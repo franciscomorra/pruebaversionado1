@@ -15,5 +15,20 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CConexion conection = new CConexion();
+            conection.Consultar_Recitales();
+
+            foreach (DataRow row in conection._tabla.Rows)
+            {
+                string primerCol = row["0"].ToString();
+                string segundaCol = row["1"].ToString();
+                string tercerCol = row["2"].ToString();
+
+            }
+
+        }
     }
 }
