@@ -7,3 +7,6 @@ C:\Documents and Settings\UsuarioAdmin\Escritorio\testVersionado\testIntegrador\
 C:\Documents and Settings\UsuarioAdmin\Escritorio\testVersionado\testIntegrador\pruebaDisenioIntegrador\pruebaDisenioIntegrador\bin\Debug\pruebaDisenioIntegrador.pdb
 C:\Documents and Settings\UsuarioAdmin\Escritorio\testVersionado\testIntegrador\pruebaDisenioIntegrador\pruebaDisenioIntegrador\obj\Debug\pruebaDisenioIntegrador.exe
 C:\Documents and Settings\UsuarioAdmin\Escritorio\testVersionado\testIntegrador\pruebaDisenioIntegrador\pruebaDisenioIntegrador\obj\Debug\pruebaDisenioIntegrador.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\testIntegrador\pruebaDisenioIntegrador\pruebaDisenioIntegrador\bin\Debug\pruebaDisenioIntegrador.exe.config
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\testIntegrador\pruebaDisenioIntegrador\pruebaDisenioIntegrador\obj\Debug\pruebaDisenioIntegrador.exe
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\testIntegrador\pruebaDisenioIntegrador\pruebaDisenioIntegrador\obj\Debug\pruebaDisenioIntegrador.pdb
