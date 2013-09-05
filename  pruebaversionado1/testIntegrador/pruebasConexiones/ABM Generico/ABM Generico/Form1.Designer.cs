@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.txtId = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.txtAdd = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtId = new System.Windows.Forms.TextBox();
+            
             this.btnSave = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -60,14 +61,14 @@
             this.txtName.Location = new System.Drawing.Point(79, 56);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(100, 20);
-            this.txtName.TabIndex = 2;
+            this.txtName.TabIndex = 3;
             // 
             // txtAdd
             // 
             this.txtAdd.Location = new System.Drawing.Point(79, 82);
             this.txtAdd.Name = "txtAdd";
             this.txtAdd.Size = new System.Drawing.Size(100, 20);
-            this.txtAdd.TabIndex = 2;
+            this.txtAdd.TabIndex = 4;
             // 
             // label3
             // 
@@ -83,7 +84,7 @@
             this.txtId.Location = new System.Drawing.Point(79, 31);
             this.txtId.Name = "txtId";
             this.txtId.Size = new System.Drawing.Size(100, 20);
-            this.txtId.TabIndex = 4;
+            this.txtId.TabIndex = 2;
             this.txtId.TextChanged += new System.EventHandler(this.txtId_TextChanged);
             // 
             // btnSave
@@ -120,10 +121,10 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.TextBox txtAdd;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.Button btnSave;
     }
 }
