@@ -6,5 +6,3 @@ C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\testIntegrador\prue
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\testIntegrador\pruebasConexiones\ABM Generico\ABM Generico\obj\Debug\ABM Generico.csproj.GenerateResource.Cache
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\testIntegrador\pruebasConexiones\ABM Generico\ABM Generico\obj\Debug\ABM Generico.exe
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\testIntegrador\pruebasConexiones\ABM Generico\ABM Generico\obj\Debug\ABM Generico.pdb
-C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\testIntegrador\pruebasConexiones\ABM Generico\ABM Generico\bin\Debug\dbPruebaDisenio.mdf
-C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\testIntegrador\pruebasConexiones\ABM Generico\ABM Generico\bin\Debug\dbPruebaDisenio_log.ldf
