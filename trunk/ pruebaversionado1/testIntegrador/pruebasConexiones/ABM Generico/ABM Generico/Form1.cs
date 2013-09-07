@@ -12,8 +12,15 @@ namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
+<<<<<<< .mine
+        //SqlConnection sc = new SqlConnection("Data Source=.\\SQLSERVER2008;AttachDbFilename=\"C:\\Documents and Settings\\UsuarioAdmin\\Escritorio\\versionado\\testIntegrador\\dbPruebaDisenio.mdf\";Persist Security Info=True;User ID=sa;Password=gestiondedatos;Connect Timeout=30;User Instance=False");
+        SqlConnection sc = new SqlConnection("Data Source=.\\SQLSERVER2008;Connect Timeout=200;User Instance=False; database = dbDisenio; User ID=sa; Password=gestiondedatos;");
+        
+        
+=======
         string string1 = "Data Source=.\\SQLSERVER2008;AttachDbFilename=|DataDirectory|\\dbPruebaDisenio.mdf;User ID=sa;Password=gestiondedatos;Connect Timeout=30;User Instance=False";
         SqlConnection sc = new SqlConnection("Data Source=.\\SQLSERVER2008;AttachDbFilename=\"C:\\Documents and Settings\\UsuarioAdmin\\Escritorio\\versionado\\testIntegrador\\dbPruebaDisenio.mdf\";Persist Security Info=True;User ID=sa;Password=gestiondedatos;Connect Timeout=30;User Instance=False");
+>>>>>>> .r24
         SqlCommand cmd;
 
         
