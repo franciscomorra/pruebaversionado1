@@ -1,0 +1,9 @@
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop.Common\bin\Debug\GrouponDesktop.Common.dll
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop.Common\bin\Debug\GrouponDesktop.Common.pdb
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop.Common\obj\Debug\ResolveAssemblyReference.cache
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop.Common\obj\Debug\GrouponDesktop.Common.dll
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop.Common\obj\Debug\GrouponDesktop.Common.pdb
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop.Common\bin\Debug\GrouponDesktop.Common.dll
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop.Common\bin\Debug\GrouponDesktop.Common.pdb
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop.Common\obj\Debug\GrouponDesktop.Common.dll
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop.Common\obj\Debug\GrouponDesktop.Common.pdb

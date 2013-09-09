@@ -1,0 +1,76 @@
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\bin\Debug\GrouponDesktop.exe.config
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\bin\Debug\GrouponDesktop.exe
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\bin\Debug\GrouponDesktop.pdb
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\bin\Debug\GrouponDesktop.Business.dll
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\bin\Debug\GrouponDesktop.Common.dll
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\bin\Debug\Data.dll
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\bin\Debug\GrouponDesktop.Business.pdb
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\bin\Debug\GrouponDesktop.Common.pdb
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\bin\Debug\Data.pdb
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\bin\Debug\Data.xml
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\ResolveAssemblyReference.cache
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.AbmCliente.ClientesForm.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.AbmProveedor.ProveedoresForm.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.AddEditRoleForm.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.AbmRol.RolesForm.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.ArmarCupon.ArmarCuponesForm.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.ArmarCupon.NuevoCupon.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.CargaCredito.CargarCreditoForm.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.CargaCredito.NuevoPago.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.ComprarCupon.ComprarCuponForm.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.ComprarGiftCard.ComprarGiftCardForm.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.ComprarGiftCard.NuevaGiftCard.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.Cuenta.CuentaForm.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.FacturarProveedor.FacturaProveedorForm.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.HistorialCupones.HistorialCuponesForm.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.ListadoEstadistico.ListadoEstadisticoForm.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.Login.ClienteUserControl.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.Login.LoginForm.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.Login.ProveedorUserControl.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.RegistroForm.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.MainView.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.PedirDevolucion.PedirDevolucionForm.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.Properties.Resources.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.PublicarCupon.PublicarCuponForm.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.RegistroConsumoCupon.RegistroConsumoCuponForm.resources
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.csproj.GenerateResource.Cache
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.exe
+Z:\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.pdb
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\bin\Debug\GrouponDesktop.exe.config
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.exe
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.pdb
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\bin\Debug\GrouponDesktop.exe
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\bin\Debug\GrouponDesktop.pdb
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\bin\Debug\GrouponDesktop.Business.dll
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\bin\Debug\GrouponDesktop.Common.dll
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\bin\Debug\Data.dll
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\bin\Debug\GrouponDesktop.Business.pdb
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\bin\Debug\GrouponDesktop.Common.pdb
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\bin\Debug\Data.pdb
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\bin\Debug\Data.xml
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.csprojResolveAssemblyReference.cache
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.AbmCliente.ClientesForm.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.AbmProveedor.ProveedoresForm.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.AddEditRoleForm.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.AbmRol.RolesForm.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.ArmarCupon.ArmarCuponesForm.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.ArmarCupon.NuevoCupon.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.CargaCredito.CargarCreditoForm.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.CargaCredito.NuevoPago.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.ComprarCupon.ComprarCuponForm.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.ComprarGiftCard.ComprarGiftCardForm.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.ComprarGiftCard.NuevaGiftCard.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.Cuenta.CuentaForm.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.FacturarProveedor.FacturaProveedorForm.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.HistorialCupones.HistorialCuponesForm.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.ListadoEstadistico.ListadoEstadisticoForm.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.Login.ClienteUserControl.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.Login.LoginForm.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.Login.ProveedorUserControl.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.RegistroForm.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.MainView.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.PedirDevolucion.PedirDevolucionForm.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.Properties.Resources.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.PublicarCupon.PublicarCuponForm.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.RegistroConsumoCupon.RegistroConsumoCuponForm.resources
+C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.csproj.GenerateResource.Cache

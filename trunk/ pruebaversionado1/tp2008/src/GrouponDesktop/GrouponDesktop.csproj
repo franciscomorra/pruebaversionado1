@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4DE32818-79B7-4459-8E2B-39D796EF0505}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GrouponDesktop</RootNamespace>
+    <AssemblyName>GrouponDesktop</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbmCliente\ClientesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmCliente\ClientesForm.Designer.cs">
+      <DependentUpon>ClientesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmProveedor\ProveedoresForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmProveedor\ProveedoresForm.Designer.cs">
+      <DependentUpon>ProveedoresForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmRol\RolesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRol\RolesForm.Designer.cs">
+      <DependentUpon>RolesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmRol\AddEditRoleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRol\AddEditRoleForm.Designer.cs">
+      <DependentUpon>AddEditRoleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmRol\RoleUpdatedEventArgs.cs" />
+    <Compile Include="ArmarCupon\ArmarCuponesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ArmarCupon\ArmarCuponesForm.Designer.cs">
+      <DependentUpon>ArmarCuponesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ArmarCupon\CuponSavedEventArgs.cs" />
+    <Compile Include="ArmarCupon\NuevoCupon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ArmarCupon\NuevoCupon.Designer.cs">
+      <DependentUpon>NuevoCupon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CargaCredito\CargarCreditoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CargaCredito\CargarCreditoForm.Designer.cs">
+      <DependentUpon>CargarCreditoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CargaCredito\NuevoPago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CargaCredito\NuevoPago.Designer.cs">
+      <DependentUpon>NuevoPago.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CargaCredito\PagoAddedEventArgs.cs" />
+    <Compile Include="ComprarCupon\ComprarCuponForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComprarCupon\ComprarCuponForm.Designer.cs">
+      <DependentUpon>ComprarCuponForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComprarGiftCard\ComprarGiftCardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComprarGiftCard\ComprarGiftCardForm.Designer.cs">
+      <DependentUpon>ComprarGiftCardForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComprarGiftCard\NewGiftCardEventArgs.cs" />
+    <Compile Include="ComprarGiftCard\NuevaGiftCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComprarGiftCard\NuevaGiftCard.Designer.cs">
+      <DependentUpon>NuevaGiftCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\AppExceptionHandler.cs" />
+    <Compile Include="Core\NonNavigableAttribute.cs" />
+    <Compile Include="Core\PermissionRequiredAttribute.cs" />
+    <Compile Include="Core\Session.cs" />
+    <Compile Include="Core\SqlExceptionHandler.cs" />
+    <Compile Include="Core\ViewsManager.cs" />
+    <Compile Include="Cuenta\CuentaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cuenta\CuentaForm.Designer.cs">
+      <DependentUpon>CuentaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FacturarProveedor\FacturaProveedorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FacturarProveedor\FacturaProveedorForm.Designer.cs">
+      <DependentUpon>FacturaProveedorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HistorialCupones\HistorialCuponesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HistorialCupones\HistorialCuponesForm.Designer.cs">
+      <DependentUpon>HistorialCuponesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListadoEstadistico\ListadoEstadisticoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListadoEstadistico\ListadoEstadisticoForm.Designer.cs">
+      <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\ClienteUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Login\ClienteUserControl.Designer.cs">
+      <DependentUpon>ClienteUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\ProveedorUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Login\ProveedorUserControl.Designer.cs">
+      <DependentUpon>ProveedorUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\RegistroForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\RegistroForm.Designer.cs">
+      <DependentUpon>RegistroForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\UserSavedEventArgs.cs" />
+    <Compile Include="Login\UserSelectedEventArgs.cs" />
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PedirDevolucion\CuponDevueltoEventArgs.cs" />
+    <Compile Include="PedirDevolucion\PedirDevolucionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PedirDevolucion\PedirDevolucionForm.Designer.cs">
+      <DependentUpon>PedirDevolucionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AbmCliente\ClientesForm.resx">
+      <DependentUpon>ClientesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmProveedor\ProveedoresForm.resx">
+      <DependentUpon>ProveedoresForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\AddEditRoleForm.resx">
+      <DependentUpon>AddEditRoleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\RolesForm.resx">
+      <DependentUpon>RolesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ArmarCupon\ArmarCuponesForm.resx">
+      <DependentUpon>ArmarCuponesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ArmarCupon\NuevoCupon.resx">
+      <DependentUpon>NuevoCupon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CargaCredito\CargarCreditoForm.resx">
+      <DependentUpon>CargarCreditoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CargaCredito\NuevoPago.resx">
+      <DependentUpon>NuevoPago.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComprarCupon\ComprarCuponForm.resx">
+      <DependentUpon>ComprarCuponForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComprarGiftCard\ComprarGiftCardForm.resx">
+      <DependentUpon>ComprarGiftCardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComprarGiftCard\NuevaGiftCard.resx">
+      <DependentUpon>NuevaGiftCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cuenta\CuentaForm.resx">
+      <DependentUpon>CuentaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FacturarProveedor\FacturaProveedorForm.resx">
+      <DependentUpon>FacturaProveedorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HistorialCupones\HistorialCuponesForm.resx">
+      <DependentUpon>HistorialCuponesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListadoEstadistico\ListadoEstadisticoForm.resx">
+      <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\ClienteUserControl.resx">
+      <DependentUpon>ClienteUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\ProveedorUserControl.resx">
+      <DependentUpon>ProveedorUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\RegistroForm.resx">
+      <DependentUpon>RegistroForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PedirDevolucion\PedirDevolucionForm.resx">
+      <DependentUpon>PedirDevolucionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PublicarCupon\PublicarCuponForm.resx">
+      <DependentUpon>PublicarCuponForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistroConsumoCupon\RegistroConsumoCuponForm.resx">
+      <DependentUpon>RegistroConsumoCuponForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="PublicarCupon\PublicarCuponForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PublicarCupon\PublicarCuponForm.Designer.cs">
+      <DependentUpon>PublicarCuponForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroConsumoCupon\RegistroConsumoCuponForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistroConsumoCupon\RegistroConsumoCuponForm.Designer.cs">
+      <DependentUpon>RegistroConsumoCuponForm.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GrouponDesktop.Business\GrouponDesktop.Business.csproj">
+      <Project>{7963797F-C64F-432C-B147-47E5000EA4D4}</Project>
+      <Name>GrouponDesktop.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GrouponDesktop.Common\GrouponDesktop.Common.csproj">
+      <Project>{4E7562B4-E184-439D-AB83-75F3862E86A3}</Project>
+      <Name>GrouponDesktop.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
