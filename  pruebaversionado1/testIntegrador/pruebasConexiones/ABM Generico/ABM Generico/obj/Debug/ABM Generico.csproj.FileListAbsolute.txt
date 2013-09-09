@@ -1,8 +1,0 @@
-C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\testIntegrador\pruebasConexiones\ABM Generico\ABM Generico\bin\Debug\ABM Generico.exe
-C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\testIntegrador\pruebasConexiones\ABM Generico\ABM Generico\bin\Debug\ABM Generico.pdb
-C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\testIntegrador\pruebasConexiones\ABM Generico\ABM Generico\obj\Debug\ResolveAssemblyReference.cache
-C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\testIntegrador\pruebasConexiones\ABM Generico\ABM Generico\obj\Debug\WindowsFormsApplication1.Form1.resources
-C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\testIntegrador\pruebasConexiones\ABM Generico\ABM Generico\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
-C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\testIntegrador\pruebasConexiones\ABM Generico\ABM Generico\obj\Debug\ABM Generico.csproj.GenerateResource.Cache
-C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\testIntegrador\pruebasConexiones\ABM Generico\ABM Generico\obj\Debug\ABM Generico.exe
-C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\testIntegrador\pruebasConexiones\ABM Generico\ABM Generico\obj\Debug\ABM Generico.pdb
