@@ -23,7 +23,7 @@ Para usar la libreria, creamos un procedimiento en la base de datos, y le damos 
 = Ejemplo QUERY SELECT =
 
 Un llamado a un procedimiento que devuelve multiples valores, como un 
- `
+<code language="c">
 SELECT COLUMNA1, COLUMNA2,COLUMNADEFECHA,COLUMNA4,COLUMNABOOL FROM tabla WHERE columna1 = @Parametro1 
 
        var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
@@ -57,13 +57,13 @@ new CLASE QUE TIENE LAS COLUMNAS()
         }
 
 
- `
+</code>
 
 
 
 =EJEMPLO DE PROCEDIMIENTO QUE DEVUELVE UN SOLO VALOR =
 un insert que nos devuelva el id de la fila insertada por ejemplo
- `
+<code language="c">
 var id = SqlDataAccess.ExecuteScalarQuery<TIPO DE DATOS QUE TIENE QUE DEVOLVER>ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                     "Nuestradb.Procedimientos", SqlDataAccessArgs
                    .CreateWith("@Parametro1", valorParametro1)
@@ -73,14 +73,15 @@ var id = SqlDataAccess.ExecuteScalarQuery<TIPO DE DATOS QUE TIENE QUE DEVOLVER>C
 
 
 
- `
+</code>
 =EJEMPLO DE PROCEDIMIENTO QUE NO DEVUELVE NADA =
 ejemplo un insert, o update
 
-  `               SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+<code language="c">
+               SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                     "NuestraDB.PROCEDIMIENTO", SqlDataAccessArgs
                     .CreateWith("@Parametro1", valorParametro1)
                     .And("@Parametro2", valorParametro2)
                     .Arguments);
 
- `
+</code>
