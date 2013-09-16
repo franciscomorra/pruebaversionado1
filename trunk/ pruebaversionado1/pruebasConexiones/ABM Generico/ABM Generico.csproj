@@ -81,15 +81,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="dbPruebaDisenio.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="dbPruebaDisenio_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>dbPruebaDisenio.mdf</DependentUpon>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\ABM.Business\ABM.Business.csproj">
+      <Project>{F8D4D5C7-DAC2-415E-B1B9-5C6DCB7C6231}</Project>
+      <Name>ABM.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ABM.Common\ABM.Common.csproj">
+      <Project>{85DEA7AB-3CA6-437F-9A32-CE6FD3ABEDC5}</Project>
+      <Name>ABM.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Data\Data.csproj">
       <Project>{437CF01F-1A34-4FF3-971E-B585A8688551}</Project>
       <Name>Data</Name>

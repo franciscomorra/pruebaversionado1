@@ -5,9 +5,9 @@
     <Setting Name="StringConexion" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=localhost\SQLSERVER2008;Connect Timeout=200; database = dbDisenio; User ID=sa; Password=gestiondedatos;User Instance=False;&lt;/ConnectionString&gt;
+  &lt;ConnectionString /&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=localhost\SQLSERVER2008;Connect Timeout=200; database = dbDisenio; User ID=sa; Password=gestiondedatos;User Instance=False;</Value>
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

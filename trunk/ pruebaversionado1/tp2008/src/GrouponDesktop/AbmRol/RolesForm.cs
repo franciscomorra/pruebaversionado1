@@ -115,5 +115,15 @@ namespace GrouponDesktop.AbmRol
             addEditForm.OnRoleUpdated += new EventHandler<RoleUpdatedEventArgs>(addEditForm_OnRoleUpdated);
             ViewsManager.LoadModal(addEditForm);
         }
+
+        private void rolesDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
