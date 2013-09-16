@@ -1,0 +1,5 @@
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\ABM.Common\bin\Debug\ABM.Common.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\ABM.Common\bin\Debug\ABM.Common.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\ABM.Common\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\ABM.Common\obj\Debug\ABM.Common.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\ABM.Common\obj\Debug\ABM.Common.pdb
