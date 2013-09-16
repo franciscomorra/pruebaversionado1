@@ -8,6 +8,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ABM Generico", "ABM Generic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{437CF01F-1A34-4FF3-971E-B585A8688551}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ABM.Common", "ABM.Common\ABM.Common.csproj", "{85DEA7AB-3CA6-437F-9A32-CE6FD3ABEDC5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{437CF01F-1A34-4FF3-971E-B585A8688551} = {437CF01F-1A34-4FF3-971E-B585A8688551}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ABM.Business", "ABM.Business\ABM.Business.csproj", "{F8D4D5C7-DAC2-415E-B1B9-5C6DCB7C6231}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +29,14 @@ Global
 		{437CF01F-1A34-4FF3-971E-B585A8688551}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{437CF01F-1A34-4FF3-971E-B585A8688551}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{437CF01F-1A34-4FF3-971E-B585A8688551}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85DEA7AB-3CA6-437F-9A32-CE6FD3ABEDC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85DEA7AB-3CA6-437F-9A32-CE6FD3ABEDC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85DEA7AB-3CA6-437F-9A32-CE6FD3ABEDC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85DEA7AB-3CA6-437F-9A32-CE6FD3ABEDC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8D4D5C7-DAC2-415E-B1B9-5C6DCB7C6231}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8D4D5C7-DAC2-415E-B1B9-5C6DCB7C6231}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8D4D5C7-DAC2-415E-B1B9-5C6DCB7C6231}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8D4D5C7-DAC2-415E-B1B9-5C6DCB7C6231}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

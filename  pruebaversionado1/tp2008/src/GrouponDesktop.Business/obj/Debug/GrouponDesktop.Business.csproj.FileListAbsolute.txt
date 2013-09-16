@@ -18,3 +18,13 @@ C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K307
 C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop.Business\obj\Debug\GrouponDesktop.Business.csprojResolveAssemblyReference.cache
 C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop.Business\obj\Debug\GrouponDesktop.Business.dll
 C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop.Business\obj\Debug\GrouponDesktop.Business.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2008\src\GrouponDesktop.Business\bin\Debug\GrouponDesktop.Business.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2008\src\GrouponDesktop.Business\bin\Debug\GrouponDesktop.Business.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2008\src\GrouponDesktop.Business\bin\Debug\Data.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2008\src\GrouponDesktop.Business\bin\Debug\GrouponDesktop.Common.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2008\src\GrouponDesktop.Business\bin\Debug\GrouponDesktop.Common.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2008\src\GrouponDesktop.Business\bin\Debug\Data.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2008\src\GrouponDesktop.Business\bin\Debug\Data.xml
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2008\src\GrouponDesktop.Business\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2008\src\GrouponDesktop.Business\obj\Debug\GrouponDesktop.Business.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2008\src\GrouponDesktop.Business\obj\Debug\GrouponDesktop.Business.pdb

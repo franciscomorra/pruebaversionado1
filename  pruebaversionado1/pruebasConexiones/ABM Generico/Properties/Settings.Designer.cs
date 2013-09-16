@@ -26,8 +26,6 @@ namespace WindowsFormsApplication1.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLSERVER2008;Connect Timeout=200; database = dbDisenio; Us" +
-            "er ID=sa; Password=gestiondedatos;User Instance=False;")]
         public string StringConexion {
             get {
                 return ((string)(this["StringConexion"]));
