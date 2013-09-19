@@ -6,7 +6,6 @@ using System.ComponentModel;
 using ABM.Common;
 using Data;
 using System.Configuration;
-
 using System.Data;
 
 namespace ABM.Business
