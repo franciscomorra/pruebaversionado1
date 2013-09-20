@@ -1,0 +1,10 @@
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\ClinicaFrba.Negocio\bin\Debug\ClinicaFrba.Negocio.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\ClinicaFrba.Negocio\bin\Debug\ClinicaFrba.Negocio.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\ClinicaFrba.Negocio\bin\Debug\ClinicaFrba.Comun.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\ClinicaFrba.Negocio\bin\Debug\Data.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\ClinicaFrba.Negocio\bin\Debug\ClinicaFrba.Comun.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\ClinicaFrba.Negocio\bin\Debug\Data.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\ClinicaFrba.Negocio\bin\Debug\Data.xml
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\ClinicaFrba.Negocio\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\ClinicaFrba.Negocio\obj\Debug\ClinicaFrba.Negocio.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\ClinicaFrba.Negocio\obj\Debug\ClinicaFrba.Negocio.pdb
