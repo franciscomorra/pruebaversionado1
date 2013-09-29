@@ -2,3 +2,8 @@ C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\Clinica Frba\o
 C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\Clinica Frba\obj\Release\Clinica_Frba.Properties.Resources.resources
 C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\Clinica Frba\obj\Release\ClinicaFrba.csproj.GenerateResource.Cache
 C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\Clinica Frba\obj\Release\ClinicaFrba.Properties.Resources.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.Login.LoginForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.MainView.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.Properties.Resources.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.csproj.GenerateResource.Cache

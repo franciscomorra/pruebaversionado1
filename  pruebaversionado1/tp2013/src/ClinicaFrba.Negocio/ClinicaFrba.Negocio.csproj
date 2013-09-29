@@ -46,8 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClassN.cs" />
+    <Compile Include="FunctionalitiesManager.cs" />
+    <Compile Include="LoginService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RolesManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ClinicaFrba.Comun\ClinicaFrba.Comun.csproj">

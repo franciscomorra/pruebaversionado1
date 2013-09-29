@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using ClinicaFrba.Core;
 
-namespace Clinica_Frba
+
+namespace ClinicaFrba
 {
     static class Program
     {
@@ -13,9 +15,10 @@ namespace Clinica_Frba
         [STAThread]
         static void Main()
         {
+            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(AppExceptionHandler.Invoke);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main());
+            Application.Run(new MainView());
         }
     }
 }

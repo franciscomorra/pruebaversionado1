@@ -3,3 +3,8 @@ C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\ClinicaFrba.Co
 C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\ClinicaFrba.Comun\obj\Release\ResolveAssemblyReference.cache
 C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\ClinicaFrba.Comun\obj\Release\ClinicaFrba.Comun.dll
 C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\ClinicaFrba.Comun\obj\Release\ClinicaFrba.Comun.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\ClinicaFrba.Comun\bin\Release\ClinicaFrba.Comun.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\ClinicaFrba.Comun\bin\Release\ClinicaFrba.Comun.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\ClinicaFrba.Comun\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\ClinicaFrba.Comun\obj\Release\ClinicaFrba.Comun.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\ClinicaFrba.Comun\obj\Release\ClinicaFrba.Comun.pdb

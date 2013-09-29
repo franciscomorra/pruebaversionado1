@@ -64,101 +64,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Login\Form1.cs">
+    <Compile Include="Core\AppExceptionHandler.cs" />
+    <Compile Include="Core\NonNavigableAttribute.cs" />
+    <Compile Include="Core\PermissionRequiredAttribute.cs" />
+    <Compile Include="Core\Session.cs" />
+    <Compile Include="Core\SqlExceptionHandler.cs" />
+    <Compile Include="Core\ViewsManager.cs" />
+    <Compile Include="Login\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Login\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro de Usuario\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Registro de Usuario\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm de Afiliado\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm de Afiliado\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm de Profesional\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm de Profesional\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm de Especialidades Medicas\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm de Especialidades Medicas\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm de Planes\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm de Planes\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm de Rol\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm de Rol\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Registrar Agenda\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Registrar Agenda\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Compra de Bono\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Compra de Bono\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Pedir Turno\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Pedir Turno\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Registro de LLegada\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Registro de LLegada\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Registro Resultado Atencion\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Registro Resultado Atencion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Cancelar Atencion\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Cancelar Atencion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Generar Receta\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Generar Receta\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Listados Estadisticos\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Listados Estadisticos\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Login\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -218,6 +149,22 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AbmAfiliado\" />
+    <Folder Include="AbmEspecialidadesMedicas\" />
+    <Folder Include="AbmPlanes\" />
+    <Folder Include="AbmProfesional\" />
+    <Folder Include="AbmRol\" />
+    <Folder Include="CancelarAtencion\" />
+    <Folder Include="CompraBono\" />
+    <Folder Include="GenerarReceta\" />
+    <Folder Include="ListadosEstadisticos\" />
+    <Folder Include="PedirTurno\" />
+    <Folder Include="RegistrarAgenda\" />
+    <Folder Include="RegistroLLegada\" />
+    <Folder Include="RegistroResultadoAtencion\" />
+    <Folder Include="RegistroUsuario\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
