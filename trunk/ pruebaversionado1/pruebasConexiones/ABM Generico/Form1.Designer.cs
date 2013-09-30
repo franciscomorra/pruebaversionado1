@@ -116,6 +116,7 @@
             this.dataGridClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridClients.Size = new System.Drawing.Size(353, 173);
             this.dataGridClients.TabIndex = 6;
+            this.dataGridClients.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridClients_CellContentClick);
             // 
             // lblResults
             // 

@@ -34,7 +34,11 @@
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panelRoles = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.comboRoles = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
+            this.panelRoles.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnLogin
@@ -83,7 +87,6 @@
             // panel1
             // 
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.None;
-           
             this.panel1.Controls.Add(this.txtPassword);
             this.panel1.Controls.Add(this.btnLogin);
             this.panel1.Controls.Add(this.label1);
@@ -93,7 +96,34 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(235, 112);
             this.panel1.TabIndex = 5;
-            
+            // 
+            // panelRoles
+            // 
+            this.panelRoles.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panelRoles.Controls.Add(this.label3);
+            this.panelRoles.Controls.Add(this.comboRoles);
+            this.panelRoles.Location = new System.Drawing.Point(169, 231);
+            this.panelRoles.Name = "panelRoles";
+            this.panelRoles.Size = new System.Drawing.Size(235, 61);
+            this.panelRoles.TabIndex = 6;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(10, 10);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(123, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Seleccione Rol a utilizar:";
+            // 
+            // comboRoles
+            // 
+            this.comboRoles.FormattingEnabled = true;
+            this.comboRoles.Location = new System.Drawing.Point(13, 26);
+            this.comboRoles.Name = "comboRoles";
+            this.comboRoles.Size = new System.Drawing.Size(212, 21);
+            this.comboRoles.TabIndex = 0;
+            this.comboRoles.SelectedIndexChanged += new System.EventHandler(this.comboRoles_SelectedIndexChanged);
             // 
             // LoginForm
             // 
@@ -101,11 +131,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(632, 356);
+            this.Controls.Add(this.panelRoles);
             this.Controls.Add(this.panel1);
             this.Name = "LoginForm";
             this.Text = "LoginForm";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panelRoles.ResumeLayout(false);
+            this.panelRoles.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -118,5 +151,8 @@
         private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelRoles;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox comboRoles;
     }
 }

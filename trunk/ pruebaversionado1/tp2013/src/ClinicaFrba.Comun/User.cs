@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
+using System.ComponentModel;
 
 namespace ClinicaFrba.Comun
 {
@@ -23,8 +25,12 @@ namespace ClinicaFrba.Comun
         /// <summary>
         /// Role ID
         /// </summary>
-        public int RoleID { get; set; }
+        
+        public int RolSeleccionado { get; set; }
 
+        public BindingList<Rol> Roles { get; set; } 
+            //List<Rol> Roles { get; set; }
+       // public SortedDictionary<Rol> Roles { get; set; }
         /// <summary>
         /// Nombre del usuario
         /// </summary>

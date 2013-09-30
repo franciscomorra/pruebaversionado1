@@ -74,3 +74,41 @@ C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K307
 C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.PublicarCupon.PublicarCuponForm.resources
 C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.RegistroConsumoCupon.RegistroConsumoCuponForm.resources
 C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop\obj\Debug\GrouponDesktop.csproj.GenerateResource.Cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\bin\Debug\GrouponDesktop.exe.config
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.exe
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\bin\Debug\GrouponDesktop.exe
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\bin\Debug\GrouponDesktop.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\bin\Debug\GrouponDesktop.Business.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\bin\Debug\GrouponDesktop.Common.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\bin\Debug\Data.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\bin\Debug\GrouponDesktop.Business.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\bin\Debug\GrouponDesktop.Common.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\bin\Debug\Data.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\bin\Debug\Data.xml
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.AbmCliente.ClientesForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.AbmProveedor.ProveedoresForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.AddEditRoleForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.AbmRol.RolesForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.ArmarCupon.ArmarCuponesForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.ArmarCupon.NuevoCupon.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.CargaCredito.CargarCreditoForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.CargaCredito.NuevoPago.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.ComprarCupon.ComprarCuponForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.ComprarGiftCard.ComprarGiftCardForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.ComprarGiftCard.NuevaGiftCard.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.Cuenta.CuentaForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.FacturarProveedor.FacturaProveedorForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.HistorialCupones.HistorialCuponesForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.ListadoEstadistico.ListadoEstadisticoForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.Login.ClienteUserControl.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.Login.LoginForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.Login.ProveedorUserControl.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.RegistroForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.MainView.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.PedirDevolucion.PedirDevolucionForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.Properties.Resources.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.PublicarCupon.PublicarCuponForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.RegistroConsumoCupon.RegistroConsumoCuponForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop\obj\Debug\GrouponDesktop.csproj.GenerateResource.Cache

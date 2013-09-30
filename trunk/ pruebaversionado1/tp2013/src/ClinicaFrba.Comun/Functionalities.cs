@@ -7,20 +7,19 @@ namespace ClinicaFrba.Comun
 {   
     public enum Functionalities
     {
-        //CARGAR LOS CORRECTOSSSSS
-        AdministrarClientes,
-        AdministrarProveedores,
-        AdministrarCupones,
-        CargarCredito,
-        CrearCupon,
-        ComprarCupones,
-        GiftCards,
-        Facturar,
-        VerHistorialCupones,
-        ListarEstadisticas,
-        PedirDevoluciones,
-        PublicarCupones,
-        RegistrarConsumoCupones,
-        AdministrarRoles
+        AbmAfiliado,
+        AbmEspecialidadesMedicas,
+        AbmPlanes,
+        AbmProfesional,
+        AbmRol,
+        CancelarAtencion,
+        CompraBono,
+        GenerarReceta,
+        ListadosEstadisticos,
+        PedirTurno,
+        RegistrarAgenda,
+        RegistroLLegada,
+        RegistroResultadoAtencion,
+        RegistroUsuario
     }
 }
