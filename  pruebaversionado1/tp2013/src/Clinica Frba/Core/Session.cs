@@ -24,7 +24,7 @@ namespace ClinicaFrba.Core
         public static void StartSession(User user)
         {
             User = user;
-            if(user.Permissions.Contains(Functionalities.AdministrarRoles))
+            if (user.Permissions.Contains(Functionalities.AbmRol))
             {
                 var manager = new RolesManager();
                 DefaultRoleID = manager.GetDefaultRoleID();

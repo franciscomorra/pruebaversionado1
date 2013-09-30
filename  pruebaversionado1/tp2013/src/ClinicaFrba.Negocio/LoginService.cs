@@ -8,6 +8,8 @@ using System.Data.SqlClient;
 using System.Security.Cryptography;
 using ClinicaFrba.Comun;
 using System.Data;
+using System.ComponentModel;
+
 
 namespace ClinicaFrba.Negocio
 {
@@ -33,14 +35,12 @@ namespace ClinicaFrba.Negocio
             if (result == null)
                 throw new Exception("Usuario o contraseña inválidos");
 
+
             var user = new User()
             {
                 UserID = int.Parse(result["ID"].ToString()),
-                //RoleID = int.Parse(result["ID_Rol"].ToString()),
                 UserName = result["Nombre"].ToString()
             };
-
-            SetUserFunctionalities(user);
 
             return user;
         }
@@ -82,10 +82,35 @@ namespace ClinicaFrba.Negocio
                 throw new Exception("Usuario Bloqueado, contacte al administrador del sistema");
         }
 
-        private void SetUserFunctionalities(User user)
+        public BindingList<Rol> GetUserRoles(int userID)
         {
+            var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
+                "ClinicaFrba.GetRoles", SqlDataAccessArgs
+                .CreateWith("@userID", userID).Arguments);
+
+            var roles = new BindingList<Rol>();
+           
+            var functionalitiesManager = new FunctionalitiesManager();
+            foreach (DataRow row in result.Rows)
+            {
+                var rol = new Rol()
+                {
+                    ID = int.Parse(row["ID"].ToString()),
+                    Nombre = row["Descripcion"].ToString(),
+                    Functionalities = functionalitiesManager.GetRoleFunctionalities(int.Parse(row["ID"].ToString()))
+                };
+                roles.Add(rol);
+            }
+
+            return roles;
+        }
+
+
+        public void SetUserFunctionalities(User user)
+        {
+            
             var manager = new FunctionalitiesManager();
-            var functionalities = manager.GetRoleFunctionalities(user.RoleID);
+            var functionalities = manager.GetRoleFunctionalities(user.RolSeleccionado);
 
             foreach (var functionality in functionalities)
             {
