@@ -42,3 +42,19 @@ C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica 
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.MainView.resources
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.Login.LoginForm.resources
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.exe
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.pdb
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\bin\Debug\ClinicaFrba.exe
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\bin\Debug\ClinicaFrba.pdb
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\bin\Debug\ClinicaFrba.Comun.dll
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\bin\Debug\ClinicaFrba.Negocio.dll
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\bin\Debug\Data.dll
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\bin\Debug\ClinicaFrba.Negocio.pdb
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\bin\Debug\ClinicaFrba.Comun.pdb
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\bin\Debug\Data.pdb
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\bin\Debug\Data.xml
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.Login.LoginForm.resources
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.MainView.resources
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.Properties.Resources.resources
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
