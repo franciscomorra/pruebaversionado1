@@ -1,7 +1,7 @@
 1. ABM de Rol
-	Probar
+		Probar
 2. Login y Seguridad
-	Falta la seleccion de ROL
+		Falta la seleccion de ROL
 4. ABM de Afiliados
 		Funcionalidad que permite a un administrativo del hospital crear, modificar y dar
 		de baja un afiliado. Se entiende por paciente a toda aquella persona que puede ser
@@ -208,4 +208,4 @@
 		No existe posibilidad de modificación y/o eliminación de una receta una vez que
 		la misma se encuentra confeccionada
 15. Listado Estadístico
-	Probar
+		Probar
