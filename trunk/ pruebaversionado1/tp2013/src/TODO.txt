@@ -1,0 +1,215 @@
+1. ABM de Rol
+	Probar
+2. Login y Seguridad
+	Falta la seleccion de ROL
+3. Registro de Usuario
+4. ABM de Afiliados
+	Funcionalidad que permite a un administrativo del hospital crear, modificar y dar
+	de baja un afiliado. Se entiende por paciente a toda aquella persona que puede ser
+	atendida en el hospital.
+	Es de suponer que un paciente a lo largo de su historia puede sufrir modificaciones
+	en alguno de sus datos, como ser su dirección, teléfono, mail, plan médico, etc.( no así
+	su nombre, apellido, dni y fecha de nacimiento) Si fuese necesario modificar el plan del
+	afiliado, ese necesario que se registre cuando se ha producido dicha modificación y el
+	motivo que la originó, de manera de poder obtener un historial de dichos cambios.
+	En caso de querer dar de baja un afiliado, la misma será por medio de baja lógica
+	y registrando la fecha de dicho acontecimiento, si el paciente tenía turnos registrados o
+	recetas emitidas estás no podrán ser utilizadas dado que dicho paciente se ha
+	desvinculado de la entidad.
+	Los datos fundamentales a registrar son los siguientes.
+		 Nombre y Apellido.
+		 Tipo y número de documento
+		 Dirección completa
+		 Teléfono
+		 mail
+		 Fecha de nacimiento
+		 Sexo
+		 Estado civil
+		 Soltero/a
+		 Casado/a
+		 Viudo/a
+		 Concubinato
+		 Divorciado/a
+		 Cantidad de hijos o familiares a cargo
+		 Plan Médico
+		 Nro. de afiliado (asignado por el sistema)
+	Antes de finalizar la operación y si el futuro nuevo afiliado es casado/a o vive en
+	concubinato se tendrá que dar la opción de asociar a su conyugue y se deberán cargar
+	todo los datos necesarios para su registro.
+	Independientemente de lo expuesto en el párrafo anterior, se deberá consultar si
+	el nuevo afiliado tiene hijos o familiares a cargo. En caso de que así sea, se deberá dar la
+	posibilidad de ingresar los datos necesarios para el registro, ya que está en todo su
+	derecho de querer afiliarlos o no, mismo caso para el conyugue.
+	Una vez completado todos los datos de registro, el sistema procederá a calcular
+	el número de afiliado para el nuevo usuario y si fuese necesario para el resto del grupo
+	familiar, para ello, el afiliado principal (el que generó el registro principalmente) será
+	registrado con un determinado número y finalizará con 01, para el conyugue 02 y 03 y
+	subsiguientes para los hijos o familiares a cargo según corresponda. Por ende todo el
+	grupo familiar compartirá el mismo número raíz de afiliado pero se identificarán uno de
+	otro en función de los últimos 2 dígitos. El número de afiliado es NUMERO, no es
+	necesario separarlos con guiones, barras, o cualquier otro carácter para marcar la
+	división de la raíz y los 2 dígitos siguientes.
+	Las modificaciones de los afiliados se tendrán que realizar en forma
+	independiente, no será necesario cargar toda la estructura familiar por ej si se quiere
+	modificar algún dato de un hijo o familiar a cargo.
+5. ABM de Profesional
+	Esta funcionalidad es la que permite a un administrativo crear, modificar, o dar de
+	baja los diferentes profesionales que atienden en el hospital.
+	Un profesional puede tener asociado una o más especialidades en la cual se puede
+	desempeñar.
+	Los datos fundamentales a registrar son los siguientes.
+		 Nombre y Apellido.
+		 Tipo y número de documento
+		 Dirección completa
+		 Teléfono
+		 Mail
+		 Fecha de nacimiento
+		 Sexo
+		 Matricula.
+		 Especialidades.
+	Si fuese necesario, dar de baja a algún profesional, la misma será por medio de
+	baja lógica y además se tendrán que dar de baja todos los turnos de los diferentes
+	pacientes que tiene asignado como así también no estar más disponible para futuras
+	consultas.
+6. ABM de Especialidades Médicas
+7. ABM de Plan
+8. Registrar Agenda Profesional.
+	Cada profesional que atiende en la clínica tiene la necesidad de llevar una agenda.
+	En dicha agenda se registrará los días en los cuales estarán disponibles los
+	diferentes profesionales que conforman la cartilla de la clínica. Para ello será necesario
+	determinar los días en los cuales el profesional atiende, pudiendo seleccionar algunos o
+	todos dentro del rango de Lunes a Sábados. Luego de ello será necesario establecer el
+	rango horario de atención, teniendo en cuenta que la clínica establece su horario de
+	atención desde las 7:00 hasta las 20.00 para los días hábiles y desde las 10:00 hasta las
+	15:00 para los días sábados
+	Una vez determinado el profesional, los días de atención y el rango horario (con
+	turnos disponibles cada 30 minutos), será necesario que se termine el rango de fechas
+	para el cual estará disponible.
+	Otro factor muy importante a tener en cuenta es que un profesional no puede tener
+	acumuladas más de 48 horas laborales por semana y no necesariamente tener la misma
+	carga horaria en los días que presta servicio.
+	El período para la confección de la agenda de un profesional no puede ser superior
+	a los 120 días corridos.
+	No se tendrán en cuenta para este TP realizar modificaciones en las agendas ya
+	asignadas, en caso de error de carga se utilizará la opción de cancelar turno.
+9. Compra de Bonos.
+	Este caso de uso detalla el proceso de compra de los bonos por parte del usuario.
+	Dentro del sistema se encuentran 2 tipos de bonos:
+	 Bono consulta
+	 Bono farmacia
+	Dichos bonos varían su precio en función del plan al que pertenezcan.
+	Los bonos consulta son aquellos utilizados por los afiliados para la atención con
+	algún profesional de la clínica, y un bono solo es válido para una atención.
+	Los bonos farmacia son aquellos que utiliza el afiliado en la compra de
+	medicamentos recetados por los médicos de la clínica, en función de la atención médica
+	prestada por dicho profesional.
+	Estos bonos, una vez comprados, se les asigna una fecha de compra, que para el
+	caso de los bonos farmacia es utilizada para calcular la fecha de vencimiento y la misma
+	es de 60 días y debe imprimirse en el bono. Por su parte, los bonos consulta tienen un
+	campo “numero de consulta”, propio de cada afiliado, el mismo es completado en el
+	momento que se efectiviza la consulta médica en forma parcial (cuando el afiliado
+	registra su llegada a la atención) que indica la cantidad de veces que el afiliado hizo una
+	consulta médica independientemente del especialista que lo atiende.
+	Una compra puede conllevar a la adquisición tanto de bonos consulta como bonos
+	farmacia sin límite.
+	Luego de finalizada la operación de compra se deberá informar el monto a pagar
+	por los bonos comprados quedando registrado en el sistema dicha suma y la cantidad
+	comprada, junto con el afiliado que realizó la transacción.
+	Se debe tener en cuenta que los bonos no son transferibles pero si pueden usarse
+	dentro del núcleo familiar, es decir que si un integrante del núcleo compra un bono
+	puede ser utilizado por otra persona que tenga su mismo número de afiliado principal.
+	Recordar que los bonos solo pueden ser utilizados para el plan que tenía asignado el
+	afiliado en el momento que realizó la compra, es decir, que si luego cambia de plan, sea
+	por uno más alto o uno más bajo, dichos bonos no podrán ser utilizado por él.
+	En ambos bonos debe figurar para qué plan puede utilizarse, además de permitir
+	guardar el número del afiliado que lo utilizó.
+	Si se presenta el caso de que administrativo realiza la compra de bonos en nombre
+	de un afiliado (por mostrador, el afiliando no compra el bono desde su casa y lo hace en
+	la clínica) será necesario que ingrese el número del afiliado que realizó la compra en
+	cuestión, pudiendo utilizar él o algún integrante de grupo familiar.
+	Para todos los casos de compra se tendrá que validar que el afiliado se encuentre
+	activo.
+10. Pedido de turno
+	Esta funcionalidad es la encargada de registrar el pedido de un turno para una
+	atención médica por parte de un afiliado con algún profesional de la clínica en función
+	de la agenda de este último.
+	Para ello se deberá determinar el profesional con el cual el afiliado se quiere
+	atender, permitiendo refinar su búsqueda por especialidad.
+	Una vez determinado el profesional será necesario que se indique que fechas
+	posee disponible para la atención (actual y futuras según la fecha del archivo config que
+	determina la fecha del sistema) junto al día de la semana que le corresponde.
+	Bajo ningún punto de vista se permiten sobre-turnos o asignaciones fuera de las
+	estipuladas por la agenda del profesional.
+	Una vez que se concertó la fecha se deberá informar los horarios disponibles para
+	la misma el sistema generará un nro de turno único para esta futura atención.
+11. Registro de llegada para atención médica
+	Funcionalidad utilizada por un administrativo para registrar la llegada de un
+	paciente a la clínica y efectivizar su turno con un especialista para convertirse en una
+	consulta médica.
+	Para generar la consulta médica, será necesario que el afiliado indique al
+	administrativo con que profesional tenía turno, pudiéndose refinar la búsqueda por
+	especialidad, porque como ya es sabido, el paciente puede que no recuerde el nombre
+	del profesional. Luego de determinado el profesional se cargaran todos los turnos
+	disponibles para el día de la atención y mediante el ingreso del número de afiliado se
+	validará si el dicho afiliado tenía turno con el profesional en cuestión.
+	Antes de finalizar este proceso que deja constancia de asistencia (de manera
+	parcial) a un turno pedido por el afiliado, será necesario que se ingrese un bono
+	consulta, se debe registrar en que consulta fue utilizado a modo de que dicho bono no
+	sea nuevamente utilizado. Si por algún motivo de fuerza mayor el afiliado se retiró de la
+	clínica, luego de que sea confirmada su asistencia, el bono consulta se tomará como
+	consumido. Como dicha situación también puede darse para un médico, para simplificar
+	la solución, suponemos que una vez que el médico está atendiendo, el mismo no se
+	retira de la clínica y finaliza su jornada laboral en forma completa.
+	El proceso de registro de llegada tiene que persistir la fecha y hora en el que se
+	produce la llegada a la clínica por parte del afiliado.
+	Se debe considerar que el paciente llegue siempre de manera puntual o anticipada,
+	si llegase a dar el caso de que un paciente se retrasa, ya sea por un segundo, el turno está
+	perdido. Es obligación de afiliando presentarse en recepción por lo menos 15 minutos
+	antes del turno que tiene asignado y se garantiza que si se llega con dicha antelación, va
+	a ser recepcionado por un administrativo para que no pierda el turno.
+	La única manera que existe de que un bono consulta pueda ser utilizado
+	nuevamente se da solamente si el afiliado cancela su turno o el profesional cancela su
+	día atención.
+12. Registro de resultado para atención médica
+	Esta funcionalidad es utilizada por el profesional para registrar el diagnóstico
+	propio de la atención.
+	Antes de ingresar el diagnóstico, será necesario que el profesional indique si la
+	atención verdaderamente ocurrió junto con la fecha y hora del dicho acontecimiento.
+	Luego que el profesional examine al paciente, este cerrará la consulta ingresando
+	cuales fueron los síntomas que produjeron la atención junto con el diagnóstico
+	pertinente.
+	Tener en cuenta que toda atención puede generar o no una receta médica, ver
+	punto 14 del TP.
+13. Cancelar atención médica
+	La cancelación de una atención médica puede dar de dos formas:
+		 Cancelada por el paciente
+		 Cancelada por el médico
+	En caso de que la cancelación sea por parte del paciente, la misma deberá
+	realizarse con un día de antelación. No puede cancelar un turno el mismo día de la
+	atención se presupone que el paciente asistirá a su compromiso.
+	En caso de que la cancelación sea por parte del médico, tendrá la misma
+	validación que para los pacientes.
+	Un paciente puede cancelar aquellos turnos que le fueron asignados.
+	Un médico puede cancelar un día particular de su agenda o un período
+	determinado. Queda a criterio de los alumnos que se hace con los turnos cancelados por
+	parte del médico, buscar un mismo especialista disponible o cancelarlos directamente.
+	Toda cancelación deberá tener un tipo de cancelación y luego un detalle más
+	explicativo del porqué de la cancelación (motivo). Los tipos de cancelación quedan a
+	criterio de los alumnos.
+14. Receta médica
+	Esta funcionalidad se deriva de una consulta médica en función del resultado de la
+	misma, para ser consumida en la farmacia de la clínica.
+	Básicamente para la confección de una receta médica se utiliza un bono farmacia,
+	en cual solo pueden recetarse como máximo 5 medicamentos, en caso de que el
+	profesional necesite indicar más medicamentos, se deberá utilizar otro bono farmacia.
+	Por cada medicamento recetado será necesario que se indique la cantidad
+	respectiva junto con su aclaración en letras (que se ingresará automáticamente en
+	función de la cantidad), no podrán indicarse más de 3 unidades por medicamente
+	recetado, y un mismo medicamento no puede recetarse más de una vez por receta.
+	Es importante recordar que el bono no debe estar vencido para su utilización y que
+	debe guardarse en el bono la fecha de la prescripción médica de los medicamentos.
+	No existe posibilidad de modificación y/o eliminación de una receta una vez que
+	la misma se encuentra confeccionada
+
+15. Listado Estadístico
+	Probar
