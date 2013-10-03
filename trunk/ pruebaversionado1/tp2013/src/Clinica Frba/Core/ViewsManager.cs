@@ -5,8 +5,8 @@ using System.Text;
 using System.Windows.Forms;
 using ClinicaFrba.Login;
 /*
-using GrouponDesktop.CargaCredito;
-using GrouponDesktop.ComprarGiftCard;
+using ClinicaFrba.CargaCredito;
+using ClinicaFrba.ComprarGiftCard;
 */
 namespace ClinicaFrba.Core
 {

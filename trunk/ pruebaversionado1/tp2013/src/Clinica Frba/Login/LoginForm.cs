@@ -34,35 +34,21 @@ namespace ClinicaFrba.Login
             
             user = svc.Login(userName, pass);
 //TERMINAR!
-            user.Roles = svc.GetUserRoles(user.UserID);
-            
-            if (user.Roles.Count > 1)
+            var roles = svc.GetUserRoles(user.UserID);
+            if (roles.Count > 1)
             {
-                foreach (var rol in user.Roles)
-                {
-                    //comboRoles.Items.Add(descrRol.Nombre.ToString());
-                    comboRoles.Items.Insert(rol.ID, rol.Nombre.ToString());
-                                       
-                }
+                comboRoles.DataSource = roles;
+                comboRoles.SelectedIndex = 0;
                 comboRoles.Show();
             }
-            else {
-                //user.RolSeleccionado = user.Roles.First<Rol>();
-                //user.RolSeleccionado = (int).user.Roles.First;
-                //Setear el primer elemento de la lista
-                //Iniciar sesion con el usuario cargado
-
+            else
+            {
+                Rol rol = (Rol)roles.Take(1);
+                user.RolSeleccionado = rol.ID;
+                svc.SetUserFunctionalities(user);
                 Session.StartSession(user);
                 ViewsManager.ClearViews();
             }
-
-        }
-
-        private void btnAceptarRol_Click(object sender, EventArgs e)
-        {
-           MessageBox.Show(comboRoles.SelectedText);
-            //comboRoles.SelectedItem 
-            //Si se eligio algo en el combo, setear el rol
         }
 
         private void comboRoles_SelectedIndexChanged(object sender, EventArgs e)
