@@ -11,14 +11,14 @@ namespace ClinicaFrba.Comun
         AbmEspecialidadesMedicas,
         AbmPlanes,
         AbmProfesional,
-        AbmRol,
+        AdministrarRoles,
         CancelarAtencion,
         CompraBono,
         GenerarReceta,
-        ListadosEstadisticos,
+        ListarEstadisticas,
         PedirTurno,
         RegistrarAgenda,
-        RegistroLLegada,
+        RegistroLlegada,
         RegistroResultadoAtencion,
         RegistroUsuario
     }

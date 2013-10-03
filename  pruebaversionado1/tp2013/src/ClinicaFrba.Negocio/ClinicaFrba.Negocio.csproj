@@ -49,6 +49,7 @@
     <Compile Include="FunctionalitiesManager.cs" />
     <Compile Include="LoginService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportManager.cs" />
     <Compile Include="RolesManager.cs" />
   </ItemGroup>
   <ItemGroup>

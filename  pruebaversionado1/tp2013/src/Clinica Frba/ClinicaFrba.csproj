@@ -64,12 +64,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbmEspecialidadesMedicas\AbmEspecialidadesMedicas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmEspecialidadesMedicas\AbmEspecialidadesMedicas.Designer.cs">
+      <DependentUpon>AbmEspecialidadesMedicas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmPlanes\AbmPlanes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmPlanes\AbmPlanes.Designer.cs">
+      <DependentUpon>AbmPlanes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmRol\AddEditRoleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRol\AddEditRoleForm.designer.cs">
+      <DependentUpon>AddEditRoleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmRol\RolesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRol\RolesForm.designer.cs">
+      <DependentUpon>RolesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmRol\RoleUpdatedEventArgs.cs" />
     <Compile Include="Core\AppExceptionHandler.cs" />
     <Compile Include="Core\NonNavigableAttribute.cs" />
     <Compile Include="Core\PermissionRequiredAttribute.cs" />
     <Compile Include="Core\Session.cs" />
     <Compile Include="Core\SqlExceptionHandler.cs" />
     <Compile Include="Core\ViewsManager.cs" />
+    <Compile Include="ListadoEstadistico\ListadoEstadisticoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListadoEstadistico\ListadoEstadisticoForm.Designer.cs">
+      <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +115,21 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AbmEspecialidadesMedicas\AbmEspecialidadesMedicas.resx">
+      <DependentUpon>AbmEspecialidadesMedicas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmPlanes\AbmPlanes.resx">
+      <DependentUpon>AbmPlanes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\AddEditRoleForm.resx">
+      <DependentUpon>AddEditRoleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\RolesForm.resx">
+      <DependentUpon>RolesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListadoEstadistico\ListadoEstadisticoForm.resx">
+      <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -94,6 +140,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistroUsuario\RegistroUsuario.resx">
+      <DependentUpon>RegistroUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -109,6 +158,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="RegistroUsuario\RegistroUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistroUsuario\RegistroUsuario.Designer.cs">
+      <DependentUpon>RegistroUsuario.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -152,19 +207,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AbmAfiliado\" />
-    <Folder Include="AbmEspecialidadesMedicas\" />
-    <Folder Include="AbmPlanes\" />
     <Folder Include="AbmProfesional\" />
-    <Folder Include="AbmRol\" />
     <Folder Include="CancelarAtencion\" />
     <Folder Include="CompraBono\" />
     <Folder Include="GenerarReceta\" />
-    <Folder Include="ListadosEstadisticos\" />
     <Folder Include="PedirTurno\" />
     <Folder Include="RegistrarAgenda\" />
-    <Folder Include="RegistroLLegada\" />
+    <Folder Include="RegistroLlegada\" />
     <Folder Include="RegistroResultadoAtencion\" />
-    <Folder Include="RegistroUsuario\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
