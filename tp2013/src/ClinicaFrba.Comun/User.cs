@@ -26,7 +26,8 @@ namespace ClinicaFrba.Comun
         /// Role ID
         /// </summary>
         
-        public int RolSeleccionado { get; set; }
+        //public int RolSeleccionado { get; set; }
+        public int RoleID { get; set; }
 
         public BindingList<Rol> Roles { get; set; } 
             //List<Rol> Roles { get; set; }
@@ -36,12 +37,12 @@ namespace ClinicaFrba.Comun
         /// </summary>
         public string UserName { get; set; }
 
-        public DetalleEntidad DetalleEntidad { get; set; }
+        public DetallesPersona DetallePersona { get; set; }
 
         public User()
         {
             Permissions = new List<Functionalities>();
-            DetalleEntidad = new DetalleEntidad();
+            DetallePersona = new DetallesPersona();
         }
 
         public override string ToString()

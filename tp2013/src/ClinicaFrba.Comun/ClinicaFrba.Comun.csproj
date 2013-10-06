@@ -45,11 +45,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DetalleEntidad.cs" />
+    <Compile Include="Afiliado.cs" />
+    <Compile Include="DetallesPersona.cs" />
+    <Compile Include="Especialidad.cs" />
     <Compile Include="Functionalities.cs" />
+    <Compile Include="PlanMedico.cs" />
+    <Compile Include="Profesional.cs" />
+    <Compile Include="Profile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportType.cs" />
     <Compile Include="Rol.cs" />
+    <Compile Include="Sexo.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

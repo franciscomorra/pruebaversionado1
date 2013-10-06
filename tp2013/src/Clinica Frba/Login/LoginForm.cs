@@ -38,13 +38,16 @@ namespace ClinicaFrba.Login
             if (roles.Count > 1)
             {
                 comboRoles.DataSource = roles;
+                //Aca le tengo que decir que muestre el nombre y ponga el id como index
+                comboRoles.DisplayMember = "Nombre";
                 comboRoles.SelectedIndex = 0;
-                comboRoles.Show();
+                panelRoles.Show();
             }
             else
             {
                 Rol rol = (Rol)roles.Take(1);
-                user.RolSeleccionado = rol.ID;
+                user.RoleID = rol.ID;
+                
                 svc.SetUserFunctionalities(user);
                 Session.StartSession(user);
                 ViewsManager.ClearViews();
@@ -53,10 +56,8 @@ namespace ClinicaFrba.Login
 
         private void comboRoles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //De aca tengo que agarrar el nombre, y sacar la posicion en la lista de roles de usuario
-            //Con la posicion, saco el ID, y en la session le cargo las funcionalidades
-            Rol rolSelect = user.Roles.ElementAt(comboRoles.SelectedIndex);
-            user.RolSeleccionado = rolSelect.ID;             
+            Rol rolSelected = (Rol)comboRoles.SelectedItem;
+            user.RoleID = rolSelected.ID;
             svc.SetUserFunctionalities(user);
             Session.StartSession(user);
             ViewsManager.ClearViews();

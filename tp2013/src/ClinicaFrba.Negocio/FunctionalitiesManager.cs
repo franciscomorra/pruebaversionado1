@@ -26,33 +26,33 @@ namespace ClinicaFrba.Negocio
          */
 
 
-        public List<Functionalities> GetAllFunctionalities()
+        public List<Functionalities> GetAllFunctionalities()//Devuelve una lista con las funcionalidades existentes (son 15)
         {
             return Enum.GetValues(typeof(Functionalities)).Cast<Functionalities>().ToList();
         }
 
-        public void DeleteRoleFunctionalities(Rol rol)
+        public void DeleteRoleFunctionalities(Rol rol)//Borra las funcionalidades de un rol
         {
-            SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
-                "ClinicaFrba.DeleteRoleFunctionalities", SqlDataAccessArgs
+            SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "SHARPS.DeleteRoleFunctionalities", SqlDataAccessArgs
                 .CreateWith("@Rol_ID", rol.ID)
             .Arguments);
         }
 
-        public void InsertRoleFunctionality(Rol rol, Functionalities functionality)
+        public void InsertRoleFunctionality(Rol rol, Functionalities functionality)//Inserta las funcionalidades a un rol
         {
-            SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
-                "ClinicaFrba.InsertRoleFunctionality", SqlDataAccessArgs
+            SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "SHARPS.InsertRoleFunctionality", SqlDataAccessArgs
                 .CreateWith("@Rol_ID", rol.ID)
                 .And("@Funcionalidad", functionality.ToString())
             .Arguments);
         }
 
-        public List<Functionalities> GetRoleFunctionalities(int roleId)
+        public List<Functionalities> GetRoleFunctionalities(int roleId)//Saca las funcionalidades de un rol
         {
             var ret = new List<Functionalities>();
-            var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
-                "ClinicaFrba.GetRoleFunctionalities", SqlDataAccessArgs
+            var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "SHARPS.GetRoleFunctionalities", SqlDataAccessArgs
                 .CreateWith("@Rol_ID", roleId)
             .Arguments);
 

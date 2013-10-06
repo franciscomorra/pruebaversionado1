@@ -16,7 +16,7 @@ namespace ClinicaFrba.Negocio
         {
             return SqlDataAccess.ExecuteDataTableQuery
             (
-                ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
+                ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 reportType.StoredProcedure, SqlDataAccessArgs
                 .CreateWith("@fecha_inicio", fechaInicio)
                 .And("@fecha_fin", fechaFin)
@@ -28,8 +28,10 @@ namespace ClinicaFrba.Negocio
         {
             return new BindingList<ReportType>()
             {
-                { new ReportType("GRUPO_N.Get_TOPDevoluciones", "Top 5 porcentaje de devolución de los cupones, por proveedor por semestre")},
-                { new ReportType("GRUPO_N.Get_TOPGiftCard", "Top 5 por usuario a los cuales se le acreditó GiftCards por semestre")}
+                { new ReportType("SHARPS.Get_TOPCancelaciones", "Top 5 de las especialidades que más se registraron cancelaciones, tanto de afiliados como de profesionales")},
+                { new ReportType("SHARPS.Get_TOPVencidos", "Top 5 de la cantidad total de bonos farmacia vencidos por afiliado.")},
+                { new ReportType("SHARPS.Get_TOPRecetados", "Top 5 de las especialidades de médicos con más bonos de farmacia recetados.")},
+                { new ReportType("SHARPS.Get_TOPVividores", "Top 10 de los afiliados que utilizaron bonos que ellos mismo no compraron")}
             };
         }
     }

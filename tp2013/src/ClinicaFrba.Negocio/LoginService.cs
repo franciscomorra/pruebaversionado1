@@ -15,31 +15,23 @@ namespace ClinicaFrba.Negocio
 {
     public class LoginService
     {
-        /// <summary>
-        /// Valida contra la DB los datos del usuario
-        /// </summary>
-        /// <param name="user">User name</param>
-        /// <param name="password">Password</param>
-        /// <returns>ID del usuario en caso de login correcto, si no tira una Exception</returns>
-        public User Login(string userName, string password)
+        public User Login(string userName, string password)//Desafia con user y password a db, si correcto, devuelve usuario
         {
             this.ValidateLockedUser(userName);
 
             var encryptedPassword = ComputeHash(password, new SHA256CryptoServiceProvider());
-            DataRow result = SqlDataAccess.ExecuteDataRowQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
-                "ClinicaFrba.Login", SqlDataAccessArgs
+            DataRow result = SqlDataAccess.ExecuteDataRowQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "SHARPS.Login", SqlDataAccessArgs
                 .CreateWith("@Nombre", userName)
                 .And("@Password", encryptedPassword)
             .Arguments);
 
             if (result == null)
                 throw new Exception("Usuario o contraseña inválidos");
-
-
             var user = new User()
             {
                 UserID = int.Parse(result["ID"].ToString()),
-                UserName = result["Nombre"].ToString()
+                UserName = result["Nombre"].ToString(),
             };
 
             return user;
@@ -49,8 +41,8 @@ namespace ClinicaFrba.Negocio
         {
             var encryptedOldPassword = ComputeHash(oldPassword, new SHA256CryptoServiceProvider());
             var encryptedNewPassword = ComputeHash(newPassword, new SHA256CryptoServiceProvider());
-            var result = SqlDataAccess.ExecuteScalarQuery<object>(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
-                "ClinicaFrba.UpdateUserPassword", SqlDataAccessArgs
+            var result = SqlDataAccess.ExecuteScalarQuery<object>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "SHARPS.UpdateUserPassword", SqlDataAccessArgs
                 .CreateWith("@ID_Usuario", user.UserID)
                 .And("@OldPassword", encryptedOldPassword)
                 .And("@NewPassword", encryptedNewPassword)
@@ -68,10 +60,10 @@ namespace ClinicaFrba.Negocio
 
         #region Private Methods
 
-        private void ValidateLockedUser(string userName)
+        private void ValidateLockedUser(string userName)//Validar si esta bloqueado
         {
-            var result = SqlDataAccess.ExecuteScalarQuery<object>(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
-                "ClinicaFrba.GetUserLoginAttempts", SqlDataAccessArgs
+            var result = SqlDataAccess.ExecuteScalarQuery<object>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "SHARPS.GetUserLoginAttempts", SqlDataAccessArgs
                 .CreateWith("@Nombre", userName)
             .Arguments);
 
@@ -82,10 +74,10 @@ namespace ClinicaFrba.Negocio
                 throw new Exception("Usuario Bloqueado, contacte al administrador del sistema");
         }
 
-        public BindingList<Rol> GetUserRoles(int userID)
+        public BindingList<Rol> GetUserRoles(int userID)//Buscar los roles de un usuario
         {
-            var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
-                "ClinicaFrba.GetRoles", SqlDataAccessArgs
+            var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "SHARPS.GetRoles", SqlDataAccessArgs
                 .CreateWith("@userID", userID).Arguments);
 
             var roles = new BindingList<Rol>();
@@ -110,7 +102,7 @@ namespace ClinicaFrba.Negocio
         {
             
             var manager = new FunctionalitiesManager();
-            var functionalities = manager.GetRoleFunctionalities(user.RolSeleccionado);
+            var functionalities = manager.GetRoleFunctionalities(user.RoleID);
 
             foreach (var functionality in functionalities)
             {
