@@ -106,6 +106,7 @@
             this.panelRoles.Name = "panelRoles";
             this.panelRoles.Size = new System.Drawing.Size(235, 61);
             this.panelRoles.TabIndex = 6;
+            this.panelRoles.Visible = false;
             // 
             // label3
             // 

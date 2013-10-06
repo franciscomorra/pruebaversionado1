@@ -16,3 +16,9 @@ C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Data\bin\
 C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Data\obj\Debug\ResolveAssemblyReference.cache
 C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Data\obj\Debug\Data.dll
 C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Data\obj\Debug\Data.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Data\bin\Data.xml
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Data\bin\Data.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Data\bin\Data.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Data\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Data\obj\Debug\Data.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Data\obj\Debug\Data.pdb

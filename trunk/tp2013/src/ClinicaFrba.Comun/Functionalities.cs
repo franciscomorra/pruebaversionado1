@@ -7,7 +7,7 @@ namespace ClinicaFrba.Comun
 {   
     public enum Functionalities
     {
-        AbmAfiliado,
+        AdministrarAfiliados,
         AbmEspecialidadesMedicas,
         AbmPlanes,
         AbmProfesional,
