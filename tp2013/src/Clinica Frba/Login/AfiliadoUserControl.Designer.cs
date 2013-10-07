@@ -54,6 +54,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.txtMotivo = new System.Windows.Forms.TextBox();
             this.panelMotivo = new System.Windows.Forms.Panel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.panelFamiliar.SuspendLayout();
             this.panelMotivo.SuspendLayout();
             this.SuspendLayout();
@@ -278,10 +280,29 @@
             this.panelMotivo.TabIndex = 29;
             this.panelMotivo.Visible = false;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(101, 372);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(200, 21);
+            this.comboBox1.TabIndex = 30;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(71, 375);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(23, 13);
+            this.label13.TabIndex = 31;
+            this.label13.Text = "Rol";
+            // 
             // AfiliadoUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.panelMotivo);
             this.Controls.Add(this.panelFamiliar);
             this.Controls.Add(this.cbxSexo);
@@ -342,5 +363,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtMotivo;
         private System.Windows.Forms.Panel panelMotivo;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label13;
     }
 }
