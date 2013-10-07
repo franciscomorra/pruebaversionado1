@@ -31,7 +31,7 @@ namespace ClinicaFrba.Core
                 {
                     {"IX_USUARIO", "El nombre de usuario ya existe, seleccione uno nuevo"},
                     {"IX_DETALLEENTIDAD_TELEFONO", "Ya hay un usuario con el mismo teléfono"},
-                    //{"IX_PROVEEDOR_CUIT", "Ya hay un profesional con el CUIT especificado"},
+                    //{"IX_PROVEEDOR_Matricula", "Ya hay un profesional con el Matricula especificado"},
                     //{"IX_PROVEEDOR_RSOCIAL", "Ya hay un profesional con esa Razón Social"},
                    // {"CK_CLIENTE_SALDO", "No posee saldo suficiente para realizar la compra"}
                 };

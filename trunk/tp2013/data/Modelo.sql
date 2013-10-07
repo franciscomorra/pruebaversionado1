@@ -1,7 +1,7 @@
 CREATE TABLE Afiliados ( 
 	nroAfiliado numeric(18) NOT NULL,
 	detalles numeric(18),
-	plan numeric(18),
+	planMedico numeric(18),
 	activoAfiliado bit,
 	estadoCivil nchar(10),
 	cantHijos int
@@ -21,7 +21,7 @@ CREATE TABLE Bonos (
 	fechaImp datetime,
 	afiliadoCompro bit,
 	tipoBono nchar(10),
-	plan numeric(18)
+	planMedico numeric(18)
 )
 ;
 
@@ -161,7 +161,7 @@ CREATE TABLE Usuarios (
 )
 ;
 
-CREATE TABLE Usuarios Roles ( 
+CREATE TABLE Usuarios_Roles ( 
 	usuario nchar(10),
 	rol numeric(10,2)
 )
@@ -208,8 +208,8 @@ ALTER TABLE Turnos
 	ADD CONSTRAINT UQ_Turnos_medico UNIQUE (medico)
 ;
 
-ALTER TABLE Usuarios Roles
-	ADD CONSTRAINT UQ_Usuarios Roles_usuario UNIQUE (usuario)
+ALTER TABLE Usuarios_Roles
+	ADD CONSTRAINT UQ_Usuarios_Roles_usuario UNIQUE (usuario)
 ;
 
 ALTER TABLE Afiliados ADD CONSTRAINT PK_Afiliados 
@@ -271,7 +271,7 @@ ALTER TABLE Usuarios ADD CONSTRAINT PK_Usuarios
 
 
 ALTER TABLE Afiliados ADD CONSTRAINT FK_Afiliados_Planes_Medcos 
-	FOREIGN KEY (plan) REFERENCES Planes_Medcos (codigo)
+	FOREIGN KEY (planMedico) REFERENCES Planes_Medcos (codigo)
 ;
 
 ALTER TABLE Afiliados ADD CONSTRAINT FK_Afiliados_Turnos 
@@ -330,10 +330,10 @@ ALTER TABLE Turnos ADD CONSTRAINT FK_Turnos_Estados_turno
 	FOREIGN KEY (estado) REFERENCES Estados_turno (idEstado)
 ;
 
-ALTER TABLE Usuarios ADD CONSTRAINT FK_Usuarios_Usuarios Roles 
-	FOREIGN KEY (username) REFERENCES Usuarios Roles (usuario)
+ALTER TABLE Usuarios ADD CONSTRAINT FK_Usuarios_Usuarios_Roles 
+	FOREIGN KEY (username) REFERENCES Usuarios_Roles (usuario)
 ;
 
-ALTER TABLE Usuarios Roles ADD CONSTRAINT FK_Usuarios Roles_Roles 
+ALTER TABLE Usuarios_Roles ADD CONSTRAINT FK_Usuarios_Roles_Roles 
 	FOREIGN KEY (rol) REFERENCES Roles (idRol)
 ;

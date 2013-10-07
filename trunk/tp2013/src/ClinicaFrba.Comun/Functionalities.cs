@@ -10,7 +10,7 @@ namespace ClinicaFrba.Comun
         AdministrarAfiliados,
         AbmEspecialidadesMedicas,
         AbmPlanes,
-        AbmProfesional,
+        AdministrarProfesionales,
         AdministrarRoles,
         CancelarAtencion,
         CompraBono,
