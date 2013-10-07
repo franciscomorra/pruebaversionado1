@@ -64,6 +64,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbmAfiliado\AfiliadosForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmAfiliado\AfiliadosForm.Designer.cs">
+      <DependentUpon>AfiliadosForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmEspecialidadesMedicas\AbmEspecialidadesMedicas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +81,12 @@
     </Compile>
     <Compile Include="AbmPlanes\AbmPlanes.Designer.cs">
       <DependentUpon>AbmPlanes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmProfesional\ProfesionalesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmProfesional\ProfesionalesForm.Designer.cs">
+      <DependentUpon>ProfesionalesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmRol\AddEditRoleForm.cs">
       <SubType>Form</SubType>
@@ -135,11 +147,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AbmAfiliado\AfiliadosForm.resx">
+      <DependentUpon>AfiliadosForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AbmEspecialidadesMedicas\AbmEspecialidadesMedicas.resx">
       <DependentUpon>AbmEspecialidadesMedicas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmPlanes\AbmPlanes.resx">
       <DependentUpon>AbmPlanes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmProfesional\ProfesionalesForm.resx">
+      <DependentUpon>ProfesionalesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\AddEditRoleForm.resx">
       <DependentUpon>AddEditRoleForm.cs</DependentUpon>
@@ -170,6 +188,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="RegistrarAgenda\RegistrarAgenda.resx">
+      <DependentUpon>RegistrarAgenda.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RegistroUsuario\RegistroUsuario.resx">
       <DependentUpon>RegistroUsuario.cs</DependentUpon>
     </EmbeddedResource>
@@ -187,6 +208,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="RegistrarAgenda\RegistrarAgenda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistrarAgenda\RegistrarAgenda.Designer.cs">
+      <DependentUpon>RegistrarAgenda.cs</DependentUpon>
     </Compile>
     <Compile Include="RegistroUsuario\RegistroUsuario.cs">
       <SubType>Form</SubType>
@@ -235,13 +262,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AbmAfiliado\" />
-    <Folder Include="AbmProfesional\" />
     <Folder Include="CancelarAtencion\" />
     <Folder Include="CompraBono\" />
     <Folder Include="GenerarReceta\" />
     <Folder Include="PedirTurno\" />
-    <Folder Include="RegistrarAgenda\" />
     <Folder Include="RegistroLlegada\" />
     <Folder Include="RegistroResultadoAtencion\" />
   </ItemGroup>
