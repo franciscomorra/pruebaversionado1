@@ -11,7 +11,7 @@ using ClinicaFrba.Core;
 using ClinicaFrba.AbmRol;
 using ClinicaFrba.Comun;
 
-namespace ClinicaFrba
+namespace ClinicaFrba //REHACER AGREGANDO EL PERFIL
 {
     [NonNavigable]
     public partial class AddEditRoleForm : Form
