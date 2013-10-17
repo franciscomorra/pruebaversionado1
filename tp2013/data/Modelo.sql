@@ -6,7 +6,7 @@ USE [GD2C2013]
 
 CREATE TABLE Afiliados ( 
 	nroAfiliado numeric(18) NOT NULL,
-	plan numeric(18) NULL,
+	planMedico numeric(18) NULL,
 	activoAfiliado char(10) NULL,
 	estadoCivil nchar(10) NULL,
 	cantHijos int NULL,
@@ -304,7 +304,7 @@ ALTER TABLE Usuarios_Roles ADD CONSTRAINT PK_Usuarios Roles
 
 
 ALTER TABLE Afiliados ADD CONSTRAINT FK_Afiliados_Planes_Medcos 
-	FOREIGN KEY (plan) REFERENCES Planes_Medicos (codigo)
+	FOREIGN KEY (planMedico) REFERENCES Planes_Medicos (codigo)
 ;
 
 ALTER TABLE Afiliados ADD CONSTRAINT FK_Afiliados_Turnos 
