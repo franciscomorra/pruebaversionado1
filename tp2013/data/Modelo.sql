@@ -25,7 +25,7 @@ CREATE TABLE Agendas (
 CREATE TABLE Bonos ( 
 	numeroBono numeric(18) NOT NULL,
 	fechaImp datetime NULL,
-	afiliadoCompro bit NULL,
+	afiliadoCompro numeric(18) NULL,
 	tipoBono nchar(10) NULL,
 	plan numeric(18) NULL
 )
@@ -176,7 +176,7 @@ CREATE TABLE Turnos (
 CREATE TABLE Usuarios ( 
 	idUser numeric(18) NOT NULL,
 	username numeric(10,2) NULL,
-	password nchar(10) NOT NULL,
+	clave nchar(10) NOT NULL,
 	intentos int NULL,
 	activo bit NULL
 )
@@ -195,6 +195,10 @@ ALTER TABLE Agendas
 
 ALTER TABLE Agendas
 	ADD CONSTRAINT UQ_Agendas_medico UNIQUE (medico)
+;
+
+ALTER TABLE Bonos
+	ADD CONSTRAINT UQ_Bonos_afiliadoCompro UNIQUE (afiliadoCompro)
 ;
 
 ALTER TABLE Cambios_Afiliado
@@ -302,6 +306,10 @@ ALTER TABLE Usuarios_Roles ADD CONSTRAINT PK_Usuarios Roles
 ;
 
 
+
+ALTER TABLE Afiliados ADD CONSTRAINT FK_Afiliados_Bonos 
+	FOREIGN KEY (nroAfiliado) REFERENCES Bonos (afiliadoCompro)
+;
 
 ALTER TABLE Afiliados ADD CONSTRAINT FK_Afiliados_Planes_Medcos 
 	FOREIGN KEY (planMedico) REFERENCES Planes_Medicos (codigo)
