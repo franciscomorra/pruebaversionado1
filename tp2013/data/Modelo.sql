@@ -1,56 +1,63 @@
+USE [GD2C2013]
+;
+
+
+
+
 CREATE TABLE Afiliados ( 
 	nroAfiliado numeric(18) NOT NULL,
-	plan numeric(18),
-	activoAfiliado char(10),
-	estadoCivil nchar(10),
-	cantHijos int,
-	userId numeric(18)
+	plan numeric(18) NULL,
+	activoAfiliado char(10) NULL,
+	estadoCivil nchar(10) NULL,
+	cantHijos int NULL,
+	userId numeric(18) NULL
 )
 ;
 
 CREATE TABLE Agendas ( 
-	medico numeric(18),
-	dia date,
-	horaIngreso time(7),
-	horaEgreso time(7)
+	medico numeric(18) NULL,
+	dia date NULL,
+	horaIngreso time(7) NULL,
+	horaEgreso time(7) NULL
 )
 ;
 
 CREATE TABLE Bonos ( 
 	numeroBono numeric(18) NOT NULL,
-	fechaImp datetime,
-	afiliadoCompro bit,
-	tipoBono nchar(10),
-	plan numeric(18)
+	fechaImp datetime NULL,
+	afiliadoCompro bit NULL,
+	tipoBono nchar(10) NULL,
+	plan numeric(18) NULL
 )
 ;
 
 CREATE TABLE Cambios_Afiliado ( 
-	afiliado numeric(18),
-	fecha date,
-	motivo char(10)
+	afiliado numeric(18) NULL,
+	fecha date NULL,
+	motivo char(10) NULL
 )
 ;
 
 CREATE TABLE Consulta ( 
-	turno numeric(18),
-	bono numeric(18),
-	sintomas varchar(255),
-	enfermedad varchar(255)
+	turno numeric(18) NULL,
+	bono numeric(18) NULL,
+	sintomas varchar(255) NULL,
+	enfermedad varchar(255) NULL,
+	nroConsulta numeric(18) NULL
 )
 ;
 
 CREATE TABLE Detalles_Persona ( 
-	dni numeric(18),
-	tipo varchar(255),
-	telefono numeric(18),
-	direccion varchar(255),
-	sexo char(10),
-	mail varchar(255),
-	apellido varchar(255),
-	nombre varchar(255),
+	dni numeric(18) NULL,
+	tipo varchar(255) NULL,
+	telefono numeric(18) NULL,
+	direccion varchar(255) NULL,
+	sexo char(10) NULL,
+	mail varchar(255) NULL,
+	apellido varchar(255) NULL,
+	nombre varchar(255) NULL,
 	userId numeric(18) NOT NULL,
-	fechaNac date
+	fechaNac date NULL
 )
 ;
 
@@ -61,117 +68,117 @@ CREATE TABLE Dias_Laborales (
 
 CREATE TABLE Especialidades ( 
 	codigoEspecialidad numeric(18) NOT NULL,
-	descripcionEsp varchar(255),
-	tipoEsp numeric(18)
+	descripcionEsp varchar(255) NULL,
+	tipoEsp numeric(18) NULL
 )
 ;
 
 CREATE TABLE Estados_turno ( 
 	idEstado numeric(18) NOT NULL,
-	descTurno nchar(10),
-	motivoCancel nchar(10)
+	descTurno nchar(10) NULL,
+	motivoCancel nchar(10) NULL
 )
 ;
 
 CREATE TABLE Funcionalidades ( 
 	idFunc numeric(10,2) NOT NULL,
-	descripcion nchar(10)
+	descripcion nchar(10) NULL
 )
 ;
 
 CREATE TABLE Medicamentos ( 
-	idMedic numeric(18),
-	descrip nchar(10)
+	idMedic numeric(18) NULL,
+	descrip nchar(10) NULL
 )
 ;
 
 CREATE TABLE Medicos ( 
-	matricula numeric(18),
+	matricula numeric(18) NULL,
 	userId numeric(18) NOT NULL,
-	activoMedico char(10)
+	activoMedico char(10) NULL
 )
 ;
 
 CREATE TABLE Medicos_Esp ( 
-	medico numeric(18),
-	especialidad numeric(18)
+	medico numeric(18) NULL,
+	especialidad numeric(18) NULL
 )
 ;
 
 CREATE TABLE Perfil ( 
 	idPerfil numeric(10,2) NOT NULL,
-	detallesPerf bit
+	detallesPerf char(10) NULL
 )
 ;
 
 CREATE TABLE Perfil_Func ( 
-	perfil numeric(10,2),
-	funcion numeric(10,2)
+	perfil numeric(10,2) NULL,
+	funcion numeric(10,2) NULL
 )
 ;
 
 CREATE TABLE Planes_Medicos ( 
 	codigo numeric(18) NOT NULL,
-	descripcionPM varchar(255),
-	precioConsulta numeric(18),
-	precioFarmacia numeric(18)
+	descripcionPM varchar(255) NULL,
+	precioConsulta numeric(18) NULL,
+	precioFarmacia numeric(18) NULL
 )
 ;
 
 CREATE TABLE Receta ( 
-	bonoConsulta nchar(10),
-	bonoFarmacia nchar(10)
+	bonoConsulta nchar(10) NULL,
+	bonoFarmacia nchar(10) NULL
 )
 ;
 
 CREATE TABLE Recetas_Medicamen ( 
-	receta nchar(10),
-	medicamento numeric(18)
+	receta nchar(10) NULL,
+	medicamento numeric(18) NULL
 )
 ;
 
 CREATE TABLE Roles ( 
 	idRol numeric(10,2) NOT NULL,
-	descripRol nchar(10),
-	activoRol bit,
-	perfil numeric(10,2)
+	descripRol nchar(10) NULL,
+	activoRol bit NULL,
+	perfil numeric(10,2) NULL
 )
 ;
 
 CREATE TABLE Roles_Func ( 
-	rol numeric(10,2),
+	rol numeric(10,2) NULL,
 	funcionalidad numeric(10,2) NOT NULL
 )
 ;
 
 CREATE TABLE Tipo_Doc ( 
 	idTipo varchar(255) NOT NULL,
-	descripcion varchar(255)
+	descripcion varchar(255) NULL
 )
 ;
 
 CREATE TABLE Tipos_Especialidad ( 
 	codigoEsp numeric(18) NOT NULL,
-	descripcionEsp varchar(255)
+	descripcionEsp varchar(255) NULL
 )
 ;
 
 CREATE TABLE Turnos ( 
 	numero numeric(18) NOT NULL,
-	medico numeric(18),
-	afiliado numeric(18),
-	fechaHora datetime,
-	estado numeric(18),
-	fechaHoraLlegada datetime
+	medico numeric(18) NULL,
+	afiliado numeric(18) NULL,
+	fechaHora datetime NULL,
+	estado numeric(18) NULL,
+	fechaHoraLlegada datetime NULL
 )
 ;
 
 CREATE TABLE Usuarios ( 
 	idUser numeric(18) NOT NULL,
-	username numeric(10,2),
+	username numeric(10,2) NULL,
 	password nchar(10) NOT NULL,
-	intentos int,
-	activo bit
+	intentos int NULL,
+	activo bit NULL
 )
 ;
 
