@@ -380,7 +380,7 @@ CREATE TABLE Roles (
 	idRol numeric(10,2) NOT NULL,
 	descripRol nchar(10),
 	activoRol bit,
-	perfil numeric(10,2)
+	perfil numeric(10,2)identity (100,1) ------<-----no seria not null
 )
 ;
 
@@ -423,7 +423,7 @@ CREATE TABLE Usuarios (
 
 CREATE TABLE Usuarios_Roles ( 
 	usuario numeric(10,2) NOT NULL,
-	rol numeric(10,2) NOT NULL
+	rol numeric(10,2) identity (100,1)NOT NULL
 )
 ;
 
