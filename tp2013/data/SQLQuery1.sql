@@ -717,8 +717,7 @@ INSERT INTO Roles (descripRol) VALUES ('Administrativo')
 INSERT INTO Roles (descripRol) VALUES ('Medico');
 INSERT INTO Roles (descripRol) VALUES ('Afiliado');
 
-INSERT INTO Roles_Func (funcionalidad)  
-SELECT idFunc FROM Funcionalidades
+
 
 
 
@@ -726,27 +725,41 @@ SELECT idFunc FROM Funcionalidades
 INSERT INTO RolesFunc (rol, funcionalidad)
 VALUES (GetIdRolByName('Afiliado'), 4)
 INSERT INTO RolesFunc (rol, funcionalidad)
-VALUES (GetIdRolByName('Afiliado'), 6)
+VALUES (GetIdRolByName('Afiliado'), 8)
 INSERT INTO RolesFunc (rol, funcionalidad)
-VALUES (GetIdRolByName('Afiliado'), 7)
+VALUES (GetIdRolByName('Afiliado'), 10)
 INSERT INTO RolesFunc(rol, funcionalidad)
-VALUES (GetIdRolByName('Afiliado'), 11)
+VALUES (GetIdRolByName('Afiliado'), 12)
 INSERT INTO RolesFunc (rol, funcionalidad)
-VALUES (GetIdRolByName('Afiliado'), 9)
+VALUES (GetIdRolByName('Afiliado'), 14)
 
 INSERT INTO RolesFunc (rol, funcionalidad)
-VALUES (GetIdRolByName('medico'), 5)
+VALUES (GetIdRolByName('medico'), 1)
 INSERT INTO RolesFunc (rol, funcionalidad)
-VALUES (GetIdRolByName('medico'), 13)
+VALUES (GetIdRolByName('medico'), 12)
 
-INSERT INTO Usuarios_Roles( usuario  ) -------rol con identity?
-Select u.username , 
-from Usuarios u 
+INSERT INTO Usuarios_Roles( usuario ) 
+Select u.username     
+from Usuarios u
 
 
-INSERT INTO Roles(idRol , descripRol , activoRol , perfil) ---perfil identity
-select u.rol , NULL , 1 
+ 
+INSERT INTO Roles(idRol , descripRol , activoRol ) 
+select distinct u.rol , NULL , 1 
 from Usuarios_Roles u
+inner join gd_esquema.Maestra m on u.usuario = CAST(m.Medico_Telefono AS NVARCHAR(255) or u.usuario = CAST(m.Paciente_Telefono AS NVARCHAR(255) ----<---- revisar  
+
+
+INSERT INTO Roles_Func (funcionalidad)  
+SELECT idFunc FROM Funcionalidades
+
+
+INSERT INTO Roles_Func (rol)
+select distinct 
+from gd_esquema.Maestra m
+inner join Usuarios u on  u.usuario = CAST(m.Medico_Telefono AS NVARCHAR(255)
+inner join Usuarios Roles ur
+inner join
 
 
 
@@ -899,10 +912,10 @@ PRINT 'Creando usuario administrador...'
 DECLARE @ID_Administrador_Inicial INT
 DECLARE @ID_Detalle_Administrador_Inicial INT
 
-INSERT INTO Usuarios (Nombre, Password, ID_Rol)
-VALUES ('Admin', 'bed9ae713b440eed894573977256ed12a992b93804975fa09aff32dd1572b658', 1)
+INSERT INTO Usuarios (username, Password,idUser ,activo , intentos)
+VALUES ('Admin', 'bed9ae713b440eed894573977256ed12a992b93804975fa09aff32dd1572b658', @ID_Detalle_Administrador_Inicial, 1 , 0)
 SET @ID_Administrador_Inicial = @@IDENTITY
-INSERT INTO Detalles_Persona (dni,tipo,telefono,direccion,sexo,mail,apellido,nombre,userid,fechaNac) VALUES ()  ---- QUE VALORES VAN PARA EL ADMINISTRADOR EN DETALLE ENTIDAD
+INSERT INTO Detalles_Persona (dni,tipo,telefono,direccion,sexo,mail,apellido,nombre,userId,fechaNac) VALUES (NULL ,NULL ,NULL ,NULL ,NULL ,NULL ,NULL ,NULL ,@ID_Detalle_Administrador_Inicial ,NULL)  ---- QUE VALORES VAN PARA EL ADMINISTRADOR EN DETALLE ENTIDAD
 SET @ID_Detalle_Administrador_Inicial = @@IDENTITY
 
 
