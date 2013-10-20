@@ -22,14 +22,28 @@ namespace ClinicaFrba.Negocio
 
         public int CreateAccount(User user, string password)
         {
+            var transaction = SessionData.Contains("Transaction") ? SessionData.Get<SqlTransaction>("Transaction") : null;
             var service = new LoginService();
             var encryptedPass = service.ComputeHash(password, new SHA256CryptoServiceProvider());
-            var result = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "SHARPS.InsertUser", SqlDataAccessArgs
-                .CreateWith("@UserName", user.UserName)
-                .And("@Password", encryptedPass)
-            .Arguments);
-            return result;
+            int result = 0;
+            if (transaction != null)
+            {
+                 result = SqlDataAccess.ExecuteScalarQuery<int>(
+                     "SHARPS.InsertUser", SqlDataAccessArgs
+                    .CreateWith("@UserName", user.UserName)
+                    .And("@Password", encryptedPass)
+                .Arguments, transaction);
+                return result;
+            }
+            else
+            {
+                 result = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                    "SHARPS.InsertUser", SqlDataAccessArgs
+                    .CreateWith("@UserName", user.UserName)
+                    .And("@Password", encryptedPass)
+                .Arguments);
+                return result;
+            }
         }
     }
 }

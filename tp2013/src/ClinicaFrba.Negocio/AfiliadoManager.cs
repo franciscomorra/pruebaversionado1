@@ -75,33 +75,43 @@ namespace ClinicaFrba.Negocio
             var entityDetailManager = new DetallePersonaManager();
             if (afiliado.UserID == 0)//NUEVO USUARIO
             {
-                var transaction = SqlDataAccess.OpenTransaction(ConfigurationManager.ConnectionStrings["StringConexion"].ToString());
-                afiliado.UserID = usersManager.CreateAccount(afiliado as User, password);
-                var detalleID = entityDetailManager.AddDetallePersona(afiliado as User);
-                if (afiliado.NroAfiliado == 0)//Primero del grupo familiar
+               var transaction = SqlDataAccess.OpenTransaction(ConfigurationManager.ConnectionStrings["StringConexion"].ToString());
+               try
                 {
-                    afiliado.NroAfiliado = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                        "SHARPS.InsertAfiliado", SqlDataAccessArgs
+                    afiliado.UserID = usersManager.CreateAccount(afiliado as User, password);
+                    var detalleID = entityDetailManager.AddDetallePersona(afiliado as User);
+                    if (afiliado.NroAfiliado == 0)//Primero del grupo familiar
+                    {
+                        afiliado.NroAfiliado = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                            "SHARPS.InsertAfiliado", SqlDataAccessArgs
+                            .CreateWith("@PlanMedico", afiliado.PlanMedico)
+                            .And("@ID", afiliado.UserID)
+                            .And("@EstadoCivil", afiliado.EstadoCivil)
+                            .And("@CantHijos", afiliado.CantHijos)
+                            .Arguments);
+                    }
+                    else//Grupo Familiar
+                    {
+                        afiliado.NroAfiliado = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                        "SHARPS.InsertMiembroGrupoFamiliar", SqlDataAccessArgs
                         .CreateWith("@PlanMedico", afiliado.PlanMedico)
                         .And("@ID", afiliado.UserID)
                         .And("@EstadoCivil", afiliado.EstadoCivil)
                         .And("@CantHijos", afiliado.CantHijos)
+                        .And("@RolAfiliado", afiliado.RoleID)
+                        .And("@nroAfiliado", afiliado.NroAfiliado)//Hay que sumarle uno
                         .Arguments);
+                    }
+
+                    SessionData.Remove("Transaction");
+                    SqlDataAccess.Commit(transaction);
                     return afiliado.NroAfiliado;
+                }catch{
+                    SqlDataAccess.Rollback(transaction);
+                    afiliado.UserID = 0;
+                    throw;
                 }
-                else {
-                    afiliado.NroAfiliado = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                    "SHARPS.InsertMiembroGrupoFamiliar", SqlDataAccessArgs
-                    .CreateWith("@PlanMedico", afiliado.PlanMedico)
-                    .And("@ID", afiliado.UserID)
-                    .And("@EstadoCivil", afiliado.EstadoCivil)
-                    .And("@CantHijos", afiliado.CantHijos)
-                    .And("@RolAfiliado", afiliado.RoleID)
-                    .And("@nroAfiliado", afiliado.NroAfiliado)//Hay que sumarle uno
-                    .Arguments);
-                    return afiliado.NroAfiliado;
-                
-                }
+
             }
             else
             {

@@ -18,7 +18,7 @@ namespace ClinicaFrba.Negocio
             {
                 return SqlDataAccess.ExecuteScalarQuery<int>(
                     "SHARPS.InsertDetallePersona", SqlDataAccessArgs
-                    .CreateWith(                    
+                    .CreateWith(
                         "@Telefono", user.DetallePersona.Telefono)
                     .And("@Email", user.DetallePersona.Email)
                     .And("@Nombre", user.DetallePersona.Nombre)
