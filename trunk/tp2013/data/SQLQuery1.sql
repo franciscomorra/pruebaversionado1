@@ -326,7 +326,7 @@ CREATE TABLE Funcionalidades (
 ;
 
 CREATE TABLE Medicamentos ( 
-	idMedic numeric(18),
+	idMedic numeric(18) identity (1000,1),
 	descrip nchar(10)
 )
 ;
@@ -345,7 +345,7 @@ CREATE TABLE Medicos_Esp (
 ;
 
 CREATE TABLE Perfil ( 
-	idPerfil numeric(10,2) NOT NULL,
+	idPerfil numeric(10,2) identity NOT NULL,
 	detallesPerf bit
 )
 ;
@@ -377,10 +377,10 @@ CREATE TABLE Recetas_Medicamen (
 ;
 
 CREATE TABLE Roles ( 
-	idRol numeric(10,2) NOT NULL,
+	idRol numeric(10,2) identity(1,1) NOT NULL,
 	descripRol nchar(10),
 	activoRol bit,
-	perfil numeric(10,2)identity (100,1) ------<-----no seria not null
+	perfil numeric(10,2)
 )
 ;
 
@@ -407,7 +407,7 @@ CREATE TABLE Turnos (
 	medico numeric(18),
 	afiliado numeric(18),
 	fechaHora datetime,
-	estado numeric(18) ,
+	estado numeric(18) identity (1,1) ,
 	fechaHoraLlegada datetime
 )
 ;
@@ -712,67 +712,105 @@ INSERT INTO Funcionalidades (Descripcion) VALUES ('CancelarTurno');
 INSERT INTO Funcionalidades (Descripcion) VALUES ('RegistrarTurno');
 INSERT INTO Funcionalidades (Descripcion) VALUES ('SolicitarTurno');
 
-INSERT INTO Roles (descripRol) VALUES ('administrador')
-INSERT INTO Roles (descripRol) VALUES ('Administrativo')
-INSERT INTO Roles (descripRol) VALUES ('Medico');
-INSERT INTO Roles (descripRol) VALUES ('Afiliado');
+INSERT INTO Perfil (detallesPerf) VALUES ('Afiliado'); ---- correspode al 1 de perfil
+INSERT INTO Perfil (detallesPerf) VALUES ('Medico'); ---corresponde al 2 de perfil
+
+INSERT INTO Perfil (detallesPerf) VALUES ('Administrativo')
+
+INSERT INTO Perfil (detallesPerf) VALUES ('administrador')
+
+
+CREATE FUNCTION [ClinicaFrba].[GetIdRolByName] ----PORQUE ME TIRA ERROR?
+(
+	@RoleName NVARCHAR(100)
+)
+RETURNS int
+AS
+BEGIN
+	DECLARE @Rol_ID int
+
+	SELECT @Rol_ID = idRol FROM Roles
+	WHERE descripRol = @RoleName
+
+	RETURN @Rol_ID
+END
+GO
 
 
 
-
-
-------------terminar ROLES FUNC
-INSERT INTO RolesFunc (rol, funcionalidad)
+-- ROLES FUNC como el del 2012
+INSERT INTO Roles_Func (rol, funcionalidad)
 VALUES (GetIdRolByName('Afiliado'), 4)
-INSERT INTO RolesFunc (rol, funcionalidad)
+INSERT INTO Roles_Func (rol, funcionalidad)
 VALUES (GetIdRolByName('Afiliado'), 8)
-INSERT INTO RolesFunc (rol, funcionalidad)
+INSERT INTO Roles_Func (rol, funcionalidad)
 VALUES (GetIdRolByName('Afiliado'), 10)
-INSERT INTO RolesFunc(rol, funcionalidad)
+INSERT INTO Roles_Func(rol, funcionalidad)
 VALUES (GetIdRolByName('Afiliado'), 12)
-INSERT INTO RolesFunc (rol, funcionalidad)
+INSERT INTO Roles_Func (rol, funcionalidad)
 VALUES (GetIdRolByName('Afiliado'), 14)
 
-INSERT INTO RolesFunc (rol, funcionalidad)
+INSERT INTO Roles_Func (rol, funcionalidad)
 VALUES (GetIdRolByName('medico'), 1)
-INSERT INTO RolesFunc (rol, funcionalidad)
+INSERT INTO Roles_Func (rol, funcionalidad)
 VALUES (GetIdRolByName('medico'), 12)
 
-INSERT INTO Usuarios_Roles( usuario ) 
-Select u.username     
+INSERT INTO Roles_Func (rol, funcionalidad)
+SELECT 1, idFunc FROM Funcionalidades
+
+
+INSERT INTO Usuarios_Roles(usuario) 
+Select u.username      
 from Usuarios u
 
 
- 
-INSERT INTO Roles(idRol , descripRol , activoRol ) 
-select distinct u.rol , NULL , 1 
+ ---migrar role de medico
+INSERT INTO Roles(idRol , descripRol , activoRol, perfil ) 
+select distinct u.rol , 'medico' , 1 ,2
 from Usuarios_Roles u
-inner join gd_esquema.Maestra m on u.usuario = CAST(m.Medico_Telefono AS NVARCHAR(255) or u.usuario = CAST(m.Paciente_Telefono AS NVARCHAR(255) ----<---- revisar  
+inner join gd_esquema.Maestra m on u.usuario = CAST(m.Medico_Telefono AS NVARCHAR(255))     
+---migrar roles de afiliado
+INSERT INTO Roles(idRol , descripRol , activoRol, perfil ) 
+select distinct u.rol , 'Afiliado' , 1 , 1
+from Usuarios_Roles u
+inner join gd_esquema.Maestra m on u.usuario = CAST(m.Paciente_Telefono AS NVARCHAR(255))
 
 
-INSERT INTO Roles_Func (funcionalidad)  
-SELECT idFunc FROM Funcionalidades
+--- ESTE ES DIRECTO YA QUE ES RELACION DE 3A15
+INSERT INTO Perfil_Func (perfil , funcion)
+values (1 ,4)
+INSERT INTO Perfil_Func (perfil , funcion)
+values (1 ,8)
+INSERT INTO Perfil_Func (perfil , funcion)
+values (1 ,10)
+INSERT INTO Perfil_Func (perfil , funcion)
+values (1 ,12)
+INSERT INTO Perfil_Func (perfil , funcion)
+values (1 ,14)
 
+INSERT INTO Perfil_Func (perfil , funcion)
+values (2,1)
+INSERT INTO Perfil_Func (perfil , funcion)
+values (2,12)
 
-INSERT INTO Roles_Func (rol)
-select distinct 
-from gd_esquema.Maestra m
-inner join Usuarios u on  u.usuario = CAST(m.Medico_Telefono AS NVARCHAR(255)
-inner join Usuarios Roles ur
-inner join
+INSERT INTO Perfil_Func (perfil , funcion)
+values (3,2)
+INSERT INTO Perfil_Func (perfil , funcion)
+values (3,3)
+INSERT INTO Perfil_Func (perfil , funcion)
+values (3,5)
+INSERT INTO Perfil_Func (perfil , funcion)
+values (3,6)
+INSERT INTO Perfil_Func (perfil , funcion)
+values (3,7)
+INSERT INTO Perfil_Func (perfil , funcion)
+values (3,9)
+INSERT INTO Perfil_Func (perfil , funcion)
+values (3,11)
+INSERT INTO Perfil_Func (perfil , funcion)
+values (3,13)
 
-
-
-
-----agregar todas las que faltan
-
-
--- mirar por relacion entre perfilfunc y perfil
-INSERT INTO Perfil (idPerfil, detallesPerf) VALUES (GRUPO_N.GetIdRolByName('Administrador'),'Administrador' );
-INSERT INTO Perfil (idPerfil, detallesPerf) VALUES (GRUPO_N.GetIdRolByName('Afiliado'),'Afiliado');
-INSERT INTO Perfil (idPerfil, detallesPerf) VALUES (GRUPO_N.GetIdRolByName('medico'),'medico');
-
-GO
+---SI VA EL DIOS DESPUES LO AGREGO
 
 
 
@@ -788,18 +826,21 @@ GO
 PRINT 'Ingresando los Afiliados...'
 GO
 
+
+
 INSERT INTO Usuarios (activo,Intentos,username,Password)
-SELECT DISTINCT 1,0,LTRIM(RTRIM(CAST(Paciente_Telefono AS NVARCHAR(255)))),'bed9ae713b440eed894573977256ed12a992b93804975fa09aff32dd1572b658' 
-FROM gd_esquema.Maestra WHERE 1=1;
+SELECT DISTINCT 1,0,LTRIM(RTRIM(CAST(Paciente_Telefono AS VARCHAR(255)))),'bed9ae713b440eed894573977256ed12a992b93804975fa09aff32dd1572b658' 
+FROM gd_esquema.Maestra ;
 
 INSERT INTO Detalles_Persona(dni,tipo,telefono,direccion,sexo,mail,apellido,nombre,userId,fechaNac) 
 SELECT distinct m.Paciente_Dni,NULL,m.Paciente_Telefono,m.Paciente_Direccion,NULL, m.Paciente_Mail,m.Paciente_Apellido,m.Paciente_Nombre, u.idUser, m.Paciente_Fecha_Nac 
-FROM gd_esquema.Maestra m INNER JOIN Usuarios u ON CAST(m.Paciente_Telefono AS NVARCHAR(255))=u.username 
+FROM gd_esquema.Maestra m INNER JOIN Usuarios u ON CAST(m.Paciente_Telefono AS VARCHAR(255))=u.username 
 
-
-INSERT INTO Afiliados(nroAfiliado,planMedico,activoAefiliado, estadoCivil,cantHijos,userId)
-SELECT DISTINCT NULL, m.Plan_Med_Codigo,1, NULL,NULL, u.idUser  FROM Usuarios u 
-INNER JOIN gd_esquema.Maestra m ON u.username = CAST(m.Paciente_Telefono AS NVARCHAR(255))
+DECLARE @NroAfiliado INT
+set @NroAfiliado = 100000
+INSERT INTO Afiliados(nroAfiliado,planMedico,activoAfiliado, estadoCivil,cantHijos,userId)
+SELECT DISTINCT (ABS(CAST(NEWID() as binary(6)) % 100000) + 1700)*100, m.Plan_Med_Codigo,1, NULL,NULL, u.idUser  FROM Usuarios u  -----faltaria aignarle el 01 02 03
+INNER JOIN gd_esquema.Maestra m ON u.username = CAST(m.Paciente_Telefono AS VARCHAR(255))
 GO
 
 
@@ -817,12 +858,29 @@ SELECT distinct m.Medico_Dni,NULL,m.Medico_Telefono,m.Medico_Direccion,NULL,m.Me
  INNER JOIN Usuarios u ON CAST(m.Medico_Telefono AS NVARCHAR(255))=u.username 
 
 
+
 INSERT INTO Medicos (matricula, userId , activoMedico)
-SELECT DISTINCT NULL, u.idUser, 1 
+SELECT DISTINCT (ABS(CAST(NEWID() as binary(6)) % 100000) + 1700), u.idUser, 1 
 FROM gd_esquema.Maestra m
 INNER JOIN Usuarios u ON u.username= CAST(m.Medico_Telefono AS NVARCHAR(255))
 
+----ingresando Agendas
 
+INSERT INTO Agendas (medico, dia, horaEgreso, horaIngreso)
+select distinct u.idUser ,  CONVERT(CHAR(10), m.Turno_Fecha ,112), CONVERT(CHAR(5), m.Turno_Fecha , 108) , CONVERT(CHAR(5), m.Turno_Fecha , 108)
+from gd_esquema.Maestra m 
+inner join Usuarios u on CAST(m.Medico_Telefono AS NVARCHAR(255)) = u.username
+group by m.Turno_Fecha , u.idUser 
+
+
+
+---Dias_Laborales
+PRINT'ingresando agenda'
+GO
+INSERT into Dias_Laborales(fecha)
+select distinct CONVERT(CHAR(10), m.Turno_Fecha,112)
+from gd_esquema.Maestra m 
+where m.Turno_Fecha is not null
 
 
 
@@ -855,8 +913,8 @@ GO
 --Ingresando Turnos
 PRINT 'Ingresando los turnos...'
 GO
-INSERT INTO Turnos (numero,medico,afiliado,fechaHora,estado,fechaHoraLlegada)
-SELECT distinct m.Turno_Numero , x.userId , a.userId, m.Turno_Fecha,'ver q poner',null -- ver como descontar 15 minutos
+INSERT INTO Turnos (numero,medico,afiliado,fechaHora,fechaHoraLlegada)
+SELECT distinct m.Turno_Numero , x.userId , a.userId, m.Turno_Fecha,null -- ver como descontar 15 minutos
 FROM gd_esquema.Maestra m
 INNER JOIN Usuarios u ON u.username=CAST(m.Paciente_Telefono AS NVARCHAR(255))
 inner JOIN Afiliados a ON u.idUser= a.userId
@@ -904,6 +962,31 @@ GO
 
 
 
+--Ingresando Recetas
+PRINT 'Ingresando los Recetas...'
+GO
+INSERT INTO Receta (bonoConsulta, bonoFarmacia)
+SELECT  m.Bono_Farmacia_Numero , m.Bono_Consulta_Numero
+from gd_esquema.Maestra m
+Where ( m.Bono_Farmacia_Numero is not null AND m.Bono_Consulta_Numero is not null )
+GO
+
+--INGRESANDO MEDICAMENTOS
+print'INGREANDO MEDICAMENTOS'
+GO
+INSERT INTO Medicamentos (descrip)
+select distinct m.Bono_Farmacia_Medicamento
+from gd_esquema.Maestra m 
+GO
+
+--Ingresando Recetas_medicamen
+PRINT 'Ingresando los  Recetas_medicamen...'
+GO
+INSERT INTO  Recetas_medicamen (receta , medicamento)
+SELECT  m.Bono_Farmacia_Numero , me.idMedic
+from gd_esquema.Maestra m
+inner join Medicamentos me on me.descrip = m.Bono_Farmacia_Medicamento 
+GO
 
 
 
