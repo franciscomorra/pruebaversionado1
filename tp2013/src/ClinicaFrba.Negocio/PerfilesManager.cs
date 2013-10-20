@@ -2,38 +2,48 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ClinicaFrba.Comun;
 using Data;
 using System.Configuration;
 using System.Data;
-using ClinicaFrba.Comun;
 using System.ComponentModel;
-
 
 namespace ClinicaFrba.Negocio
 {
-    public class ProfileManager
+    public class PerfilesManager
     {
-        public BindingList<Profile> GetAllProfiles()
+        public List<Perfil> GetAllPerfiles()
+        {
+            return Enum.GetValues(typeof(Perfil)).Cast<Perfil>().ToList();
+        }
+
+        public List<Perfil> GetRegistrationPerfiles()
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(
                 ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "SHARPS.GetPerfiles"
             );
-            var perfiles = new BindingList<Profile>();
+            var perfiles = new BindingList<Perfil>();
             var functionalitiesManager = new FunctionalitiesManager();
             foreach (DataRow row in result.Rows)
             {
-                var profile = new Profile()
+                var perfil = new Perfil()
                 {
                     ID = int.Parse(row["ID"].ToString()),
                     Nombre = row["Descripcion"].ToString(),
-                    Functionalities = functionalitiesManager.GetProfileFunctionalities(int.Parse(row["ID"].ToString()))
+                    //Perfil = row["Perfil"].ToString(),
+                    Functionalities = functionalitiesManager.GetPerfilFunctionalities(int.Parse(row["ID"].ToString()))
 
                 };
-                perfiles.Add(profile);
+                perfiles.Add(perfil);
             }
 
             return perfiles;
+            /*
+            var items = Enum.GetValues(typeof(Profile)).Cast<Profile>().ToList();
+            items.Remove(Profile.Administrador);
+            return items;
+             */
         }
     }
 }

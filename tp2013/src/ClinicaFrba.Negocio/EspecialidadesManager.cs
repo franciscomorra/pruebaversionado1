@@ -17,11 +17,9 @@ namespace ClinicaFrba.Negocio
             {
                 return SessionData.Get<List<Especialidad>>("Especialidades");
             }
-
             var ret = new List<Especialidad>();
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "SHARPS.GetEspecialidades");
-
             if (result != null)
             {
                 foreach (DataRow row in result.Rows)
@@ -32,9 +30,7 @@ namespace ClinicaFrba.Negocio
                         
                 }
             }
-
             SessionData.Set("Especialidades", ret);
-
             return ret;
         }
     }

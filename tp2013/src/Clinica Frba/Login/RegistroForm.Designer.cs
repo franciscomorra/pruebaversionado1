@@ -40,7 +40,7 @@ namespace ClinicaFrba
             this.cbxProfiles = new System.Windows.Forms.ComboBox();
             this.lblPerfil = new System.Windows.Forms.Label();
             this.userPanel = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAsignarPerfil = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnSave
@@ -145,15 +145,15 @@ namespace ClinicaFrba
             this.userPanel.Size = new System.Drawing.Size(506, 373);
             this.userPanel.TabIndex = 10;
             // 
-            // button1
+            // btnAsignarPerfil
             // 
-            this.button1.Location = new System.Drawing.Point(272, 104);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(246, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Asignar otro Perfil";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnAsignarPerfil.Location = new System.Drawing.Point(272, 104);
+            this.btnAsignarPerfil.Name = "btnAsignarPerfil";
+            this.btnAsignarPerfil.Size = new System.Drawing.Size(246, 23);
+            this.btnAsignarPerfil.TabIndex = 11;
+            this.btnAsignarPerfil.Text = "Asignar otro Perfil";
+            this.btnAsignarPerfil.UseVisualStyleBackColor = true;
+            this.btnAsignarPerfil.Click += new System.EventHandler(this.btnAsignarPerfil_Click);
             // 
             // RegistroForm
             // 
@@ -162,7 +162,7 @@ namespace ClinicaFrba
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(530, 545);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnAsignarPerfil);
             this.Controls.Add(this.userPanel);
             this.Controls.Add(this.lblPerfil);
             this.Controls.Add(this.cbxProfiles);
@@ -195,6 +195,6 @@ namespace ClinicaFrba
         private System.Windows.Forms.ComboBox cbxProfiles;
         private System.Windows.Forms.Label lblPerfil;
         private System.Windows.Forms.Panel userPanel;
-        private Button button1;
+        private Button btnAsignarPerfil;
     }
 }

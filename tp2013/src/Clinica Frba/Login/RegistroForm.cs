@@ -17,12 +17,13 @@ namespace ClinicaFrba
     public partial class RegistroForm : Form
     {
         public event EventHandler<UserSavedEventArgs> OnUserSaved;
-        private List<Profile> Profiles;
+        //private List<Profile> Profiles;
         private AfiliadoUserControl afiliadoUserControl = new AfiliadoUserControl();
         private ProfesionalUserControl profesionalUserControl = new ProfesionalUserControl();
         private Profesional _profesional = new Profesional();
         private Afiliado _afiliado = new Afiliado();
         private bool _updatingData = false;
+        
         public Profile Profile
         {
             get
@@ -37,13 +38,15 @@ namespace ClinicaFrba
                 lblPerfil.Visible = false;
             }
         }
+        
 
         public RegistroForm()
         {
             InitializeComponent();
             var manager = new ProfileManager();
-            Profiles = manager.GetRegistrationProfiles();
-            Profiles.ForEach(x => cbxProfiles.Items.Add(x));
+            var perfiles = manager.GetAllProfiles();
+            cbxProfiles.DataSource = perfiles;
+            cbxProfiles.DisplayMember = "Nombre";
             cbxProfiles.SelectedIndex = 0;
         }
 
@@ -55,18 +58,22 @@ namespace ClinicaFrba
             txtPassword.Enabled = false;
             txtConfirmPassword.Enabled = false;
             cbxProfiles.Enabled = false;
+            Profile perfilmascara = new Profile();
             if (user is Afiliado)
             {
+                perfilmascara.Nombre = "Afiliado";
                 _afiliado = user as Afiliado;
-                cbxProfiles.SelectedItem = Profile.Afiliado;
+                cbxProfiles.SelectedIndex = cbxProfiles.Items.IndexOf(perfilmascara);//HotFix para que seleccione el perfil
                 afiliadoUserControl.SetUser(_afiliado);
             }
             else
             {
+                perfilmascara.Nombre = "Profesional";
                 _profesional = user as Profesional;
-                cbxProfiles.SelectedItem = Profile.Profesional;
+                cbxProfiles.SelectedIndex = cbxProfiles.Items.IndexOf(perfilmascara);
                 profesionalUserControl.SetUser(_profesional);
             }
+            
         }
 
         private void RegistroForm_Load(object sender, EventArgs e)
@@ -77,7 +84,8 @@ namespace ClinicaFrba
         private void cbxProfiles_SelectedIndexChanged(object sender, EventArgs e)
         {
             userPanel.Controls.Clear();
-            if (Profile == Profile.Afiliado)
+            Profile perfilSelected = (Profile)cbxProfiles.SelectedItem;
+            if (perfilSelected.Nombre == "Afiliado")
             {
                 userPanel.Controls.Add(afiliadoUserControl);
             }
@@ -100,13 +108,28 @@ namespace ClinicaFrba
             }
 
             User user = null;
-            if (Profile == Profile.Afiliado)
+            if (Profile.Nombre == "Afiliado")
             {
                 _afiliado = ((AfiliadoUserControl)afiliadoUserControl).GetAfiliado();
                 _afiliado.UserName = txtUsername.Text;
                 var manager = new AfiliadoManager();
-                manager.GuardarAfiliado(_afiliado, txtPassword.Text);
+                int nroAfiliado = manager.GuardarAfiliado(_afiliado, txtPassword.Text);
                 user = _afiliado;
+                if (nroAfiliado != 0) //Nuevo afiliado
+                {
+                    if (_afiliado.EstadoCivil != EstadoCivil.Soltero || _afiliado.EstadoCivil != EstadoCivil.Viudo)
+                    {
+                        
+                        //Preguntar si quiere agregar Conyuge
+
+
+                    }
+                    if (_afiliado.CantHijos > 0)
+                    {
+                        nroAfiliado = nroAfiliado + 1;
+
+                    }
+                }
             }
             else
             {
@@ -129,9 +152,10 @@ namespace ClinicaFrba
             this.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnAsignarPerfil_Click(object sender, EventArgs e)
         {
 
         }
+
     }
 }

@@ -39,8 +39,9 @@ namespace ClinicaFrba.Login
             _afiliado.DetallePersona.Direccion = txtDireccion.Text.Trim();
             _afiliado.DetallePersona.Telefono = telefono;
             _afiliado.DetallePersona.Email = txtMail.Text.Trim();
-            
-            _afiliado.EstadoCivil = cbxEstadoCivil.SelectedItem.ToString();
+           // EstadoCivil = (EstadoCivil)Enum.Parse(typeof(EstadoCivil), row["EstadoCivil"].ToString()),
+                        
+            _afiliado.EstadoCivil = (EstadoCivil)Enum.Parse(typeof(EstadoCivil),cbxEstadoCivil.SelectedItem.ToString());
             _afiliado.PlanMedico = (PlanMedico)cbxPlanMedico.SelectedItem;
             _afiliado.CantHijos = CantHijos;
             _afiliado.MotivoCambio = txtMotivo.Text.Trim();
@@ -75,11 +76,30 @@ namespace ClinicaFrba.Login
         {
             InitializeComponent();
             _afiliado = new Afiliado();
-            var manager = new EspecialidadesManager();
-            var especialidades = manager.GetAll();
+            //Rellenar Sexo
+            var manager = new PlanesMedicosManager();
+            var planesMedicos = manager.GetAll();
             cbxPlanMedico.DisplayMember = "Name";
-            especialidades.ForEach(x => cbxPlanMedico.Items.Add(x));
+            planesMedicos.ForEach(x => cbxPlanMedico.Items.Add(x));
             cbxPlanMedico.SelectedIndex = 0;
+            cbxSexo.Items.Add("Masculino");
+            cbxSexo.Items.Add("Femenino");
+            var items = Enum.GetValues(typeof(EstadoCivil)).Cast<EstadoCivil>().ToList();
+            items.ForEach(x => cbxEstadoCivil.Items.Add(x));
+            cbxEstadoCivil.DisplayMember = "Name";
+            cbxPlanMedico.SelectedIndex = 0;
+
+            RolesManager rman = new RolesManager();
+            Profile perfilMasc = new Profile() { Nombre = "Afiliado" };
+            var roles = rman.GetRolesByPerfil(perfilMasc);
+            if (roles.Count > 1)
+            {
+                cbxRoles.DataSource = roles;
+                cbxRoles.DisplayMember = "Nombre";
+                cbxRoles.SelectedIndex = 0;
+            }
+
+
         }
 
         private void AfiliadoUserControl_Load(object sender, EventArgs e)

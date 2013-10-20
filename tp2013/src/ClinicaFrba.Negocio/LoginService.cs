@@ -24,6 +24,7 @@ namespace ClinicaFrba.Negocio
                 "SHARPS.Login", SqlDataAccessArgs
                 .CreateWith("@Nombre", userName)
                 .And("@Password", encryptedPassword)
+
             .Arguments);
 
             if (result == null)
@@ -32,6 +33,7 @@ namespace ClinicaFrba.Negocio
             {
                 UserID = int.Parse(result["ID"].ToString()),
                 UserName = result["Nombre"].ToString(),
+                Estado = result["Estado"].ToString(),
             };
 
             return user;
@@ -77,7 +79,7 @@ namespace ClinicaFrba.Negocio
         public BindingList<Rol> GetUserRoles(int userID)//Buscar los roles de un usuario
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "SHARPS.GetRoles", SqlDataAccessArgs
+                "SHARPS.GetUserRoles", SqlDataAccessArgs
                 .CreateWith("@userID", userID).Arguments);
 
             var roles = new BindingList<Rol>();
@@ -90,6 +92,7 @@ namespace ClinicaFrba.Negocio
                     ID = int.Parse(row["ID"].ToString()),
                     Nombre = row["Descripcion"].ToString(),
                     Functionalities = functionalitiesManager.GetRoleFunctionalities(int.Parse(row["ID"].ToString()))
+                    
                 };
                 roles.Add(rol);
             }

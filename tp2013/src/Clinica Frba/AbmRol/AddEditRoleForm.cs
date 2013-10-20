@@ -16,17 +16,35 @@ namespace ClinicaFrba //REHACER AGREGANDO EL PERFIL
     [NonNavigable]
     public partial class AddEditRoleForm : Form
     {
-        public AddEditRoleForm() : this(new Rol()) { }
-
+        //public AddEditRoleForm() : this(new Rol()) { }
+        private ProfileManager profileMan = new ProfileManager();
+        private FunctionalitiesManager functMan = new FunctionalitiesManager();
+        private Rol Rol { get; set; }
+        private Profile Perfil { get; set; }
+        public AddEditRoleForm()
+        {
+            var perfiles = profileMan.GetAllProfiles();
+            if (perfiles.Count > 1)
+            {
+                cbxPerfiles.DataSource = perfiles;
+                cbxPerfiles.DisplayMember = "Nombre";
+                cbxPerfiles.SelectedIndex = 0;
+                perfilPanel.Show();
+                rolPanel.Hide();
+            }
+            InitializeComponent();
+        }
         public AddEditRoleForm(Rol rol)
         {
+            perfilPanel.Hide();
+            rolPanel.Show();
             InitializeComponent();
             this.Rol = rol;
+            this.Perfil = rol.Perfil;
+
         }
 
         public event EventHandler<RoleUpdatedEventArgs> OnRoleUpdated;
-
-        private Rol Rol { get; set; }
 
         private void AddEditRoleForm_Load(object sender, EventArgs e)
         {
@@ -35,12 +53,15 @@ namespace ClinicaFrba //REHACER AGREGANDO EL PERFIL
 
         private void ProcessForm()
         {
-            var mgr = new FunctionalitiesManager();
-            var functionalities = mgr.GetAllFunctionalities();
+            
+            var profileMan = new ProfileManager();
+            Profile perfil = (Profile)cbxPerfiles.SelectedItem;
+            var functionalities = functMan.GetProfileFunctionalities(perfil.ID);
             foreach (var item in functionalities)
             {
                 lstFuncionalidades.Items.Add(item, RoleHasFunctionality(item));
             }
+
             txtNombre.Text = Rol.Nombre;
         }
 
@@ -72,6 +93,18 @@ namespace ClinicaFrba //REHACER AGREGANDO EL PERFIL
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void cbxPerfiles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.Perfil = (Profile)cbxPerfiles.SelectedItem;
+            var functionalities = functMan.GetProfileFunctionalities(this.Perfil.ID);
+            foreach (var item in functionalities)
+            {
+                lstFuncionalidades.Items.Add(item, RoleHasFunctionality(item));
+            }
+            rolPanel.Show();
+            perfilPanel.Hide();
         }
     }
 }

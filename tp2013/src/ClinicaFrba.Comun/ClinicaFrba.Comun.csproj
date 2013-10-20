@@ -48,6 +48,7 @@
     <Compile Include="Afiliado.cs" />
     <Compile Include="DetallesPersona.cs" />
     <Compile Include="Especialidad.cs" />
+    <Compile Include="EstadoCivil.cs" />
     <Compile Include="Functionalities.cs" />
     <Compile Include="PlanMedico.cs" />
     <Compile Include="Profesional.cs" />

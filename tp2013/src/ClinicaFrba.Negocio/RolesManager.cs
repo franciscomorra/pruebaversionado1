@@ -12,24 +12,33 @@ namespace ClinicaFrba.Negocio
 {
     public class RolesManager
     {
-        /*
-        public BindingList<Rol> GetRoles()
-         * usa el procedimiento GetRoles de SQL Saca todos los roles
-        public void DeleteRole(Rol rol)
-         * usa el procedimiento DeleteRole de SQL, borra un rol
-        public void SaveRole(Rol rol)
-         * ??
-        private void InsertRole(Rol rol)
-         * usa el procedimiento InsertRole de SQL, requiere el nombre del rol
+        public BindingList<Rol> GetRolesByPerfil(Profile perfil)
+        {
+            var result = SqlDataAccess.ExecuteDataTableQuery(
+                ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "SHARPS.GetRolesByPerfil", SqlDataAccessArgs
+                .CreateWith("@nombrePerfil", perfil.Nombre)
+            .Arguments);
 
-        private void UpdateRole(Rol rol)
+            var roles = new BindingList<Rol>();
+            var functionalitiesManager = new FunctionalitiesManager();
+            foreach (DataRow row in result.Rows)
+            {
+                var rol = new Rol()
+                {
+                    ID = int.Parse(row["ID"].ToString()),
+                    Nombre = row["Descripcion"].ToString(),
+                    Perfil = (Profile)Enum.Parse(typeof(Profile), row["Perfil"].ToString()),
+                    Functionalities = functionalitiesManager.GetRoleFunctionalities(int.Parse(row["ID"].ToString()))
 
+                };
+                roles.Add(rol);
+            }
 
-        private void UpdateRoleFunctionalities(Rol rol)
-
-
-        public int GetDefaultRoleID()
-        */
+            return roles;
+        }
+        
+        
         public BindingList<Rol> GetRoles()
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(
@@ -44,7 +53,9 @@ namespace ClinicaFrba.Negocio
                 {
                     ID = int.Parse(row["ID"].ToString()),
                     Nombre = row["Descripcion"].ToString(),
+                    Perfil = (Profile)Enum.Parse(typeof(Profile), row["Perfil"].ToString()),
                     Functionalities = functionalitiesManager.GetRoleFunctionalities(int.Parse(row["ID"].ToString()))
+
                 };
                 roles.Add(rol);
             }
@@ -102,5 +113,6 @@ namespace ClinicaFrba.Negocio
             return SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "SHARPS.GetDefaultRoleID");
         }
+
     }
 }

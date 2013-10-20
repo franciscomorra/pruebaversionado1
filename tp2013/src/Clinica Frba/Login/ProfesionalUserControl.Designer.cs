@@ -49,9 +49,10 @@
             this.Especialidades = new System.Windows.Forms.Label();
             this.clbEspecialidades = new System.Windows.Forms.CheckedListBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbxTipoDNI = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cbxRoles = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -129,7 +130,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(46, 142);
+            this.label5.Location = new System.Drawing.Point(42, 142);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(52, 13);
             this.label5.TabIndex = 8;
@@ -178,7 +179,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(38, 5);
+            this.label8.Location = new System.Drawing.Point(40, 5);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(50, 13);
             this.label8.TabIndex = 24;
@@ -205,7 +206,7 @@
             // Especialidades
             // 
             this.Especialidades.AutoSize = true;
-            this.Especialidades.Location = new System.Drawing.Point(14, 36);
+            this.Especialidades.Location = new System.Drawing.Point(12, 28);
             this.Especialidades.Name = "Especialidades";
             this.Especialidades.Size = new System.Drawing.Size(78, 13);
             this.Especialidades.TabIndex = 29;
@@ -221,6 +222,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.Especialidades);
             this.panel1.Controls.Add(this.clbEspecialidades);
             this.panel1.Controls.Add(this.label8);
@@ -230,38 +232,47 @@
             this.panel1.Size = new System.Drawing.Size(329, 147);
             this.panel1.TabIndex = 30;
             // 
-            // comboBox1
+            // cbxTipoDNI
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(209, 86);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(93, 21);
-            this.comboBox1.TabIndex = 31;
+            this.cbxTipoDNI.FormattingEnabled = true;
+            this.cbxTipoDNI.Location = new System.Drawing.Point(209, 86);
+            this.cbxTipoDNI.Name = "cbxTipoDNI";
+            this.cbxTipoDNI.Size = new System.Drawing.Size(93, 21);
+            this.cbxTipoDNI.TabIndex = 31;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(72, 371);
+            this.label13.Location = new System.Drawing.Point(16, 371);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(23, 13);
+            this.label13.Size = new System.Drawing.Size(78, 13);
             this.label13.TabIndex = 33;
-            this.label13.Text = "Rol";
+            this.label13.Text = "Rol Profesional";
             // 
-            // comboBox2
+            // cbxRoles
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(102, 368);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(200, 21);
-            this.comboBox2.TabIndex = 32;
+            this.cbxRoles.FormattingEnabled = true;
+            this.cbxRoles.Location = new System.Drawing.Point(102, 368);
+            this.cbxRoles.Name = "cbxRoles";
+            this.cbxRoles.Size = new System.Drawing.Size(200, 21);
+            this.cbxRoles.TabIndex = 32;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 41);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(47, 13);
+            this.label6.TabIndex = 30;
+            this.label6.Text = "Medicas";
             // 
             // ProfesionalUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbxRoles);
+            this.Controls.Add(this.cbxTipoDNI);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.cbxSexo);
             this.Controls.Add(this.label11);
@@ -311,8 +322,9 @@
         private System.Windows.Forms.Label Especialidades;
         private System.Windows.Forms.CheckedListBox clbEspecialidades;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbxTipoDNI;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cbxRoles;
+        private System.Windows.Forms.Label label6;
     }
 }

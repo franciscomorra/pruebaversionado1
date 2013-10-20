@@ -28,37 +28,7 @@ namespace ClinicaFrba.Negocio
                 "SHARPS.InsertUser", SqlDataAccessArgs
                 .CreateWith("@UserName", user.UserName)
                 .And("@Password", encryptedPass)
-                .And("@ID_Rol", user.RoleID)
             .Arguments);
-
-            return result;
-        }
-
-        public int CreateProfileAccount(User user, Profile profile, string password)
-        {
-            var transaction = SessionData.Contains("Transaction") ? SessionData.Get<SqlTransaction>("Transaction") : null;
-            var service = new LoginService();
-            var encryptedPass = service.ComputeHash(password, new SHA256CryptoServiceProvider());
-            int result = 0;
-            if (transaction != null)
-            {
-                result = SqlDataAccess.ExecuteScalarQuery<int>(
-                    "SHARPS.InsertProfileUser", SqlDataAccessArgs
-                    .CreateWith("@UserName", user.UserName)
-                    .And("@Password", encryptedPass)
-                    .And("@ProfileName", profile.ToString())
-                .Arguments, transaction);
-            }
-            else
-            {
-                result = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                    "SHARPS.InsertProfileUser", SqlDataAccessArgs
-                    .CreateWith("@UserName", user.UserName)
-                    .And("@Password", encryptedPass)
-                    .And("@ProfileName", profile.ToString())
-                .Arguments);
-            }
-
             return result;
         }
     }

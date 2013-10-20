@@ -24,11 +24,13 @@ namespace ClinicaFrba.Core
         public static void StartSession(User user)
         {
             User = user;
+            /*
             if (user.Permissions.Contains(Functionalities.AdministrarRoles))
             {
                 var manager = new RolesManager();
                 DefaultRoleID = manager.GetDefaultRoleID();
             }
+            */
             ViewsManager.LoadMenu();
         }
 

@@ -12,31 +12,13 @@ namespace ClinicaFrba.Comun
     /// </summary>
     public class User
     {
-        /// <summary>
-        /// Permisos con los que cuenta el usuario
-        /// </summary>
         public List<Functionalities> Permissions { get; private set; }
-
-        /// <summary>
-        /// User ID
-        /// </summary>
         public int UserID { get; set; }
-
-        /// <summary>
-        /// Role ID
-        /// </summary>
-        
-        //public int RolSeleccionado { get; set; }
         public int RoleID { get; set; }
-
+        public Profile Perfil{ get; set; }
         public BindingList<Rol> Roles { get; set; } 
-            //List<Rol> Roles { get; set; }
-       // public SortedDictionary<Rol> Roles { get; set; }
-        /// <summary>
-        /// Nombre del usuario
-        /// </summary>
         public string UserName { get; set; }
-
+        public string Estado { get; set; }
         public DetallesPersona DetallePersona { get; set; }
 
         public User()
