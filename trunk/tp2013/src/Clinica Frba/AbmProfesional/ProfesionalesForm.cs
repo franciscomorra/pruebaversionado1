@@ -111,13 +111,13 @@ namespace ClinicaFrba.AbmProfesional
         {
             var regForm = new RegistroForm();
             regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
-            regForm.Profile = Profile.Profesional;
+            regForm.Profile = new Profile() { Nombre = "Profesional" };
             ViewsManager.LoadModal(regForm);
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            txtRazonSocial.Text = string.Empty;
+            txtApellido.Text = string.Empty;
             txtMatricula.Text = string.Empty;
             txtEmail.Text = string.Empty;
             profesionalesGrid.DataSource = _manager.GetAll();
@@ -127,9 +127,9 @@ namespace ClinicaFrba.AbmProfesional
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             var profesionales = _manager.GetAll();
-            if (!string.IsNullOrEmpty(txtRazonSocial.Text))
+            if (!string.IsNullOrEmpty(txtApellido.Text))
             {
-                profesionales = new BindingList<Profesional>(profesionales.Where(x => x.DetallePersona.Apellido.ToLowerInvariant().Contains(txtRazonSocial.Text.ToLowerInvariant())).ToList());
+                profesionales = new BindingList<Profesional>(profesionales.Where(x => x.DetallePersona.Apellido.ToLowerInvariant().Contains(txtApellido.Text.ToLowerInvariant())).ToList());
             }
             if (!string.IsNullOrEmpty(txtEmail.Text))
             {

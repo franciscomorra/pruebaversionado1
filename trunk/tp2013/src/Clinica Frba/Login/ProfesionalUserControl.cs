@@ -32,17 +32,12 @@ namespace ClinicaFrba.Login
 
             _profesional.DetallePersona.Apellido = txtApellido.Text.Trim();
             _profesional.DetallePersona.Nombre = txtNombre.Text.Trim();
-            //_profesional.DetallePersona.Sexo = (Sexo)cbxSexo.SelectedItem();
             _profesional.DetallePersona.DNI = dni;
             _profesional.DetallePersona.FechaNacimiento = dtFechaNacimiento.Value;
             _profesional.DetallePersona.Direccion = txtDireccion.Text.Trim();
             _profesional.DetallePersona.Telefono = telefono;
             _profesional.DetallePersona.Email = txtMail.Text.Trim();
             _profesional.Matricula = txtMatricula.Text.Trim();
-
-            //_profesional.PlanMedico = (PlanMedico)cbxPlanMedico.SelectedItem;
-            //_afiliado.DetallePersona.Ciudad = (City)cbxCiudad.SelectedItem;
-            //_profesional.Especialidad = (E)
             return _profesional;
         }
 
@@ -66,9 +61,16 @@ namespace ClinicaFrba.Login
             var manager = new EspecialidadesManager();
             var especialidades = manager.GetAll();
             clbEspecialidades.DisplayMember = "Name";
-
             especialidades.ForEach(x => clbEspecialidades.Items.Add(x, false));
-
+            RolesManager rman = new RolesManager();
+            Profile perfilMasc = new Profile() { Nombre = "Profesional" };
+            var roles = rman.GetRolesByPerfil(perfilMasc);
+            if (roles.Count > 1)
+            {
+                cbxRoles.DataSource = roles;
+                cbxRoles.DisplayMember = "Nombre";
+                cbxRoles.SelectedIndex = 0;
+            }
         }
 
         private void ProfesionalUserControl_Load(object sender, EventArgs e)

@@ -48,7 +48,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtMatricula = new System.Windows.Forms.TextBox();
-            this.txtRazonSocial = new System.Windows.Forms.TextBox();
+            this.txtApellido = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.profesionalesGrid)).BeginInit();
             this.buttonsPanel.SuspendLayout();
             this.searchPanel.SuspendLayout();
@@ -214,7 +214,7 @@
             this.groupBox.Controls.Add(this.label2);
             this.groupBox.Controls.Add(this.txtEmail);
             this.groupBox.Controls.Add(this.txtMatricula);
-            this.groupBox.Controls.Add(this.txtRazonSocial);
+            this.groupBox.Controls.Add(this.txtApellido);
             this.groupBox.Location = new System.Drawing.Point(12, 6);
             this.groupBox.Name = "groupBox";
             this.groupBox.Size = new System.Drawing.Size(928, 76);
@@ -234,11 +234,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 22);
+            this.label3.Location = new System.Drawing.Point(38, 22);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(70, 13);
+            this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Razón Social";
+            this.label3.Text = "Apellido";
             // 
             // label2
             // 
@@ -265,12 +265,12 @@
             this.txtMatricula.Size = new System.Drawing.Size(197, 20);
             this.txtMatricula.TabIndex = 1;
             // 
-            // txtRazonSocial
+            // txtApellido
             // 
-            this.txtRazonSocial.Location = new System.Drawing.Point(94, 19);
-            this.txtRazonSocial.Name = "txtRazonSocial";
-            this.txtRazonSocial.Size = new System.Drawing.Size(197, 20);
-            this.txtRazonSocial.TabIndex = 0;
+            this.txtApellido.Location = new System.Drawing.Point(94, 19);
+            this.txtApellido.Name = "txtApellido";
+            this.txtApellido.Size = new System.Drawing.Size(197, 20);
+            this.txtApellido.TabIndex = 0;
             // 
             // ProfesionalesForm
             // 
@@ -313,7 +313,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtMatricula;
-        private System.Windows.Forms.TextBox txtRazonSocial;
+        private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.Label lblResults;
         private System.Windows.Forms.Label label5;
     }

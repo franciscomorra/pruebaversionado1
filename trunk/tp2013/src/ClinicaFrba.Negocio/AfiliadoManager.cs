@@ -45,7 +45,7 @@ namespace ClinicaFrba.Negocio
                         {
                             ID = int.Parse(row["Plan"].ToString())
                         },
-                        EstadoCivil  = row["EstadoCivil"].ToString(),
+                        EstadoCivil = (EstadoCivil)Enum.Parse(typeof(EstadoCivil), row["EstadoCivil"].ToString()),
                         CantHijos  = int.Parse(row["CantHijos"].ToString()),
                         DetallePersona = new DetallesPersona()
                         {
@@ -69,24 +69,39 @@ namespace ClinicaFrba.Negocio
         /// <summary>
         /// Guarda un afiliado en la base de datos
         /// </summary>
-        public void GuardarAfiliado(Afiliado afiliado, string password)
+        public int GuardarAfiliado(Afiliado afiliado, string password)
         {
             var usersManager = new UsersManager();
             var entityDetailManager = new DetallePersonaManager();
             if (afiliado.UserID == 0)//NUEVO USUARIO
             {
                 var transaction = SqlDataAccess.OpenTransaction(ConfigurationManager.ConnectionStrings["StringConexion"].ToString());
-                afiliado.UserID = usersManager.CreateProfileAccount(afiliado as User, Afiliado.Profile, password);
+                afiliado.UserID = usersManager.CreateAccount(afiliado as User, password);
                 var detalleID = entityDetailManager.AddDetallePersona(afiliado as User);
-
-                afiliado.NroAfiliado = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                    "SHARPS.InsertAfiliado", SqlDataAccessArgs
+                if (afiliado.NroAfiliado == 0)//Primero del grupo familiar
+                {
+                    afiliado.NroAfiliado = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                        "SHARPS.InsertAfiliado", SqlDataAccessArgs
+                        .CreateWith("@PlanMedico", afiliado.PlanMedico)
+                        .And("@ID", afiliado.UserID)
+                        .And("@EstadoCivil", afiliado.EstadoCivil)
+                        .And("@CantHijos", afiliado.CantHijos)
+                        .Arguments);
+                    return afiliado.NroAfiliado;
+                }
+                else {
+                    afiliado.NroAfiliado = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                    "SHARPS.InsertMiembroGrupoFamiliar", SqlDataAccessArgs
                     .CreateWith("@PlanMedico", afiliado.PlanMedico)
                     .And("@ID", afiliado.UserID)
                     .And("@EstadoCivil", afiliado.EstadoCivil)
                     .And("@CantHijos", afiliado.CantHijos)
+                    .And("@RolAfiliado", afiliado.RoleID)
+                    .And("@nroAfiliado", afiliado.NroAfiliado)//Hay que sumarle uno
                     .Arguments);
-
+                    return afiliado.NroAfiliado;
+                
+                }
             }
             else
             {
@@ -96,9 +111,11 @@ namespace ClinicaFrba.Negocio
                     .CreateWith("@PlanMedico", afiliado.PlanMedico)
                     .And("@ID", afiliado.UserID)
                     .And("@EstadoCivil", afiliado.EstadoCivil)
+                    .And("@RolAfiliado", afiliado.RoleID)
                     .And("@CantHijos", afiliado.CantHijos)
                     .And("@Motivo", afiliado.MotivoCambio)
                 .Arguments);
+                return 0;
             }
         }
 

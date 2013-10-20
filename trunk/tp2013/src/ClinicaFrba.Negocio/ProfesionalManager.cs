@@ -59,14 +59,16 @@ namespace ClinicaFrba.Negocio
                 try
                 {
                     SessionData.Set("Transaction", transaction);
-                    profesional.UserID = usersManager.CreateProfileAccount(profesional as User, Profesional.Profile, password);
+
+                    profesional.UserID = usersManager.CreateAccount(profesional as User,password);
+
                     var detalleID = entityDetailManager.AddDetallePersona(profesional as User);
 
                     SqlDataAccess.ExecuteNonQuery(
                         "SHARPS.InsertProfesional", SqlDataAccessArgs
                         .CreateWith("@Matricula", profesional.Matricula)
                         .And("@ID", profesional.UserID)
-                        //HACER ESPECIALIDADES
+                        .And("@Rol", profesional.RoleID)
                         .Arguments,
                     transaction);
 
@@ -86,15 +88,26 @@ namespace ClinicaFrba.Negocio
                 SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                     "SHARPS.UpdateProfesional", SqlDataAccessArgs
                     .CreateWith("@Matricula", profesional.Matricula)
-                    //HACER ESPECIALIDADES
                     .And("@ID", profesional.UserID)
                     .Arguments);
             }
+            InsertarEspecialidades(profesional);
         }
 
         public void Delete(Profesional profesional)
         {
             _usersManager.DeleteAccount(profesional as User);
         }
+
+        public void InsertarEspecialidades(Profesional profesional) {
+            foreach (var especialidad in profesional.Especialidades){
+                SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
+                    "SHARPS.InsertSpeciality", SqlDataAccessArgs
+                    .CreateWith("@MedicoID", profesional.UserID)
+                    .And("@Especialidad", especialidad)
+                .Arguments);
+            }
+        }
+
     }
 }

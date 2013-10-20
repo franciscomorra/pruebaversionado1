@@ -23,7 +23,6 @@ namespace ClinicaFrba.Login
         {
             InitializeComponent();
         }
-
         private void btnLogin_Click(object sender, EventArgs e)
         {
             Login(txtUserName.Text, txtPassword.Text);
@@ -33,12 +32,10 @@ namespace ClinicaFrba.Login
         {
             
             user = svc.Login(userName, pass);
-//TERMINAR!
             var roles = svc.GetUserRoles(user.UserID);
             if (roles.Count > 1)
             {
                 comboRoles.DataSource = roles;
-                //Aca le tengo que decir que muestre el nombre y ponga el id como index
                 comboRoles.DisplayMember = "Nombre";
                 comboRoles.SelectedIndex = 0;
                 panelRoles.Show();
@@ -47,7 +44,7 @@ namespace ClinicaFrba.Login
             {
                 Rol rol = (Rol)roles.Take(1);
                 user.RoleID = rol.ID;
-                
+                user.Perfil = rol.Perfil;
                 svc.SetUserFunctionalities(user);
                 Session.StartSession(user);
                 ViewsManager.ClearViews();
@@ -58,8 +55,17 @@ namespace ClinicaFrba.Login
         {
             Rol rolSelected = (Rol)comboRoles.SelectedItem;
             user.RoleID = rolSelected.ID;
+
+            user.Perfil = rolSelected.Perfil;
             svc.SetUserFunctionalities(user);
             Session.StartSession(user);
+
+            if (user.Estado == "") { //Aca va lo de actualizacion de datos incompletos
+            
+            
+            }
+
+
             ViewsManager.ClearViews();
         }
     }

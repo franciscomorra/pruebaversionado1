@@ -68,5 +68,25 @@ namespace ClinicaFrba.Negocio
 
             return ret;
         }
+        public List<Functionalities> GetProfileFunctionalities(int profileId)//Saca las funcionalidades de un rol
+        {
+            var ret = new List<Functionalities>();
+            var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "SHARPS.GetProfileFunctionalities", SqlDataAccessArgs
+                .CreateWith("@Perfil_Id", profileId)
+            .Arguments);
+
+            if (result != null)
+            {
+                foreach (DataRow row in result.Rows)
+                {
+                    var permission = row["Descripcion"].ToString();
+                    var enumItem = (Functionalities)Enum.Parse(typeof(Functionalities), permission);
+                    ret.Add(enumItem);
+                }
+            }
+
+            return ret;
+        }
     }
 }

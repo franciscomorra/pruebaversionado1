@@ -15,19 +15,48 @@ namespace ClinicaFrba.RegistrarAgenda
     [PermissionRequired(Functionalities.RegistrarAgenda)]
     public partial class RegistrarAgenda : Form
     {
+        private int id_profesional;
         public RegistrarAgenda()
         {
+            //CARGAR HORARIOS LABORALES EN LAS LISTAS
+
+
+            if (Session.User.Perfil.Nombre != "Profesional")
+            {
+                ProfesionalManager manager = new ProfesionalManager();
+                var listadoProfesionales = manager.GetAll();
+                if (listadoProfesionales.Count > 1)
+                {
+                    cbxProfesional.DataSource = listadoProfesionales;
+                    cbxProfesional.DisplayMember = "Matricula";
+                    cbxProfesional.SelectedIndex = 0;
+                    panelProfesional.Show();
+                }
+            }
+            else {
+                id_profesional = Session.User.UserID;
+                //Cargar Agenda!
+            }
             InitializeComponent();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+           /* if ((dtDesde.Value - dtHasta.Value) < 120 dias )
+            {
+            }
+            */
+
             //Validar datos y guardar por fecha cambiada
         }
-
-        private void calendarioAgenda_DateSelected(object sender, DateRangeEventArgs e)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Rellenar horarios en la lista, cada item tiene que tener un checkbox
+            Profesional profSelected = (Profesional)cbxProfesional.SelectedItem;
+            this.id_profesional = profSelected.UserID;
+            //Cargar Agenda!
         }
+
+
+
     }
 }

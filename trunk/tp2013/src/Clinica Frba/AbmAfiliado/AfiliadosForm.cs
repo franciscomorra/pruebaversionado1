@@ -116,7 +116,8 @@ namespace ClinicaFrba.AbmAfiliado
         {
             var regForm = new RegistroForm();
             regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
-            regForm.Profile = Profile.Afiliado;
+
+            regForm.Profile = new Profile() { Nombre = "Afiliado"};
             ViewsManager.LoadModal(regForm);
         }
 
@@ -125,17 +126,17 @@ namespace ClinicaFrba.AbmAfiliado
             txtApellido.Text = string.Empty;
             txtNombre.Text = string.Empty;
             txtEmail.Text = string.Empty;
-            txtDNI.Text = string.Empty;
+            txtAfiliadoNro.Text = string.Empty;
             dgvAfiliados.DataSource = _afiliadoManager.GetAll();
             dgvAfiliados.Refresh();
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            long dni = 0;
-            if (!string.IsNullOrEmpty(txtDNI.Text) && !long.TryParse(txtDNI.Text, out dni))
+            long nroAfiliado = 0;
+            if (!string.IsNullOrEmpty(txtAfiliadoNro.Text) && !long.TryParse(txtAfiliadoNro.Text, out nroAfiliado))
             {
-                MessageBox.Show("El DNI debe ser numérico");
+                MessageBox.Show("El Nro de Afiliado debe ser numérico");
                 return;
             }
             var afiliados = _afiliadoManager.GetAll();
@@ -151,9 +152,9 @@ namespace ClinicaFrba.AbmAfiliado
             {
                 afiliados = new BindingList<Afiliado>(afiliados.Where(x => x.DetallePersona.Email.ToLowerInvariant().Contains(txtEmail.Text.ToLowerInvariant())).ToList());
             }
-            if (!string.IsNullOrEmpty(txtDNI.Text))
+            if (!string.IsNullOrEmpty(txtAfiliadoNro.Text))
             {
-                afiliados = new BindingList<Afiliado>(afiliados.Where(x => x.DetallePersona.DNI == dni).ToList());
+                afiliados = new BindingList<Afiliado>(afiliados.Where(x => x.NroAfiliado == nroAfiliado).ToList());
             }
             afiliados.Remove(new Afiliado() { UserID = Session.User.UserID });
             dgvAfiliados.DataSource = new BindingList<Afiliado>(afiliados.OrderBy(x => x.DetallePersona.Apellido + x.DetallePersona.Nombre).ToList());

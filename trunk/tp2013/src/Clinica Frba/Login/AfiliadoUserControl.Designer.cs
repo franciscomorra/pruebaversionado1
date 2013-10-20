@@ -54,8 +54,9 @@
             this.label12 = new System.Windows.Forms.Label();
             this.txtMotivo = new System.Windows.Forms.TextBox();
             this.panelMotivo = new System.Windows.Forms.Panel();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbxRoles = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.cbxTipoDNI = new System.Windows.Forms.ComboBox();
             this.panelFamiliar.SuspendLayout();
             this.panelMotivo.SuspendLayout();
             this.SuspendLayout();
@@ -96,7 +97,7 @@
             // 
             this.txtDNI.Location = new System.Drawing.Point(102, 63);
             this.txtDNI.Name = "txtDNI";
-            this.txtDNI.Size = new System.Drawing.Size(200, 20);
+            this.txtDNI.Size = new System.Drawing.Size(104, 20);
             this.txtDNI.TabIndex = 5;
             // 
             // label3
@@ -228,7 +229,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(68, 90);
+            this.label11.Location = new System.Drawing.Point(63, 90);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(31, 13);
             this.label11.TabIndex = 4;
@@ -280,29 +281,38 @@
             this.panelMotivo.TabIndex = 29;
             this.panelMotivo.Visible = false;
             // 
-            // comboBox1
+            // cbxRoles
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(101, 372);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(200, 21);
-            this.comboBox1.TabIndex = 30;
+            this.cbxRoles.FormattingEnabled = true;
+            this.cbxRoles.Location = new System.Drawing.Point(101, 372);
+            this.cbxRoles.Name = "cbxRoles";
+            this.cbxRoles.Size = new System.Drawing.Size(200, 21);
+            this.cbxRoles.TabIndex = 30;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(71, 375);
+            this.label13.Location = new System.Drawing.Point(19, 375);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(23, 13);
+            this.label13.Size = new System.Drawing.Size(75, 13);
             this.label13.TabIndex = 31;
-            this.label13.Text = "Rol";
+            this.label13.Text = "Rol de Afiliado";
+            // 
+            // cbxTipoDNI
+            // 
+            this.cbxTipoDNI.FormattingEnabled = true;
+            this.cbxTipoDNI.Location = new System.Drawing.Point(208, 62);
+            this.cbxTipoDNI.Name = "cbxTipoDNI";
+            this.cbxTipoDNI.Size = new System.Drawing.Size(93, 21);
+            this.cbxTipoDNI.TabIndex = 32;
             // 
             // AfiliadoUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cbxTipoDNI);
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbxRoles);
             this.Controls.Add(this.panelMotivo);
             this.Controls.Add(this.panelFamiliar);
             this.Controls.Add(this.cbxSexo);
@@ -363,7 +373,8 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtMotivo;
         private System.Windows.Forms.Panel panelMotivo;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbxRoles;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox cbxTipoDNI;
     }
 }
