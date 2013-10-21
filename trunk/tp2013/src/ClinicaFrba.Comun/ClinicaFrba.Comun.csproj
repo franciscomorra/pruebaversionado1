@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Afiliado.cs" />
+    <Compile Include="Agenda.cs" />
     <Compile Include="DetallesPersona.cs" />
     <Compile Include="Especialidad.cs" />
     <Compile Include="EstadoCivil.cs" />

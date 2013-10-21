@@ -7,56 +7,83 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ClinicaFrba.Core;
+using ClinicaFrba.AbmProfesional;
+using ClinicaFrba.Login;
 using ClinicaFrba.Comun;
 using ClinicaFrba.Negocio;
+using Data;
+using System.Configuration;
 
 namespace ClinicaFrba.RegistrarAgenda
 {
     [PermissionRequired(Functionalities.RegistrarAgenda)]
     public partial class RegistrarAgenda : Form
     {
-        private int id_profesional;
+        private User _user;
+        private ProfesionalesForm _profesionalesForm;
+        private Agenda _agenda = new Agenda();
+        private AgendaManager mgr = new AgendaManager();
         public RegistrarAgenda()
         {
             //CARGAR HORARIOS LABORALES EN LAS LISTAS
-
-
             if (Session.User.Perfil.Nombre != "Profesional")
             {
-                ProfesionalManager manager = new ProfesionalManager();
-                var listadoProfesionales = manager.GetAll();
-                if (listadoProfesionales.Count > 1)
-                {
-                    cbxProfesional.DataSource = listadoProfesionales;
-                    cbxProfesional.DisplayMember = "Matricula";
-                    cbxProfesional.SelectedIndex = 0;
-                    panelProfesional.Show();
-                }
+                panelProfesional.Show();
             }
-            else {
-                id_profesional = Session.User.UserID;
-                //Cargar Agenda!
+            else
+            {
+                txtProfesional.Text = Session.User.UserID.ToString();
+                panelProfesional.Hide();
             }
             InitializeComponent();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-           /* if ((dtDesde.Value - dtHasta.Value) < 120 dias )
+            
+            _agenda.FechaDesde = dtDesde.Value;
+            _agenda.FechaHasta = dtHasta.Value;
+            //RELLENAR AGENDA LUNES - SABADO
+            /*
+            if (_agenda.FechaDesde - ) < 120 dias )
             {
             }
-            */
+            if (calcularCantidadTotalHoras() > 40) { 
+            
+            }
+           */
 
             //Validar datos y guardar por fecha cambiada
+            mgr.GuardarAgenda(_agenda);
         }
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void btnBuscar_Click(object sender, EventArgs e)
         {
-            Profesional profSelected = (Profesional)cbxProfesional.SelectedItem;
-            this.id_profesional = profSelected.UserID;
-            //Cargar Agenda!
+            if (_profesionalesForm == null)
+            {
+                _profesionalesForm = new ProfesionalesForm();
+                _profesionalesForm.SetSearchMode();
+                _profesionalesForm.OnUserSelected += new EventHandler<UserSelectedEventArgs>(clientesForm_OnUserSelected);
+            }
+            ViewsManager.LoadModal(_profesionalesForm);
         }
-
-
+        
+        void clientesForm_OnUserSelected(object sender, UserSelectedEventArgs e)
+        {
+            _user = e.User;
+            txtProfesional.Text = _user.UserName;
+            _profesionalesForm.Hide();
+            rellenarAgendas();
+        }
+        private void rellenarAgendas()
+        {
+            //RELLENAR DIAS DE AGENDAS!
+        }
+        private int calcularCantidadTotalHoras()
+        {
+            //VA CAMPO POR CAMPO Y SUMA
+            return 0;
+        }
 
     }
 }

@@ -46,8 +46,9 @@
             this.label8 = new System.Windows.Forms.Label();
             this.listSabado = new System.Windows.Forms.ListBox();
             this.panelProfesional = new System.Windows.Forms.Panel();
-            this.label9 = new System.Windows.Forms.Label();
-            this.cbxProfesional = new System.Windows.Forms.ComboBox();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.txtProfesional = new System.Windows.Forms.TextBox();
+            this.lblProf = new System.Windows.Forms.Label();
             this.panelProfesional.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -199,31 +200,41 @@
             // 
             // panelProfesional
             // 
-            this.panelProfesional.Controls.Add(this.label9);
-            this.panelProfesional.Controls.Add(this.cbxProfesional);
+            this.panelProfesional.Controls.Add(this.btnBuscar);
+            this.panelProfesional.Controls.Add(this.lblProf);
+            this.panelProfesional.Controls.Add(this.txtProfesional);
             this.panelProfesional.Location = new System.Drawing.Point(7, 2);
             this.panelProfesional.Name = "panelProfesional";
             this.panelProfesional.Size = new System.Drawing.Size(618, 43);
             this.panelProfesional.TabIndex = 15;
             this.panelProfesional.Visible = false;
             // 
-            // label9
+            // btnBuscar
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(38, 13);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(59, 13);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "Profesional";
+            this.btnBuscar.Location = new System.Drawing.Point(180, 7);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscar.TabIndex = 34;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
-            // cbxProfesional
+            // txtProfesional
             // 
-            this.cbxProfesional.FormattingEnabled = true;
-            this.cbxProfesional.Location = new System.Drawing.Point(103, 10);
-            this.cbxProfesional.Name = "cbxProfesional";
-            this.cbxProfesional.Size = new System.Drawing.Size(121, 21);
-            this.cbxProfesional.TabIndex = 0;
-            this.cbxProfesional.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.txtProfesional.Location = new System.Drawing.Point(71, 9);
+            this.txtProfesional.Name = "txtProfesional";
+            this.txtProfesional.ReadOnly = true;
+            this.txtProfesional.Size = new System.Drawing.Size(100, 20);
+            this.txtProfesional.TabIndex = 33;
+            // 
+            // lblProf
+            // 
+            this.lblProf.AutoSize = true;
+            this.lblProf.Location = new System.Drawing.Point(6, 12);
+            this.lblProf.Name = "lblProf";
+            this.lblProf.Size = new System.Drawing.Size(59, 13);
+            this.lblProf.TabIndex = 32;
+            this.lblProf.Text = "Profesional";
             // 
             // RegistrarAgenda
             // 
@@ -277,8 +288,9 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ListBox listSabado;
         private System.Windows.Forms.Panel panelProfesional;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox cbxProfesional;
+        private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.Label lblProf;
+        private System.Windows.Forms.TextBox txtProfesional;
 
     }
 }
