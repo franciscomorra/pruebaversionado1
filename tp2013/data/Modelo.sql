@@ -26,8 +26,9 @@ CREATE TABLE Bonos (
 	numeroBono numeric(18) NOT NULL,
 	fechaImp datetime NULL,
 	afiliadoCompro numeric(18) NULL,
-	tipoBono nchar(10) NULL,
-	plan numeric(18) NULL
+	tipoBono numeric(18) NULL,
+	plan numeric(18) NULL,
+	fechaCompra datetime NULL
 )
 ;
 
@@ -57,7 +58,7 @@ CREATE TABLE Detalles_Persona (
 	apellido varchar(255) NULL,
 	nombre varchar(255) NULL,
 	userId numeric(18) NOT NULL,
-	fechaNac date NULL
+	fechaNac datetime NULL
 )
 ;
 
@@ -87,8 +88,8 @@ CREATE TABLE Funcionalidades (
 ;
 
 CREATE TABLE Medicamentos ( 
-	idMedic numeric(18) NULL,
-	descrip nchar(10) NULL
+	idMedic varchar(255) NOT NULL,
+	descrip varchar(255) NULL
 )
 ;
 
@@ -126,14 +127,14 @@ CREATE TABLE Planes_Medicos (
 ;
 
 CREATE TABLE Receta ( 
-	bonoConsulta nchar(10) NULL,
-	bonoFarmacia nchar(10) NULL
+	bonoConsulta numeric(18) NULL,
+	bonoFarmacia numeric(18) NULL
 )
 ;
 
 CREATE TABLE Recetas_Medicamen ( 
-	receta nchar(10) NULL,
-	medicamento numeric(18) NULL
+	receta numeric(18) NOT NULL,
+	medicamento varchar(255) NULL
 )
 ;
 
@@ -175,7 +176,7 @@ CREATE TABLE Turnos (
 
 CREATE TABLE Usuarios ( 
 	idUser numeric(18) NOT NULL,
-	username numeric(10,2) NULL,
+	username varchar(255) NULL,
 	clave nchar(10) NOT NULL,
 	intentos int NULL,
 	activo bit NULL
@@ -183,7 +184,7 @@ CREATE TABLE Usuarios (
 ;
 
 CREATE TABLE Usuarios_Roles ( 
-	usuario numeric(10,2) NOT NULL,
+	usuario varchar(255) NOT NULL,
 	rol numeric(10,2) NOT NULL
 )
 ;
@@ -273,12 +274,20 @@ ALTER TABLE Funcionalidades ADD CONSTRAINT PK_Funcionalidades
 	PRIMARY KEY CLUSTERED (idFunc)
 ;
 
+ALTER TABLE Medicamentos ADD CONSTRAINT PK_Medicamentos 
+	PRIMARY KEY CLUSTERED (idMedic)
+;
+
 ALTER TABLE Perfil ADD CONSTRAINT PK_Perfil 
 	PRIMARY KEY CLUSTERED (idPerfil)
 ;
 
 ALTER TABLE Planes_Medicos ADD CONSTRAINT PK_Planes_Medcos 
 	PRIMARY KEY CLUSTERED (codigo)
+;
+
+ALTER TABLE Recetas_Medicamen ADD CONSTRAINT PK_Recetas_Medicamen 
+	PRIMARY KEY CLUSTERED (receta)
 ;
 
 ALTER TABLE Roles ADD CONSTRAINT PK_Roles 
@@ -331,10 +340,6 @@ ALTER TABLE Bonos ADD CONSTRAINT FK_Bonos_Consulta
 	FOREIGN KEY (numeroBono) REFERENCES Consulta (bono)
 ;
 
-ALTER TABLE Detalles_Persona ADD CONSTRAINT FK_Detalles_Persona_Tipo_Doc 
-	FOREIGN KEY (tipo) REFERENCES Tipo_Doc (idTipo)
-;
-
 ALTER TABLE Detalles_Persona ADD CONSTRAINT FK_Detalles_Persona_Usuarios 
 	FOREIGN KEY (userId) REFERENCES Usuarios (idUser)
 ;
@@ -371,6 +376,14 @@ ALTER TABLE Perfil_Func ADD CONSTRAINT FK_Perfil_Func_Perfil
 	FOREIGN KEY (perfil) REFERENCES Perfil (idPerfil)
 ;
 
+ALTER TABLE Receta ADD CONSTRAINT FK_Receta_Recetas_Medicamen 
+	FOREIGN KEY (bonoFarmacia) REFERENCES Recetas_Medicamen (receta)
+;
+
+ALTER TABLE Recetas_Medicamen ADD CONSTRAINT FK_Recetas_Medicamen_Medicamentos 
+	FOREIGN KEY (medicamento) REFERENCES Medicamentos (idMedic)
+;
+
 ALTER TABLE Roles ADD CONSTRAINT FK_Roles_Perfil 
 	FOREIGN KEY (perfil) REFERENCES Perfil (idPerfil)
 ;
@@ -387,6 +400,6 @@ ALTER TABLE Turnos ADD CONSTRAINT FK_Turnos_Estados_turno
 	FOREIGN KEY (estado) REFERENCES Estados_turno (idEstado)
 ;
 
-ALTER TABLE Usuarios_Roles ADD CONSTRAINT FK_Usuarios Roles_Roles 
-	FOREIGN KEY (rol) REFERENCES Roles (idRol)
+ALTER TABLE Usuarios ADD CONSTRAINT FK_Usuarios_Usuarios_Roles 
+	FOREIGN KEY (username) REFERENCES Usuarios_Roles (usuario)
 ;
