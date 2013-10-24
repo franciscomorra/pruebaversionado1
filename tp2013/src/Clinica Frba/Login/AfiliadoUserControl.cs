@@ -26,8 +26,11 @@ namespace ClinicaFrba.Login
                 throw new Exception("El DNI debe ser numérico!");
             if (!int.TryParse(txtHijos.Text, out CantHijos))
                 throw new Exception("Cantidad de hijos debe ser numérico!");
+
             if (string.IsNullOrEmpty(txtNombre.Text.Trim()))
                 throw new Exception("El Nombre es obligatorio!");
+            if (string.IsNullOrEmpty(txtMotivo.Text.Trim()))
+                throw new Exception("El Motivo es obligatorio!");
             if (string.IsNullOrEmpty(txtApellido.Text.Trim()))
                 throw new Exception("El Apellido es obligatorio!");
 
