@@ -101,12 +101,30 @@
       <DependentUpon>RolesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmRol\RoleUpdatedEventArgs.cs" />
+    <Compile Include="CancelarAtencion\CancelarDia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CancelarAtencion\CancelarDia.Designer.cs">
+      <DependentUpon>CancelarDia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CompraBono\ComprarBono.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CompraBono\ComprarBono.Designer.cs">
+      <DependentUpon>ComprarBono.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\AppExceptionHandler.cs" />
     <Compile Include="Core\NonNavigableAttribute.cs" />
     <Compile Include="Core\PermissionRequiredAttribute.cs" />
     <Compile Include="Core\Session.cs" />
     <Compile Include="Core\SqlExceptionHandler.cs" />
     <Compile Include="Core\ViewsManager.cs" />
+    <Compile Include="GenerarReceta\GenerarReceta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GenerarReceta\GenerarReceta.Designer.cs">
+      <DependentUpon>GenerarReceta.cs</DependentUpon>
+    </Compile>
     <Compile Include="ListadoEstadistico\ListadoEstadisticoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +183,15 @@
     <EmbeddedResource Include="AbmRol\RolesForm.resx">
       <DependentUpon>RolesForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CancelarAtencion\CancelarDia.resx">
+      <DependentUpon>CancelarDia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CompraBono\ComprarBono.resx">
+      <DependentUpon>ComprarBono.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GenerarReceta\GenerarReceta.resx">
+      <DependentUpon>GenerarReceta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ListadoEstadistico\ListadoEstadisticoForm.resx">
       <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -191,6 +218,12 @@
     <EmbeddedResource Include="RegistrarAgenda\RegistrarAgenda.resx">
       <DependentUpon>RegistrarAgenda.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="RegistroLlegada\RegistrarLlegada.resx">
+      <DependentUpon>RegistrarLlegada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistroResultadoAtencion\RegistroResultadoAtencion.resx">
+      <DependentUpon>RegistroResultadoAtencion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RegistroUsuario\RegistroUsuario.resx">
       <DependentUpon>RegistroUsuario.cs</DependentUpon>
     </EmbeddedResource>
@@ -199,7 +232,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="Configuracion.config" />
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -214,6 +247,18 @@
     </Compile>
     <Compile Include="RegistrarAgenda\RegistrarAgenda.Designer.cs">
       <DependentUpon>RegistrarAgenda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroLlegada\RegistrarLlegada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistroLlegada\RegistrarLlegada.Designer.cs">
+      <DependentUpon>RegistrarLlegada.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroResultadoAtencion\RegistroResultadoAtencion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistroResultadoAtencion\RegistroResultadoAtencion.Designer.cs">
+      <DependentUpon>RegistroResultadoAtencion.cs</DependentUpon>
     </Compile>
     <Compile Include="RegistroUsuario\RegistroUsuario.cs">
       <SubType>Form</SubType>
@@ -262,12 +307,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CancelarAtencion\" />
-    <Folder Include="CompraBono\" />
-    <Folder Include="GenerarReceta\" />
     <Folder Include="PedirTurno\" />
-    <Folder Include="RegistroLlegada\" />
-    <Folder Include="RegistroResultadoAtencion\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

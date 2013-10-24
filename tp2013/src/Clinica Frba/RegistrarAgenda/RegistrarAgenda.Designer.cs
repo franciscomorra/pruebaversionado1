@@ -33,22 +33,30 @@
             this.dtHasta = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.dtDesde = new System.Windows.Forms.DateTimePicker();
-            this.listLunes = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.listMartes = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.listMiercoles = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.listJueves = new System.Windows.Forms.ListBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.listViernes = new System.Windows.Forms.ListBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.listSabado = new System.Windows.Forms.ListBox();
             this.panelProfesional = new System.Windows.Forms.Panel();
             this.btnBuscar = new System.Windows.Forms.Button();
-            this.txtProfesional = new System.Windows.Forms.TextBox();
             this.lblProf = new System.Windows.Forms.Label();
+            this.txtProfesional = new System.Windows.Forms.TextBox();
+            this.cbxLunesIN = new System.Windows.Forms.ComboBox();
+            this.cbxLunesOUT = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.cbxMartesIN = new System.Windows.Forms.ComboBox();
+            this.cbxMartesOUT = new System.Windows.Forms.ComboBox();
+            this.cbxMiercIN = new System.Windows.Forms.ComboBox();
+            this.cbxMiercOUT = new System.Windows.Forms.ComboBox();
+            this.cbxJueIN = new System.Windows.Forms.ComboBox();
+            this.cbxJueOUT = new System.Windows.Forms.ComboBox();
+            this.cbxViesIN = new System.Windows.Forms.ComboBox();
+            this.cbxVieOUT = new System.Windows.Forms.ComboBox();
+            this.cbxSabIN = new System.Windows.Forms.ComboBox();
+            this.cbxSabOUT = new System.Windows.Forms.ComboBox();
             this.panelProfesional.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,69 +104,37 @@
             this.dtDesde.TabIndex = 7;
             this.dtDesde.Value = new System.DateTime(2014, 1, 1, 0, 0, 0, 0);
             // 
-            // listLunes
-            // 
-            this.listLunes.FormattingEnabled = true;
-            this.listLunes.Location = new System.Drawing.Point(7, 111);
-            this.listLunes.Name = "listLunes";
-            this.listLunes.Size = new System.Drawing.Size(103, 69);
-            this.listLunes.TabIndex = 9;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(4, 95);
+            this.label3.Location = new System.Drawing.Point(62, 158);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(36, 13);
             this.label3.TabIndex = 10;
             this.label3.Text = "Lunes";
             // 
-            // listMartes
-            // 
-            this.listMartes.FormattingEnabled = true;
-            this.listMartes.Location = new System.Drawing.Point(110, 111);
-            this.listMartes.Name = "listMartes";
-            this.listMartes.Size = new System.Drawing.Size(103, 69);
-            this.listMartes.TabIndex = 9;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(107, 95);
+            this.label4.Location = new System.Drawing.Point(152, 158);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(39, 13);
             this.label4.TabIndex = 10;
             this.label4.Text = "Martes";
             // 
-            // listMiercoles
-            // 
-            this.listMiercoles.FormattingEnabled = true;
-            this.listMiercoles.Location = new System.Drawing.Point(213, 111);
-            this.listMiercoles.Name = "listMiercoles";
-            this.listMiercoles.Size = new System.Drawing.Size(103, 69);
-            this.listMiercoles.TabIndex = 9;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(210, 95);
+            this.label5.Location = new System.Drawing.Point(245, 158);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(52, 13);
             this.label5.TabIndex = 10;
             this.label5.Text = "Miercoles";
             // 
-            // listJueves
-            // 
-            this.listJueves.FormattingEnabled = true;
-            this.listJueves.Location = new System.Drawing.Point(316, 111);
-            this.listJueves.Name = "listJueves";
-            this.listJueves.Size = new System.Drawing.Size(103, 69);
-            this.listJueves.TabIndex = 9;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(313, 95);
+            this.label6.Location = new System.Drawing.Point(351, 158);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 13);
             this.label6.TabIndex = 10;
@@ -167,36 +143,20 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(416, 95);
+            this.label7.Location = new System.Drawing.Point(446, 158);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(42, 13);
             this.label7.TabIndex = 12;
             this.label7.Text = "Viernes";
             // 
-            // listViernes
-            // 
-            this.listViernes.FormattingEnabled = true;
-            this.listViernes.Location = new System.Drawing.Point(419, 111);
-            this.listViernes.Name = "listViernes";
-            this.listViernes.Size = new System.Drawing.Size(103, 69);
-            this.listViernes.TabIndex = 11;
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(519, 95);
+            this.label8.Location = new System.Drawing.Point(542, 158);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(44, 13);
             this.label8.TabIndex = 14;
             this.label8.Text = "Sabado";
-            // 
-            // listSabado
-            // 
-            this.listSabado.FormattingEnabled = true;
-            this.listSabado.Location = new System.Drawing.Point(522, 111);
-            this.listSabado.Name = "listSabado";
-            this.listSabado.Size = new System.Drawing.Size(103, 69);
-            this.listSabado.TabIndex = 13;
             // 
             // panelProfesional
             // 
@@ -219,14 +179,6 @@
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
-            // txtProfesional
-            // 
-            this.txtProfesional.Location = new System.Drawing.Point(71, 9);
-            this.txtProfesional.Name = "txtProfesional";
-            this.txtProfesional.ReadOnly = true;
-            this.txtProfesional.Size = new System.Drawing.Size(100, 20);
-            this.txtProfesional.TabIndex = 33;
-            // 
             // lblProf
             // 
             this.lblProf.AutoSize = true;
@@ -236,24 +188,154 @@
             this.lblProf.TabIndex = 32;
             this.lblProf.Text = "Profesional";
             // 
+            // txtProfesional
+            // 
+            this.txtProfesional.Location = new System.Drawing.Point(71, 9);
+            this.txtProfesional.Name = "txtProfesional";
+            this.txtProfesional.ReadOnly = true;
+            this.txtProfesional.Size = new System.Drawing.Size(100, 20);
+            this.txtProfesional.TabIndex = 33;
+            // 
+            // cbxLunesIN
+            // 
+            this.cbxLunesIN.FormattingEnabled = true;
+            this.cbxLunesIN.Location = new System.Drawing.Point(54, 183);
+            this.cbxLunesIN.Name = "cbxLunesIN";
+            this.cbxLunesIN.Size = new System.Drawing.Size(78, 21);
+            this.cbxLunesIN.TabIndex = 16;
+            // 
+            // cbxLunesOUT
+            // 
+            this.cbxLunesOUT.FormattingEnabled = true;
+            this.cbxLunesOUT.Location = new System.Drawing.Point(54, 231);
+            this.cbxLunesOUT.Name = "cbxLunesOUT";
+            this.cbxLunesOUT.Size = new System.Drawing.Size(78, 21);
+            this.cbxLunesOUT.TabIndex = 16;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(4, 186);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(38, 13);
+            this.label9.TabIndex = 10;
+            this.label9.Text = "Desde";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(4, 234);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(35, 13);
+            this.label10.TabIndex = 10;
+            this.label10.Text = "Hasta";
+            // 
+            // cbxMartesIN
+            // 
+            this.cbxMartesIN.FormattingEnabled = true;
+            this.cbxMartesIN.Location = new System.Drawing.Point(151, 183);
+            this.cbxMartesIN.Name = "cbxMartesIN";
+            this.cbxMartesIN.Size = new System.Drawing.Size(78, 21);
+            this.cbxMartesIN.TabIndex = 16;
+            // 
+            // cbxMartesOUT
+            // 
+            this.cbxMartesOUT.FormattingEnabled = true;
+            this.cbxMartesOUT.Location = new System.Drawing.Point(151, 231);
+            this.cbxMartesOUT.Name = "cbxMartesOUT";
+            this.cbxMartesOUT.Size = new System.Drawing.Size(78, 21);
+            this.cbxMartesOUT.TabIndex = 16;
+            // 
+            // cbxMiercIN
+            // 
+            this.cbxMiercIN.FormattingEnabled = true;
+            this.cbxMiercIN.Location = new System.Drawing.Point(248, 183);
+            this.cbxMiercIN.Name = "cbxMiercIN";
+            this.cbxMiercIN.Size = new System.Drawing.Size(78, 21);
+            this.cbxMiercIN.TabIndex = 16;
+            // 
+            // cbxMiercOUT
+            // 
+            this.cbxMiercOUT.FormattingEnabled = true;
+            this.cbxMiercOUT.Location = new System.Drawing.Point(248, 231);
+            this.cbxMiercOUT.Name = "cbxMiercOUT";
+            this.cbxMiercOUT.Size = new System.Drawing.Size(78, 21);
+            this.cbxMiercOUT.TabIndex = 16;
+            // 
+            // cbxJueIN
+            // 
+            this.cbxJueIN.FormattingEnabled = true;
+            this.cbxJueIN.Location = new System.Drawing.Point(345, 183);
+            this.cbxJueIN.Name = "cbxJueIN";
+            this.cbxJueIN.Size = new System.Drawing.Size(78, 21);
+            this.cbxJueIN.TabIndex = 16;
+            // 
+            // cbxJueOUT
+            // 
+            this.cbxJueOUT.FormattingEnabled = true;
+            this.cbxJueOUT.Location = new System.Drawing.Point(345, 231);
+            this.cbxJueOUT.Name = "cbxJueOUT";
+            this.cbxJueOUT.Size = new System.Drawing.Size(78, 21);
+            this.cbxJueOUT.TabIndex = 16;
+            // 
+            // cbxViesIN
+            // 
+            this.cbxViesIN.FormattingEnabled = true;
+            this.cbxViesIN.Location = new System.Drawing.Point(442, 183);
+            this.cbxViesIN.Name = "cbxViesIN";
+            this.cbxViesIN.Size = new System.Drawing.Size(78, 21);
+            this.cbxViesIN.TabIndex = 16;
+            // 
+            // cbxVieOUT
+            // 
+            this.cbxVieOUT.FormattingEnabled = true;
+            this.cbxVieOUT.Location = new System.Drawing.Point(442, 231);
+            this.cbxVieOUT.Name = "cbxVieOUT";
+            this.cbxVieOUT.Size = new System.Drawing.Size(78, 21);
+            this.cbxVieOUT.TabIndex = 16;
+            // 
+            // cbxSabIN
+            // 
+            this.cbxSabIN.FormattingEnabled = true;
+            this.cbxSabIN.Location = new System.Drawing.Point(539, 183);
+            this.cbxSabIN.Name = "cbxSabIN";
+            this.cbxSabIN.Size = new System.Drawing.Size(78, 21);
+            this.cbxSabIN.TabIndex = 16;
+            // 
+            // cbxSabOUT
+            // 
+            this.cbxSabOUT.FormattingEnabled = true;
+            this.cbxSabOUT.Location = new System.Drawing.Point(539, 231);
+            this.cbxSabOUT.Name = "cbxSabOUT";
+            this.cbxSabOUT.Size = new System.Drawing.Size(78, 21);
+            this.cbxSabOUT.TabIndex = 16;
+            // 
             // RegistrarAgenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(632, 356);
+            this.Controls.Add(this.cbxSabOUT);
+            this.Controls.Add(this.cbxSabIN);
+            this.Controls.Add(this.cbxVieOUT);
+            this.Controls.Add(this.cbxViesIN);
+            this.Controls.Add(this.cbxJueOUT);
+            this.Controls.Add(this.cbxJueIN);
+            this.Controls.Add(this.cbxMiercOUT);
+            this.Controls.Add(this.cbxMiercIN);
+            this.Controls.Add(this.cbxMartesOUT);
+            this.Controls.Add(this.cbxMartesIN);
+            this.Controls.Add(this.cbxLunesOUT);
+            this.Controls.Add(this.cbxLunesIN);
             this.Controls.Add(this.panelProfesional);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.listSabado);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.listViernes);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.listJueves);
-            this.Controls.Add(this.listMiercoles);
-            this.Controls.Add(this.listMartes);
-            this.Controls.Add(this.listLunes);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dtDesde);
             this.Controls.Add(this.label1);
@@ -275,22 +357,30 @@
         private System.Windows.Forms.DateTimePicker dtHasta;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dtDesde;
-        private System.Windows.Forms.ListBox listLunes;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ListBox listMartes;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ListBox listMiercoles;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ListBox listJueves;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ListBox listViernes;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ListBox listSabado;
         private System.Windows.Forms.Panel panelProfesional;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Label lblProf;
         private System.Windows.Forms.TextBox txtProfesional;
+        private System.Windows.Forms.ComboBox cbxLunesIN;
+        private System.Windows.Forms.ComboBox cbxLunesOUT;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox cbxMartesIN;
+        private System.Windows.Forms.ComboBox cbxMartesOUT;
+        private System.Windows.Forms.ComboBox cbxMiercIN;
+        private System.Windows.Forms.ComboBox cbxMiercOUT;
+        private System.Windows.Forms.ComboBox cbxJueIN;
+        private System.Windows.Forms.ComboBox cbxJueOUT;
+        private System.Windows.Forms.ComboBox cbxViesIN;
+        private System.Windows.Forms.ComboBox cbxVieOUT;
+        private System.Windows.Forms.ComboBox cbxSabIN;
+        private System.Windows.Forms.ComboBox cbxSabOUT;
 
     }
 }

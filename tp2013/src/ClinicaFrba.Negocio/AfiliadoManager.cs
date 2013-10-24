@@ -16,12 +16,57 @@ namespace ClinicaFrba.Negocio
     /// </summary>
     public class AfiliadoManager
     {
+        
+        
         private UsersManager _usersManager = new UsersManager();
 
+        public Afiliado getInfo(int userID) 
+        {
+            Afiliado afiliado = new Afiliado();
+            var row = SqlDataAccess.ExecuteDataRowQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "SHARPS.GetAfiliados",SqlDataAccessArgs
+                .CreateWith("@userId", userID)
+                .Arguments);
+            if (row != null && row != null)
+            {
+                afiliado.UserName = row["UserName"].ToString();
+                //RoleID = int.Parse(row["ID_Rol"].ToString()),
+                afiliado.NroAfiliado = int.Parse(row["nroAfiliado"].ToString());
+                afiliado.PlanMedico = new PlanMedico()
+                {
+                    ID = int.Parse(row["Plan_ID"].ToString()),
+                    PrecioConsulta = int.Parse(row["PrecioConsulta"].ToString()),
+                    PrecioFarmacia = int.Parse(row["PrecioFarmacia"].ToString())
+
+                };
+                afiliado.EstadoCivil = (EstadoCivil)Enum.Parse(typeof(EstadoCivil), row["EstadoCivil"].ToString());
+                afiliado.CantHijos = int.Parse(row["CantHijos"].ToString());
+                
+                afiliado.DetallePersona = new DetallesPersona()
+                {
+                    Apellido = row["Apellido"].ToString(),
+                    Nombre = row["Nombre"].ToString(),
+                    FechaNacimiento = Convert.ToDateTime(row["FechaNacimiento"]),
+                    DNI = long.Parse(row["DNI"].ToString()),
+                    Email = row["Email"].ToString(),
+                    Direccion = row["Direccion"].ToString(),
+                    Telefono = long.Parse(row["Telefono"].ToString()),
+                    //Sexo = row["Sexo"].ToString()
+                 
+                };
+                
+                
+            }
+            return afiliado;
+        }
+        
         /// <summary>
         /// Obtiene el listado de afiliados del sistema
         /// </summary>
         /// <returns>Listado de afiliados</returns>
+        
+        
+        
         public BindingList<Afiliado> GetAll()
         {
             if (SessionData.Contains("Afiliados"))
@@ -43,10 +88,14 @@ namespace ClinicaFrba.Negocio
                         NroAfiliado = int.Parse(row["nroAfiliado"].ToString()),
                         PlanMedico = new PlanMedico()
                         {
-                            ID = int.Parse(row["Plan"].ToString())
+                            ID = int.Parse(row["Plan_ID"].ToString()),
+                            PrecioConsulta = int.Parse(row["PrecioConsulta"].ToString()),
+                            PrecioFarmacia = int.Parse(row["PrecioFarmacia"].ToString())
+
                         },
                         EstadoCivil = (EstadoCivil)Enum.Parse(typeof(EstadoCivil), row["EstadoCivil"].ToString()),
                         CantHijos  = int.Parse(row["CantHijos"].ToString()),
+                        
                         DetallePersona = new DetallesPersona()
                         {
                             Apellido = row["Apellido"].ToString(),
@@ -56,7 +105,7 @@ namespace ClinicaFrba.Negocio
                             Email = row["Email"].ToString(),
                             Direccion = row["Direccion"].ToString(),
                             Telefono = long.Parse(row["Telefono"].ToString()),
-                           // Sexo = row["Sexo"].ToString()
+                            //Sexo = row["Sexo"].ToString()
                          
                         }
                     });

@@ -17,6 +17,7 @@ namespace ClinicaFrba.Login
 
         public Profesional GetProfesional()
         {
+            
             long telefono = 0;
             long dni = 0;
             if (!long.TryParse(txtTelefono.Text.Trim().Replace("-", ""), out telefono))
@@ -27,9 +28,11 @@ namespace ClinicaFrba.Login
                 throw new Exception("El Nombre es obligatorio!");
             if (string.IsNullOrEmpty(txtApellido.Text.Trim()))
                 throw new Exception("El Apellido es obligatorio!"); 
+            if (string.IsNullOrEmpty(txtMatricula.Text.Trim()))
+                throw new Exception("La Matricula es obligatoria!"); 
             if (string.IsNullOrEmpty(txtMail.Text.Trim()))
                 throw new Exception("El Email es obligatorio!");
-
+            //PEDIR AL MENOS UNA ESPECIALIDAD!
             _profesional.DetallePersona.Apellido = txtApellido.Text.Trim();
             _profesional.DetallePersona.Nombre = txtNombre.Text.Trim();
             _profesional.DetallePersona.DNI = dni;
@@ -38,6 +41,9 @@ namespace ClinicaFrba.Login
             _profesional.DetallePersona.Telefono = telefono;
             _profesional.DetallePersona.Email = txtMail.Text.Trim();
             _profesional.Matricula = txtMatricula.Text.Trim();
+           /* _profesional.Especialidades = clbEspecialidades.SelectedItems;
+            clbEspecialidades.ForEach(x => _profesional.Especialidades.Add(x))
+            */
             return _profesional;
         }
 
@@ -60,8 +66,10 @@ namespace ClinicaFrba.Login
             _profesional = new Profesional();
             var manager = new EspecialidadesManager();
             var especialidades = manager.GetAll();
-            clbEspecialidades.DisplayMember = "Name";
             especialidades.ForEach(x => clbEspecialidades.Items.Add(x, false));
+            
+            clbEspecialidades.DisplayMember = "Name";
+
             RolesManager rman = new RolesManager();
             Profile perfilMasc = new Profile() { Nombre = "Profesional" };
             var roles = rman.GetRolesByPerfil(perfilMasc);

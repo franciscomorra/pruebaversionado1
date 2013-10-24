@@ -70,3 +70,9 @@ C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica 
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.RegistrarAgenda.RegistrarAgenda.resources
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.AbmAfiliado.AfiliadosForm.resources
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.AbmProfesional.ProfesionalesForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.GenerarReceta.GenerarReceta.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.CompraBono.ComprarBono.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.CancelarAtencion.CancelarDia.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.RegistroLlegada.RegistrarLlegada.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.RegistroResultadoAtencion.RegistroResultadoAtencion.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\bin\Debug\ClinicaFrba.exe.config

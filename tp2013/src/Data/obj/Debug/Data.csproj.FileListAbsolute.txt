@@ -10,12 +10,6 @@ C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K307
 C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\Data\obj\Debug\Data.csprojResolveAssemblyReference.cache
 C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\Data\obj\Debug\Data.dll
 C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\Data\obj\Debug\Data.pdb
-C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Data\bin\Data.xml
-C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Data\bin\Data.dll
-C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Data\bin\Data.pdb
-C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Data\obj\Debug\ResolveAssemblyReference.cache
-C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Data\obj\Debug\Data.dll
-C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Data\obj\Debug\Data.pdb
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Data\bin\Data.xml
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Data\bin\Data.dll
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Data\bin\Data.pdb

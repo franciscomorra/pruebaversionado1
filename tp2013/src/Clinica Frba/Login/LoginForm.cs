@@ -10,7 +10,7 @@ using ClinicaFrba.Core;
 using ClinicaFrba.Negocio;
 using ClinicaFrba.Comun;
 using System.Security.Cryptography;
-
+using System.Configuration;
 
 namespace ClinicaFrba.Login
 {
@@ -22,10 +22,21 @@ namespace ClinicaFrba.Login
         public LoginForm()
         {
             InitializeComponent();
+            //var Config = new ConfigurationManager();
+            string conexion = ConfigurationManager.ConnectionStrings["StringConexion"].ToString();
+
+
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            Login(txtUserName.Text, txtPassword.Text);
+            try
+            {
+                Login(txtUserName.Text, txtPassword.Text);
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+            }
         }
 
         private void Login(string userName, string pass)
@@ -64,9 +75,8 @@ namespace ClinicaFrba.Login
             
             
             }
-
-
             ViewsManager.ClearViews();
         }
+
     }
 }

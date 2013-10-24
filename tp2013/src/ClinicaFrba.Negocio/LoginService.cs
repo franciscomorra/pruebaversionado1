@@ -2,30 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel;
+using ClinicaFrba.Comun;
 using Data;
 using System.Configuration;
-using System.Data.SqlClient;
-using System.Security.Cryptography;
-using ClinicaFrba.Comun;
 using System.Data;
-using System.ComponentModel;
+using System.Security.Cryptography;
+
 
 
 namespace ClinicaFrba.Negocio
 {
     public class LoginService
     {
-        public User Login(string userName, string password)//Desafia con user y password a db, si correcto, devuelve usuario
+       public User Login(string userName, string password)//Desafia con user y password a db, si correcto, devuelve usuario
         {
             this.ValidateLockedUser(userName);
 
-            var encryptedPassword = ComputeHash(password, new SHA256CryptoServiceProvider());
+            var encryptedPassword = ComputeHash(password, new SHA256Managed());
             DataRow result = SqlDataAccess.ExecuteDataRowQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "SHARPS.Login", SqlDataAccessArgs
+                "Login", SqlDataAccessArgs
                 .CreateWith("@Nombre", userName)
                 .And("@Password", encryptedPassword)
-
-            .Arguments);
+                .Arguments);
 
             if (result == null)
                 throw new Exception("Usuario o contraseña inválidos");
@@ -41,8 +40,8 @@ namespace ClinicaFrba.Negocio
 
         public bool UpdateUserPassword(User user, string oldPassword, string newPassword)
         {
-            var encryptedOldPassword = ComputeHash(oldPassword, new SHA256CryptoServiceProvider());
-            var encryptedNewPassword = ComputeHash(newPassword, new SHA256CryptoServiceProvider());
+            var encryptedOldPassword = ComputeHash(oldPassword, new SHA256Managed());
+            var encryptedNewPassword = ComputeHash(newPassword, new SHA256Managed());
             var result = SqlDataAccess.ExecuteScalarQuery<object>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "SHARPS.UpdateUserPassword", SqlDataAccessArgs
                 .CreateWith("@ID_Usuario", user.UserID)
@@ -60,12 +59,12 @@ namespace ClinicaFrba.Negocio
             return BitConverter.ToString(hashedBytes);
         }
 
-        #region Private Methods
-
+   
         private void ValidateLockedUser(string userName)//Validar si esta bloqueado
         {
+                
             var result = SqlDataAccess.ExecuteScalarQuery<object>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "SHARPS.GetUserLoginAttempts", SqlDataAccessArgs
+                "GetUserLoginAttempts", SqlDataAccessArgs
                 .CreateWith("@Nombre", userName)
             .Arguments);
 
@@ -112,7 +111,5 @@ namespace ClinicaFrba.Negocio
                 user.Permissions.Add(functionality);
             }
         }
-
-        #endregion
     }
 }

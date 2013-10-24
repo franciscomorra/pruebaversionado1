@@ -10,7 +10,7 @@ using System.Data;
 namespace ClinicaFrba.Negocio
 {
     public class PlanesMedicosManager
-    {
+    {        
         public List<PlanMedico> GetAll()
         {
             var ret = new List<PlanMedico>();
