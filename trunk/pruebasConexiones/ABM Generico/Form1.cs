@@ -8,10 +8,11 @@ using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration; //Para que tome bien click derecho en references y agregar referencia
-using Data; //Para que tome bien click derecho en references y agregar referencia
+//using Data; //Para que tome bien click derecho en references y agregar referencia
 using ABM.Business;
 using ABM.Common;
 using System.Collections;
+using System.Security.Cryptography;
 
 namespace WindowsFormsApplication1
 {
@@ -24,6 +25,8 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+            string conexion = ConfigurationManager.ConnectionStrings["StringConexion"].ToString();
+
         }
         private void Form1_Load(object sender, EventArgs e) //Cuando carga el formulario
         {
@@ -126,6 +129,21 @@ namespace WindowsFormsApplication1
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             this.limpiarCampos();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+           int numero = this.ayudanteClientes.funcionprueba();
+           MessageBox.Show("Numero = "+numero.ToString());
+           var encryptedPassword = ComputeHash("w23e", new SHA256Managed());
+           MessageBox.Show("Hash = " + encryptedPassword.ToString());
+
+        }
+        public string ComputeHash(string input, HashAlgorithm algorithm)
+        {
+            Byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+            Byte[] hashedBytes = algorithm.ComputeHash(inputBytes);
+            return BitConverter.ToString(hashedBytes);
         }
 
     }

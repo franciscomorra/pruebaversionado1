@@ -12,7 +12,22 @@ namespace ABM.Business
 {
     public class ClientsManager
     {
+        public int funcionprueba() {
 
+            var result = SqlDataAccess.ExecuteScalarQuery<object>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),"dbo.GetUserLoginAttempts", SqlDataAccessArgs.CreateWith("@Nombre", "asd").Arguments);
+
+            if (result == null)
+                throw new Exception("Usuario o contraseña inválidos");
+
+            if (int.Parse(result.ToString()) == 3)
+            {
+                throw new Exception("Usuario Bloqueado, contacte al administrador del sistema");
+            }
+            else
+            {
+                return int.Parse(result.ToString());
+            }
+        }
         public BindingList<Client> GetAllClients()
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),

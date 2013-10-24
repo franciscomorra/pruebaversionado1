@@ -40,6 +40,7 @@
             this.Resultados = new System.Windows.Forms.Label();
             this.btnBorrar = new System.Windows.Forms.Button();
             this.btnNuevo = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridClients)).BeginInit();
             this.SuspendLayout();
             // 
@@ -116,7 +117,6 @@
             this.dataGridClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridClients.Size = new System.Drawing.Size(353, 173);
             this.dataGridClients.TabIndex = 6;
-            this.dataGridClients.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridClients_CellContentClick);
             // 
             // lblResults
             // 
@@ -157,11 +157,22 @@
             this.btnNuevo.UseVisualStyleBackColor = true;
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(420, 52);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(377, 363);
+            this.ClientSize = new System.Drawing.Size(638, 366);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnNuevo);
             this.Controls.Add(this.btnBorrar);
             this.Controls.Add(this.Resultados);
@@ -200,6 +211,7 @@
         private System.Windows.Forms.Button btnBorrar;
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.Button btnNuevo;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -1,0 +1,6 @@
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\Data\bin\Release\Data.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\Data\bin\Release\Data.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\Data\bin\Release\TFSLA.Data.XML
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\Data\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\Data\obj\Release\Data.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\Data\obj\Release\Data.pdb
