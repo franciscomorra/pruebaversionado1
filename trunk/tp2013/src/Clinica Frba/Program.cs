@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using ClinicaFrba.Core;
 
 
+
 namespace ClinicaFrba
 {
     static class Program
@@ -19,6 +20,7 @@ namespace ClinicaFrba
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainView());
+           
         }
     }
 }

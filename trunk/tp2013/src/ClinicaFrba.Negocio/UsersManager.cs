@@ -7,7 +7,7 @@ using Data;
 using System.Configuration;
 using System.Security.Cryptography;
 using System.Data.SqlClient;
-
+//SHA256CryptoServiceProvider tira error de compilacion, SHA256Managed funciona
 namespace ClinicaFrba.Negocio
 {
     public class UsersManager
@@ -24,7 +24,7 @@ namespace ClinicaFrba.Negocio
         {
             var transaction = SessionData.Contains("Transaction") ? SessionData.Get<SqlTransaction>("Transaction") : null;
             var service = new LoginService();
-            var encryptedPass = service.ComputeHash(password, new SHA256CryptoServiceProvider());
+            var encryptedPass = service.ComputeHash(password, new SHA256Managed());
             int result = 0;
             if (transaction != null)
             {

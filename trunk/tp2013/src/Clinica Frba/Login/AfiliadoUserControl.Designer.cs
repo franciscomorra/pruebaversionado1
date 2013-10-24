@@ -54,11 +54,13 @@
             this.label12 = new System.Windows.Forms.Label();
             this.txtMotivo = new System.Windows.Forms.TextBox();
             this.panelMotivo = new System.Windows.Forms.Panel();
+            this.cbxTipoDNI = new System.Windows.Forms.ComboBox();
             this.cbxRoles = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.cbxTipoDNI = new System.Windows.Forms.ComboBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panelFamiliar.SuspendLayout();
             this.panelMotivo.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -195,7 +197,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(32, 14);
+            this.label6.Location = new System.Drawing.Point(31, 8);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(62, 13);
             this.label6.TabIndex = 21;
@@ -203,7 +205,7 @@
             // 
             // txtHijos
             // 
-            this.txtHijos.Location = new System.Drawing.Point(102, 39);
+            this.txtHijos.Location = new System.Drawing.Point(101, 33);
             this.txtHijos.Name = "txtHijos";
             this.txtHijos.Size = new System.Drawing.Size(200, 20);
             this.txtHijos.TabIndex = 23;
@@ -211,7 +213,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(4, 42);
+            this.label8.Location = new System.Drawing.Point(3, 36);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(90, 13);
             this.label8.TabIndex = 24;
@@ -221,7 +223,7 @@
             // 
             this.cbxEstadoCivil.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxEstadoCivil.FormattingEnabled = true;
-            this.cbxEstadoCivil.Location = new System.Drawing.Point(102, 11);
+            this.cbxEstadoCivil.Location = new System.Drawing.Point(101, 5);
             this.cbxEstadoCivil.Name = "cbxEstadoCivil";
             this.cbxEstadoCivil.Size = new System.Drawing.Size(200, 21);
             this.cbxEstadoCivil.TabIndex = 25;
@@ -252,7 +254,7 @@
             this.panelFamiliar.Controls.Add(this.label8);
             this.panelFamiliar.Location = new System.Drawing.Point(2, 243);
             this.panelFamiliar.Name = "panelFamiliar";
-            this.panelFamiliar.Size = new System.Drawing.Size(312, 70);
+            this.panelFamiliar.Size = new System.Drawing.Size(312, 57);
             this.panelFamiliar.TabIndex = 26;
             // 
             // label12
@@ -275,28 +277,11 @@
             // 
             this.panelMotivo.Controls.Add(this.txtMotivo);
             this.panelMotivo.Controls.Add(this.label12);
-            this.panelMotivo.Location = new System.Drawing.Point(0, 319);
+            this.panelMotivo.Location = new System.Drawing.Point(0, 302);
             this.panelMotivo.Name = "panelMotivo";
-            this.panelMotivo.Size = new System.Drawing.Size(314, 46);
+            this.panelMotivo.Size = new System.Drawing.Size(314, 26);
             this.panelMotivo.TabIndex = 29;
             this.panelMotivo.Visible = false;
-            // 
-            // cbxRoles
-            // 
-            this.cbxRoles.FormattingEnabled = true;
-            this.cbxRoles.Location = new System.Drawing.Point(101, 372);
-            this.cbxRoles.Name = "cbxRoles";
-            this.cbxRoles.Size = new System.Drawing.Size(200, 21);
-            this.cbxRoles.TabIndex = 30;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(19, 375);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(75, 13);
-            this.label13.TabIndex = 31;
-            this.label13.Text = "Rol de Afiliado";
             // 
             // cbxTipoDNI
             // 
@@ -306,13 +291,38 @@
             this.cbxTipoDNI.Size = new System.Drawing.Size(93, 21);
             this.cbxTipoDNI.TabIndex = 32;
             // 
+            // cbxRoles
+            // 
+            this.cbxRoles.FormattingEnabled = true;
+            this.cbxRoles.Location = new System.Drawing.Point(102, 6);
+            this.cbxRoles.Name = "cbxRoles";
+            this.cbxRoles.Size = new System.Drawing.Size(200, 21);
+            this.cbxRoles.TabIndex = 30;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(19, 9);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(75, 13);
+            this.label13.TabIndex = 31;
+            this.label13.Text = "Rol de Afiliado";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label13);
+            this.panel1.Controls.Add(this.cbxRoles);
+            this.panel1.Location = new System.Drawing.Point(2, 331);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(314, 35);
+            this.panel1.TabIndex = 33;
+            // 
             // AfiliadoUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.cbxTipoDNI);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.cbxRoles);
             this.Controls.Add(this.panelMotivo);
             this.Controls.Add(this.panelFamiliar);
             this.Controls.Add(this.cbxSexo);
@@ -340,6 +350,8 @@
             this.panelFamiliar.PerformLayout();
             this.panelMotivo.ResumeLayout(false);
             this.panelMotivo.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -373,8 +385,9 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtMotivo;
         private System.Windows.Forms.Panel panelMotivo;
+        private System.Windows.Forms.ComboBox cbxTipoDNI;
         private System.Windows.Forms.ComboBox cbxRoles;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ComboBox cbxTipoDNI;
+        private System.Windows.Forms.Panel panel1;
     }
 }

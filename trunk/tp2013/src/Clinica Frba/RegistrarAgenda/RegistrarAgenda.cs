@@ -11,7 +11,6 @@ using ClinicaFrba.AbmProfesional;
 using ClinicaFrba.Login;
 using ClinicaFrba.Comun;
 using ClinicaFrba.Negocio;
-using Data;
 using System.Configuration;
 
 namespace ClinicaFrba.RegistrarAgenda
@@ -63,12 +62,12 @@ namespace ClinicaFrba.RegistrarAgenda
             {
                 _profesionalesForm = new ProfesionalesForm();
                 _profesionalesForm.SetSearchMode();
-                _profesionalesForm.OnUserSelected += new EventHandler<UserSelectedEventArgs>(clientesForm_OnUserSelected);
+                _profesionalesForm.OnUserSelected += new EventHandler<UserSelectedEventArgs>(profesionalesForm_OnUserSelected);
             }
             ViewsManager.LoadModal(_profesionalesForm);
         }
         
-        void clientesForm_OnUserSelected(object sender, UserSelectedEventArgs e)
+        void profesionalesForm_OnUserSelected(object sender, UserSelectedEventArgs e)
         {
             _user = e.User;
             txtProfesional.Text = _user.UserName;

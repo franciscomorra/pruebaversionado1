@@ -56,7 +56,7 @@
             this.rolesDataGridView.MultiSelect = false;
             this.rolesDataGridView.Name = "rolesDataGridView";
             this.rolesDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.rolesDataGridView.Size = new System.Drawing.Size(960, 540);
+            this.rolesDataGridView.Size = new System.Drawing.Size(836, 540);
             this.rolesDataGridView.TabIndex = 0;
             // 
             // ID
@@ -86,7 +86,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(960, 39);
+            this.panel1.Size = new System.Drawing.Size(836, 39);
             this.panel1.TabIndex = 1;
             // 
             // lblResults
@@ -95,7 +95,7 @@
             this.lblResults.AutoSize = true;
             this.lblResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblResults.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblResults.Location = new System.Drawing.Point(863, 15);
+            this.lblResults.Location = new System.Drawing.Point(739, 15);
             this.lblResults.Name = "lblResults";
             this.lblResults.Size = new System.Drawing.Size(14, 13);
             this.lblResults.TabIndex = 11;
@@ -117,7 +117,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label5.Location = new System.Drawing.Point(883, 15);
+            this.label5.Location = new System.Drawing.Point(759, 15);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 13);
             this.label5.TabIndex = 10;
@@ -147,7 +147,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(960, 579);
+            this.ClientSize = new System.Drawing.Size(836, 579);
             this.Controls.Add(this.rolesDataGridView);
             this.Controls.Add(this.panel1);
             this.Name = "RolesForm";
