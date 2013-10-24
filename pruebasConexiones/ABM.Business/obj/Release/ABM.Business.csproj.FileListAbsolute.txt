@@ -1,0 +1,9 @@
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\ABM.Business\bin\Release\ABM.Business.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\ABM.Business\bin\Release\ABM.Business.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\ABM.Business\bin\Release\ABM.Common.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\ABM.Business\bin\Release\Data.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\ABM.Business\bin\Release\ABM.Common.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\ABM.Business\bin\Release\Data.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\ABM.Business\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\ABM.Business\obj\Release\ABM.Business.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\ABM.Business\obj\Release\ABM.Business.pdb
