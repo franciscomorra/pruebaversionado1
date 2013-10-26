@@ -227,7 +227,7 @@ values (1 ,7)
 INSERT INTO Perfil_Func (perfil , funcion)
 values (1 ,10)
 INSERT INTO Perfil_Func (perfil , funcion)
-values (1 ,)
+values (3 ,9 )
 INSERT INTO Perfil_Func (perfil , funcion)
 values (2 ,13)
 
@@ -251,7 +251,7 @@ values (3,12)
 INSERT INTO Perfil_Func (perfil , funcion)
 values (3,14)
 INSERT INTO Perfil_Func (perfil , funcion)
-values (3,)
+values (2,11)
 
 ---SI VA EL DIOS DESPUES LO AGREGO
 
@@ -294,7 +294,8 @@ GO
 
 INSERT INTO Usuarios (activo,intentos,username,password)
 SELECT DISTINCT 1,0, LTRIM(RTRIM(CAST(Medico_Dni AS NVARCHAR(255)))),'E6-B8-70-50-BF-CB-81-43-FC-B8-DB-01-70-A4-DC-9E-D0-0D-90-4D-DD-3E-2A-4A-D1-B1-E8-DC-0F-DC-9B-E7' 
-FROM gd_esquema.Maestra  
+FROM gd_esquema.Maestra m 
+inner join Usuarios u on  LTRIM(RTRIM(CAST(m.Medico_dni AS NVARCHAR(255)))) <> u.username ---Para que no repita
 Where Medico_Dni is not null
 
 INSERT INTO Detalles_Persona(dni,tipo,telefono,direccion,sexo,mail,apellido,nombre,userid,fechaNac) 
@@ -434,9 +435,14 @@ GO
 
 
 
+INSERT INTO Usuarios_Roles(usuario) --- Lo hago 2 veces ya que uno puede ser para paciente y otro medico pero ambos tienen el mismo usuario(dni)  y se le aignan 2 roles
+Select distinct CAST(m.Medico_Dni AS NVARCHAR(255))      
+from gd_esquema.Maestra m
+
 INSERT INTO Usuarios_Roles(usuario) 
-Select u.username      
-from Usuarios u
+Select distinct CAST(m.Paciente_Dni AS NVARCHAR(255))      
+from gd_esquema.Maestra m
+
 
 ---migrar roles de medico
 INSERT INTO Roles(idRol , descripRol , activoRol, perfil ) 
@@ -451,12 +457,12 @@ inner join gd_esquema.Maestra m on u.usuario = CAST(m.Paciente_Dni AS NVARCHAR(2
 
 -- ROLES FUNC 
 INSERT INTO Roles_Func (rol, funcionalidad)
-select distinct idRol ,4
+select distinct idRol ,6
 from Roles
 where descripRol = 'Afiliado'
 
 INSERT INTO Roles_Func (rol, funcionalidad)
-select distinct idRol ,8
+select distinct idRol ,7
 from Roles
 where descripRol = 'Afiliado'
 
@@ -466,25 +472,25 @@ from Roles
 where descripRol = 'Afiliado'
 
 INSERT INTO Roles_Func (rol, funcionalidad)
-select distinct idRol ,12
+select distinct idRol ,11
 from Roles
-where descripRol = 'Afiliado'
+where descripRol = 'medico'
+
 
 INSERT INTO Roles_Func (rol, funcionalidad)
-select distinct idRol ,14
-from Roles
-where descripRol = 'Afiliado'
-
-INSERT INTO Roles_Func (rol, funcionalidad)
-select distinct idRol ,1
+select distinct idRol ,6
 from Roles
 where descripRol = 'medico'
 
 INSERT INTO Roles_Func (rol, funcionalidad)
-select distinct idRol ,12
+select distinct idRol ,8
 from Roles
 where descripRol = 'medico'
 
+INSERT INTO Roles_Func (rol, funcionalidad)
+select distinct idRol ,13
+from Roles
+where descripRol = 'medico'
 
 PRINT 'Proceso finalizado con éxito!'
 GO
