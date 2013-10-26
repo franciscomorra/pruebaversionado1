@@ -87,6 +87,7 @@ namespace ClinicaFrba
             Profile perfilSelected = (Profile)cbxProfiles.SelectedItem;
             if (perfilSelected.Nombre == "Afiliado")
             {
+                
                 userPanel.Controls.Add(afiliadoUserControl);
             }
             else

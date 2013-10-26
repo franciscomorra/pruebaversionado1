@@ -48,7 +48,6 @@
   <ItemGroup>
     <Compile Include="AfiliadoManager.cs" />
     <Compile Include="AgendaManager.cs" />
-    <Compile Include="ClasePrueba.cs" />
     <Compile Include="DetallePersonaManager.cs" />
     <Compile Include="EspecialidadesManager.cs" />
     <Compile Include="FunctionalitiesManager.cs" />

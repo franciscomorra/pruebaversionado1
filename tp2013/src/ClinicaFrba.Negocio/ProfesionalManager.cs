@@ -15,6 +15,37 @@ namespace ClinicaFrba.Negocio
     {
         private UsersManager _usersManager = new UsersManager();
 
+        public Profesional getInfo(int userID)
+        {
+            Profesional profesional = new Profesional();
+            EspecialidadesManager espMan = new EspecialidadesManager();
+            var row = SqlDataAccess.ExecuteDataRowQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "SHARPS.GetProfesionalInfo", SqlDataAccessArgs
+                .CreateWith("@userId", userID)
+                .Arguments);
+
+            if (row != null && row != null)
+            {
+                profesional.UserName = row["UserName"].ToString();
+                profesional.Matricula = row["matricula"].ToString();
+                profesional.Especialidades = espMan.GetAllForUser(userID);
+                profesional.DetallePersona = new DetallesPersona()
+                {
+                    Apellido = row["Apellido"].ToString(),
+                    Nombre = row["Nombre"].ToString(),
+                    FechaNacimiento = Convert.ToDateTime(row["FechaNacimiento"]),
+                    DNI = long.Parse(row["DNI"].ToString()),
+                    Email = row["Email"].ToString(),
+                    Direccion = row["Direccion"].ToString(),
+                    Telefono = long.Parse(row["Telefono"].ToString()),
+                    Sexo = (TipoSexo)Enum.Parse(typeof(TipoSexo), row["Sexo"].ToString()),
+                    TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString())
+                };
+
+
+            }
+            return profesional;
+        }
         public BindingList<Profesional> GetAll()
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
@@ -30,7 +61,7 @@ namespace ClinicaFrba.Negocio
                         UserID = int.Parse(row["ID"].ToString()),
                         UserName = row["UserName"].ToString(),
                         Matricula = row["RazonSocial"].ToString(),
-                        //HACER ESPECIALIDADES
+                        Especialidades = espMan.GetAllForUser(int.Parse(row["ID"].ToString())),
                         DetallePersona = new DetallesPersona()
                         {
                             Apellido = row["Apellido"].ToString(),
@@ -40,8 +71,8 @@ namespace ClinicaFrba.Negocio
                             Nombre = row["Nombre"].ToString(),
                             FechaNacimiento = Convert.ToDateTime(row["FechaNacimiento"]),
                             Telefono = long.Parse(row["Telefono"].ToString()),
-                            TipoDNI = row["TipoDNI"].ToString(),
-                            //Ver lo del tipo de Sexo
+                            Sexo = (TipoSexo)Enum.Parse(typeof(TipoSexo), row["Sexo"].ToString()),
+                            TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString())
                         }
                     });
                 }

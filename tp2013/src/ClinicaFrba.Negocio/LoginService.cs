@@ -32,7 +32,7 @@ namespace ClinicaFrba.Negocio
             {
                 UserID = int.Parse(result["ID"].ToString()),
                 UserName = result["Nombre"].ToString(),
-                Estado = result["Estado"].ToString(),
+                FaltanDatos = result["Estado"].ToString(),
             };
 
             return user;
@@ -90,8 +90,9 @@ namespace ClinicaFrba.Negocio
                 {
                     ID = int.Parse(row["ID"].ToString()),
                     Nombre = row["Descripcion"].ToString(),
+                    Perfil = (Profile)Enum.Parse(typeof(Profile), row["Perfil"].ToString()),
                     Functionalities = functionalitiesManager.GetRoleFunctionalities(int.Parse(row["ID"].ToString()))
-                    
+
                 };
                 roles.Add(rol);
             }

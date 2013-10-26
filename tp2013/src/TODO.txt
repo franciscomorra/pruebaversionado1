@@ -18,16 +18,17 @@ Mientras estan los procedimientos SQL:
 
 
 1. ABM de Rol
-		FALTA HACER LO DE PERFIL
+		Probar
 2. Login y Seguridad
-		FALTA PEDIR DATOS FALTANTES
+		Probar pedido de datos faltantes!
 4. ABM de Afiliados
+		
 		FALTA RELLENAR COMBOBOX
 		FALTA VER LOGICA DE AGREGAR CONYUGES Y FAMILIARES
 		
 5. ABM de Profesional
-		FALTA RELLENAR LAS ESPECIALIDADES CUANDO SE GUARDA 
-		FALTA CHEQUEAR LAS ESPECIALIDADES DEL PROFESIONAL AL CARGAR SUS DATOS
+		//Probar y completar codigo para que guarde las especialidades
+		
 8. Registrar Agenda Profesional.
 		Hacer logica
 

@@ -14,7 +14,6 @@ namespace ClinicaFrba.Login
     public partial class ProfesionalUserControl : UserControl
     {
         private Profesional _profesional;
-
         public Profesional GetProfesional()
         {
             
@@ -32,7 +31,11 @@ namespace ClinicaFrba.Login
                 throw new Exception("La Matricula es obligatoria!"); 
             if (string.IsNullOrEmpty(txtMail.Text.Trim()))
                 throw new Exception("El Email es obligatorio!");
-            //PEDIR AL MENOS UNA ESPECIALIDAD!
+            
+            if (clbEspecialidades.SelectedItems == null) {
+                throw new Exception("Debe elegir al menos Una especialidad"); 
+                //PROBAR!!!!
+            }
             _profesional.DetallePersona.Apellido = txtApellido.Text.Trim();
             _profesional.DetallePersona.Nombre = txtNombre.Text.Trim();
             _profesional.DetallePersona.DNI = dni;
@@ -41,7 +44,8 @@ namespace ClinicaFrba.Login
             _profesional.DetallePersona.Telefono = telefono;
             _profesional.DetallePersona.Email = txtMail.Text.Trim();
             _profesional.Matricula = txtMatricula.Text.Trim();
-           /* _profesional.Especialidades = clbEspecialidades.SelectedItems;
+            /* HACER ESTO; COMO ES??
+            _profesional.Especialidades = clbEspecialidades.SelectedItems;
             clbEspecialidades.ForEach(x => _profesional.Especialidades.Add(x))
             */
             return _profesional;
@@ -57,7 +61,10 @@ namespace ClinicaFrba.Login
             txtDireccion.Text = profesional.DetallePersona.Direccion.Trim();
             txtTelefono.Text = profesional.DetallePersona.Telefono.ToString();
             txtMail.Text = profesional.DetallePersona.Email.Trim();
-
+            //SELECCIONAR LAS ESPECIALIDADES DEL PROFESIONAL
+            var especialidadesManager = new EspecialidadesManager();
+            List<Especialidad> especialidadesProfesional = especialidadesManager.GetAllForUser(profesional.UserID);
+            //clbEspecialidades.SelectedIndices = especialidadesProfesional;
         }
 
         public ProfesionalUserControl()
@@ -67,7 +74,7 @@ namespace ClinicaFrba.Login
             var manager = new EspecialidadesManager();
             var especialidades = manager.GetAll();
             especialidades.ForEach(x => clbEspecialidades.Items.Add(x, false));
-            
+
             clbEspecialidades.DisplayMember = "Name";
 
             RolesManager rman = new RolesManager();

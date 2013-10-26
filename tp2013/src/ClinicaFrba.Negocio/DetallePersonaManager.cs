@@ -25,6 +25,8 @@ namespace ClinicaFrba.Negocio
                     .And("@Apellido", user.DetallePersona.Apellido)
                     .And("@DNI", user.DetallePersona.DNI)
                     .And("@TipoDNI", user.DetallePersona.TipoDNI)
+                    .And("@Sexo", user.DetallePersona.Sexo)
+                    .And("@FechaNacimiento", user.DetallePersona.FechaNacimiento)
                     .And("@Direccion", user.DetallePersona.Direccion)
                     .And("@ID_Usuario", user.UserID)
                     .Arguments,
@@ -33,12 +35,14 @@ namespace ClinicaFrba.Negocio
             return SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "SHARPS.InsertDetallePersona", SqlDataAccessArgs
                 .CreateWith(
-                    "@Telefono", user.DetallePersona.Telefono)
+                        "@Telefono", user.DetallePersona.Telefono)
                     .And("@Email", user.DetallePersona.Email)
                     .And("@Nombre", user.DetallePersona.Nombre)
                     .And("@Apellido", user.DetallePersona.Apellido)
                     .And("@DNI", user.DetallePersona.DNI)
                     .And("@TipoDNI", user.DetallePersona.TipoDNI)
+                    .And("@Sexo", user.DetallePersona.Sexo)
+                    .And("@FechaNacimiento", user.DetallePersona.FechaNacimiento)
                     .And("@Direccion", user.DetallePersona.Direccion)
                     .And("@ID_Usuario", user.UserID)
             .Arguments);
@@ -55,6 +59,8 @@ namespace ClinicaFrba.Negocio
                     .And("@Apellido", user.DetallePersona.Apellido)
                     .And("@DNI", user.DetallePersona.DNI)
                     .And("@TipoDNI", user.DetallePersona.TipoDNI)
+                    .And("@Sexo", user.DetallePersona.Sexo)
+                    .And("@FechaNacimiento", user.DetallePersona.FechaNacimiento)
                     .And("@Direccion", user.DetallePersona.Direccion)
                     .And("@ID_Usuario", user.UserID)
             .Arguments);

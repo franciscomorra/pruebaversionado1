@@ -16,21 +16,17 @@ namespace ClinicaFrba.Negocio
     /// </summary>
     public class AfiliadoManager
     {
-        
-        
         private UsersManager _usersManager = new UsersManager();
-
         public Afiliado getInfo(int userID) 
         {
             Afiliado afiliado = new Afiliado();
             var row = SqlDataAccess.ExecuteDataRowQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "SHARPS.GetAfiliados",SqlDataAccessArgs
+                "SHARPS.GetAfiliadoInfo",SqlDataAccessArgs
                 .CreateWith("@userId", userID)
                 .Arguments);
             if (row != null && row != null)
             {
                 afiliado.UserName = row["UserName"].ToString();
-                //RoleID = int.Parse(row["ID_Rol"].ToString()),
                 afiliado.NroAfiliado = int.Parse(row["nroAfiliado"].ToString());
                 afiliado.PlanMedico = new PlanMedico()
                 {
@@ -51,8 +47,8 @@ namespace ClinicaFrba.Negocio
                     Email = row["Email"].ToString(),
                     Direccion = row["Direccion"].ToString(),
                     Telefono = long.Parse(row["Telefono"].ToString()),
-                    //Sexo = row["Sexo"].ToString()
-                 
+                    Sexo = (TipoSexo)Enum.Parse(typeof(TipoSexo), row["Sexo"].ToString()),
+                    TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString())
                 };
                 
                 
@@ -105,7 +101,8 @@ namespace ClinicaFrba.Negocio
                             Email = row["Email"].ToString(),
                             Direccion = row["Direccion"].ToString(),
                             Telefono = long.Parse(row["Telefono"].ToString()),
-                            //Sexo = row["Sexo"].ToString()
+                            Sexo = (TipoSexo)Enum.Parse(typeof(TipoSexo), row["Sexo"].ToString()),
+                            TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString())
                          
                         }
                     });
@@ -177,46 +174,6 @@ namespace ClinicaFrba.Negocio
                 return 0;
             }
         }
-
-
-
-/*
-        private void AddCiudades(Afiliado afiliado)
-        {
-            SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                    "SHARPS.DeleteCiudadesAfiliado", SqlDataAccessArgs
-                    .CreateWith("@ID_Afiliado", afiliado.UserID).Arguments);
-
-            foreach (var city in afiliado.Ciudades)
-            {
-                SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                    "SHARPS.InsertCiudadAfiliado", SqlDataAccessArgs
-                    .CreateWith("@ID_Afiliado", afiliado.UserID)
-                    .And("@ID_Ciudad", city.ID)
-                .Arguments);
-            }
-        }
-
-        private List<City> GetCiudades(int id)
-        {
-            var ret = new List<City>();
-            var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "SHARPS.GetCiudadesAfiliado", SqlDataAccessArgs
-                    .CreateWith("@ID_Afiliado", id).Arguments);
-            if (result != null && result.Rows != null)
-            {
-                foreach (DataRow row in result.Rows)
-                {
-                    ret.Add(new City()
-                    {
-                        ID = int.Parse(row["ID_Ciudad"].ToString())
-                    });
-                }
-            }
-
-            return ret;
-        }
-*/
         public void Delete(Afiliado afiliado)
         {
             _usersManager.DeleteAccount(afiliado as User);

@@ -97,7 +97,7 @@ namespace ClinicaFrba.AbmAfiliado
             var regForm = new RegistroForm();
             regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
             regForm.SetUser(afiliado);
-            
+
             ViewsManager.LoadModal(regForm);
         }
 
