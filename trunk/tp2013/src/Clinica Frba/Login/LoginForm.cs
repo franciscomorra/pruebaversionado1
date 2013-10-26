@@ -71,8 +71,23 @@ namespace ClinicaFrba.Login
             svc.SetUserFunctionalities(user);
             Session.StartSession(user);
 
-            if (user.Estado == "") { //Aca va lo de actualizacion de datos incompletos
-            
+            if (user.FaltanDatos=="true") { //Aca va lo de actualizacion de datos incompletos
+                MessageBox.Show("Faltan Datos!");
+                
+                if (user.Perfil.Nombre == "Afiliado") {
+                   var manager = new AfiliadoManager();
+                   var usuario = manager.getInfo(user.UserID);
+                   var regForm = new RegistroForm();
+                   regForm.SetUser(usuario);
+                }
+                else if (user.Perfil.Nombre == "Profesional") 
+                {
+                   var manager = new ProfesionalManager();
+                   var usuario = manager.getInfo(user.UserID);
+                   var regForm = new RegistroForm();
+                   regForm.SetUser(usuario);
+                }
+
             
             }
             ViewsManager.ClearViews();

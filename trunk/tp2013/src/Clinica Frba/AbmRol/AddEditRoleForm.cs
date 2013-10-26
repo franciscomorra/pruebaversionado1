@@ -36,12 +36,21 @@ namespace ClinicaFrba //REHACER AGREGANDO EL PERFIL
         }
         public AddEditRoleForm(Rol rol)
         {
-            perfilPanel.Hide();
+            var perfiles = profileMan.GetAllProfiles();
+            if (perfiles.Count > 1)
+            {
+                cbxPerfiles.DataSource = perfiles;
+                cbxPerfiles.DisplayMember = "Nombre";
+                cbxPerfiles.SelectedIndex = 0;
+                perfilPanel.Show();
+                rolPanel.Hide();
+            }
+            //perfilPanel.Hide();
+            cbxPerfiles.Enabled = false;
             rolPanel.Show();
-            InitializeComponent();
             this.Rol = rol;
             this.Perfil = rol.Perfil;
-
+            InitializeComponent();
         }
 
         public event EventHandler<RoleUpdatedEventArgs> OnRoleUpdated;
@@ -53,7 +62,6 @@ namespace ClinicaFrba //REHACER AGREGANDO EL PERFIL
 
         private void ProcessForm()
         {
-            
             var profileMan = new ProfileManager();
             Profile perfil = (Profile)cbxPerfiles.SelectedItem;
             var functionalities = functMan.GetProfileFunctionalities(perfil.ID);
@@ -99,6 +107,7 @@ namespace ClinicaFrba //REHACER AGREGANDO EL PERFIL
         {
             this.Perfil = (Profile)cbxPerfiles.SelectedItem;
             var functionalities = functMan.GetProfileFunctionalities(this.Perfil.ID);
+            lstFuncionalidades.Items.Clear();
             foreach (var item in functionalities)
             {
                 lstFuncionalidades.Items.Add(item, RoleHasFunctionality(item));
