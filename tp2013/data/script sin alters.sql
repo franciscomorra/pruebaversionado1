@@ -169,7 +169,7 @@ CREATE TABLE Turnos (
 
 CREATE TABLE Usuarios ( 
 	idUser numeric(18) identity(1000,1)  NOT NULL,
-	username numeric(10,2),
+	username nvarchar(255),
 	password nvarchar(255) NOT NULL,
 	intentos int,
 	activo bit
@@ -191,20 +191,20 @@ CREATE TABLE Usuarios_Roles (
 PRINT 'INICIO DE MIGRACION DE DATOS'
 
 
-INSERT INTO Funcionalidades (Descripcion) VALUES ('DarDeAltaPaciente');
-INSERT INTO Funcionalidades (Descripcion) VALUES ('ModificarDatos');
-INSERT INTO Funcionalidades (Descripcion) VALUES ('EliminarUsuarios');
-INSERT INTO Funcionalidades (Descripcion) VALUES ('Recetar');
-INSERT INTO Funcionalidades (Descripcion) VALUES ('habilitarRol');
-INSERT INTO Funcionalidades (Descripcion) VALUES ('inhabilitarRol');
-INSERT INTO Funcionalidades (Descripcion) VALUES ('venderBonosFarmacia');
-INSERT INTO Funcionalidades (Descripcion) VALUES ('comprarBonosFarmacia');
-INSERT INTO Funcionalidades (Descripcion) VALUES ('venderBonosConsulta');
-INSERT INTO Funcionalidades (Descripcion) VALUES ('comprarBonosConsulta');
-INSERT INTO Funcionalidades (Descripcion) VALUES ('RegistrarUsuarios');
-INSERT INTO Funcionalidades (Descripcion) VALUES ('CancelarTurno');
-INSERT INTO Funcionalidades (Descripcion) VALUES ('RegistrarTurno');
-INSERT INTO Funcionalidades (Descripcion) VALUES ('SolicitarTurno');
+INSERT INTO Funcionalidades (Descripcion) VALUES ('AdministrarAfiliados'); ---1
+INSERT INTO Funcionalidades (Descripcion) VALUES ('AbmEspecialidadesMedicas');---2
+INSERT INTO Funcionalidades (Descripcion) VALUES ('AbmPlanes');---3
+INSERT INTO Funcionalidades (Descripcion) VALUES ('AdministrarProfesionales');----4
+INSERT INTO Funcionalidades (Descripcion) VALUES ('AdministrarRoles');----5
+INSERT INTO Funcionalidades (Descripcion) VALUES ('CancelarAtencion');----6
+INSERT INTO Funcionalidades (Descripcion) VALUES ('CompraBono');----7
+INSERT INTO Funcionalidades (Descripcion) VALUES ('GenerarReceta');----8
+INSERT INTO Funcionalidades (Descripcion) VALUES ('ListarEstadisticas');----9
+INSERT INTO Funcionalidades (Descripcion) VALUES ('PedirTurno');-----10
+INSERT INTO Funcionalidades (Descripcion) VALUES ('RegistrarAgenda');----11
+INSERT INTO Funcionalidades (Descripcion) VALUES ('RegistroLlegada');----12
+INSERT INTO Funcionalidades (Descripcion) VALUES ('RegistroResultadoAtencion');----13
+INSERT INTO Funcionalidades (Descripcion) VALUES ('RegistroUsuario');----14
 
 INSERT INTO Perfil (detallesPerf) VALUES ('Afiliado'); ---- correspode al 1 de perfil
 INSERT INTO Perfil (detallesPerf) VALUES ('Medico'); ---corresponde al 2 de perfil
@@ -219,39 +219,39 @@ INSERT INTO Perfil (detallesPerf) VALUES ('administrador')
 
 
 
---- ESTE ES DIRECTO YA QUE ES RELACION DE 3A15
+--- ESTE ES DIRECTO YA QUE ES RELACION DE 3A15   ---Modificar
 INSERT INTO Perfil_Func (perfil , funcion)
-values (1 ,4)
+values (1 ,6)
 INSERT INTO Perfil_Func (perfil , funcion)
-values (1 ,8)
+values (1 ,7)
 INSERT INTO Perfil_Func (perfil , funcion)
 values (1 ,10)
 INSERT INTO Perfil_Func (perfil , funcion)
-values (1 ,12)
+values (1 ,)
 INSERT INTO Perfil_Func (perfil , funcion)
-values (1 ,14)
+values (2 ,13)
 
 INSERT INTO Perfil_Func (perfil , funcion)
-values (2,1)
+values (2,6)
 INSERT INTO Perfil_Func (perfil , funcion)
-values (2,12)
+values (2,8)
 
+INSERT INTO Perfil_Func (perfil , funcion)
+values (3,1)
 INSERT INTO Perfil_Func (perfil , funcion)
 values (3,2)
 INSERT INTO Perfil_Func (perfil , funcion)
 values (3,3)
 INSERT INTO Perfil_Func (perfil , funcion)
+values (3,4)
+INSERT INTO Perfil_Func (perfil , funcion)
 values (3,5)
 INSERT INTO Perfil_Func (perfil , funcion)
-values (3,6)
+values (3,12)
 INSERT INTO Perfil_Func (perfil , funcion)
-values (3,7)
+values (3,14)
 INSERT INTO Perfil_Func (perfil , funcion)
-values (3,9)
-INSERT INTO Perfil_Func (perfil , funcion)
-values (3,11)
-INSERT INTO Perfil_Func (perfil , funcion)
-values (3,13)
+values (3,)
 
 ---SI VA EL DIOS DESPUES LO AGREGO
 
@@ -272,7 +272,7 @@ GO
 
 
 INSERT INTO Usuarios (activo,Intentos,username,Password)
-SELECT DISTINCT 1,0,LTRIM(RTRIM(CAST(Paciente_Dni AS NVARCHAR(255)))),'bed9ae713b440eed894573977256ed12a992b93804975fa09aff32dd1572b658' 
+SELECT DISTINCT 1,0,LTRIM(RTRIM(CAST(Paciente_Dni AS NVARCHAR(255)))),'E6-B8-70-50-BF-CB-81-43-FC-B8-DB-01-70-A4-DC-9E-D0-0D-90-4D-DD-3E-2A-4A-D1-B1-E8-DC-0F-DC-9B-E7' 
 FROM gd_esquema.Maestra 
 where Paciente_Dni is not null
 
@@ -293,7 +293,7 @@ GO
 
 
 INSERT INTO Usuarios (activo,intentos,username,password)
-SELECT DISTINCT 1,0, LTRIM(RTRIM(CAST(Medico_Dni AS NVARCHAR(255)))),'bed9ae713b440eed894573977256ed12a992b93804975fa09aff32dd1572b658' 
+SELECT DISTINCT 1,0, LTRIM(RTRIM(CAST(Medico_Dni AS NVARCHAR(255)))),'E6-B8-70-50-BF-CB-81-43-FC-B8-DB-01-70-A4-DC-9E-D0-0D-90-4D-DD-3E-2A-4A-D1-B1-E8-DC-0F-DC-9B-E7' 
 FROM gd_esquema.Maestra  
 Where Medico_Dni is not null
 
