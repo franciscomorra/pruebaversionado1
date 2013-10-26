@@ -11,9 +11,9 @@ CREATE TABLE Afiliados (
 
 CREATE TABLE Agendas ( 
 	medico numeric(18),
-	dia date,
-	horaIngreso time(7),
-	horaEgreso time(7)
+	dia datetime,
+	idEntrada int, 
+	idTurno int
 )
 ;
 
@@ -162,8 +162,9 @@ CREATE TABLE Turnos (
 	medico numeric(18),
 	afiliado numeric(18),
 	fechaHora datetime,
-	estado numeric(18) identity (1,1) ,
-	fechaHoraLlegada datetime
+	estado numeric(18)  ,
+	fechaHoraLlegada datetime,
+	idAgenda int identity(1,1)
 )
 ;
 
@@ -310,18 +311,12 @@ FROM gd_esquema.Maestra m
 INNER JOIN Usuarios u ON u.username= CAST(m.Medico_Dni AS NVARCHAR(255))
 
 
-----ingresando Agendas
 
 
 
 
----Dias_Laborales
-PRINT'ingresando agenda'
-GO
-INSERT into Dias_Laborales(fecha)
-select distinct CONVERT(CHAR(10), m.Turno_Fecha,112)
-from gd_esquema.Maestra m 
-where m.Turno_Fecha is not null
+
+
 
 
 
@@ -365,6 +360,11 @@ INNER JOIN Turnos t ON t.numero = m.Turno_Numero
 INNER JOIN Bonos b ON m.Bono_Consulta_Numero = b.numeroBono   
 GO  
 
+---Ingresando Agenda
+
+INSERT INTO Agendas(idTurno , medico , dia , idEntrada)
+select t.idAgenda , t.medico , t.fechaHora , null
+from Turnos t
 
 
 --Ingresando Planes
@@ -438,10 +438,12 @@ GO
 INSERT INTO Usuarios_Roles(usuario) --- Lo hago 2 veces ya que uno puede ser para paciente y otro medico pero ambos tienen el mismo usuario(dni)  y se le aignan 2 roles
 Select distinct CAST(m.Medico_Dni AS NVARCHAR(255))      
 from gd_esquema.Maestra m
+where m.Medico_Dni is not null
 
 INSERT INTO Usuarios_Roles(usuario) 
-Select distinct CAST(m.Paciente_Dni AS NVARCHAR(255))      
+Select distinct CAST( m.Paciente_Dni AS NVARCHAR(255))      
 from gd_esquema.Maestra m
+where m.Paciente_Dni is not null
 
 
 ---migrar roles de medico
