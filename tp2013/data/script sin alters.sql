@@ -302,6 +302,7 @@ Where Medico_Dni is not null
 INSERT INTO Detalles_Persona(dni,tipo,telefono,direccion,sexo,mail,apellido,nombre,userid,fechaNac) 
 SELECT distinct m.Medico_Dni,NULL,m.Medico_Telefono,m.Medico_Direccion,NULL,m.Medico_Mail,m.Medico_Apellido,m.Medico_Nombre, u.idUser,m.Medico_Fecha_Nac FROM gd_esquema.Maestra m 
  INNER JOIN Usuarios u ON CAST(m.Medico_Dni AS NVARCHAR(255))=u.username 
+ inner join Detalles_Persona dp on dp.dni < > m.Medico_Dni ------AUN NO PROBADO
 
 
 
