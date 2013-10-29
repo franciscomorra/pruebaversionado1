@@ -276,3 +276,16 @@ go
 
 
 
+create procedure [SHARPS].[DeleteRole]
+
+@Description nchar(10)
+
+as 
+begin
+
+delete Roles where descripRol = @Description
+
+end 
+go
+
+
