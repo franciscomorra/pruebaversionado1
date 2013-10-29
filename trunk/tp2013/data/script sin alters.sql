@@ -106,7 +106,7 @@ CREATE TABLE Perfil (
 ;
 
 CREATE TABLE Perfil_Func ( 
-	perfil numeric(10,2),
+	perfil numeric(10,2) identity (1,1),
 	funcion numeric(10,2)
 )
 ;
@@ -132,7 +132,7 @@ CREATE TABLE Recetas_Medicamen (
 ;
 
 CREATE TABLE Roles ( 
-	idRol numeric(10)  NOT NULL,
+	idRol numeric(10) identity(1,1) NOT NULL,
 	descripRol nchar(10),
 	activoRol bit,
 	perfil numeric(10,2)
@@ -179,7 +179,7 @@ CREATE TABLE Usuarios (
 
 CREATE TABLE Usuarios_Roles ( 
 	usuario numeric(18) NOT NULL,
-	rol numeric(10) identity (100,1)NOT NULL
+	rol numeric(10) NOT NULL
 )
 ;
 
@@ -436,27 +436,27 @@ GO
 
 
 
-INSERT INTO Usuarios_Roles(usuario) --- Lo hago 2 veces ya que uno puede ser para paciente y otro medico pero ambos tienen el mismo usuario(dni)  y se le aignan 2 roles
-Select distinct CAST(m.Medico_Dni AS NVARCHAR(255))      
+INSERT INTO Usuarios_Roles(usuario , rol) --- Lo hago 2 veces ya que uno puede ser para paciente y otro medico pero ambos tienen el mismo usuario(dni)  y se le aignan 2 roles
+Select distinct CAST(m.Medico_Dni AS NVARCHAR(255))  , 2    
 from gd_esquema.Maestra m
 where m.Medico_Dni is not null
 
-INSERT INTO Usuarios_Roles(usuario) 
-Select distinct CAST( m.Paciente_Dni AS NVARCHAR(255))      
+INSERT INTO Usuarios_Roles(usuario , rol) 
+Select distinct CAST( m.Paciente_Dni AS NVARCHAR(255)),1      
 from gd_esquema.Maestra m
 where m.Paciente_Dni is not null
 
-
----migrar roles de medico
-INSERT INTO Roles(idRol , descripRol , activoRol, perfil ) 
-select distinct u.rol , 'medico' , 1 ,2
-from Usuarios_Roles u
-inner join gd_esquema.Maestra m on u.usuario = CAST(m.Medico_Dni AS NVARCHAR(255))     
 ---migrar roles de afiliado
-INSERT INTO Roles(idRol , descripRol , activoRol, perfil ) 
-select distinct u.rol , 'Afiliado' , 1 , 1
+INSERT INTO Roles( descripRol , activoRol, perfil ) 
+select distinct 'Afiliado' , 1 , 1
 from Usuarios_Roles u
 inner join gd_esquema.Maestra m on u.usuario = CAST(m.Paciente_Dni AS NVARCHAR(255))
+---migrar roles de medico
+INSERT INTO Roles( descripRol , activoRol, perfil ) 
+select distinct  'medico' , 1 ,2
+from Usuarios_Roles u
+inner join gd_esquema.Maestra m on u.usuario = CAST(m.Medico_Dni AS NVARCHAR(255))     
+
 
 -- ROLES FUNC 
 INSERT INTO Roles_Func (rol, funcionalidad)
