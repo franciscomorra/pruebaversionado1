@@ -376,7 +376,7 @@ FROM gd_esquema.Maestra m INNER JOIN Usuarios u ON CAST(m.Paciente_Dni AS NVARCH
 
 
 INSERT INTO Afiliados(nroAfiliado,planMedico,activoAfiliado, estadoCivil,cantHijos,userId)
-SELECT DISTINCT (ABS(CAST(NEWID() as binary(6)) % 100000) + 1700)*100, m.Plan_Med_Codigo,1, NULL,NULL, u.idUser  FROM Usuarios u  -----faltaria aignarle el 01 02 03
+SELECT DISTINCT (RANK() OVER (ORDER BY m.Paciente_Dni DESC)* 100), m.Plan_Med_Codigo,1, NULL,NULL, u.idUser  FROM Usuarios u  -----faltaria aignarle el 01 02 03
 INNER JOIN gd_esquema.Maestra m ON u.username = CAST(m.Paciente_Dni AS NVARCHAR(255))
 GO
 
@@ -400,10 +400,9 @@ SELECT distinct m.Medico_Dni,NULL,m.Medico_Telefono,m.Medico_Direccion,NULL,m.Me
 
 
 INSERT INTO Medicos (matricula, userId , activoMedico)
-SELECT DISTINCT (ABS(CAST(NEWID() as binary(6)) % 100000) + 1700), u.idUser, 1 
+SELECT DISTINCT (RANK() OVER (ORDER BY m.Medico_Dni DESC)+ 723), u.idUser, 1 
 FROM gd_esquema.Maestra m
 INNER JOIN Usuarios u ON u.username= CAST(m.Medico_Dni AS NVARCHAR(255))
-
 
 
 
