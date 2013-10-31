@@ -52,7 +52,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
-Create function [SHARPS].[GetAfiliadoInfo] 
+Create function [GetAfiliadoInfo] 
 (
 @userId numeric (18,0)
 )
@@ -60,7 +60,7 @@ returns table
 as 
 return
 
-select u.username UserName , pm.codigo Plan_ID , pm.precioConsulta PrecioConsulta, pm.precioFarmacia PrecioFarmacia, a.cantHijos CantHijos, a.nroAfiliado nroAfiliado, a.estadoCivil EstadoCivil, dp.apellido Apellido, dp.nombre Nombre, dp.sexo Sexo
+select distinct u.username UserName , pm.codigo Plan_ID , pm.precioConsulta PrecioConsulta, pm.precioFarmacia PrecioFarmacia, a.cantHijos CantHijos, a.nroAfiliado nroAfiliado, a.estadoCivil EstadoCivil, dp.apellido Apellido, dp.nombre Nombre, dp.sexo Sexo
 , dp.mail Email,dp.fechaNac FechaNacimiento, dp.tipo TipoDoc, dp.telefono Telefono, dp.direccion Direccion, dp.dni DNI
 from Usuarios u
 inner join Afiliados a on a.userId = @userId
@@ -148,7 +148,7 @@ returns table
 as 
 return
 
-select u.username UserName , a.matricula matricula,  dp.apellido Apellido, dp.nombre Nombre, dp.sexo Sexo
+select distinct u.username UserName , a.matricula matricula,  dp.apellido Apellido, dp.nombre Nombre, dp.sexo Sexo
 , dp.mail Email,dp.fechaNac FechaNacimiento, dp.tipo TipoDoc, dp.telefono Telefono, dp.direccion Direccion, dp.dni DNI
 from Usuarios u
 inner join Medicos a on a.userId = @userId
@@ -179,7 +179,7 @@ create function [SHARPS].[GetRolesByPerfil]
 returns table
 as 
 return
-select r.idRol ID , r.descripRol Descripcion , r.perfil Perfil -----cuando dice perfil quiere el codigo o la descripcion denuevo
+select r.idRol ID , r.descripRol Descripcion 
 from Perfil p 
 inner join Roles r on r.perfil = p.idPerfil
 where p.detallesPerf = @nombrePerfil
@@ -289,3 +289,4 @@ end
 go
 
 
+--- cuando mandes cambios de especialidades , borrar todo lo relacionado con el medico y insert lo nuevo.
