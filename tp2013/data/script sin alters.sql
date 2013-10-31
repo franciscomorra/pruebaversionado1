@@ -1,56 +1,87 @@
+USE [GD2C2013]
+GO
+IF  EXISTS (SELECT * FROM sys.schemas WHERE name = 'SHARPS')
+DROP SCHEMA [SHARPS]
+GO
+/****** Object:  Schema [GRUPO_N]    Script Date: 11/12/2012 20:20:08 ******/
+CREATE SCHEMA [SHARPS] AUTHORIZATION [gd]
+GO
+
+
 CREATE TABLE Afiliados ( 
-	nroAfiliado numeric(18) NOT NULL,
-	planMedico numeric(18),
+	nroAfiliado int NOT NULL,
+	planMedico int,
 	activoAfiliado char(10),
 	estadoCivil nchar(10),
 	cantHijos int,
-	userId numeric(18),
+	userId int,
 	tipoAfiliado int,       --------<----------SOLUCION AL 01,02,03     
-)
+CONSTRAINT [PK_Afiliados] PRIMARY KEY CLUSTERED 
+(
+	[nroAfiliado] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 ;
 
 CREATE TABLE Agendas ( 
-	medico numeric(18),
+	medico int,
 	dia datetime,
 	idEntrada int, 
-	idTurno int
-)
+	idTurno int,
+CONSTRAINT [PK_Agendas] PRIMARY KEY CLUSTERED 
+(
+	[idTurno] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 ;
 
 CREATE TABLE Bonos ( 
-	numeroBono numeric(18)  NOT NULL,
+	numeroBono int  NOT NULL,
 	fechaImp datetime,
 	afiliadoCompro nvarchar(255),
 	tipoBono nchar(10),
-	planMedico numeric(18)
-)
+	planMedico int,
+CONSTRAINT [PK_Bonos] PRIMARY KEY CLUSTERED 
+(
+	[numeroBono] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 ;
 
 CREATE TABLE Cambios_Afiliado ( 
-	afiliado numeric(18),
+	afiliado int,
 	fecha date,
 	motivo char(10)
 )
 ;
 
 CREATE TABLE Consulta ( 
-	turno numeric(18),
-	bono numeric(18),
+	turno int,
+	bono int,
 	sintomas varchar(255),
-	enfermedad varchar(255)
-)
+	enfermedad varchar(255),
+	nroConsulta int identity(1,1),
+CONSTRAINT [PK_Consulta] PRIMARY KEY CLUSTERED 
+(
+	[nroConsulta] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 ;
 
 CREATE TABLE Detalles_Persona ( 
-	dni numeric(18),
+	dni int,
 	tipo varchar(255),
-	telefono numeric(18),
+	telefono int,
 	direccion varchar(255),
 	sexo char(10),
 	mail varchar(255),
 	apellido varchar(255),
 	nombre varchar(255),
-	userId numeric(18) NOT NULL,
+	userId int NOT NULL,
 	fechaNac date
 )
 ;
@@ -61,82 +92,133 @@ CREATE TABLE Dias_Laborales (
 ;
 
 CREATE TABLE Especialidades ( 
-	codigoEspecialidad numeric(18) NOT NULL,
+	codigoEspecialidad int NOT NULL,
 	descripcionEsp varchar(255),
-	tipoEsp numeric(18)
-)
+	tipoEsp int,
+CONSTRAINT [PK_Especialidades] PRIMARY KEY CLUSTERED 
+(
+	[codigoEspecialidad] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 ;
 
 CREATE TABLE Estados_turno ( 
-	idEstado numeric(18) NOT NULL,
+	idEstado int NOT NULL,
 	descTurno nchar(10),
-	motivoCancel nchar(10)
-)
+	motivoCancel nchar(10),
+CONSTRAINT [PK_Estados_turno] PRIMARY KEY CLUSTERED 
+(
+	[idEstado] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 ;
 
 CREATE TABLE Funcionalidades ( 
 	idFunc numeric(10) IDENTITY (1,1) NOT NULL,
-	descripcion nchar(255)
-)
+	descripcion nchar(255),
+CONSTRAINT [PK_Funcionalidades] PRIMARY KEY CLUSTERED 
+(
+	[idFunc] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 ;
 
 CREATE TABLE Medicamentos ( 
-	idMedic numeric(18) identity (1000,1),
-	descrip nchar(255)
-)
+	idMedic int identity (1000,1),
+	descrip nchar(255),
+CONSTRAINT [PK_Medicamentos] PRIMARY KEY CLUSTERED 
+(
+	[idMedic] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 ;
 
 CREATE TABLE Medicos ( 
-	matricula numeric(18),
-	userId numeric(18) NOT NULL,
-	activoMedico char(10)
-)
+	matricula int,
+	userId int NOT NULL,
+	activoMedico char(10),
+CONSTRAINT [PK_Medicos] PRIMARY KEY CLUSTERED 
+(
+	[matricula] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 ;
 
 CREATE TABLE Medicos_Esp ( 
-	medico numeric(18),
-	especialidad numeric(18)
+	medico int,
+	especialidad int
 )
 ;
 
 CREATE TABLE Perfil ( 
 	idPerfil numeric(10) identity(1,1) NOT NULL,
-	detallesPerf nchar(255)
-)
+	detallesPerf nchar(255),
+CONSTRAINT [PK_Perfil] PRIMARY KEY CLUSTERED 
+(
+	[idPerfil] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 ;
 
 CREATE TABLE Perfil_Func ( 
-	perfil numeric(10,2) identity (1,1),
+	perfil numeric(10,2) ,
 	funcion numeric(10,2)
 )
 ;
 
 CREATE TABLE Planes_Medicos ( 
-	codigo numeric(18) NOT NULL,
+	codigo int NOT NULL,
 	descripcionPM varchar(255),
-	precioConsulta numeric(18),
-	precioFarmacia numeric(18)
-)
+	precioConsulta int,
+	precioFarmacia int,
+CONSTRAINT [PK_Planes_Medicos] PRIMARY KEY CLUSTERED 
+(
+	[codigo] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 ;
 
 CREATE TABLE Receta ( 
 	bonoConsulta nchar(10),
-	bonoFarmacia nchar(10)
-)
+	bonoFarmacia nchar(10),
+	idReceta int identity(1,1),
+CONSTRAINT [PK_Receta] PRIMARY KEY CLUSTERED 
+(
+	[idReceta] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 ;
 
 CREATE TABLE Recetas_Medicamen ( 
 	receta nchar(10),
-	medicamento numeric(18)
-)
+	medicamento int
+CONSTRAINT [PK_Recetas_Medicamen] PRIMARY KEY CLUSTERED 
+(
+	[receta] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 ;
 
 CREATE TABLE Roles ( 
 	idRol numeric(10) identity(1,1) NOT NULL,
 	descripRol nchar(10),
 	activoRol bit,
-	perfil numeric(10,2)
-)
+	perfil numeric(10,2),
+CONSTRAINT [PK_Roles] PRIMARY KEY CLUSTERED 
+(
+	[idRol] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 ;
 
 CREATE TABLE Roles_Func ( 
@@ -145,40 +227,51 @@ CREATE TABLE Roles_Func (
 )
 ;
 
-CREATE TABLE Tipo_Doc ( 
-	idTipo varchar(255) NOT NULL,
-	descripcion varchar(255)
-)
-;
+
 
 CREATE TABLE Tipos_Especialidad ( 
-	codigoEsp numeric(18) NOT NULL,
-	descripcionEsp varchar(255)
-)
+	codigoEsp int NOT NULL,
+	descripcionEsp varchar(255),
+CONSTRAINT [PK_Tipos_Especialidad] PRIMARY KEY CLUSTERED 
+(
+	[codigoEsp ] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 ;
 
 CREATE TABLE Turnos ( 
-	numero numeric(18) NOT NULL,
-	medico numeric(18),
-	afiliado numeric(18),
+	numero int NOT NULL,
+	medico int,
+	afiliado int,
 	fechaHora datetime,
-	estado numeric(18)  ,
+	estado int  ,
 	fechaHoraLlegada datetime,
-	idAgenda int identity(1,1)
-)
+	idAgenda int identity(1,1),
+CONSTRAINT [PK_Turnos] PRIMARY KEY CLUSTERED 
+(
+	[numero] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 ;
 
 CREATE TABLE Usuarios ( 
-	idUser numeric(18) identity(1000,1)  NOT NULL,
+	idUser int identity(1000,1)  NOT NULL,
 	username nvarchar(255),
 	password nvarchar(255) NOT NULL,
 	intentos int,
-	activo bit
-)
+	activo bit,
+CONSTRAINT [PK_Usuarios] PRIMARY KEY CLUSTERED 
+(
+	[idUser] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 ;
 
 CREATE TABLE Usuarios_Roles ( 
-	usuario numeric(18) NOT NULL,
+	usuario int NOT NULL,
 	rol numeric(10) NOT NULL
 )
 ;
