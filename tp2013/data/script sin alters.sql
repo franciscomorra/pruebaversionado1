@@ -59,11 +59,11 @@ CREATE TABLE Cambios_Afiliado (
 ;
 
 CREATE TABLE Consultas ( --Revisar, Numero_Consulta es la cantidad de veces que el paciente se atendio
-	--Numero_Consulta [int] identity(1,1),
 	Turno [int],
 	Bono [int],
 	Sintomas nvarchar(MAX),
 	Enfermedad nvarchar(MAX),
+	Numero_Consulta [int]
 CONSTRAINT [PK_Consulta] PRIMARY KEY CLUSTERED 
 (
 	Turno,Bono ASC
@@ -392,23 +392,11 @@ INSERT INTO Roles_Funcionalidades (Rol, Funcionalidad)
 SELECT PF.Perfil AS ROL, PF.Funcionalidad AS FUNCIONALIDAD FROM Perfiles_Funcionalidades PF
 
 
---Ingresando Usuario Administrador
-
-
 PRINT 'Generando Usuario Administrador...'
 INSERT INTO Usuarios (Activo,Intentos,Username,Password)
 values (1,0,'Administrador','E6-B8-70-50-BF-CB-81-43-FC-B8-DB-01-70-A4-DC-9E-D0-0D-90-4D-DD-3E-2A-4A-D1-B1-E8-DC-0F-DC-9B-E7')
 
-INSERT INTO Usuarios_Roles (Rol,Usuario)
-SELECT R.RolID, U.UsuarioID
-FROM Roles R, Usuarios U
-WHERE R.Descripcion = 'Administrador'
-AND U.Username = 'Administrador'
 
-
--- Ingresando los clientes.
-PRINT 'Ingresando los Afiliados...'
-GO
 
 
 PRINT 'Ingresando los Usuarios de Afiliados...'
@@ -451,7 +439,7 @@ INNER JOIN Usuarios u ON u.Username= CAST(m.Medico_DNI AS Nvarchar(MAX))
 
 
 --Ingresando los Bonos
-
+PRINT 'Ingresando los Tipos de Bonos'
 INSERT INTO Tipos_Bonos (Descripcion) VALUES ('Consulta'); ---- correspode al 1 de Tipos
 INSERT INTO Tipos_Bonos (Descripcion) VALUES ('Farmacia'); ---corresponde al 2 de Tipos
 
@@ -470,9 +458,6 @@ SELECT distinct m.Bono_Farmacia_Numero , m.Bono_Farmacia_Fecha_Impresion, a.Usua
   inner join Usuarios a on CAST(m.Paciente_DNI AS Nvarchar(MAX))= a.Username
   WHERE m.Turno_Fecha is NULL AND m.Bono_Farmacia_Numero is not null   
 GO
-
----hasta aca 56 segundos
-
 
 --Ingresando Turnos
 PRINT 'Ingresando los Turnos...'
@@ -579,10 +564,12 @@ SELECT distinct CAST( a.UsuarioID AS Nvarchar(MAX)),1
 FROM Usuarios a
 --WHERE m.Paciente_DNI is not null
 
-    
 
-
-
+INSERT INTO Usuarios_Roles (Rol,Usuario)
+SELECT R.RolID, U.UsuarioID
+FROM Roles R, Usuarios U
+WHERE R.Descripcion = 'Administrador'
+AND U.Username = 'Administrador'
 
 PRINT 'Proceso finalizado con éxito!'
 GO
