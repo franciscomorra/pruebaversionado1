@@ -158,6 +158,7 @@ CREATE TABLE Medicos_Especialidades (
 CREATE TABLE Perfiles ( 
 	PerfilID [int] identity(1,1) NOT NULL,
 	Descripcion nvarchar(MAX),
+
 CONSTRAINT [PK_Perfil] PRIMARY KEY CLUSTERED 
 (
 	[PerfilID] ASC
@@ -167,8 +168,8 @@ GO
 ;
 
 CREATE TABLE Perfiles_Funcionalidades ( 
-	Perfil numeric(10,2) ,
-	Funcionalidad numeric(10,2)
+	Perfil [int] ,
+	Funcionalidad [int]
 )
 ;
 
@@ -212,7 +213,7 @@ CREATE TABLE Roles (
 	RolID [int] identity(1,1) NOT NULL,
 	Descripcion nvarchar(50),
 	Activo bit,
-	Perfil numeric(10,2),
+	Perfil [int],
 CONSTRAINT [PK_Roles] PRIMARY KEY CLUSTERED 
 (
 	[RolID] ASC
@@ -222,8 +223,8 @@ GO
 ;
 
 CREATE TABLE Roles_Funcionalidades ( 
-	Rol numeric(10,2),
-	Funcionalidad numeric(10,2) NOT NULL
+	Rol [int],
+	Funcionalidad [int] NOT NULL
 )
 ;
 
@@ -362,10 +363,18 @@ FROM Usuarios_Roles u
 inner join gd_esquema.Maestra m on u.Usuario = CAST(m.Medico_DNI AS Nvarchar(MAX)) 
 */
 
-INSERT INTO Roles (Descripcion) VALUES ('Afiliado'); ---- correspode al 1 de Roles
-INSERT INTO Roles (Descripcion) VALUES ('Medico'); ---corresponde al 2 de Roles
-INSERT INTO Roles (Descripcion) VALUES ('Administrativo')
-INSERT INTO Roles (Descripcion) VALUES ('Administrador')
+INSERT INTO Roles (Descripcion,Perfil) 
+SELECT 'Afiliado' as Descripcion, p.perfilID as Perfil FROM Perfiles p WHERE Descripcion = 'Afiliado' ---- correspode al 1 de Roles
+
+INSERT INTO Roles (Descripcion,Perfil) 
+SELECT 'Medico' as Descripcion, p.perfilID as Perfil FROM Perfiles p WHERE Descripcion = 'Afiliado' ---- correspode al 1 de Roles
+
+INSERT INTO Roles (Descripcion,Perfil) 
+SELECT 'Administrativo' as Descripcion, p.perfilID as Perfil FROM Perfiles p WHERE Descripcion = 'Afiliado' ---- correspode al 1 de Roles
+
+INSERT INTO Roles (Descripcion,Perfil) 
+SELECT 'Administrador' as Descripcion, p.perfilID as Perfil FROM Perfiles p WHERE Descripcion = 'Afiliado' ---- correspode al 1 de Roles
+
 
 -- ROLES FUNC 
 INSERT INTO Roles_Funcionalidades (Rol, Funcionalidad)
