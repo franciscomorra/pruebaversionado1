@@ -294,14 +294,14 @@ CREATE TABLE Usuarios_Roles (
 -------MIGRACIONES------------------------------------------------------
 PRINT 'INICIO DE MIGRACION DE DATOS'
 
-
+PRINT 'Creando Funcionalidades'
 INSERT INTO Funcionalidades (Descripcion) VALUES ('AdministrarAfiliados'); ---1
 INSERT INTO Funcionalidades (Descripcion) VALUES ('AbmEspecialidadesMedicas');---2
 INSERT INTO Funcionalidades (Descripcion) VALUES ('AbmPlanes');---3
 INSERT INTO Funcionalidades (Descripcion) VALUES ('AdministrarProfesionales');----4
 INSERT INTO Funcionalidades (Descripcion) VALUES ('AdministrarRoles');----5
 INSERT INTO Funcionalidades (Descripcion) VALUES ('CancelarAtencion');----6
-INSERT INTO Funcionalidades (Descripcion) VALUES ('CompraBono');----7
+INSERT INTO Funcionalidades (Descripcion) VALUES ('ComprarBono');----7
 INSERT INTO Funcionalidades (Descripcion) VALUES ('GenerarRecetas');----8
 INSERT INTO Funcionalidades (Descripcion) VALUES ('ListarEstadisticas');----9
 INSERT INTO Funcionalidades (Descripcion) VALUES ('PedirTurno');-----10
@@ -309,95 +309,87 @@ INSERT INTO Funcionalidades (Descripcion) VALUES ('RegistrarAgenda');----11
 INSERT INTO Funcionalidades (Descripcion) VALUES ('RegistroLlegada');----12
 INSERT INTO Funcionalidades (Descripcion) VALUES ('RegistroResultadoAtencion');----13
 INSERT INTO Funcionalidades (Descripcion) VALUES ('RegistroUsuario');----14
-
-INSERT INTO Perfiles (Descripcion) VALUES ('Afiliado'); ---- correspode al 1 de Perfiles
-INSERT INTO Perfiles (Descripcion) VALUES ('Medico'); ---corresponde al 2 de Perfiles
+PRINT 'Creando Perfiles'
+INSERT INTO Perfiles (Descripcion) VALUES ('Afiliado');
+INSERT INTO Perfiles (Descripcion) VALUES ('Medico');
 INSERT INTO Perfiles (Descripcion) VALUES ('Administrativo')
 INSERT INTO Perfiles (Descripcion) VALUES ('Administrador')
 
---- ESTE ES DIRECTO YA QUE ES RELACION DE 3A15   ---Modificar
+PRINT 'Asignando Funcionalidades a los Perfiles'
 INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
-values (1 ,6)
-INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
-values (1 ,7)
-INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
-values (1 ,10)
-INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
-values (3 ,9 )
-INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
-values (2 ,13)
+SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
+WHERE p.Descripcion = 'Administrador'
 
 INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
-values (2,6)
-INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
-values (2,8)
+SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
+WHERE p.Descripcion = 'Afiliado' AND f.Descripcion = 'CancelarAtencion'
 
 INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
-values (3,1)
+SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
+WHERE p.Descripcion = 'Afiliado' AND f.Descripcion = 'ComprarBono'
+
 INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
-values (3,2)
+SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
+WHERE p.Descripcion = 'Afiliado' AND f.Descripcion = 'PedirTurno'
+
 INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
-values (3,3)
+SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
+WHERE p.Descripcion = 'Administrativo' AND f.Descripcion = 'ListarEstadisticas'
+
 INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
-values (3,4)
+SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
+WHERE p.Descripcion = 'Administrativo' AND f.Descripcion = 'AdministrarAfiliados'
+
 INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
-values (3,5)
+SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
+WHERE p.Descripcion = 'Administrativo' AND f.Descripcion = 'AbmEspecialidadesMedicas'
+
 INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
-values (3,12)
+SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
+WHERE p.Descripcion = 'Administrativo' AND f.Descripcion = 'AbmPlanes'
+
 INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
-values (3,14)
+SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
+WHERE p.Descripcion = 'Administrativo' AND f.Descripcion = 'AdministrarProfesionales'
+
 INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
-values (2,11)
+SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
+WHERE p.Descripcion = 'Administrativo' AND f.Descripcion = 'AdministrarRoles'
+
+INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
+SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
+WHERE p.Descripcion = 'Administrativo' AND f.Descripcion = 'RegistroLlegada'
+
+INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
+SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
+WHERE p.Descripcion = 'Administrativo' AND f.Descripcion = 'RegistroUsuario'
+
+INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
+SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
+WHERE p.Descripcion = 'Medico' AND f.Descripcion = 'CancelarAtencion'
 
 
-/*
----migrar roles de Afiliado
-INSERT INTO Roles( Descripcion , Activo, Perfiles ) 
-SELECT distinct 'Afiliado' , 1 , 1
-FROM Usuarios_Roles u
-inner join gd_esquema.Maestra m on u.Usuario = CAST(m.Paciente_DNI AS Nvarchar(MAX))
----migrar roles de Medico
-INSERT INTO Roles( Descripcion , Activo, Perfiles ) 
-SELECT distinct  'Medico' , 1 ,2
-FROM Usuarios_Roles u
-inner join gd_esquema.Maestra m on u.Usuario = CAST(m.Medico_DNI AS Nvarchar(MAX)) 
-*/
+INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
+SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
+WHERE p.Descripcion = 'Medico' AND f.Descripcion = 'GenerarRecetas'
 
+INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
+SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
+WHERE p.Descripcion = 'Medico' AND f.Descripcion = 'RegistrarAgenda'
+
+
+INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
+SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
+WHERE p.Descripcion = 'Medico' AND f.Descripcion = 'RegistroResultadoAtencion'
+
+PRINT 'Agregando Roles' --Los roles por defecto tienen los mismos nombres que sus perfiles
 INSERT INTO Roles (Descripcion,Perfil) 
-SELECT 'Afiliado' as Descripcion, p.perfilID as Perfil FROM Perfiles p WHERE Descripcion = 'Afiliado' ---- correspode al 1 de Roles
-
-INSERT INTO Roles (Descripcion,Perfil) 
-SELECT 'Medico' as Descripcion, p.perfilID as Perfil FROM Perfiles p WHERE Descripcion = 'Afiliado' ---- correspode al 1 de Roles
-
-INSERT INTO Roles (Descripcion,Perfil) 
-SELECT 'Administrativo' as Descripcion, p.perfilID as Perfil FROM Perfiles p WHERE Descripcion = 'Afiliado' ---- correspode al 1 de Roles
-
-INSERT INTO Roles (Descripcion,Perfil) 
-SELECT 'Administrador' as Descripcion, p.perfilID as Perfil FROM Perfiles p WHERE Descripcion = 'Afiliado' ---- correspode al 1 de Roles
-
+SELECT p.Descripcion, p.PerfilID FROM Perfiles p
 
 -- ROLES FUNC 
+PRINT 'Asignando Funcionalidades a los Roles' --Los roles tienen todas las funcionalidades del perfil
 INSERT INTO Roles_Funcionalidades (Rol, Funcionalidad)
-SELECT distinct RolID ,6 FROM Roles WHERE Descripcion = 'Afiliado'
-
-INSERT INTO Roles_Funcionalidades (Rol, Funcionalidad)
-SELECT distinct RolID ,7 FROM Roles WHERE Descripcion = 'Afiliado'
-
-INSERT INTO Roles_Funcionalidades (Rol, Funcionalidad)
-SELECT distinct RolID ,10 FROM Roles WHERE Descripcion = 'Afiliado'
-
-INSERT INTO Roles_Funcionalidades (Rol, Funcionalidad)
-SELECT distinct RolID ,11 FROM Roles WHERE Descripcion = 'Medico'
-
-INSERT INTO Roles_Funcionalidades (Rol, Funcionalidad)
-SELECT distinct RolID ,6 FROM Roles WHERE Descripcion = 'Medico'
-
-INSERT INTO Roles_Funcionalidades (Rol, Funcionalidad)
-SELECT distinct RolID ,8 FROM Roles WHERE Descripcion = 'Medico'
-
-INSERT INTO Roles_Funcionalidades (Rol, Funcionalidad)
-SELECT distinct RolID ,13 FROM Roles WHERE Descripcion = 'Medico'
-
+SELECT PF.Perfil AS ROL, PF.Funcionalidad AS FUNCIONALIDAD FROM Perfiles_Funcionalidades PF
 
 
 --Ingresando Usuario Administrador
@@ -412,6 +404,7 @@ SELECT R.RolID, U.UsuarioID
 FROM Roles R, Usuarios U
 WHERE R.Descripcion = 'Administrador'
 AND U.Username = 'Administrador'
+
 
 -- Ingresando los clientes.
 PRINT 'Ingresando los Afiliados...'
