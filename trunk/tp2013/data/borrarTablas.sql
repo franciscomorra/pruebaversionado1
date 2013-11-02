@@ -2,27 +2,28 @@ DROP TABLE [GD2C2013].[dbo].[Afiliados];
 DROP TABLE [GD2C2013].[dbo].[Agendas]; 
 DROP TABLE [GD2C2013].[dbo].[Bonos]; 
 DROP TABLE [GD2C2013].[dbo].[Cambios_Afiliado]; 
-DROP TABLE [GD2C2013].[dbo].[Consulta]; 
+DROP TABLE [GD2C2013].[dbo].[ConsultaS]; 
 DROP TABLE [GD2C2013].[dbo].[Detalles_Persona]; 
-DROP TABLE [GD2C2013].[dbo].[Dias_Laborales]; 
+
 DROP TABLE [GD2C2013].[dbo].[Especialidades]; 
 DROP TABLE [GD2C2013].[dbo].[Estados_turno]; 
 DROP TABLE [GD2C2013].[dbo].[Funcionalidades]; 
 DROP TABLE [GD2C2013].[dbo].[Medicamentos]; 
 DROP TABLE [GD2C2013].[dbo].[Medicos]; 
-DROP TABLE [GD2C2013].[dbo].[Medicos_Esp]; 
-DROP TABLE [GD2C2013].[dbo].[Perfil]; 
-DROP TABLE [GD2C2013].[dbo].[Perfil_Func]; 
+DROP TABLE [GD2C2013].[dbo].[Medicos_Especialidades]; 
+DROP TABLE [GD2C2013].[dbo].[PerfilES]; 
+DROP TABLE [GD2C2013].[dbo].[Perfiles_Funcionalidades]; 
 DROP TABLE [GD2C2013].[dbo].[Planes_Medicos]; 
-DROP TABLE [GD2C2013].[dbo].[Receta]; 
-DROP TABLE [GD2C2013].[dbo].[Recetas_Medicamen]; 
+DROP TABLE [GD2C2013].[dbo].[Recetas]; 
+DROP TABLE [GD2C2013].[dbo].[Recetas_Medicamentos]; 
 DROP TABLE [GD2C2013].[dbo].[Roles]; 
-DROP TABLE [GD2C2013].[dbo].[Roles_Func];  
-DROP TABLE [GD2C2013].[dbo].[Tipos_Especialidad]; 
+DROP TABLE [GD2C2013].[dbo].[Roles_Funcionalidades];  
+DROP TABLE [GD2C2013].[dbo].[Tipos_Bonos];
+DROP TABLE [GD2C2013].[dbo].[Tipos_Especialidades]; 
 DROP TABLE [GD2C2013].[dbo].[Turnos]; 
 DROP TABLE [GD2C2013].[dbo].[Usuarios]; 
 DROP TABLE [GD2C2013].[dbo].[Usuarios_Roles]; 
-
+/*
 DROP PROCEDURE SHARPS.UpdateUserPassword;
 DROP PROCEDURE SHARPS.Login;
 DROP function [GetAfiliadoInfo];
@@ -39,3 +40,4 @@ DROP procedure [SHARPS].[GetRoles];
 DROP procedure[SHARPS].[InsertRole];
 DROP procedure [SHARPS].[UpdateRole];
 DROP procedure [SHARPS].[DeleteRole];
+*/
