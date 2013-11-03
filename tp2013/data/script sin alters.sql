@@ -421,10 +421,11 @@ SELECT distinct m.Paciente_DNI,'DNI',m.Paciente_Telefono,m.Paciente_Direccion,NU
 FROM gd_esquema.Maestra m INNER JOIN Usuarios u ON CAST(m.Paciente_DNI AS Nvarchar(MAX))=u.Username 
 
 PRINT 'Ingresando las Entidades de Afiliados...'
-
-INSERT INTO Afiliados(GrupoFamiliar,PlanMedico,Activo, EstadoCivil,CantHijos,UsuarioID)
-SELECT DISTINCT (RANK() OVER (ORDER BY m.Paciente_DNI DESC)* 100), m.Plan_Med_Codigo,1, NULL,NULL, u.UsuarioID  FROM Usuarios u  -----faltaria aignarle el 01 02 03
+DELETE FROM Afiliados
+INSERT INTO Afiliados(GrupoFamiliar,PlanMedico,Activo, EstadoCivil,CantHijos,TipoAfiliado,UsuarioID)
+SELECT DISTINCT (RANK() OVER (ORDER BY m.Paciente_DNI DESC)* 100), m.Plan_Med_Codigo,1, es.Codigo,0,01,u.UsuarioID  FROM Usuarios u 
 INNER JOIN gd_esquema.Maestra m ON u.Username = CAST(m.Paciente_DNI AS Nvarchar(MAX))
+INNER JOIN Estados_Civiles es ON es.Descripcion = 'Soltero'
 GO
 
 PRINT 'Ingresando los Usuarios de Profesionales...'
