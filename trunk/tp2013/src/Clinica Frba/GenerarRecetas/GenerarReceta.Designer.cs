@@ -46,10 +46,10 @@
             this.lblBono = new System.Windows.Forms.Label();
             this.txtBono = new System.Windows.Forms.TextBox();
             this.panelMed1 = new System.Windows.Forms.Panel();
-            this.cbxMed1 = new System.Windows.Forms.ComboBox();
-            this.cbxCant1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.cbxCant1 = new System.Windows.Forms.ComboBox();
+            this.cbxMed1 = new System.Windows.Forms.ComboBox();
             this.panelMed2 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -253,22 +253,6 @@
             this.panelMed1.TabIndex = 23;
             this.panelMed1.Visible = false;
             // 
-            // cbxMed1
-            // 
-            this.cbxMed1.FormattingEnabled = true;
-            this.cbxMed1.Location = new System.Drawing.Point(83, 3);
-            this.cbxMed1.Name = "cbxMed1";
-            this.cbxMed1.Size = new System.Drawing.Size(88, 21);
-            this.cbxMed1.TabIndex = 0;
-            // 
-            // cbxCant1
-            // 
-            this.cbxCant1.FormattingEnabled = true;
-            this.cbxCant1.Location = new System.Drawing.Point(230, 3);
-            this.cbxCant1.Name = "cbxCant1";
-            this.cbxCant1.Size = new System.Drawing.Size(65, 21);
-            this.cbxCant1.TabIndex = 0;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -286,6 +270,22 @@
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 24;
             this.label2.Text = "Cantidad";
+            // 
+            // cbxCant1
+            // 
+            this.cbxCant1.FormattingEnabled = true;
+            this.cbxCant1.Location = new System.Drawing.Point(230, 3);
+            this.cbxCant1.Name = "cbxCant1";
+            this.cbxCant1.Size = new System.Drawing.Size(65, 21);
+            this.cbxCant1.TabIndex = 0;
+            // 
+            // cbxMed1
+            // 
+            this.cbxMed1.FormattingEnabled = true;
+            this.cbxMed1.Location = new System.Drawing.Point(83, 3);
+            this.cbxMed1.Name = "cbxMed1";
+            this.cbxMed1.Size = new System.Drawing.Size(88, 21);
+            this.cbxMed1.TabIndex = 0;
             // 
             // panelMed2
             // 
@@ -487,7 +487,7 @@
             this.Controls.Add(this.panelProfesional);
             this.Controls.Add(this.btnGuardar);
             this.Name = "GenerarReceta";
-            this.Text = "GenerarReceta";
+            this.Text = "Receta";
             this.panelProfesional.ResumeLayout(false);
             this.panelProfesional.PerformLayout();
             this.panelAfiliado.ResumeLayout(false);

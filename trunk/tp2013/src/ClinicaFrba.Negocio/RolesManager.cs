@@ -16,7 +16,7 @@ namespace ClinicaFrba.Negocio
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(
                 ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "SHARPS.GetRolesByPerfil", SqlDataAccessArgs
+                "GetRolesByPerfil", SqlDataAccessArgs
                 .CreateWith("@nombrePerfil", perfil.Nombre)
             .Arguments);
 
@@ -29,7 +29,7 @@ namespace ClinicaFrba.Negocio
                     ID = int.Parse(row["ID"].ToString()),
                     Nombre = row["Descripcion"].ToString(),
                     Perfil = (Profile)Enum.Parse(typeof(Profile), row["Perfil"].ToString()),
-                    Functionalities = functionalitiesManager.GetRoleFunctionalities(int.Parse(row["ID"].ToString()))
+                    //Functionalities = functionalitiesManager.GetRoleFunctionalities(int.Parse(row["ID"].ToString()))
 
                 };
                 roles.Add(rol);
@@ -43,7 +43,7 @@ namespace ClinicaFrba.Negocio
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(
                 ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "SHARPS.GetRoles"
+                "GetRoles"
             );
             var roles = new BindingList<Rol>();
             var functionalitiesManager = new FunctionalitiesManager();
@@ -65,7 +65,7 @@ namespace ClinicaFrba.Negocio
         public void DeleteRole(Rol rol)
         {
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "SHARPS.DeleteRole", SqlDataAccessArgs
+                "DeleteRole", SqlDataAccessArgs
                 .CreateWith("@Rol_ID", rol.ID)
             .Arguments);
         }
@@ -79,7 +79,7 @@ namespace ClinicaFrba.Negocio
         private void InsertRole(Rol rol)
         {
             var roleId = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "SHARPS.InsertRole", SqlDataAccessArgs
+                "InsertRole", SqlDataAccessArgs
                 .CreateWith("@Description", rol.Nombre)
             .Arguments);
             rol.ID = roleId;
@@ -89,7 +89,7 @@ namespace ClinicaFrba.Negocio
         private void UpdateRole(Rol rol)
         {
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "SHARPS.UpdateRole", SqlDataAccessArgs
+                "UpdateRole", SqlDataAccessArgs
                 .CreateWith("@Description", rol.Nombre)
                 .And("@ID", rol.ID)
             .Arguments);
@@ -111,7 +111,7 @@ namespace ClinicaFrba.Negocio
         public int GetDefaultRoleID()
         {
             return SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "SHARPS.GetDefaultRoleID");
+                "GetDefaultRoleID");
         }
 
     }

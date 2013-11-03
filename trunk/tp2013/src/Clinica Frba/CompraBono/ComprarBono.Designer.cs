@@ -219,7 +219,8 @@
             this.Controls.Add(this.panelCompra);
             this.Controls.Add(this.panelAfiliado);
             this.Name = "ComprarBono";
-            this.Text = "Comprar Bono";
+            this.Text = "Comprar Bonos";
+            this.Load += new System.EventHandler(this.ComprarBono_Load);
             this.panelAfiliado.ResumeLayout(false);
             this.panelAfiliado.PerformLayout();
             this.panelCompra.ResumeLayout(false);

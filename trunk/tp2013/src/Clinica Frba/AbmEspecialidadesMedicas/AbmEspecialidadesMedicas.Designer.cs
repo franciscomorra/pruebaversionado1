@@ -47,7 +47,7 @@
             this.ClientSize = new System.Drawing.Size(292, 273);
             this.Controls.Add(this.label1);
             this.Name = "AbmEspecialidadesMedicas";
-            this.Text = "AbmEspecialidadesMedicas";
+            this.Text = "Especialidades";
             this.ResumeLayout(false);
             this.PerformLayout();
 

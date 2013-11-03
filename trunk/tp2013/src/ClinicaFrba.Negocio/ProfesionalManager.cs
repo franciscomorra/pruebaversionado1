@@ -20,7 +20,7 @@ namespace ClinicaFrba.Negocio
             Profesional profesional = new Profesional();
             EspecialidadesManager espMan = new EspecialidadesManager();
             var row = SqlDataAccess.ExecuteDataRowQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "SHARPS.GetProfesionalInfo", SqlDataAccessArgs
+                "GetProfesionalInfo", SqlDataAccessArgs
                 .CreateWith("@userId", userID)
                 .Arguments);
 
@@ -49,7 +49,7 @@ namespace ClinicaFrba.Negocio
         public BindingList<Profesional> GetAll()
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "SHARPS.GetProfesionales");
+                "GetProfesionales");
             var data = new BindingList<Profesional>();
             if (result != null && result.Rows != null)
             {
@@ -96,7 +96,7 @@ namespace ClinicaFrba.Negocio
                     var detalleID = entityDetailManager.AddDetallePersona(profesional as User);
 
                     SqlDataAccess.ExecuteNonQuery(
-                        "SHARPS.InsertProfesional", SqlDataAccessArgs
+                        "InsertProfesional", SqlDataAccessArgs
                         .CreateWith("@Matricula", profesional.Matricula)
                         .And("@ID", profesional.UserID)
                         .And("@Rol", profesional.RoleID)
@@ -117,7 +117,7 @@ namespace ClinicaFrba.Negocio
             {
                 entityDetailManager.UpdateDetallePersona(profesional as User);
                 SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                    "SHARPS.UpdateProfesional", SqlDataAccessArgs
+                    "UpdateProfesional", SqlDataAccessArgs
                     .CreateWith("@Matricula", profesional.Matricula)
                     .And("@ID", profesional.UserID)
                     .Arguments);
@@ -133,7 +133,7 @@ namespace ClinicaFrba.Negocio
         public void InsertarEspecialidades(Profesional profesional) {
             foreach (var especialidad in profesional.Especialidades){
                 SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
-                    "SHARPS.InsertSpeciality", SqlDataAccessArgs
+                    "InsertSpeciality", SqlDataAccessArgs
                     .CreateWith("@MedicoID", profesional.UserID)
                     .And("@Especialidad", especialidad)
                 .Arguments);

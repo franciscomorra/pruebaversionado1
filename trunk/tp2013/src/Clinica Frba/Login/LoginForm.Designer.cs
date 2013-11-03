@@ -135,7 +135,7 @@
             this.Controls.Add(this.panelRoles);
             this.Controls.Add(this.panel1);
             this.Name = "LoginForm";
-            this.Text = "LoginForm";
+            this.Text = "Ingresar";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panelRoles.ResumeLayout(false);

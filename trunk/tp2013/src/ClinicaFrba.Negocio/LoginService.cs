@@ -32,7 +32,8 @@ namespace ClinicaFrba.Negocio
             {
                 UserID = int.Parse(result["ID"].ToString()),
                 UserName = result["Nombre"].ToString(),
-                FaltanDatos = result["Estado"].ToString(),
+                //FaltanDatos = result["Estado"].ToString(),
+                FaltanDatos = "false"
             };
 
             return user;
@@ -43,7 +44,7 @@ namespace ClinicaFrba.Negocio
             var encryptedOldPassword = ComputeHash(oldPassword, new SHA256Managed());
             var encryptedNewPassword = ComputeHash(newPassword, new SHA256Managed());
             var result = SqlDataAccess.ExecuteScalarQuery<object>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "SHARPS.UpdateUserPassword", SqlDataAccessArgs
+                "UpdateUserPassword", SqlDataAccessArgs
                 .CreateWith("@ID_Usuario", user.UserID)
                 .And("@OldPassword", encryptedOldPassword)
                 .And("@NewPassword", encryptedNewPassword)
@@ -76,25 +77,28 @@ namespace ClinicaFrba.Negocio
         }
 
         public BindingList<Rol> GetUserRoles(int userID)//Buscar los roles de un usuario
-        {
+        {//21124787
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "SHARPS.GetUserRoles", SqlDataAccessArgs
+                "GetUserRoles", SqlDataAccessArgs
                 .CreateWith("@userID", userID).Arguments);
 
             var roles = new BindingList<Rol>();
-           
-            var functionalitiesManager = new FunctionalitiesManager();
-            foreach (DataRow row in result.Rows)
-            {
-                var rol = new Rol()
-                {
-                    ID = int.Parse(row["ID"].ToString()),
-                    Nombre = row["Descripcion"].ToString(),
-                    Perfil = (Profile)Enum.Parse(typeof(Profile), row["Perfil"].ToString()),
-                    Functionalities = functionalitiesManager.GetRoleFunctionalities(int.Parse(row["ID"].ToString()))
 
-                };
-                roles.Add(rol);
+            if (result != null && result.Rows != null)
+            {
+
+                foreach (DataRow row in result.Rows)
+                {
+                    var rol = new Rol()
+                    {
+                        ID = int.Parse(row["ID"].ToString()),
+                        Nombre = row["Descripcion"].ToString()
+                    };
+                    rol.Perfil = new Profile();
+                    rol.Perfil.ID = int.Parse(row["PerfilId"].ToString());
+                    rol.Perfil.Nombre = row["PerfilNombre"].ToString();
+                    roles.Add(rol);
+                }
             }
 
             return roles;

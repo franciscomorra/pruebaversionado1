@@ -15,7 +15,7 @@ namespace ClinicaFrba.Negocio
         {
             var ret = new List<PlanMedico>();
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "SHARPS.GetPlanesMedicos");
+                "GetPlanesMedicos");
 
             if (result != null)
             {

@@ -16,9 +16,9 @@ namespace ClinicaFrba.Comun
 
         public Rol()
         {
-            Perfil = new Profile();
+            /*Perfil = new Profile();
             Functionalities = new List<Functionalities>();
-        }
+        */}
 
         public override bool Equals(object obj)
         {

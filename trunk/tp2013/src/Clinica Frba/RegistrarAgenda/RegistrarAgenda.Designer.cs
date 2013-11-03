@@ -342,7 +342,8 @@
             this.Controls.Add(this.dtHasta);
             this.Controls.Add(this.btnGuardar);
             this.Name = "RegistrarAgenda";
-            this.Text = "RegistrarAgenda";
+            this.Text = "Agenda de Profesional";
+            this.Load += new System.EventHandler(this.RegistrarAgenda_Load);
             this.panelProfesional.ResumeLayout(false);
             this.panelProfesional.PerformLayout();
             this.ResumeLayout(false);

@@ -21,7 +21,7 @@ namespace ClinicaFrba.Negocio
         {
             Afiliado afiliado = new Afiliado();
             var row = SqlDataAccess.ExecuteDataRowQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "SHARPS.GetAfiliadoInfo",SqlDataAccessArgs
+                "GetAfiliadoInfo",SqlDataAccessArgs
                 .CreateWith("@userId", userID)
                 .Arguments);
             if (row != null && row != null)
@@ -70,7 +70,7 @@ namespace ClinicaFrba.Negocio
                 return SessionData.Get<BindingList<Afiliado>>("Afiliados");
             }
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "SHARPS.GetAfiliados");
+                "GetAfiliados");
             var afiliados = new BindingList<Afiliado>();
             if (result != null && result.Rows != null)
             {
@@ -129,7 +129,7 @@ namespace ClinicaFrba.Negocio
                     if (afiliado.NroAfiliado == 0)//Primero del grupo familiar
                     {
                         afiliado.NroAfiliado = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                            "SHARPS.InsertAfiliado", SqlDataAccessArgs
+                            "InsertAfiliado", SqlDataAccessArgs
                             .CreateWith("@PlanMedico", afiliado.PlanMedico)
                             .And("@ID", afiliado.UserID)
                             .And("@EstadoCivil", afiliado.EstadoCivil)
@@ -139,7 +139,7 @@ namespace ClinicaFrba.Negocio
                     else//Grupo Familiar
                     {
                         afiliado.NroAfiliado = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                        "SHARPS.InsertMiembroGrupoFamiliar", SqlDataAccessArgs
+                        "InsertMiembroGrupoFamiliar", SqlDataAccessArgs
                         .CreateWith("@PlanMedico", afiliado.PlanMedico)
                         .And("@ID", afiliado.UserID)
                         .And("@EstadoCivil", afiliado.EstadoCivil)
@@ -163,7 +163,7 @@ namespace ClinicaFrba.Negocio
             {
                 entityDetailManager.UpdateDetallePersona(afiliado as User);
                 SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                    "SHARPS.UpdateAfiliado", SqlDataAccessArgs
+                    "UpdateAfiliado", SqlDataAccessArgs
                     .CreateWith("@PlanMedico", afiliado.PlanMedico)
                     .And("@ID", afiliado.UserID)
                     .And("@EstadoCivil", afiliado.EstadoCivil)

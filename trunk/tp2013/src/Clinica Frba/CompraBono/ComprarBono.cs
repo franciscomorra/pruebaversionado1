@@ -15,7 +15,7 @@ using System.Configuration;
 
 namespace ClinicaFrba.CompraBono
 {
-    [PermissionRequired(Functionalities.CompraBono)]
+    [PermissionRequired(Functionalities.ComprarBonos)]
     public partial class ComprarBono : Form
     {
         private User _user;
@@ -24,18 +24,6 @@ namespace ClinicaFrba.CompraBono
         private Afiliado afiliado;
         public ComprarBono()
         {
-            if (Session.User.Perfil.Nombre != "Afiliado")
-            {
-                panelCompra.Hide();
-                panelAfiliado.Show();
-            }
-            else
-            {
-                txtAfiliado.Text = Session.User.UserID.ToString();
-                panelAfiliado.Hide();
-                rellenarPrecios();
-                panelCompra.Show();
-            }
             InitializeComponent();
         }
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -65,6 +53,22 @@ namespace ClinicaFrba.CompraBono
             lblprecioFarmacia.Text = afiliado.PlanMedico.PrecioFarmacia.ToString();
             lblTotal.Text = "0";
         
+        }
+
+        private void ComprarBono_Load(object sender, EventArgs e)
+        {
+            if (Session.User.Perfil.Nombre != "Afiliado")
+            {
+                panelCompra.Hide();
+                panelAfiliado.Show();
+            }
+            else
+            {
+                txtAfiliado.Text = Session.User.UserID.ToString();
+                panelAfiliado.Hide();
+                rellenarPrecios();
+                panelCompra.Show();
+            }
         }
     }
 }
