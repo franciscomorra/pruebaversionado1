@@ -175,7 +175,7 @@
             this.Controls.Add(this.panelTurno);
             this.Controls.Add(this.panelAfiliado);
             this.Name = "RegistrarLlegada";
-            this.Text = "RegistrarLlegada";
+            this.Text = "Llegada de Paciente";
             this.panelTurno.ResumeLayout(false);
             this.panelTurno.PerformLayout();
             this.panelAfiliado.ResumeLayout(false);

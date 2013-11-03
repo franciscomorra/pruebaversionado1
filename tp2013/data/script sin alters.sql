@@ -267,7 +267,7 @@ GO
 ;
 
 CREATE TABLE Usuarios ( 
-	UsuarioID [int] identity(1000,1)  NOT NULL,
+	UsuarioID [int] identity(1,1)  NOT NULL,
 	Username nvarchar(MAX),
 	Password nvarchar(MAX) NOT NULL,
 	Intentos [int],
@@ -301,7 +301,7 @@ INSERT INTO Funcionalidades (Descripcion) VALUES ('AbmPlanes');---3
 INSERT INTO Funcionalidades (Descripcion) VALUES ('AdministrarProfesionales');----4
 INSERT INTO Funcionalidades (Descripcion) VALUES ('AdministrarRoles');----5
 INSERT INTO Funcionalidades (Descripcion) VALUES ('CancelarAtencion');----6
-INSERT INTO Funcionalidades (Descripcion) VALUES ('ComprarBono');----7
+INSERT INTO Funcionalidades (Descripcion) VALUES ('ComprarBonos');----7
 INSERT INTO Funcionalidades (Descripcion) VALUES ('GenerarRecetas');----8
 INSERT INTO Funcionalidades (Descripcion) VALUES ('ListarEstadisticas');----9
 INSERT INTO Funcionalidades (Descripcion) VALUES ('PedirTurno');-----10
@@ -553,18 +553,18 @@ GO
 
 
 PRINT 'Ingresando Relacion Usuarios-Roles...'
-
+PRINT 'Medicos...'
 INSERT INTO Usuarios_Roles(Usuario , Rol) --- Lo hago 2 veces ya que uno puede ser para paciente y otro Medico pero ambos tienen el mismo Usuario(DNI)  y se le aignan 2 roles
 SELECT distinct CAST(m.UsuarioID AS Nvarchar(MAX))  , 2    
 FROM Medicos m --No hace falta referenciar a la maestra, ya tengo todos los Medicos
 --WHERE m.Medico_DNI is not null
-
+PRINT 'Afiliados...'
 INSERT INTO Usuarios_Roles(Usuario , Rol) 
 SELECT distinct CAST( a.UsuarioID AS Nvarchar(MAX)),1      
-FROM Usuarios a
+FROM Afiliados a
 --WHERE m.Paciente_DNI is not null
 
-
+PRINT 'Administrador...'
 INSERT INTO Usuarios_Roles (Rol,Usuario)
 SELECT R.RolID, U.UsuarioID
 FROM Roles R, Usuarios U

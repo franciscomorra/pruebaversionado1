@@ -119,10 +119,10 @@
     <Compile Include="Core\Session.cs" />
     <Compile Include="Core\SqlExceptionHandler.cs" />
     <Compile Include="Core\ViewsManager.cs" />
-    <Compile Include="GenerarReceta\GenerarReceta.cs">
+    <Compile Include="GenerarRecetas\GenerarReceta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GenerarReceta\GenerarReceta.Designer.cs">
+    <Compile Include="GenerarRecetas\GenerarReceta.Designer.cs">
       <DependentUpon>GenerarReceta.cs</DependentUpon>
     </Compile>
     <Compile Include="ListadoEstadistico\ListadoEstadisticoForm.cs">
@@ -189,7 +189,7 @@
     <EmbeddedResource Include="CompraBono\ComprarBono.resx">
       <DependentUpon>ComprarBono.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GenerarReceta\GenerarReceta.resx">
+    <EmbeddedResource Include="GenerarRecetas\GenerarReceta.resx">
       <DependentUpon>GenerarReceta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListadoEstadistico\ListadoEstadisticoForm.resx">

@@ -33,10 +33,11 @@
             // 
             // mainMenu
             // 
+            this.mainMenu.AutoSize = false;
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Margin = new System.Windows.Forms.Padding(0, 30, 0, 30);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(914, 24);
+            this.mainMenu.Size = new System.Drawing.Size(914, 50);
             this.mainMenu.TabIndex = 0;
             this.mainMenu.Text = "menuStrip1";
             // 
@@ -44,7 +45,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(914, 568);
+            this.ClientSize = new System.Drawing.Size(914, 381);
             this.Controls.Add(this.mainMenu);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.mainMenu;
@@ -56,7 +57,6 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainView_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

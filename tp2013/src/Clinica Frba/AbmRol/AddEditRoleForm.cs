@@ -23,6 +23,7 @@ namespace ClinicaFrba //REHACER AGREGANDO EL PERFIL
         private Profile Perfil { get; set; }
         public AddEditRoleForm()
         {
+            InitializeComponent();
             var perfiles = profileMan.GetAllProfiles();
             if (perfiles.Count > 1)
             {
@@ -32,7 +33,7 @@ namespace ClinicaFrba //REHACER AGREGANDO EL PERFIL
                 perfilPanel.Show();
                 rolPanel.Hide();
             }
-            InitializeComponent();
+
         }
         public AddEditRoleForm(Rol rol)
         {

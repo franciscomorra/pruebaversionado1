@@ -15,7 +15,7 @@ using System.Configuration;
 
 namespace ClinicaFrba.GenerarReceta
 {
-    [PermissionRequired(Functionalities.GenerarReceta)]
+    [PermissionRequired(Functionalities.GenerarRecetas)]
     public partial class GenerarReceta : Form
     {
         private User _user;

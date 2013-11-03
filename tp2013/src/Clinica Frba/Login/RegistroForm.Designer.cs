@@ -46,7 +46,7 @@ namespace ClinicaFrba
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(443, 510);
+            this.btnSave.Location = new System.Drawing.Point(443, 557);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 0;
@@ -58,7 +58,7 @@ namespace ClinicaFrba
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(12, 510);
+            this.btnCancel.Location = new System.Drawing.Point(12, 557);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -142,7 +142,7 @@ namespace ClinicaFrba
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.userPanel.Location = new System.Drawing.Point(12, 131);
             this.userPanel.Name = "userPanel";
-            this.userPanel.Size = new System.Drawing.Size(506, 373);
+            this.userPanel.Size = new System.Drawing.Size(506, 420);
             this.userPanel.TabIndex = 10;
             // 
             // btnAsignarPerfil
@@ -161,7 +161,7 @@ namespace ClinicaFrba
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(530, 545);
+            this.ClientSize = new System.Drawing.Size(530, 592);
             this.Controls.Add(this.btnAsignarPerfil);
             this.Controls.Add(this.userPanel);
             this.Controls.Add(this.lblPerfil);

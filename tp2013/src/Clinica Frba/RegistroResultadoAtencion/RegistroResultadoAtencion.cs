@@ -15,5 +15,10 @@ namespace ClinicaFrba.RegistroResultadoAtencion
         {
             InitializeComponent();
         }
+
+        private void RegistroResultadoAtencion_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

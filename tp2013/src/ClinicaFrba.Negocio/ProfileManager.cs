@@ -17,7 +17,7 @@ namespace ClinicaFrba.Negocio
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(
                 ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "SHARPS.GetPerfiles"
+                "GetPerfiles"
             );
             var perfiles = new BindingList<Profile>();
             var functionalitiesManager = new FunctionalitiesManager();

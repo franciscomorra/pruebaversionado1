@@ -72,6 +72,7 @@ namespace ClinicaFrba.Core
 
             foreach (var formType in formTypes)
             {
+                MessageBox.Show(formType.ToString());
                 if(IsAccesibleForm(formType))
                     AddMenuItemForView(formType);
             }

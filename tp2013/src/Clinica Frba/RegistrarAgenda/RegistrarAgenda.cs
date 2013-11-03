@@ -25,15 +25,7 @@ namespace ClinicaFrba.RegistrarAgenda
         public RegistrarAgenda()
         {
             //CARGAR HORARIOS LABORALES EN LAS LISTAS
-            if (Session.User.Perfil.Nombre != "Profesional")
-            {
-                panelProfesional.Show();
-            }
-            else
-            {
-                txtProfesional.Text = Session.User.UserID.ToString();
-                panelProfesional.Hide();
-            }
+
             InitializeComponent();
         }
 
@@ -82,6 +74,20 @@ namespace ClinicaFrba.RegistrarAgenda
         {
             //VA CAMPO POR CAMPO Y SUMA
             return 0;
+        }
+
+        private void RegistrarAgenda_Load(object sender, EventArgs e)
+        {
+            if (Session.User.Perfil.Nombre != "Profesional")
+            {
+                //panelProfesional.Show();
+                panelProfesional.Visible = true;
+            }
+            else
+            {
+                txtProfesional.Text = Session.User.UserID.ToString();
+                panelProfesional.Hide();
+            }
         }
 
     }

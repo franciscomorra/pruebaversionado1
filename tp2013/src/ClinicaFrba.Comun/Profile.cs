@@ -13,7 +13,7 @@ namespace ClinicaFrba.Comun
 
         public Profile()
         {
-            Functionalities = new List<Functionalities>();
+            //Functionalities = new List<Functionalities>();
         }
 
         public override bool Equals(object obj)

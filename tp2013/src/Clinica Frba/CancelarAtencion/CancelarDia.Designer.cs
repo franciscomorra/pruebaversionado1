@@ -110,7 +110,7 @@
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.panelProfesional);
             this.Name = "CancelarDia";
-            this.Text = "cancelarDia";
+            this.Text = "Cancelar Turnos del Dia";
             this.panelProfesional.ResumeLayout(false);
             this.panelProfesional.PerformLayout();
             this.ResumeLayout(false);

@@ -169,7 +169,7 @@
             this.Controls.Add(this.searchPanel);
             this.Controls.Add(this.panel1);
             this.Name = "ListadoEstadisticoForm";
-            this.Text = "Listado estadístico";
+            this.Text = "Estadisticas";
             this.Load += new System.EventHandler(this.ListadoEstadisticoForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.groupBox.ResumeLayout(false);

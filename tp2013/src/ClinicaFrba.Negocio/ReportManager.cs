@@ -28,10 +28,10 @@ namespace ClinicaFrba.Negocio
         {
             return new BindingList<ReportType>()
             {
-                { new ReportType("SHARPS.Get_TOPCancelaciones", "Top 5 de las especialidades que más se registraron cancelaciones, tanto de afiliados como de profesionales")},
-                { new ReportType("SHARPS.Get_TOPVencidos", "Top 5 de la cantidad total de bonos farmacia vencidos por afiliado.")},
-                { new ReportType("SHARPS.Get_TOPRecetados", "Top 5 de las especialidades de médicos con más bonos de farmacia recetados.")},
-                { new ReportType("SHARPS.Get_TOPVividores", "Top 10 de los afiliados que utilizaron bonos que ellos mismo no compraron")}
+                { new ReportType("Get_TOPCancelaciones", "Top 5 de las especialidades que más se registraron cancelaciones, tanto de afiliados como de profesionales")},
+                { new ReportType("Get_TOPVencidos", "Top 5 de la cantidad total de bonos farmacia vencidos por afiliado.")},
+                { new ReportType("Get_TOPRecetados", "Top 5 de las especialidades de médicos con más bonos de farmacia recetados.")},
+                { new ReportType("Get_TOPVividores", "Top 10 de los afiliados que utilizaron bonos que ellos mismo no compraron")}
             };
         }
     }

@@ -55,7 +55,6 @@
             this.panelAfiliado.Name = "panelAfiliado";
             this.panelAfiliado.Size = new System.Drawing.Size(618, 43);
             this.panelAfiliado.TabIndex = 24;
-            this.panelAfiliado.Visible = false;
             // 
             // btnBuscarAfiliado
             // 
@@ -92,7 +91,6 @@
             this.panelProfesional.Name = "panelProfesional";
             this.panelProfesional.Size = new System.Drawing.Size(618, 43);
             this.panelProfesional.TabIndex = 23;
-            this.panelProfesional.Visible = false;
             // 
             // btnBuscarProfesional
             // 
@@ -186,7 +184,8 @@
             this.Controls.Add(this.panelAfiliado);
             this.Controls.Add(this.panelProfesional);
             this.Name = "RegistroResultadoAtencion";
-            this.Text = "Registrar Resultado de Atencion";
+            this.Text = "Resultado de Atencion";
+            this.Load += new System.EventHandler(this.RegistroResultadoAtencion_Load);
             this.panelAfiliado.ResumeLayout(false);
             this.panelAfiliado.PerformLayout();
             this.panelProfesional.ResumeLayout(false);
