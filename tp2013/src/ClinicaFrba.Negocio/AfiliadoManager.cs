@@ -76,36 +76,40 @@ namespace ClinicaFrba.Negocio
             {
                 foreach (DataRow row in result.Rows)
                 {
-                    afiliados.Add(new Afiliado()
-                    {
-                        UserID = int.Parse(row["ID"].ToString()),
-                        UserName = row["UserName"].ToString(),
-                        //RoleID = int.Parse(row["ID_Rol"].ToString()),
-                        NroAfiliado = int.Parse(row["nroAfiliado"].ToString()),
-                        PlanMedico = new PlanMedico()
-                        {
-                            ID = int.Parse(row["Plan_ID"].ToString()),
-                            PrecioConsulta = int.Parse(row["PrecioConsulta"].ToString()),
-                            PrecioFarmacia = int.Parse(row["PrecioFarmacia"].ToString())
+                    Afiliado afiliado = new Afiliado();
+                    afiliado.UserID = int.Parse(row["ID"].ToString());
+                    afiliado.UserName = row["UserName"].ToString();
 
-                        },
-                        EstadoCivil = (EstadoCivil)Enum.Parse(typeof(EstadoCivil), row["EstadoCivil"].ToString()),
-                        CantHijos  = int.Parse(row["CantHijos"].ToString()),
-                        
-                        DetallePersona = new DetallesPersona()
-                        {
-                            Apellido = row["Apellido"].ToString(),
-                            Nombre = row["Nombre"].ToString(),
-                            FechaNacimiento = Convert.ToDateTime(row["FechaNacimiento"]),
-                            DNI = long.Parse(row["DNI"].ToString()),
-                            Email = row["Email"].ToString(),
-                            Direccion = row["Direccion"].ToString(),
-                            Telefono = long.Parse(row["Telefono"].ToString()),
-                            Sexo = (TipoSexo)Enum.Parse(typeof(TipoSexo), row["Sexo"].ToString()),
-                            TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString())
-                         
-                        }
-                    });
+                    afiliado.PlanMedico = new PlanMedico();
+                    afiliado.PlanMedico.ID = int.Parse(row["Plan_ID"].ToString());
+                    afiliado.PlanMedico.PrecioConsulta = int.Parse(row["PrecioConsulta"].ToString());
+                    afiliado.PlanMedico.PrecioFarmacia = int.Parse(row["PrecioFarmacia"].ToString());
+                    
+               //     if (row["EstadoCivil"].GetType != null)
+                 //   afiliado.EstadoCivil = row["EstadoCivil"] as string? ?? default(string);
+                    if (!DBNull.Value.Equals(row["EstadoCivil"]))
+                        afiliado.EstadoCivil = (EstadoCivil)Enum.Parse(typeof(EstadoCivil), row["EstadoCivil"].ToString());
+
+                    if (!DBNull.Value.Equals(row["CantHijos"])) 
+                        afiliado.CantHijos = int.Parse(row["CantHijos"].ToString());
+
+                    afiliado.DetallePersona = new DetallesPersona();
+                    afiliado.DetallePersona.Apellido = row["Apellido"].ToString();
+                    afiliado.DetallePersona.Nombre = row["Nombre"].ToString();
+                    afiliado.DetallePersona.FechaNacimiento = Convert.ToDateTime(row["FechaNacimiento"]);
+                    afiliado.DetallePersona.DNI = long.Parse(row["DNI"].ToString());
+                    afiliado.DetallePersona.Email = row["Email"].ToString();
+                    afiliado.DetallePersona.Direccion = row["Direccion"].ToString();
+                    afiliado.DetallePersona.Telefono = long.Parse(row["Telefono"].ToString());
+                    if (!DBNull.Value.Equals(row["Sexo"])) 
+                        afiliado.DetallePersona.Sexo = (TipoSexo)Enum.Parse(typeof(TipoSexo), row["Sexo"].ToString());
+                    afiliado.DetallePersona.TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString());
+                    int grupoFamiliar = int.Parse(row["GrupoFamiliar"].ToString());
+                    int tipoAfiliado = int.Parse(row["tipoAfiliado"].ToString());
+                    afiliado.NroAfiliado = grupoFamiliar*100 + tipoAfiliado;
+                    
+                    afiliados.Add(afiliado);
+                       
                 }
             }
             SessionData.Set("Afiliados", afiliados);

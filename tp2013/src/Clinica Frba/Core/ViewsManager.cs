@@ -31,7 +31,7 @@ namespace ClinicaFrba.Core
         /// <param name="form">Formulario a mostrar</param>
         public static void LoadView(Form form)
         {
-            ClearViews();
+            LimpiarVistas();
 
             form.Text = string.Empty;
             form.ShowIcon = false;
@@ -58,7 +58,6 @@ namespace ClinicaFrba.Core
             form.FormBorderStyle = FormBorderStyle.FixedDialog;
             form.ShowInTaskbar = false;
             form.TopMost = true;
-
             form.ShowDialog();
         }
 
@@ -69,22 +68,32 @@ namespace ClinicaFrba.Core
         {
             var formTypes = typeof(MainView).Assembly.GetTypes()
                 .Where(x => x.IsSubclassOf(typeof(Form)));
-
+            var dropDown = new System.Windows.Forms.ToolStripMenuItem()
+            {
+                Name = "AccionesTS",
+                Text = "Acciones"
+            };
             foreach (var formType in formTypes)
             {
-                MessageBox.Show(formType.ToString());
-                if(IsAccesibleForm(formType))
-                    AddMenuItemForView(formType);
-            }
 
-            var menuItem = new ToolStripMenuItem("Salir", null, new EventHandler(Logoff));
-            _mainWindow.MainMenuStrip.Items.Add(menuItem);
+                if (IsAccesibleForm(formType)) {
+                    var form = (Form)Activator.CreateInstance(formType);
+                    var menuItem = new ToolStripMenuItem(form.Text, null, new EventHandler(Navigate))
+                    {
+                        Tag = formType
+                    };
+                    dropDown.DropDownItems.Add(menuItem);
+                }
+            }
+            var salir = new ToolStripMenuItem("Salir", null, new EventHandler(Logoff));
+            dropDown.DropDownItems.Add(salir);
+            _mainWindow.MainMenuStrip.Items.Add(dropDown);
         }
 
         /// <summary>
         /// Cierra todas las ventanas activas en el sistema
         /// </summary>
-        public static void ClearViews()
+        public static void LimpiarVistas()
         {
             foreach (var chilren in _mainWindow.MdiChildren)
             {
@@ -107,7 +116,7 @@ namespace ClinicaFrba.Core
         /// <summary>
         /// Reinicia el sistema
         /// </summary>
-        public static void Reset()
+        public static void BorrarMenu()
         {
             _mainWindow.MainMenuStrip.Items.Clear();
             _Views.Clear();
@@ -115,27 +124,7 @@ namespace ClinicaFrba.Core
         }
 
         #region Private Members
-
-        /// <summary>
-        /// Es la instancia de la ventana principal en el sistema
-        /// </summary>
         private static Form _mainWindow;
-
-        /// <summary>
-        /// Agrega un elemento del menu para un formulario en particular
-        /// </summary>
-        /// <param name="formType">El Type del formulario para el cual agregar el menu item</param>
-        private static void AddMenuItemForView(Type formType)
-        {
-            var form = (Form)Activator.CreateInstance(formType);
-            
-            var menuItem = new ToolStripMenuItem(form.Text, null, new EventHandler(Navigate))
-            {
-                Tag = formType
-            };
-
-            _mainWindow.MainMenuStrip.Items.Add(menuItem);
-        }
 
         /// <summary>
         /// Metodo ejecutado al seleccionar un elemento del menu
@@ -161,7 +150,7 @@ namespace ClinicaFrba.Core
         {
             if (MessageBox.Show("Confirma que desea salir del sistema?", "Salir", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
-                Session.Close();
+                Session.Salir();
             }
         }
 

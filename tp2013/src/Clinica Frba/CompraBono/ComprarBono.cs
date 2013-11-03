@@ -47,27 +47,36 @@ namespace ClinicaFrba.CompraBono
         }
         private void rellenarPrecios()
         { 
+            
             afiliado = _afiliadoMan.getInfo(_user.UserID);
             
             lblprecioConsulta.Text = afiliado.PlanMedico.PrecioConsulta.ToString();
             lblprecioFarmacia.Text = afiliado.PlanMedico.PrecioFarmacia.ToString();
             lblTotal.Text = "0";
+
         
         }
 
         private void ComprarBono_Load(object sender, EventArgs e)
         {
-            if (Session.User.Perfil.Nombre != "Afiliado")
+            try
             {
-                panelCompra.Hide();
-                panelAfiliado.Show();
+                if (Session.User.Perfil.Nombre != "Afiliado")
+                {
+                    panelCompra.Hide();
+                    panelAfiliado.Show();
+                }
+                else
+                {
+                    txtAfiliado.Text = Session.User.UserID.ToString();
+                    panelAfiliado.Hide();
+                    rellenarPrecios();
+                    panelCompra.Show();
+                }
             }
-            else
+            catch (System.Exception excep)
             {
-                txtAfiliado.Text = Session.User.UserID.ToString();
-                panelAfiliado.Hide();
-                rellenarPrecios();
-                panelCompra.Show();
+                MessageBox.Show(excep.Message);
             }
         }
     }

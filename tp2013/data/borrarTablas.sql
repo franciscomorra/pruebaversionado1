@@ -6,12 +6,13 @@ DROP TABLE [GD2C2013].[dbo].[ConsultaS];
 DROP TABLE [GD2C2013].[dbo].[Detalles_Persona]; 
 
 DROP TABLE [GD2C2013].[dbo].[Especialidades]; 
+DROP TABLE [GD2C2013].[dbo].[Estados_Civiles];
 DROP TABLE [GD2C2013].[dbo].[Estados_turno]; 
 DROP TABLE [GD2C2013].[dbo].[Funcionalidades]; 
 DROP TABLE [GD2C2013].[dbo].[Medicamentos]; 
-DROP TABLE [GD2C2013].[dbo].[Medicos]; 
-DROP TABLE [GD2C2013].[dbo].[Medicos_Especialidades]; 
-DROP TABLE [GD2C2013].[dbo].[PerfilES]; 
+DROP TABLE [GD2C2013].[dbo].[Profesionales]; 
+DROP TABLE [GD2C2013].[dbo].[Profesionales_Especialidades]; 
+DROP TABLE [GD2C2013].[dbo].[PerfileS]; 
 DROP TABLE [GD2C2013].[dbo].[Perfiles_Funcionalidades]; 
 DROP TABLE [GD2C2013].[dbo].[Planes_Medicos]; 
 DROP TABLE [GD2C2013].[dbo].[Recetas]; 

@@ -70,6 +70,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.cbxCant5 = new System.Windows.Forms.ComboBox();
             this.cbxMed5 = new System.Windows.Forms.ComboBox();
+            this.panelAcciones = new System.Windows.Forms.Panel();
             this.panelProfesional.SuspendLayout();
             this.panelAfiliado.SuspendLayout();
             this.panelTurno.SuspendLayout();
@@ -471,6 +472,13 @@
             this.cbxMed5.Size = new System.Drawing.Size(88, 21);
             this.cbxMed5.TabIndex = 0;
             // 
+            // panelAcciones
+            // 
+            this.panelAcciones.Location = new System.Drawing.Point(7, 51);
+            this.panelAcciones.Name = "panelAcciones";
+            this.panelAcciones.Size = new System.Drawing.Size(620, 279);
+            this.panelAcciones.TabIndex = 24;
+            // 
             // GenerarReceta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -486,8 +494,10 @@
             this.Controls.Add(this.panelAfiliado);
             this.Controls.Add(this.panelProfesional);
             this.Controls.Add(this.btnGuardar);
+            this.Controls.Add(this.panelAcciones);
             this.Name = "GenerarReceta";
-            this.Text = "Receta";
+            this.Text = "Generar Receta";
+            this.Load += new System.EventHandler(this.GenerarReceta_Load);
             this.panelProfesional.ResumeLayout(false);
             this.panelProfesional.PerformLayout();
             this.panelAfiliado.ResumeLayout(false);
@@ -554,6 +564,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox cbxCant5;
         private System.Windows.Forms.ComboBox cbxMed5;
+        private System.Windows.Forms.Panel panelAcciones;
 
     }
 }

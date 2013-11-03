@@ -50,5 +50,10 @@ namespace ClinicaFrba.GenerarReceta
             //rellenarAgendas();
         }
 
+        private void GenerarReceta_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

@@ -11,9 +11,10 @@ using ClinicaFrba.Comun;
 
 namespace ClinicaFrba.RegistroUsuario
 {
+    [PermissionRequired(Functionalities.RegistroUsuario)]
     public partial class RegistroUsuario : Form
     {
-        [PermissionRequired(Functionalities.RegistroUsuario)]
+
         public RegistroUsuario()
         {
             InitializeComponent();

@@ -47,7 +47,7 @@
             this.ClientSize = new System.Drawing.Size(292, 273);
             this.Controls.Add(this.label1);
             this.Name = "AbmPlanes";
-            this.Text = "Planes Medicos";
+            this.Text = "Administrar Planes Medicos";
             this.ResumeLayout(false);
             this.PerformLayout();
 
