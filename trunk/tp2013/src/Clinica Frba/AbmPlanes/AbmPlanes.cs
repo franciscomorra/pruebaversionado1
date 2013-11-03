@@ -11,9 +11,10 @@ using ClinicaFrba.Comun;
 
 namespace ClinicaFrba.AbmPlanes
 {
+    [PermissionRequired(Functionalities.AbmEspecialidadesMedicas)]
     public partial class AbmPlanes : Form
     {
-        [PermissionRequired(Functionalities.AbmEspecialidadesMedicas)]
+
         public AbmPlanes()
         {
             InitializeComponent();

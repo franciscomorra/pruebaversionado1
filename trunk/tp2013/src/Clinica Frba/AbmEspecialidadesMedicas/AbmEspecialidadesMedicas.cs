@@ -12,9 +12,9 @@ using ClinicaFrba.Comun;
 
 namespace ClinicaFrba.AbmEspecialidadesMedicas
 {
+    [PermissionRequired(Functionalities.AbmEspecialidadesMedicas)]
     public partial class AbmEspecialidadesMedicas : Form
     {
-        [PermissionRequired(Functionalities.AbmEspecialidadesMedicas)]
         public AbmEspecialidadesMedicas()
         {
             InitializeComponent();

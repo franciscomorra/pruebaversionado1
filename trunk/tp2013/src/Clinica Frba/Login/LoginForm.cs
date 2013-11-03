@@ -58,7 +58,7 @@ namespace ClinicaFrba.Login
                 user.Perfil = rol.Perfil;
                 svc.SetUserFunctionalities(user);
                 Session.StartSession(user);
-                ViewsManager.ClearViews();
+                ViewsManager.LimpiarVistas();
             }
         }
 
@@ -89,7 +89,7 @@ namespace ClinicaFrba.Login
                        regForm.SetUser(usuario);
                     }
                 }
-                ViewsManager.ClearViews();
+                ViewsManager.LimpiarVistas();
             }
             catch (System.Exception excep)
             {

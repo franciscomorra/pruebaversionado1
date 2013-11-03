@@ -151,7 +151,7 @@
             this.Controls.Add(this.rolesDataGridView);
             this.Controls.Add(this.panel1);
             this.Name = "RolesForm";
-            this.Text = "Roles";
+            this.Text = "Administrar Roles";
             this.Load += new System.EventHandler(this.RolesForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.rolesDataGridView)).EndInit();
             this.panel1.ResumeLayout(false);

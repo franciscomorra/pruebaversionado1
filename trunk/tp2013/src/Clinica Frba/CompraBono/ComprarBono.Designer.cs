@@ -52,7 +52,7 @@
             // cbxCantConsulta
             // 
             this.cbxCantConsulta.FormattingEnabled = true;
-            this.cbxCantConsulta.Location = new System.Drawing.Point(224, 12);
+            this.cbxCantConsulta.Location = new System.Drawing.Point(151, 8);
             this.cbxCantConsulta.Name = "cbxCantConsulta";
             this.cbxCantConsulta.Size = new System.Drawing.Size(61, 21);
             this.cbxCantConsulta.TabIndex = 17;
@@ -60,7 +60,7 @@
             // cbxCantFarmacia
             // 
             this.cbxCantFarmacia.FormattingEnabled = true;
-            this.cbxCantFarmacia.Location = new System.Drawing.Point(224, 39);
+            this.cbxCantFarmacia.Location = new System.Drawing.Point(151, 35);
             this.cbxCantFarmacia.Name = "cbxCantFarmacia";
             this.cbxCantFarmacia.Size = new System.Drawing.Size(61, 21);
             this.cbxCantFarmacia.TabIndex = 17;
@@ -68,7 +68,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(79, 15);
+            this.label1.Location = new System.Drawing.Point(6, 11);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(139, 13);
             this.label1.TabIndex = 18;
@@ -77,7 +77,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(79, 42);
+            this.label2.Location = new System.Drawing.Point(6, 38);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(139, 13);
             this.label2.TabIndex = 18;
@@ -86,7 +86,7 @@
             // lblprecioConsulta
             // 
             this.lblprecioConsulta.AutoSize = true;
-            this.lblprecioConsulta.Location = new System.Drawing.Point(291, 15);
+            this.lblprecioConsulta.Location = new System.Drawing.Point(218, 11);
             this.lblprecioConsulta.Name = "lblprecioConsulta";
             this.lblprecioConsulta.Size = new System.Drawing.Size(13, 13);
             this.lblprecioConsulta.TabIndex = 19;
@@ -95,7 +95,7 @@
             // lblprecioFarmacia
             // 
             this.lblprecioFarmacia.AutoSize = true;
-            this.lblprecioFarmacia.Location = new System.Drawing.Point(291, 42);
+            this.lblprecioFarmacia.Location = new System.Drawing.Point(218, 38);
             this.lblprecioFarmacia.Name = "lblprecioFarmacia";
             this.lblprecioFarmacia.Size = new System.Drawing.Size(13, 13);
             this.lblprecioFarmacia.TabIndex = 19;
@@ -104,7 +104,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(332, 15);
+            this.label3.Location = new System.Drawing.Point(259, 11);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(83, 13);
             this.label3.TabIndex = 18;
@@ -113,7 +113,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(332, 42);
+            this.label4.Location = new System.Drawing.Point(259, 38);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(83, 13);
             this.label4.TabIndex = 18;
@@ -122,7 +122,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(314, 68);
+            this.label5.Location = new System.Drawing.Point(241, 64);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(31, 13);
             this.label5.TabIndex = 18;
@@ -131,7 +131,7 @@
             // lblTotal
             // 
             this.lblTotal.AutoSize = true;
-            this.lblTotal.Location = new System.Drawing.Point(351, 68);
+            this.lblTotal.Location = new System.Drawing.Point(278, 64);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(13, 13);
             this.lblTotal.TabIndex = 19;
@@ -140,7 +140,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(392, 68);
+            this.label6.Location = new System.Drawing.Point(319, 64);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 13);
             this.label6.TabIndex = 18;
@@ -148,7 +148,7 @@
             // 
             // btnComprar
             // 
-            this.btnComprar.Location = new System.Drawing.Point(352, 95);
+            this.btnComprar.Location = new System.Drawing.Point(279, 91);
             this.btnComprar.Name = "btnComprar";
             this.btnComprar.Size = new System.Drawing.Size(75, 23);
             this.btnComprar.TabIndex = 20;
@@ -160,9 +160,9 @@
             this.panelAfiliado.Controls.Add(this.btnBuscar);
             this.panelAfiliado.Controls.Add(this.lblAfiliado);
             this.panelAfiliado.Controls.Add(this.txtAfiliado);
-            this.panelAfiliado.Location = new System.Drawing.Point(2, 12);
+            this.panelAfiliado.Location = new System.Drawing.Point(0, 0);
             this.panelAfiliado.Name = "panelAfiliado";
-            this.panelAfiliado.Size = new System.Drawing.Size(618, 43);
+            this.panelAfiliado.Size = new System.Drawing.Size(368, 43);
             this.panelAfiliado.TabIndex = 21;
             this.panelAfiliado.Visible = false;
             // 
@@ -206,16 +206,16 @@
             this.panelCompra.Controls.Add(this.label1);
             this.panelCompra.Controls.Add(this.cbxCantFarmacia);
             this.panelCompra.Controls.Add(this.cbxCantConsulta);
-            this.panelCompra.Location = new System.Drawing.Point(2, 54);
+            this.panelCompra.Location = new System.Drawing.Point(0, 49);
             this.panelCompra.Name = "panelCompra";
-            this.panelCompra.Size = new System.Drawing.Size(616, 140);
+            this.panelCompra.Size = new System.Drawing.Size(368, 128);
             this.panelCompra.TabIndex = 22;
             // 
             // ComprarBono
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(632, 356);
+            this.ClientSize = new System.Drawing.Size(370, 181);
             this.Controls.Add(this.panelCompra);
             this.Controls.Add(this.panelAfiliado);
             this.Name = "ComprarBono";

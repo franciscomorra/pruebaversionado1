@@ -59,6 +59,7 @@
     <Compile Include="ReportManager.cs" />
     <Compile Include="RolesManager.cs" />
     <Compile Include="SessionData.cs" />
+    <Compile Include="TurnosManager.cs" />
     <Compile Include="UsersManager.cs" />
   </ItemGroup>
   <ItemGroup>

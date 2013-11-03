@@ -127,7 +127,7 @@
             // 
             // buttonsPanel
             // 
-            this.buttonsPanel.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.buttonsPanel.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonsPanel.Controls.Add(this.lblResults);
             this.buttonsPanel.Controls.Add(this.btnEliminar);
             this.buttonsPanel.Controls.Add(this.label5);
@@ -144,7 +144,7 @@
             this.lblResults.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblResults.AutoSize = true;
             this.lblResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResults.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblResults.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblResults.Location = new System.Drawing.Point(855, 16);
             this.lblResults.Name = "lblResults";
             this.lblResults.Size = new System.Drawing.Size(14, 13);
@@ -156,7 +156,7 @@
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label5.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label5.Location = new System.Drawing.Point(875, 16);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 13);
@@ -281,7 +281,7 @@
             this.Controls.Add(this.searchPanel);
             this.Controls.Add(this.buttonsPanel);
             this.Name = "ProfesionalesForm";
-            this.Text = "Profesionales";
+            this.Text = "Administrar Profesionales";
             this.Load += new System.EventHandler(this.ProfesionalesForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.profesionalesGrid)).EndInit();
             this.buttonsPanel.ResumeLayout(false);

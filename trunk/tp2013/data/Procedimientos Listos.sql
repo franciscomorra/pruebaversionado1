@@ -51,37 +51,40 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
+use GD2C2013
 
-Create function [GetAfiliadoInfo] 
+CREATE PROCEDURE [GetAfiliadoInfo] 
 (
-@userId numeric (18,0)
+@userId INT
 )
-returns table
-as 
-return
-
-select distinct u.username UserName , pm.codigo Plan_ID , pm.precioConsulta PrecioConsulta, pm.precioFarmacia PrecioFarmacia, a.cantHijos CantHijos, a.nroAfiliado nroAfiliado, a.estadoCivil EstadoCivil, dp.apellido Apellido, dp.nombre Nombre, dp.sexo Sexo
-, dp.mail Email,dp.fechaNac FechaNacimiento, dp.tipo TipoDoc, dp.telefono Telefono, dp.direccion Direccion, dp.dni DNI
+AS 
+BEGIN
+select distinct u.username UserName , pm.codigo Plan_ID , pm.Precio_Bono_Consulta PrecioConsulta, pm.Precio_Bono_Farmacia PrecioFarmacia, a.cantHijos CantHijos, ((a.GrupoFamiliar*100)+a.tipoAfiliado) nroAfiliado, a.estadoCivil EstadoCivil, dp.apellido Apellido, dp.nombre Nombre, dp.sexo Sexo
+, dp.mail Email,dp.fechaNac FechaNacimiento, dp.TipoDNI TipoDoc, dp.telefono Telefono, dp.direccion Direccion, dp.dni DNI
 from Usuarios u
-inner join Afiliados a on a.userId = @userId
+inner join Afiliados a on a.usuarioID = @userId
 inner join Planes_Medicos pm on pm.codigo = a.planMedico
-inner join Detalles_Persona dp on dp.userId = @userId
-where u.idUser = @userId
+inner join Detalles_Persona dp on dp.usuarioID = @userId
+WHERE u.usuarioID = @userId
+END
 
 
 
+CREATE PROCEDURE [GetAfiliados]
 
-create procedure [SHARPS].[GetAfiliados]
+AS
+BEGIN
+	select distinct u.username UserName , pm.codigo Plan_ID , pm.Precio_Bono_Consulta PrecioConsulta, pm.Precio_Bono_Farmacia PrecioFarmacia, a.cantHijos CantHijos, ((a.GrupoFamiliar*100)+a.tipoAfiliado) nroAfiliado, a.estadoCivil EstadoCivil, dp.apellido Apellido, dp.nombre Nombre, dp.sexo Sexo
+	, dp.mail Email,dp.fechaNac FechaNacimiento, dp.TipoDNI TipoDoc, dp.telefono Telefono, dp.direccion Direccion, dp.dni DNI
+	from Usuarios u
+	inner join Afiliados a on a.usuarioID = u.usuarioID
+	inner join Planes_Medicos pm on pm.codigo = a.planMedico
+	inner join Detalles_Persona dp on dp.usuarioID = u.usuarioID
 
-as
-begin
-select [SHARPS].[GetAfiliadoInfo]( u.idUser )
-from Usuarios u
-inner join Afiliados a on a.userId = u.idUser
-end
+END
 
 
-create procedure [SHARPS].[InsertAfiliado]
+create procedure [InsertAfiliado]
 @PlanMedico numeric(18,0),
 @ID numeric (18,0),
 @EstadoCivil nchar(10),
@@ -99,7 +102,7 @@ go
 
 
 
-create procedure [SHARPS].[InsertMiembroGrupoFamiliar]
+create procedure [InsertMiembroGrupoFamiliar]
 @PlanMedico numeric(18,0),
 @ID numeric (18,0),
 @EstadoCivil nchar(10),
@@ -116,7 +119,7 @@ go
 
 
 
-create procedure [SHARPS].[UpdateAfiliado]
+create procedure [UpdateAfiliado]
 
 @PlanMedico numeric(18,0),
 @ID numeric (18,0),
@@ -139,7 +142,7 @@ end
 go
 
 
-create function [SHARPS].[GetProfesionalInfo]
+create function [GetProfesionalInfo]
 ( @userId numeric(18,0)
 )
 
@@ -158,11 +161,11 @@ where u.idUser = @userId
 
 
 
-create procedure [SHARPS].[GetProfesionales]
+create procedure [GetProfesionales]
 
 as
 begin
-select [SHARPS].[GetProfesionalInfo]( u.idUser ) ---ver si se puede hacer
+select [GetProfesionalInfo]( u.idUser ) ---ver si se puede hacer
 from Usuarios u
 inner join Medicos m on m.userId =  u.idUser
 end
@@ -171,7 +174,7 @@ end
 
 
 
-create function [SHARPS].[GetRolesByPerfil]
+create function [GetRolesByPerfil]
 (
 @nombrePerfil nchar(255)
 )
@@ -189,7 +192,7 @@ where p.detallesPerf = @nombrePerfil
 ----HACER LA DE TODOS LOS ROLES
 
 
-create procedure [SHARPS].[InsertDetallePersona]
+create procedure [InsertDetallePersona]
 
 @Telefono numeric (18,0),
 @Email varchar(255),
@@ -211,7 +214,7 @@ end
 go
 
 
-create procedure [SHARPS].[UpdateDetallePersona]
+create procedure [UpdateDetallePersona]
 
 @Telefono numeric (18,0),
 @Email varchar(255),
@@ -236,19 +239,19 @@ end
 go
 
 
-create procedure [SHARPS].[GetRoles]
+create procedure [GetRoles]
 
 
 as 
 begin
-select [SHARPS].[GetRolesByPerfil](detallesPerfil)
+select [GetRolesByPerfil](detallesPerfil)
 from Perfil
 end 
 go
 
 
 
-create procedure[SHARPS].[InsertRole]
+create procedure[InsertRole]
 @Description nchar(10)
 as
 begin
@@ -260,7 +263,7 @@ end
 go
 
 
-create procedure [SHARPS].[UpdateRole]
+create procedure [UpdateRole]
 @Description nchar(10),
 @ID numeric(10,2)
 
@@ -276,7 +279,7 @@ go
 
 
 
-create procedure [SHARPS].[DeleteRole]
+create procedure [DeleteRole]
 
 @Description nchar(10)
 

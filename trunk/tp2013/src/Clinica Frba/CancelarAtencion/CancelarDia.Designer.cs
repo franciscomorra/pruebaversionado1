@@ -35,6 +35,7 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.panelAcciones = new System.Windows.Forms.Panel();
             this.panelProfesional.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,7 +46,7 @@
             this.panelProfesional.Controls.Add(this.txtProfesional);
             this.panelProfesional.Location = new System.Drawing.Point(2, 3);
             this.panelProfesional.Name = "panelProfesional";
-            this.panelProfesional.Size = new System.Drawing.Size(618, 43);
+            this.panelProfesional.Size = new System.Drawing.Size(298, 43);
             this.panelProfesional.TabIndex = 24;
             this.panelProfesional.Visible = false;
             // 
@@ -100,15 +101,23 @@
             this.label1.TabIndex = 32;
             this.label1.Text = "Fecha";
             // 
+            // panelAcciones
+            // 
+            this.panelAcciones.Location = new System.Drawing.Point(2, 57);
+            this.panelAcciones.Name = "panelAcciones";
+            this.panelAcciones.Size = new System.Drawing.Size(298, 73);
+            this.panelAcciones.TabIndex = 33;
+            // 
             // CancelarDia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(632, 356);
+            this.ClientSize = new System.Drawing.Size(303, 138);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.panelProfesional);
+            this.Controls.Add(this.panelAcciones);
             this.Name = "CancelarDia";
             this.Text = "Cancelar Turnos del Dia";
             this.panelProfesional.ResumeLayout(false);
@@ -127,6 +136,7 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panelAcciones;
 
     }
 }

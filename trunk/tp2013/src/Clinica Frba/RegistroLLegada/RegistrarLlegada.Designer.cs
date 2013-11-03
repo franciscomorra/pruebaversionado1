@@ -169,13 +169,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(632, 356);
+            this.ClientSize = new System.Drawing.Size(632, 189);
             this.Controls.Add(this.btnRegistrar);
             this.Controls.Add(this.panelBono);
             this.Controls.Add(this.panelTurno);
             this.Controls.Add(this.panelAfiliado);
             this.Name = "RegistrarLlegada";
-            this.Text = "Llegada de Paciente";
+            this.Text = "Registrar Llegada de Paciente";
             this.panelTurno.ResumeLayout(false);
             this.panelTurno.PerformLayout();
             this.panelAfiliado.ResumeLayout(false);

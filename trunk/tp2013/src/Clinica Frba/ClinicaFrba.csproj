@@ -101,6 +101,12 @@
       <DependentUpon>RolesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmRol\RoleUpdatedEventArgs.cs" />
+    <Compile Include="AbmTurno\TurnosForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmTurno\TurnosForm.Designer.cs">
+      <DependentUpon>TurnosForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CancelarAtencion\CancelarDia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\RolesForm.resx">
       <DependentUpon>RolesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmTurno\TurnosForm.resx">
+      <DependentUpon>TurnosForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CancelarAtencion\CancelarDia.resx">
       <DependentUpon>CancelarDia.cs</DependentUpon>
@@ -305,9 +314,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="PedirTurno\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

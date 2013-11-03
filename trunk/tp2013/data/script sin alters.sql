@@ -12,7 +12,7 @@ CREATE TABLE Afiliados (
 	GrupoFamiliar [int] NOT NULL,
 	PlanMedico [int],
 	Activo [bit],
-	EstadoCivil nvarchar(50),
+	EstadoCivil [int],
 	CantHijos [int],
 	UsuarioID [int],
 	TipoAfiliado [int],    
@@ -26,12 +26,11 @@ GO
 
 CREATE TABLE Agendas ( 
 	AgendaID  [int] IDENTITY (1,1) NOT NULL,
-	Medico [int],
+	Profesional [int],
 	Horario datetime,
-	Turno [int],
 CONSTRAINT [PK_Agendas] PRIMARY KEY CLUSTERED 
 (
-	Turno,Horario ASC
+	Profesional,Horario ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -75,13 +74,13 @@ GO
 CREATE TABLE Detalles_Persona ( 
 	UsuarioID [int] NOT NULL,
 	DNI [int],
-	TipoDNI nvarchar(MAX),
+	TipoDNI nvarchar(5),
 	Telefono [numeric](18, 0),
 	Direccion nvarchar(MAX),
 	Sexo nvarchar(10),
-	Mail nvarchar(MAX),
-	Apellido nvarchar(MAX),
-	Nombre nvarchar(MAX),
+	Mail nvarchar(50),
+	Apellido nvarchar(50),
+	Nombre nvarchar(50),
 	FechaNac datetime
 )
 ;
@@ -102,7 +101,16 @@ CONSTRAINT [PK_Especialidades] PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 ;
-
+CREATE TABLE Estados_Civiles ( 
+	Codigo [int] IDENTITY(1,1) NOT NULL,
+	Descripcion nvarchar(MAX),
+CONSTRAINT [PK_Estados_Civiles] PRIMARY KEY CLUSTERED 
+(
+	[Codigo] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+;
 CREATE TABLE Estados_Turno ( 
 	Estado [int] IDENTITY(1,1) NOT NULL,
 	Descripcion nvarchar(50),
@@ -137,11 +145,11 @@ CONSTRAINT [PK_Medicamentos] PRIMARY KEY CLUSTERED
 GO
 ;
 
-CREATE TABLE Medicos ( 
+CREATE TABLE Profesionales ( 
 	Matricula [int],
 	UsuarioID [int] NOT NULL,
 	Activo char(10),
-CONSTRAINT [PK_Medicos] PRIMARY KEY CLUSTERED 
+CONSTRAINT [PK_Profesionales] PRIMARY KEY CLUSTERED 
 (
 	[Matricula] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
@@ -149,8 +157,8 @@ CONSTRAINT [PK_Medicos] PRIMARY KEY CLUSTERED
 GO
 ;
 
-CREATE TABLE Medicos_Especialidades ( 
-	Medico [int],
+CREATE TABLE Profesionales_Especialidades ( 
+	Profesional [int],
 	Especialidad [int]
 )
 ;
@@ -252,12 +260,11 @@ GO
 
 CREATE TABLE Turnos ( 
 	Numero [int] NOT NULL,
-	Medico [int],
 	Afiliado [int],
-	FechaHora datetime,
 	Estado [int]  ,
 	FechaHoraLlegada datetime,
-	Agenda [int] identity(1,1),
+	Agenda datetime,--Tiene que ser [int],
+	Profesional [int] --No tiene que ir!
 CONSTRAINT [PK_Turnos] PRIMARY KEY CLUSTERED 
 (
 	[Numero] ASC
@@ -295,23 +302,25 @@ CREATE TABLE Usuarios_Roles (
 PRINT 'INICIO DE MIGRACION DE DATOS'
 
 PRINT 'Creando Funcionalidades'
-INSERT INTO Funcionalidades (Descripcion) VALUES ('AdministrarAfiliados'); ---1
-INSERT INTO Funcionalidades (Descripcion) VALUES ('AbmEspecialidadesMedicas');---2
-INSERT INTO Funcionalidades (Descripcion) VALUES ('AbmPlanes');---3
-INSERT INTO Funcionalidades (Descripcion) VALUES ('AdministrarProfesionales');----4
-INSERT INTO Funcionalidades (Descripcion) VALUES ('AdministrarRoles');----5
-INSERT INTO Funcionalidades (Descripcion) VALUES ('CancelarAtencion');----6
-INSERT INTO Funcionalidades (Descripcion) VALUES ('ComprarBonos');----7
-INSERT INTO Funcionalidades (Descripcion) VALUES ('GenerarRecetas');----8
-INSERT INTO Funcionalidades (Descripcion) VALUES ('ListarEstadisticas');----9
-INSERT INTO Funcionalidades (Descripcion) VALUES ('PedirTurno');-----10
-INSERT INTO Funcionalidades (Descripcion) VALUES ('RegistrarAgenda');----11
-INSERT INTO Funcionalidades (Descripcion) VALUES ('RegistroLlegada');----12
-INSERT INTO Funcionalidades (Descripcion) VALUES ('RegistroResultadoAtencion');----13
-INSERT INTO Funcionalidades (Descripcion) VALUES ('RegistroUsuario');----14
+INSERT INTO Funcionalidades (Descripcion) VALUES ('AdministrarAfiliados'); --Listado de Afiliados
+INSERT INTO Funcionalidades (Descripcion) VALUES ('AbmEspecialidadesMedicas'); --No se requiere
+INSERT INTO Funcionalidades (Descripcion) VALUES ('AbmPlanes'); --No se requiere
+INSERT INTO Funcionalidades (Descripcion) VALUES ('AdministrarProfesionales'); --Listado de Profesionales
+INSERT INTO Funcionalidades (Descripcion) VALUES ('AdministrarRoles'); --Listado de Roles
+INSERT INTO Funcionalidades (Descripcion) VALUES ('AdministrarTurnos'); --Listado de Turnos de Afiliado
+INSERT INTO Funcionalidades (Descripcion) VALUES ('CancelarDia'); --Cancelar dia para Profesional
+INSERT INTO Funcionalidades (Descripcion) VALUES ('ComprarBonos'); --Comprar Bonos para Afiliado
+INSERT INTO Funcionalidades (Descripcion) VALUES ('GenerarRecetas'); --Generar una Receta
+INSERT INTO Funcionalidades (Descripcion) VALUES ('ListarEstadisticas'); --Listados Estadisticos
+INSERT INTO Funcionalidades (Descripcion) VALUES ('RegistrarAgenda'); --Registrar Agenda de Profesional
+INSERT INTO Funcionalidades (Descripcion) VALUES ('RegistroLlegada'); --Registrar llegada de Afiliado
+INSERT INTO Funcionalidades (Descripcion) VALUES ('RegistroResultadoAtencion'); --Registrar Resultados
+INSERT INTO Funcionalidades (Descripcion) VALUES ('RegistroUsuario'); --No se requiere
+
+
 PRINT 'Creando Perfiles'
 INSERT INTO Perfiles (Descripcion) VALUES ('Afiliado');
-INSERT INTO Perfiles (Descripcion) VALUES ('Medico');
+INSERT INTO Perfiles (Descripcion) VALUES ('Profesional');
 INSERT INTO Perfiles (Descripcion) VALUES ('Administrativo')
 INSERT INTO Perfiles (Descripcion) VALUES ('Administrador')
 
@@ -322,15 +331,11 @@ WHERE p.Descripcion = 'Administrador'
 
 INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
 SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
-WHERE p.Descripcion = 'Afiliado' AND f.Descripcion = 'CancelarAtencion'
+WHERE p.Descripcion = 'Afiliado' AND f.Descripcion = 'AdministrarTurnos'
 
 INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
 SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
-WHERE p.Descripcion = 'Afiliado' AND f.Descripcion = 'ComprarBono'
-
-INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
-SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
-WHERE p.Descripcion = 'Afiliado' AND f.Descripcion = 'PedirTurno'
+WHERE p.Descripcion = 'Afiliado' AND f.Descripcion = 'ComprarBonos'
 
 INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
 SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
@@ -366,21 +371,21 @@ WHERE p.Descripcion = 'Administrativo' AND f.Descripcion = 'RegistroUsuario'
 
 INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
 SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
-WHERE p.Descripcion = 'Medico' AND f.Descripcion = 'CancelarAtencion'
+WHERE p.Descripcion = 'Profesional' AND f.Descripcion = 'CancelarDia'
 
 
 INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
 SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
-WHERE p.Descripcion = 'Medico' AND f.Descripcion = 'GenerarRecetas'
+WHERE p.Descripcion = 'Profesional' AND f.Descripcion = 'GenerarRecetas'
 
 INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
 SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
-WHERE p.Descripcion = 'Medico' AND f.Descripcion = 'RegistrarAgenda'
+WHERE p.Descripcion = 'Profesional' AND f.Descripcion = 'RegistrarAgenda'
 
 
 INSERT INTO Perfiles_Funcionalidades (Perfil , Funcionalidad)
 SELECT p.perfilID, f.Codigo FROM Perfiles p, Funcionalidades f
-WHERE p.Descripcion = 'Medico' AND f.Descripcion = 'RegistroResultadoAtencion'
+WHERE p.Descripcion = 'Profesional' AND f.Descripcion = 'RegistroResultadoAtencion'
 
 PRINT 'Agregando Roles' --Los roles por defecto tienen los mismos nombres que sus perfiles
 INSERT INTO Roles (Descripcion,Perfil) 
@@ -397,45 +402,53 @@ INSERT INTO Usuarios (Activo,Intentos,Username,Password)
 values (1,0,'Administrador','E6-B8-70-50-BF-CB-81-43-FC-B8-DB-01-70-A4-DC-9E-D0-0D-90-4D-DD-3E-2A-4A-D1-B1-E8-DC-0F-DC-9B-E7')
 
 
-
+PRINT 'Ingresando Estados Civiles...'
+INSERT INTO Estados_Civiles(Descripcion) VALUES ('Soltero'); 
+INSERT INTO Estados_Civiles (Descripcion) VALUES ('Casado');
+INSERT INTO Estados_Civiles (Descripcion) VALUES ('Viudo');
+INSERT INTO Estados_Civiles (Descripcion) VALUES ('En Pareja');
 
 PRINT 'Ingresando los Usuarios de Afiliados...'
 INSERT INTO Usuarios (Activo,Intentos,Username,Password)
 SELECT DISTINCT 1,0,LTRIM(RTRIM(CAST(Paciente_DNI AS Nvarchar(MAX)))),'E6-B8-70-50-BF-CB-81-43-FC-B8-DB-01-70-A4-DC-9E-D0-0D-90-4D-DD-3E-2A-4A-D1-B1-E8-DC-0F-DC-9B-E7' 
 FROM gd_esquema.Maestra 
 WHERE Paciente_DNI is not null
+
+
 PRINT 'Ingresando los Detalles Personales de Afiliados...'
 INSERT INTO Detalles_Persona(DNI,TipoDNI,Telefono,Direccion,Sexo,Mail,Apellido,Nombre,UsuarioID,FechaNac) 
-SELECT distinct m.Paciente_DNI,NULL,m.Paciente_Telefono,m.Paciente_Direccion,NULL, m.Paciente_Mail,m.Paciente_Apellido,m.Paciente_Nombre, u.UsuarioID, m.Paciente_Fecha_Nac 
+SELECT distinct m.Paciente_DNI,'DNI',m.Paciente_Telefono,m.Paciente_Direccion,NULL, m.Paciente_Mail,m.Paciente_Apellido,m.Paciente_Nombre, u.UsuarioID, m.Paciente_Fecha_Nac 
 FROM gd_esquema.Maestra m INNER JOIN Usuarios u ON CAST(m.Paciente_DNI AS Nvarchar(MAX))=u.Username 
 
 PRINT 'Ingresando las Entidades de Afiliados...'
+
 INSERT INTO Afiliados(GrupoFamiliar,PlanMedico,Activo, EstadoCivil,CantHijos,UsuarioID)
 SELECT DISTINCT (RANK() OVER (ORDER BY m.Paciente_DNI DESC)* 100), m.Plan_Med_Codigo,1, NULL,NULL, u.UsuarioID  FROM Usuarios u  -----faltaria aignarle el 01 02 03
 INNER JOIN gd_esquema.Maestra m ON u.Username = CAST(m.Paciente_DNI AS Nvarchar(MAX))
 GO
 
-
-
-PRINT 'Ingresando los Usuarios de Medicos...'
+PRINT 'Ingresando los Usuarios de Profesionales...'
 INSERT INTO Usuarios (Activo,Intentos,Username,Password)
-SELECT DISTINCT 1,0, LTRIM(RTRIM(CAST(Medico_DNI AS Nvarchar(MAX)))),'E6-B8-70-50-BF-CB-81-43-FC-B8-DB-01-70-A4-DC-9E-D0-0D-90-4D-DD-3E-2A-4A-D1-B1-E8-DC-0F-DC-9B-E7' 
+SELECT DISTINCT 1,0, LTRIM(RTRIM(CAST(m.Medico_DNI AS Nvarchar(MAX)))),'E6-B8-70-50-BF-CB-81-43-FC-B8-DB-01-70-A4-DC-9E-D0-0D-90-4D-DD-3E-2A-4A-D1-B1-E8-DC-0F-DC-9B-E7' 
 FROM gd_esquema.Maestra m 
---inner join Usuarios u on  LTRIM(RTRIM(CAST(m.Medico_DNI AS Nvarchar(MAX)))) <> u.Username ---Para que no repita
 WHERE Medico_DNI is not null
-PRINT 'Ingresando los Detalles Personales de Medicos...'
+
+PRINT 'Ingresando los Detalles Personales de Profesionales...'
 INSERT INTO Detalles_Persona(DNI,TipoDNI,Telefono,Direccion,Sexo,Mail,Apellido,Nombre,UsuarioID,FechaNac) 
 SELECT distinct m.Medico_DNI,NULL,m.Medico_Telefono,m.Medico_Direccion,NULL,m.Medico_Mail,m.Medico_Apellido,m.Medico_Nombre, u.UsuarioID,m.Medico_Fecha_Nac FROM gd_esquema.Maestra m 
  INNER JOIN Usuarios u ON CAST(m.Medico_DNI AS Nvarchar(MAX))=u.Username 
  --inner join Detalles_Persona dp on dp.DNI < > m.Medico_DNI ------AUN NO PROBADO
 
 
-PRINT 'Ingresando las Entidades de Medicos...'
+PRINT 'Ingresando las Entidades de Profesionales...'
 
-INSERT INTO Medicos (Matricula, UsuarioID , Activo)
+INSERT INTO Profesionales (Matricula, UsuarioID , Activo)
 SELECT DISTINCT (RANK() OVER (ORDER BY m.Medico_DNI DESC)+ 723), u.UsuarioID, 1 
 FROM gd_esquema.Maestra m
 INNER JOIN Usuarios u ON u.Username= CAST(m.Medico_DNI AS Nvarchar(MAX))
+
+
+
 
 
 --Ingresando los Bonos
@@ -458,23 +471,49 @@ SELECT distinct m.Bono_Farmacia_Numero , m.Bono_Farmacia_Fecha_Impresion, a.Usua
   inner join Usuarios a on CAST(m.Paciente_DNI AS Nvarchar(MAX))= a.Username
   WHERE m.Turno_Fecha is NULL AND m.Bono_Farmacia_Numero is not null   
 GO
+/*
+--Rellenando Agendas
+PRINT 'Rellenando Agendas...'
+INSERT INTO Agendas(Profesional,Horario)
+SELECT distinct x.UsuarioID , m.Turno_Fecha
+FROM gd_esquema.Maestra m
+inner join Usuarios x on x.Username =CAST(m.Medico_DNI AS Nvarchar(MAX))
+WHERE m.Turno_Fecha is not null
+order by 1
+
 
 --Ingresando Turnos
 PRINT 'Ingresando los Turnos...'
 GO
-INSERT INTO Turnos (Numero,Medico,Afiliado,FechaHora,FechaHoraLlegada)
-SELECT distinct m.Turno_Numero , x.UsuarioID , u.UsuarioID, m.Turno_Fecha,null -- ver como descontar 15 minutos
+INSERT INTO Turnos (Numero,Afiliado,Agenda)
+SELECT distinct m.Turno_Numero , u.UsuarioID , a.AgendaID 
+FROM gd_esquema.Maestra m
+INNER JOIN Agendas a ON a.Horario = m.Turno_Fecha
+INNER JOIN Usuarios x ON x.UsuarioID = a.Profesional
+INNER JOIN Usuarios U on u.Username = CAST(m.Paciente_Dni AS Nvarchar(MAX))
+WHERE m.Turno_Fecha is not null
+ORDER by 1
+*/
+
+--Ingresando Turnos
+DELETE FROM TURNOS
+PRINT 'Ingresando los Turnos...'
+GO
+INSERT INTO Turnos (Numero,Profesional,Afiliado,Agenda,FechaHoraLlegada)
+SELECT distinct m.Turno_Numero , x.UsuarioID , u.UsuarioID, m.Turno_Fecha, null -- ver como descontar 15 minutos
 FROM gd_esquema.Maestra m
 inner join Usuarios u ON u.Username=CAST(m.Paciente_DNI AS Nvarchar(MAX))
 inner join Usuarios x on x.Username =CAST(m.Medico_DNI AS Nvarchar(MAX))
+
 WHERE m.Turno_Fecha is not null
 order by 1
 
 --Rellenando Agendas
 PRINT 'Rellenando Agendas...'
-INSERT INTO Agendas(Medico,Horario,Turno)
-SELECT t.Medico,t.FechaHora,t.Numero
+INSERT INTO Agendas(Profesional,Horario)
+SELECT t.Profesional,t.Agenda
 FROM Turnos t
+
 
 PRINT 'Rellenando Consultas...'
 INSERT INTO Consultas(Turno,Bono,Sintomas,Enfermedad)
@@ -494,7 +533,7 @@ FROM gd_esquema.Maestra m
 GO
 
 
---Ingresando Medicos Esp
+--Ingresando Profesionales Esp
 
 PRINT 'Ingresando Tipos de Especialidades...'
 GO
@@ -512,13 +551,13 @@ FROM gd_esquema.Maestra m
 WHERE m.Tipo_Especialidad_Codigo is not null 
 GO
 
-PRINT 'Ingresando Relacion Medicos-Especialidades...'
+PRINT 'Ingresando Relacion Profesionales-Especialidades...'
 GO
-INSERT INTO Medicos_Especialidades(Medico , Especialidad)
+INSERT INTO Profesionales_Especialidades(Profesional, Especialidad)
 SELECT distinct a.Matricula , m.Especialidad_Codigo
 FROM gd_esquema.Maestra m
 inner join Usuarios u on u.Username = CAST(m.Medico_DNI AS Nvarchar(MAX))
-inner join Medicos a on u.UsuarioID = a.UsuarioID
+inner join Profesionales a on u.UsuarioID = a.UsuarioID
 GO
 
 
@@ -553,16 +592,16 @@ GO
 
 
 PRINT 'Ingresando Relacion Usuarios-Roles...'
-PRINT 'Medicos...'
+PRINT 'Profesionales...'
 INSERT INTO Usuarios_Roles(Usuario , Rol) --- Lo hago 2 veces ya que uno puede ser para paciente y otro Medico pero ambos tienen el mismo Usuario(DNI)  y se le aignan 2 roles
 SELECT distinct CAST(m.UsuarioID AS Nvarchar(MAX))  , 2    
-FROM Medicos m --No hace falta referenciar a la maestra, ya tengo todos los Medicos
---WHERE m.Medico_DNI is not null
+FROM Profesionales m 
+
 PRINT 'Afiliados...'
 INSERT INTO Usuarios_Roles(Usuario , Rol) 
 SELECT distinct CAST( a.UsuarioID AS Nvarchar(MAX)),1      
 FROM Afiliados a
---WHERE m.Paciente_DNI is not null
+
 
 PRINT 'Administrador...'
 INSERT INTO Usuarios_Roles (Rol,Usuario)

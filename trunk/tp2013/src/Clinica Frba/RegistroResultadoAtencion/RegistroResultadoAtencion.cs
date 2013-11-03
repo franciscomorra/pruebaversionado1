@@ -6,9 +6,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ClinicaFrba.Core;
+using ClinicaFrba.Comun;
 
 namespace ClinicaFrba.RegistroResultadoAtencion
 {
+    [PermissionRequired(Functionalities.RegistroResultadoAtencion)]
     public partial class RegistroResultadoAtencion : Form
     {
         public RegistroResultadoAtencion()
@@ -16,9 +19,5 @@ namespace ClinicaFrba.RegistroResultadoAtencion
             InitializeComponent();
         }
 
-        private void RegistroResultadoAtencion_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
