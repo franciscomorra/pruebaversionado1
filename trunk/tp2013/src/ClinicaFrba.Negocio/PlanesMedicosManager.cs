@@ -22,10 +22,10 @@ namespace ClinicaFrba.Negocio
                 foreach (DataRow row in result.Rows)
                 {
                     ret.Add(new PlanMedico() { 
-                        ID = int.Parse(row["codigo"].ToString()), 
-                        Nombre = row["Descripcion"].ToString(), 
-                        PrecioConsulta = int.Parse(row["precioConsulta"].ToString()), 
-                        PrecioFarmacia = int.Parse(row["precioFarmacia"].ToString())
+                        ID = int.Parse(row["Codigo"].ToString()), 
+                        Nombre = row["Descripcion"].ToString(),
+                        PrecioConsulta = int.Parse(row["Precio_Bono_Consulta"].ToString()),
+                        PrecioFarmacia = int.Parse(row["Precio_Bono_Farmacia"].ToString())
                     });
                 }
             }

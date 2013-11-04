@@ -11,10 +11,7 @@ namespace ClinicaFrba.Comun
         public string Nombre { get; set; }
         public List<Functionalities> Functionalities { get; set; }
 
-        public Profile()
-        {
-            //Functionalities = new List<Functionalities>();
-        }
+        public Profile(){}
 
         public override bool Equals(object obj)
         {

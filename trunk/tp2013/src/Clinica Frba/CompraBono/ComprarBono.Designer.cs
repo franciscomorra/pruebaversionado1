@@ -56,6 +56,7 @@
             this.cbxCantConsulta.Name = "cbxCantConsulta";
             this.cbxCantConsulta.Size = new System.Drawing.Size(61, 21);
             this.cbxCantConsulta.TabIndex = 17;
+            this.cbxCantConsulta.SelectedIndexChanged += new System.EventHandler(this.cbxCantConsulta_SelectedIndexChanged);
             // 
             // cbxCantFarmacia
             // 
@@ -64,6 +65,7 @@
             this.cbxCantFarmacia.Name = "cbxCantFarmacia";
             this.cbxCantFarmacia.Size = new System.Drawing.Size(61, 21);
             this.cbxCantFarmacia.TabIndex = 17;
+            this.cbxCantFarmacia.SelectedIndexChanged += new System.EventHandler(this.cbxCantConsulta_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -174,6 +176,7 @@
             this.btnBuscar.TabIndex = 34;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click_1);
             // 
             // lblAfiliado
             // 

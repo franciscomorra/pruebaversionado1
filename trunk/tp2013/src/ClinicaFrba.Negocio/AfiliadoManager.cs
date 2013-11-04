@@ -26,8 +26,35 @@ namespace ClinicaFrba.Negocio
                 .Arguments);
             if (row != null && row != null)
             {
+                //afiliado.UserID = int.Parse(row["ID"].ToString());
                 afiliado.UserName = row["UserName"].ToString();
-                afiliado.NroAfiliado = int.Parse(row["nroAfiliado"].ToString());
+
+                afiliado.PlanMedico = new PlanMedico();
+                afiliado.PlanMedico.ID = int.Parse(row["Plan_ID"].ToString());
+                afiliado.PlanMedico.PrecioConsulta = int.Parse(row["PrecioConsulta"].ToString());
+                afiliado.PlanMedico.PrecioFarmacia = int.Parse(row["PrecioFarmacia"].ToString());
+                if (!DBNull.Value.Equals(row["EstadoCivil"]))
+                    afiliado.EstadoCivil = (EstadoCivil)Enum.Parse(typeof(EstadoCivil), row["EstadoCivil"].ToString());
+
+                if (!DBNull.Value.Equals(row["CantHijos"]))
+                    afiliado.CantHijos = int.Parse(row["CantHijos"].ToString());
+                afiliado.DetallePersona = new DetallesPersona();
+                afiliado.DetallePersona.Apellido = row["Apellido"].ToString();
+                afiliado.DetallePersona.Nombre = row["Nombre"].ToString();
+                afiliado.DetallePersona.FechaNacimiento = Convert.ToDateTime(row["FechaNacimiento"]);
+                afiliado.DetallePersona.DNI = long.Parse(row["DNI"].ToString());
+                afiliado.DetallePersona.Email = row["Email"].ToString();
+                afiliado.DetallePersona.Direccion = row["Direccion"].ToString();
+                afiliado.DetallePersona.Telefono = long.Parse(row["Telefono"].ToString());
+                if (!DBNull.Value.Equals(row["Sexo"]))
+                    afiliado.DetallePersona.Sexo = (TipoSexo)Enum.Parse(typeof(TipoSexo), row["Sexo"].ToString());
+                afiliado.DetallePersona.TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString());
+                long grupoFamiliar = long.Parse(row["GrupoFamiliar"].ToString());
+                long tipoAfiliado = long.Parse(row["TipoAfiliado"].ToString());
+                afiliado.NroAfiliado = ((grupoFamiliar * 100) + tipoAfiliado);
+
+                afiliado.UserName = row["UserName"].ToString();
+                //afiliado.NroAfiliado = int.Parse(row["nroAfiliado"].ToString());
                 afiliado.PlanMedico = new PlanMedico()
                 {
                     ID = int.Parse(row["Plan_ID"].ToString()),
@@ -37,21 +64,6 @@ namespace ClinicaFrba.Negocio
                 };
                 afiliado.EstadoCivil = (EstadoCivil)Enum.Parse(typeof(EstadoCivil), row["EstadoCivil"].ToString());
                 afiliado.CantHijos = int.Parse(row["CantHijos"].ToString());
-                
-                afiliado.DetallePersona = new DetallesPersona()
-                {
-                    Apellido = row["Apellido"].ToString(),
-                    Nombre = row["Nombre"].ToString(),
-                    FechaNacimiento = Convert.ToDateTime(row["FechaNacimiento"]),
-                    DNI = long.Parse(row["DNI"].ToString()),
-                    Email = row["Email"].ToString(),
-                    Direccion = row["Direccion"].ToString(),
-                    Telefono = long.Parse(row["Telefono"].ToString()),
-                    Sexo = (TipoSexo)Enum.Parse(typeof(TipoSexo), row["Sexo"].ToString()),
-                    TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString())
-                };
-                
-                
             }
             return afiliado;
         }
@@ -84,15 +96,11 @@ namespace ClinicaFrba.Negocio
                     afiliado.PlanMedico.ID = int.Parse(row["Plan_ID"].ToString());
                     afiliado.PlanMedico.PrecioConsulta = int.Parse(row["PrecioConsulta"].ToString());
                     afiliado.PlanMedico.PrecioFarmacia = int.Parse(row["PrecioFarmacia"].ToString());
-                    
-               //     if (row["EstadoCivil"].GetType != null)
-                 //   afiliado.EstadoCivil = row["EstadoCivil"] as string? ?? default(string);
                     if (!DBNull.Value.Equals(row["EstadoCivil"]))
                         afiliado.EstadoCivil = (EstadoCivil)Enum.Parse(typeof(EstadoCivil), row["EstadoCivil"].ToString());
 
                     if (!DBNull.Value.Equals(row["CantHijos"])) 
                         afiliado.CantHijos = int.Parse(row["CantHijos"].ToString());
-
                     afiliado.DetallePersona = new DetallesPersona();
                     afiliado.DetallePersona.Apellido = row["Apellido"].ToString();
                     afiliado.DetallePersona.Nombre = row["Nombre"].ToString();
@@ -104,10 +112,9 @@ namespace ClinicaFrba.Negocio
                     if (!DBNull.Value.Equals(row["Sexo"])) 
                         afiliado.DetallePersona.Sexo = (TipoSexo)Enum.Parse(typeof(TipoSexo), row["Sexo"].ToString());
                     afiliado.DetallePersona.TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString());
-                    int grupoFamiliar = int.Parse(row["GrupoFamiliar"].ToString());
-                    int tipoAfiliado = int.Parse(row["tipoAfiliado"].ToString());
-                    afiliado.NroAfiliado = grupoFamiliar*100 + tipoAfiliado;
-                    
+                    long grupoFamiliar = long.Parse(row["GrupoFamiliar"].ToString());
+                    long tipoAfiliado = long.Parse(row["TipoAfiliado"].ToString());
+                    afiliado.NroAfiliado = ((grupoFamiliar*100) + tipoAfiliado);
                     afiliados.Add(afiliado);
                        
                 }
@@ -119,7 +126,7 @@ namespace ClinicaFrba.Negocio
         /// <summary>
         /// Guarda un afiliado en la base de datos
         /// </summary>
-        public int GuardarAfiliado(Afiliado afiliado, string password)
+        public long GuardarAfiliado(Afiliado afiliado, string password)
         {
             var usersManager = new UsersManager();
             var entityDetailManager = new DetallePersonaManager();

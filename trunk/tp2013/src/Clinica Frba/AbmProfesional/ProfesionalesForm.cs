@@ -91,7 +91,7 @@ namespace ClinicaFrba.AbmProfesional
             var profesional = row.DataBoundItem as Profesional;
             var regForm = new RegistroForm();
             regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
-            regForm.SetUser(profesional);
+            regForm.SetUser(profesional, new Profile() { Nombre = "Profesional"});
 
             ViewsManager.LoadModal(regForm);
         }

@@ -7,8 +7,7 @@ namespace ClinicaFrba.Comun
 {
     public class Afiliado : User
     {
-        //public static Profile Profile = Profile.Afiliado;
-        public int NroAfiliado { get; set; }
+        public long NroAfiliado { get; set; }
         public EstadoCivil EstadoCivil { get; set; }
         public int CantHijos { get; set; }
         public PlanMedico PlanMedico { get; set; }

@@ -17,13 +17,10 @@ namespace ClinicaFrba
     public partial class RegistroForm : Form
     {
         public event EventHandler<UserSavedEventArgs> OnUserSaved;
-        //private List<Profile> Profiles;
-        private AfiliadoUserControl afiliadoUserControl = new AfiliadoUserControl();
-        private ProfesionalUserControl profesionalUserControl = new ProfesionalUserControl();
-        private Profesional _profesional = new Profesional();
-        private Afiliado _afiliado = new Afiliado();
+
         private bool _updatingData = false;
-        
+        ProfileManager _perfilManager = new ProfileManager();
+        RolesManager _rolesManager = new RolesManager();
         public Profile Profile
         {
             get
@@ -43,108 +40,167 @@ namespace ClinicaFrba
         public RegistroForm()
         {
             InitializeComponent();
-            var manager = new ProfileManager();
-            var perfiles = manager.GetAllProfiles();
-            cbxProfiles.DataSource = perfiles;
-            cbxProfiles.DisplayMember = "Nombre";
-            cbxProfiles.SelectedIndex = 0;
         }
 
-        public void SetUser(User user)
+        public void SetUser(User user, Profile perfil)
         {
             _updatingData = true;
             txtUsername.Text = user.UserName;
-            txtUsername.Enabled = false;
-            txtPassword.Enabled = false;
-            txtConfirmPassword.Enabled = false;
-            cbxProfiles.Enabled = false;
-            Profile perfilmascara = new Profile();
-            if (user is Afiliado)
-            {
-                perfilmascara.Nombre = "Afiliado";
-                _afiliado = user as Afiliado;
-                cbxProfiles.SelectedIndex = cbxProfiles.Items.IndexOf(perfilmascara);//HotFix para que seleccione el perfil
-                afiliadoUserControl.SetUser(_afiliado);
+            txtUsername.Enabled = true;
+           // cbxProfiles.Enabled = false;
+
+            //Inicio detalles de persona
+            txtApellido.Text = user.DetallePersona.Apellido.Trim();
+            txtNombre.Text = user.DetallePersona.Nombre.Trim();
+            txtDNI.Text = user.DetallePersona.DNI.ToString();
+            cbxSexo.SelectedItem = user.DetallePersona.Sexo;
+            dtFechaNacimiento.Value = user.DetallePersona.FechaNacimiento;
+            txtDireccion.Text = user.DetallePersona.Direccion.Trim();
+            txtTelefono.Text = user.DetallePersona.Telefono.ToString();
+            txtMail.Text = user.DetallePersona.Email.Trim();
+            //Fin detalles de persona
+
+            
+            BindingList<Rol> listadoRoles = _rolesManager.GetUserRoles(user.UserID);
+            ProfileManager prmanager = new ProfileManager();
+            perfil = prmanager.getInfo(perfil.Nombre);
+
+            if (listadoRoles.Count == 1) {
+                cbxProfiles.Enabled = false;
+                cbxProfiles.SelectedIndex = cbxProfiles.Items.IndexOf(perfil);
             }
-            else
+
+            if (perfil.Nombre == "Afiliado") {
+                AfiliadoUserControl afiliadoUserControl = new AfiliadoUserControl();
+                Afiliado afiliado = user as Afiliado;
+                afiliadoUserControl.SetUser(afiliado);
+
+                userPanel.Controls.Add(afiliadoUserControl);
+            }else if (perfil.Nombre == "Profesional")
             {
-                perfilmascara.Nombre = "Profesional";
-                _profesional = user as Profesional;
-                cbxProfiles.SelectedIndex = cbxProfiles.Items.IndexOf(perfilmascara);
-                profesionalUserControl.SetUser(_profesional);
+                AfiliadoUserControl afiliadoUserControl = new AfiliadoUserControl();
+                Afiliado afiliado = user as Afiliado;
+                afiliadoUserControl.SetUser(afiliado);
             }
             
         }
 
         private void RegistroForm_Load(object sender, EventArgs e)
         {
-            
+            try
+            {
+                cbxSexo.DataSource = Enum.GetValues(typeof(TipoSexo)).Cast<TipoSexo>().ToList();
+                cbxTipoDNI.DataSource = Enum.GetValues(typeof(TipoDoc)).Cast<TipoDoc>().ToList();
+                var manager = new ProfileManager();
+                var perfiles = manager.GetAllProfiles();
+                cbxProfiles.DataSource = perfiles;
+                cbxProfiles.DisplayMember = "Nombre";
+                cbxProfiles.SelectedIndex = 0;
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+            }
         }
 
-        private void cbxProfiles_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbxProfiles_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            userPanel.Controls.Clear();
-            Profile perfilSelected = (Profile)cbxProfiles.SelectedItem;
-            if (perfilSelected.Nombre == "Afiliado")
-            {
-                
-                userPanel.Controls.Add(afiliadoUserControl);
+            try{
+
+                userPanel.Controls.Clear();
+                Profile perfilSelected = (Profile)cbxProfiles.SelectedItem;
+                if (perfilSelected.Nombre.ToString() == "Afiliado")
+                {
+                    AfiliadoUserControl afiliadoUserControl = new AfiliadoUserControl();
+                    userPanel.Controls.Add(afiliadoUserControl);
+                }
+                else if (perfilSelected.Nombre == "Profesional")
+                {
+                    ProfesionalUserControl profesionalUserControl = new ProfesionalUserControl();
+                    userPanel.Controls.Add(profesionalUserControl);
+                }
             }
-            else
+            catch (System.Exception excep)
             {
-                userPanel.Controls.Add(profesionalUserControl);
+                MessageBox.Show(excep.Message);
             }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (!_updatingData)
-            {
-                if (string.IsNullOrEmpty(txtUsername.Text))
-                    throw new Exception("El nombre de usuario es obligatorio!");
-                if (string.IsNullOrEmpty(txtPassword.Text))
-                    throw new Exception("El password es obligatorio!");
-                if (txtPassword.Text != txtConfirmPassword.Text)
-                    throw new Exception("Los passwords no coinciden!");
-            }
-
-            User user = null;
-            if (Profile.Nombre == "Afiliado")
-            {
-                _afiliado = ((AfiliadoUserControl)afiliadoUserControl).GetAfiliado();
-                _afiliado.UserName = txtUsername.Text;
-                var manager = new AfiliadoManager();
-                int nroAfiliado = manager.GuardarAfiliado(_afiliado, txtPassword.Text);
-                user = _afiliado;
-                if (nroAfiliado != 0) //Nuevo afiliado
+            try{
+                long telefono = 0;
+                long dni = 0;
+                User user = new User();
+                if (!_updatingData)
                 {
-                    if (_afiliado.EstadoCivil != EstadoCivil.Soltero || _afiliado.EstadoCivil != EstadoCivil.Viudo)
+                    if (string.IsNullOrEmpty(txtUsername.Text))
+                        throw new Exception("El nombre de usuario es obligatorio!");
+                }
+
+                if (!long.TryParse(txtTelefono.Text.Trim().Replace("-", ""), out telefono))
+                    throw new Exception("El teléfono debe ser numérico!");
+                if (!long.TryParse(txtDNI.Text, out dni))
+                    throw new Exception("El DNI debe ser numérico!");
+                if (string.IsNullOrEmpty(txtNombre.Text.Trim()))
+                    throw new Exception("El Nombre es obligatorio!");
+                if (string.IsNullOrEmpty(txtApellido.Text.Trim()))
+                    throw new Exception("El Apellido es obligatorio!");
+
+                if (string.IsNullOrEmpty(txtMail.Text.Trim()))
+                    throw new Exception("El Email es obligatorio!");
+
+                user.DetallePersona.Apellido = txtApellido.Text.Trim();
+                user.DetallePersona.Nombre = txtNombre.Text.Trim();
+                user.DetallePersona.DNI = dni;
+                user.DetallePersona.FechaNacimiento = dtFechaNacimiento.Value;
+                user.DetallePersona.Direccion = txtDireccion.Text.Trim();
+                user.DetallePersona.Telefono = telefono;
+                user.DetallePersona.Email = txtMail.Text.Trim();
+
+
+                if (Profile.Nombre == "Afiliado")
+                {
+                    Afiliado afiliado = new Afiliado();
+                    AfiliadoUserControl afiliadoUserControl = new AfiliadoUserControl();
+                    afiliado = ((AfiliadoUserControl)afiliadoUserControl).GetAfiliado();
+                    afiliado.UserName = txtUsername.Text;
+                    var manager = new AfiliadoManager();
+                    long nroAfiliado = manager.GuardarAfiliado(afiliado, txtPassword.Text);
+                    user = afiliado;
+                    if (nroAfiliado != 0) //Nuevo afiliado
                     {
-                        
-                        //Preguntar si quiere agregar Conyuge
+                        if (afiliado.EstadoCivil != EstadoCivil.Soltero || afiliado.EstadoCivil != EstadoCivil.Viudo)
+                        {
+                            //Preguntar si quiere agregar Conyuge
+                        }
+                        if (afiliado.CantHijos > 0)
+                        {
+                            nroAfiliado = nroAfiliado + 1;
 
-
-                    }
-                    if (_afiliado.CantHijos > 0)
-                    {
-                        nroAfiliado = nroAfiliado + 1;
-
+                        }
                     }
                 }
-            }
-            else
-            {
-                _profesional = ((ProfesionalUserControl)profesionalUserControl).GetProfesional();
-                _profesional.UserName = txtUsername.Text;
-                var manager = new ProfesionalManager();
-                manager.GuardarProfesional(_profesional, txtPassword.Text);
-                user = _profesional; 
-            }
+                else
+                {
+                    Profesional profesional = new Profesional();
+                    ProfesionalUserControl profesionalUserControl = new ProfesionalUserControl();
+                    profesional = ((ProfesionalUserControl)profesionalUserControl).GetProfesional();
+                    profesional.UserName = txtUsername.Text;
+                    var manager = new ProfesionalManager();
+                    manager.GuardarProfesional(profesional, txtPassword.Text);
+                    user = profesional; 
+                }
 
-            if (OnUserSaved != null)
+                if (OnUserSaved != null)
+                {
+                    OnUserSaved(this, new UserSavedEventArgs() { Username = this.txtUsername.Text, Password = this.txtPassword.Text, User = user });
+                    this.Close();
+                }
+            }
+            catch (System.Exception excep)
             {
-                OnUserSaved(this, new UserSavedEventArgs() { Username = this.txtUsername.Text, Password = this.txtPassword.Text, User = user });
-                this.Close();
+                MessageBox.Show(excep.Message);
             }
         }
 
@@ -157,6 +213,8 @@ namespace ClinicaFrba
         {
 
         }
+
+
 
     }
 }

@@ -17,7 +17,7 @@ namespace ClinicaFrba.Negocio
             var result = SqlDataAccess.ExecuteDataTableQuery(
                 ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "GetRolesByPerfil", SqlDataAccessArgs
-                .CreateWith("@nombrePerfil", perfil.Nombre)
+                .CreateWith("@Perfil", perfil.Nombre)
             .Arguments);
 
             var roles = new BindingList<Rol>();
@@ -26,11 +26,8 @@ namespace ClinicaFrba.Negocio
             {
                 var rol = new Rol()
                 {
-                    ID = int.Parse(row["ID"].ToString()),
+                    ID = int.Parse(row["RolID"].ToString()),
                     Nombre = row["Descripcion"].ToString(),
-                    Perfil = (Profile)Enum.Parse(typeof(Profile), row["Perfil"].ToString()),
-                    //Functionalities = functionalitiesManager.GetRoleFunctionalities(int.Parse(row["ID"].ToString()))
-
                 };
                 roles.Add(rol);
             }
@@ -53,7 +50,12 @@ namespace ClinicaFrba.Negocio
                 {
                     ID = int.Parse(row["ID"].ToString()),
                     Nombre = row["Descripcion"].ToString(),
-                    Perfil = (Profile)Enum.Parse(typeof(Profile), row["Perfil"].ToString()),
+                    //Perfil = (Profile)Enum.Parse(typeof(Profile), row["Perfil"].ToString()),
+                    Perfil = new Profile(){
+
+                        ID = int.Parse(row["PerfilID"].ToString()),
+                        Nombre = row["PerfilNombre"].ToString()
+                    },
                     Functionalities = functionalitiesManager.GetRoleFunctionalities(int.Parse(row["ID"].ToString()))
 
                 };
@@ -108,11 +110,34 @@ namespace ClinicaFrba.Negocio
             }
         }
 
-        public int GetDefaultRoleID()
+        public BindingList<Rol> GetUserRoles(int userID)//Buscar los roles de un usuario
         {
-            return SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "GetDefaultRoleID");
+            var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "GetUserRoles", SqlDataAccessArgs
+                .CreateWith("@userID", userID).Arguments);
+
+            var roles = new BindingList<Rol>();
+
+            if (result != null && result.Rows != null)
+            {
+
+                foreach (DataRow row in result.Rows)
+                {
+                    var rol = new Rol()
+                    {
+                        ID = int.Parse(row["ID"].ToString()),
+                        Nombre = row["Descripcion"].ToString()
+                    };
+                    rol.Perfil = new Profile();
+                    rol.Perfil.ID = int.Parse(row["PerfilId"].ToString());
+                    rol.Perfil.Nombre = row["PerfilNombre"].ToString();
+                    roles.Add(rol);
+                }
+            }
+
+            return roles;
         }
+
 
     }
 }

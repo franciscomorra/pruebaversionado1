@@ -76,35 +76,6 @@ namespace ClinicaFrba.Negocio
                 throw new Exception("Usuario Bloqueado, contacte al administrador del sistema");
         }
 
-        public BindingList<Rol> GetUserRoles(int userID)//Buscar los roles de un usuario
-        {//21124787
-            var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "GetUserRoles", SqlDataAccessArgs
-                .CreateWith("@userID", userID).Arguments);
-
-            var roles = new BindingList<Rol>();
-
-            if (result != null && result.Rows != null)
-            {
-
-                foreach (DataRow row in result.Rows)
-                {
-                    var rol = new Rol()
-                    {
-                        ID = int.Parse(row["ID"].ToString()),
-                        Nombre = row["Descripcion"].ToString()
-                    };
-                    rol.Perfil = new Profile();
-                    rol.Perfil.ID = int.Parse(row["PerfilId"].ToString());
-                    rol.Perfil.Nombre = row["PerfilNombre"].ToString();
-                    roles.Add(rol);
-                }
-            }
-
-            return roles;
-        }
-
-
         public void SetUserFunctionalities(User user)
         {
             

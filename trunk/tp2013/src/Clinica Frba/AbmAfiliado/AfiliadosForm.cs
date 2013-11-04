@@ -33,16 +33,23 @@ namespace ClinicaFrba.AbmAfiliado
 
         private void AfiliadosForm_Load(object sender, EventArgs e)
         {
-            var dataSource = _afiliadoManager.GetAll();
-            if (_isSearchMode)
+            try
             {
+                var dataSource = _afiliadoManager.GetAll();
+                if (_isSearchMode)
+                {
+                    dataSource.Remove(new Afiliado() { UserID = Session.User.UserID });
+                }
+                dgvAfiliados.AutoGenerateColumns = false;
+                dgvAfiliados.DataSourceChanged += new EventHandler(dgvAfiliados_DataSourceChanged);
                 dataSource.Remove(new Afiliado() { UserID = Session.User.UserID });
+                dgvAfiliados.DataSource = dataSource;
+                dgvAfiliados.DoubleClick += new EventHandler(dgvAfiliados_DoubleClick);
             }
-            dgvAfiliados.AutoGenerateColumns = false;
-            dgvAfiliados.DataSourceChanged += new EventHandler(dgvAfiliados_DataSourceChanged);
-            dataSource.Remove(new Afiliado() { UserID = Session.User.UserID });
-            dgvAfiliados.DataSource = dataSource;
-            dgvAfiliados.DoubleClick += new EventHandler(dgvAfiliados_DoubleClick);
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+            }
         }
 
         void dgvAfiliados_DataSourceChanged(object sender, EventArgs e)
@@ -91,14 +98,20 @@ namespace ClinicaFrba.AbmAfiliado
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (dgvAfiliados.SelectedRows == null || dgvAfiliados.SelectedRows.Count == 0) return;
-            var row = dgvAfiliados.SelectedRows[0];
-            var afiliado = row.DataBoundItem as Afiliado;
-            var regForm = new RegistroForm();
-            regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
-            regForm.SetUser(afiliado);
+           try{
+                if (dgvAfiliados.SelectedRows == null || dgvAfiliados.SelectedRows.Count == 0) return;
+                var row = dgvAfiliados.SelectedRows[0];
+                var afiliado = row.DataBoundItem as User;
+                var regForm = new RegistroForm();
+                regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
+                regForm.SetUser(afiliado, new Profile() {Nombre="Afiliado"});
 
-            ViewsManager.LoadModal(regForm);
+                ViewsManager.LoadModal(regForm);
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+            }
         }
 
         void regForm_OnUserSaved(object sender, UserSavedEventArgs e)

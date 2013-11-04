@@ -27,13 +27,30 @@ namespace ClinicaFrba.Negocio
                 {
                     ID = int.Parse(row["ID"].ToString()),
                     Nombre = row["Descripcion"].ToString(),
-                    Functionalities = functionalitiesManager.GetProfileFunctionalities(int.Parse(row["ID"].ToString()))
+                    //Functionalities = functionalitiesManager.GetProfileFunctionalities(int.Parse(row["ID"].ToString()))
 
                 };
                 perfiles.Add(profile);
             }
 
             return perfiles;
+        }
+
+        public Profile getInfo(string NombrePerfil) 
+        {
+            Profile perfil = new Profile();
+            var row = SqlDataAccess.ExecuteDataRowQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "GetProfileInfo",SqlDataAccessArgs
+                .CreateWith("@NombrePerfil", NombrePerfil)
+                .Arguments);
+
+            if (row != null)
+            {
+                perfil.Nombre = NombrePerfil;
+                perfil.ID = int.Parse(row["PerfilId"].ToString());
+                //perfil.Functionalities = functionalitiesManager.GetProfileFunctionalities(int.Parse(row["ID"].ToString()))
+            }
+            return perfil;
         }
     }
 }
