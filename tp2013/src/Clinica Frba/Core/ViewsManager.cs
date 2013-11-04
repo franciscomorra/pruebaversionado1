@@ -66,12 +66,12 @@ namespace ClinicaFrba.Core
         /// </summary>
         public static void LoadMenu()
         {
+            
             var formTypes = typeof(MainView).Assembly.GetTypes()
                 .Where(x => x.IsSubclassOf(typeof(Form)));
             var dropDown = new System.Windows.Forms.ToolStripMenuItem()
             {
-                Name = "AccionesTS",
-                Text = "Acciones"
+                Text = Session.User.Perfil.Nombre.ToString()
             };
             foreach (var formType in formTypes)
             {

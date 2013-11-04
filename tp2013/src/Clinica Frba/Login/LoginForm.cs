@@ -19,13 +19,10 @@ namespace ClinicaFrba.Login
     {
         User user;
         LoginService svc = new LoginService();
+        RolesManager rolManager = new RolesManager();
         public LoginForm()
         {
             InitializeComponent();
-            //var Config = new ConfigurationManager();
-            string conexion = ConfigurationManager.ConnectionStrings["StringConexion"].ToString();
-
-
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
@@ -41,14 +38,12 @@ namespace ClinicaFrba.Login
 
         private void Login(string userName, string pass)
         {
-            
             user = svc.Login(userName, pass);
-            var roles = svc.GetUserRoles(user.UserID);
+            var roles = rolManager.GetUserRoles(user.UserID);
             if (roles.Count > 1)
             {
                 comboRoles.DataSource = roles;
                 comboRoles.DisplayMember = "Nombre";
-                //comboRoles.SelectedIndex = 0;
                 panelRoles.Show();
             }
             else
@@ -71,22 +66,23 @@ namespace ClinicaFrba.Login
                 user.Perfil = rolSelected.Perfil;
                 svc.SetUserFunctionalities(user);
                 Session.StartSession(user);
-
                 if (user.FaltanDatos=="true") { //Aca va lo de actualizacion de datos incompletos
                     MessageBox.Show("Faltan Datos!");
-                    
+                    //Rehacer con un formulario a parte solo para los datos faltantes
+                    //Afiliado: Sexo, Tipo de Documento, Cantidad de Hijos, Estado Civil
+                    //Profesional: Matricula
                     if (user.Perfil.Nombre == "Afiliado") {
                        var manager = new AfiliadoManager();
                        var usuario = manager.getInfo(user.UserID);
                        var regForm = new RegistroForm();
-                       regForm.SetUser(usuario);
+                       regForm.SetUser(usuario,rolSelected.Perfil);
                     }
                     else if (user.Perfil.Nombre == "Profesional") 
                     {
                        var manager = new ProfesionalManager();
                        var usuario = manager.getInfo(user.UserID);
                        var regForm = new RegistroForm();
-                       regForm.SetUser(usuario);
+                       regForm.SetUser(usuario, rolSelected.Perfil);
                     }
                 }
                 ViewsManager.LimpiarVistas();

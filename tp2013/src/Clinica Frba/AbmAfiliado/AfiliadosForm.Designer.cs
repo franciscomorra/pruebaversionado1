@@ -34,7 +34,6 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
-            this.dgvAfiliados = new System.Windows.Forms.DataGridView();
             this.searchPanel = new System.Windows.Forms.Panel();
             this.groupBox = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -47,10 +46,13 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
+            this.dgvAfiliados = new System.Windows.Forms.DataGridView();
+            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Matricula = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonsPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAfiliados)).BeginInit();
             this.searchPanel.SuspendLayout();
             this.groupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAfiliados)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonsPanel
@@ -122,21 +124,6 @@
             this.btnAgregar.Text = "Nuevo";
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
-            // 
-            // dgvAfiliados
-            // 
-            this.dgvAfiliados.AllowUserToAddRows = false;
-            this.dgvAfiliados.AllowUserToDeleteRows = false;
-            this.dgvAfiliados.AllowUserToOrderColumns = true;
-            this.dgvAfiliados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvAfiliados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAfiliados.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvAfiliados.Location = new System.Drawing.Point(0, 156);
-            this.dgvAfiliados.MultiSelect = false;
-            this.dgvAfiliados.Name = "dgvAfiliados";
-            this.dgvAfiliados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAfiliados.Size = new System.Drawing.Size(588, 314);
-            this.dgvAfiliados.TabIndex = 4;
             // 
             // searchPanel
             // 
@@ -257,6 +244,38 @@
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
+            // dgvAfiliados
+            // 
+            this.dgvAfiliados.AllowUserToAddRows = false;
+            this.dgvAfiliados.AllowUserToDeleteRows = false;
+            this.dgvAfiliados.AllowUserToOrderColumns = true;
+            this.dgvAfiliados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAfiliados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAfiliados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Email,
+            this.Matricula});
+            this.dgvAfiliados.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvAfiliados.Location = new System.Drawing.Point(0, 156);
+            this.dgvAfiliados.MultiSelect = false;
+            this.dgvAfiliados.Name = "dgvAfiliados";
+            this.dgvAfiliados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvAfiliados.Size = new System.Drawing.Size(588, 314);
+            this.dgvAfiliados.TabIndex = 7;
+            // 
+            // Email
+            // 
+            this.Email.DataPropertyName = "DetallePersona";
+            this.Email.HeaderText = "Nombre y Apellido";
+            this.Email.Name = "Email";
+            this.Email.ReadOnly = true;
+            // 
+            // Matricula
+            // 
+            this.Matricula.DataPropertyName = "NroAfiliado";
+            this.Matricula.HeaderText = "Numero de Afiliado";
+            this.Matricula.Name = "Matricula";
+            this.Matricula.ReadOnly = true;
+            // 
             // AfiliadosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -270,10 +289,10 @@
             this.Load += new System.EventHandler(this.AfiliadosForm_Load);
             this.buttonsPanel.ResumeLayout(false);
             this.buttonsPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAfiliados)).EndInit();
             this.searchPanel.ResumeLayout(false);
             this.groupBox.ResumeLayout(false);
             this.groupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAfiliados)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -284,7 +303,6 @@
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.DataGridView dgvAfiliados;
         private System.Windows.Forms.Panel searchPanel;
         private System.Windows.Forms.GroupBox groupBox;
         private System.Windows.Forms.Button btnLimpiar;
@@ -299,5 +317,8 @@
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label lblResults;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DataGridView dgvAfiliados;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Matricula;
     }
 }

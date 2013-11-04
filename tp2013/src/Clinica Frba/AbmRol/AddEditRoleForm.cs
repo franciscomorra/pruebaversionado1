@@ -11,7 +11,7 @@ using ClinicaFrba.Core;
 using ClinicaFrba.AbmRol;
 using ClinicaFrba.Comun;
 
-namespace ClinicaFrba //REHACER AGREGANDO EL PERFIL
+namespace ClinicaFrba
 {
     [NonNavigable]
     public partial class AddEditRoleForm : Form
@@ -21,6 +21,7 @@ namespace ClinicaFrba //REHACER AGREGANDO EL PERFIL
         private FunctionalitiesManager functMan = new FunctionalitiesManager();
         private Rol Rol { get; set; }
         private Profile Perfil { get; set; }
+
         public AddEditRoleForm()
         {
             InitializeComponent();
@@ -46,7 +47,7 @@ namespace ClinicaFrba //REHACER AGREGANDO EL PERFIL
                 perfilPanel.Show();
                 rolPanel.Hide();
             }
-            //perfilPanel.Hide();
+
             cbxPerfiles.Enabled = false;
             rolPanel.Show();
             this.Rol = rol;

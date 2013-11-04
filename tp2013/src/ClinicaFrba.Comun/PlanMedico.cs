@@ -11,7 +11,10 @@ namespace ClinicaFrba.Comun
         public string Nombre { get; set; }
         public int PrecioConsulta { get; set; }
         public int PrecioFarmacia { get; set; }
-        
+        public override string ToString()
+        {
+            return Nombre;
+        }
 
         public override bool Equals(object obj)
         {

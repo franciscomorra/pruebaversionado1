@@ -78,11 +78,6 @@ namespace ClinicaFrba.AbmRol
             if (rolesDataGridView.SelectedRows == null || rolesDataGridView.SelectedRows.Count == 0) return;
             var row = rolesDataGridView.SelectedRows[0];
             var rol = row.DataBoundItem as Rol;
-            if (rol.ID == Session.DefaultRoleID)
-            {
-                MessageBox.Show("Rol no editable");
-                return;
-            }
             if (MessageBox.Show(string.Format("Confirma que desea eliminar el rol {0}?", rol.Nombre)
                 , "Eliminar rol", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
@@ -106,11 +101,6 @@ namespace ClinicaFrba.AbmRol
             if (rolesDataGridView.SelectedRows == null || rolesDataGridView.SelectedRows.Count == 0) return;
             var row = rolesDataGridView.SelectedRows[0];
             var rol = row.DataBoundItem as Rol;
-            if (rol.ID == Session.DefaultRoleID)
-            {
-                MessageBox.Show("Rol no editable");
-                return;
-            }
             var addEditForm = new AddEditRoleForm(rol);
             addEditForm.OnRoleUpdated += new EventHandler<RoleUpdatedEventArgs>(addEditForm_OnRoleUpdated);
             ViewsManager.LoadModal(addEditForm);

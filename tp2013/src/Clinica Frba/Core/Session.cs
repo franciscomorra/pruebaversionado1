@@ -35,8 +35,6 @@ namespace ClinicaFrba.Core
             User = null;
             ViewsManager.BorrarMenu();
         }
-
-        public static int DefaultRoleID { get; private set; }
     }
 }
 

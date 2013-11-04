@@ -26,7 +26,7 @@ namespace ClinicaFrba.CompraBono
         {
             InitializeComponent();
         }
-        private void btnBuscar_Click(object sender, EventArgs e)
+        private void btnBuscar_Click_1(object sender, EventArgs e)
         {
             if (_afiliadosForm == null)
             {
@@ -49,11 +49,16 @@ namespace ClinicaFrba.CompraBono
         { 
             
             afiliado = _afiliadoMan.getInfo(_user.UserID);
-            
             lblprecioConsulta.Text = afiliado.PlanMedico.PrecioConsulta.ToString();
             lblprecioFarmacia.Text = afiliado.PlanMedico.PrecioFarmacia.ToString();
             lblTotal.Text = "0";
-
+            for (int i = 0; i <= 10; i++)
+            {
+                cbxCantConsulta.Items.Add(i);
+                cbxCantConsulta.SelectedIndex = 0;
+                cbxCantFarmacia.Items.Add(i);
+                cbxCantFarmacia.SelectedIndex = 0;
+            }
         
         }
 
@@ -79,6 +84,16 @@ namespace ClinicaFrba.CompraBono
                 MessageBox.Show(excep.Message);
             }
         }
+
+        private void cbxCantConsulta_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int totalConsulta = cbxCantConsulta.SelectedIndex * afiliado.PlanMedico.PrecioConsulta;
+            int totalFarmacia = cbxCantFarmacia.SelectedIndex * afiliado.PlanMedico.PrecioFarmacia;
+            int total = totalConsulta + totalFarmacia;
+            lblTotal.Text = total.ToString();
+        }
+
+
     }
 }
 
