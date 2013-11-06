@@ -4,3 +4,9 @@ C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\D
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\Data\obj\Release\ResolveAssemblyReference.cache
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\Data\obj\Release\Data.dll
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\pruebasConexiones\Data\obj\Release\Data.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Data\bin\Release\Data.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Data\bin\Release\Data.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Data\bin\Release\TFSLA.Data.XML
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Data\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Data\obj\Release\Data.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Data\obj\Release\Data.pdb

@@ -77,7 +77,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.panel1.Controls.Add(this.lblResults);
             this.panel1.Controls.Add(this.btnEliminar);
             this.panel1.Controls.Add(this.label5);

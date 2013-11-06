@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using ClinicaFrba.Core;
 using ClinicaFrba.AbmAfiliado;
-using ClinicaFrba.Login;
+//using ClinicaFrba.Login;
 using ClinicaFrba.Comun;
 using ClinicaFrba.Negocio;
 using System.Configuration;
@@ -32,15 +32,15 @@ namespace ClinicaFrba.CompraBono
             {
                 _afiliadosForm = new AfiliadosForm();
                 _afiliadosForm.SetSearchMode();
-                _afiliadosForm.OnUserSelected += new EventHandler<UserSelectedEventArgs>(afiliadosForm_OnUserSelected);
+                _afiliadosForm.OnAfiliadoSelected += new EventHandler<AfiliadoSelectedEventArgs>(afiliadosForm_OnAfiliadoSelected);
             }
             ViewsManager.LoadModal(_afiliadosForm);
         }
 
-        void afiliadosForm_OnUserSelected(object sender, UserSelectedEventArgs e)
+        void afiliadosForm_OnAfiliadoSelected(object sender, AfiliadoSelectedEventArgs e)
         {
-            _user = e.User;
-            txtAfiliado.Text = _user.UserName;
+            _user = e.Afiliado;
+            txtAfiliado.Text = _user.DetallePersona.Apellido+", " + _user.DetallePersona.Nombre;
             _afiliadosForm.Hide();
             rellenarPrecios();
             panelCompra.Show();

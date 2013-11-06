@@ -41,53 +41,54 @@ namespace ClinicaFrba
         {
             InitializeComponent();
         }
-
+        
         public void SetUser(User user, Profile perfil)
         {
-            _updatingData = true;
-            txtUsername.Text = user.UserName;
-            txtUsername.Enabled = true;
-           // cbxProfiles.Enabled = false;
+            /*
+               _updatingData = true;
+               txtUsername.Text = user.UserName;
+               txtUsername.Enabled = true;
+              // cbxProfiles.Enabled = false;
 
-            //Inicio detalles de persona
-            txtApellido.Text = user.DetallePersona.Apellido.Trim();
-            txtNombre.Text = user.DetallePersona.Nombre.Trim();
-            txtDNI.Text = user.DetallePersona.DNI.ToString();
-            cbxSexo.SelectedItem = user.DetallePersona.Sexo;
-            dtFechaNacimiento.Value = user.DetallePersona.FechaNacimiento;
-            txtDireccion.Text = user.DetallePersona.Direccion.Trim();
-            txtTelefono.Text = user.DetallePersona.Telefono.ToString();
-            txtMail.Text = user.DetallePersona.Email.Trim();
-            //Fin detalles de persona
+               //Inicio detalles de persona
+               txtApellido.Text = user.DetallePersona.Apellido.Trim();
+               txtNombre.Text = user.DetallePersona.Nombre.Trim();
+               txtDNI.Text = user.DetallePersona.DNI.ToString();
+               cbxSexo.SelectedItem = user.DetallePersona.Sexo;
+               dtFechaNacimiento.Value = user.DetallePersona.FechaNacimiento;
+               txtDireccion.Text = user.DetallePersona.Direccion.Trim();
+               txtTelefono.Text = user.DetallePersona.Telefono.ToString();
+               txtMail.Text = user.DetallePersona.Email.Trim();
+               //Fin detalles de persona
 
             
-            BindingList<Rol> listadoRoles = _rolesManager.GetUserRoles(user.UserID);
-            ProfileManager prmanager = new ProfileManager();
-            perfil = prmanager.getInfo(perfil.Nombre);
+               BindingList<Rol> listadoRoles = _rolesManager.GetUserRoles(user.UserID);
+               ProfileManager prmanager = new ProfileManager();
+               perfil = prmanager.getInfo(perfil.Nombre);
 
-            if (listadoRoles.Count == 1) {
-                cbxProfiles.Enabled = false;
-                cbxProfiles.SelectedIndex = cbxProfiles.Items.IndexOf(perfil);
-            }
+               if (listadoRoles.Count == 1) {
+                   cbxProfiles.Enabled = false;
+                   cbxProfiles.SelectedIndex = cbxProfiles.Items.IndexOf(perfil);
+               }
 
-            if (perfil.Nombre == "Afiliado") {
-                AfiliadoUserControl afiliadoUserControl = new AfiliadoUserControl();
-                Afiliado afiliado = user as Afiliado;
-                afiliadoUserControl.SetUser(afiliado);
+               if (perfil.Nombre == "Afiliado") {
+                   AfiliadoUserControl afiliadoUserControl = new AfiliadoUserControl();
+                   Afiliado afiliado = user as Afiliado;
+                   afiliadoUserControl.SetAfiliado(afiliado);
 
-                userPanel.Controls.Add(afiliadoUserControl);
-            }else if (perfil.Nombre == "Profesional")
-            {
-                AfiliadoUserControl afiliadoUserControl = new AfiliadoUserControl();
-                Afiliado afiliado = user as Afiliado;
-                afiliadoUserControl.SetUser(afiliado);
-            }
-            
+                   userPanel.Controls.Add(afiliadoUserControl);
+               }else if (perfil.Nombre == "Profesional")
+               {
+                   AfiliadoUserControl afiliadoUserControl = new AfiliadoUserControl();
+                   Afiliado afiliado = user as Afiliado;
+                   afiliadoUserControl.SetUser(afiliado);
+               }
+           */
         }
 
         private void RegistroForm_Load(object sender, EventArgs e)
         {
-            try
+         /*   try
             {
                 cbxSexo.DataSource = Enum.GetValues(typeof(TipoSexo)).Cast<TipoSexo>().ToList();
                 cbxTipoDNI.DataSource = Enum.GetValues(typeof(TipoDoc)).Cast<TipoDoc>().ToList();
@@ -101,11 +102,12 @@ namespace ClinicaFrba
             {
                 MessageBox.Show(excep.Message);
             }
+          */
         }
 
         private void cbxProfiles_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            try{
+           /* try{
 
                 userPanel.Controls.Clear();
                 Profile perfilSelected = (Profile)cbxProfiles.SelectedItem;
@@ -124,11 +126,12 @@ namespace ClinicaFrba
             {
                 MessageBox.Show(excep.Message);
             }
+            * */
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try{
+            /*try{
                 long telefono = 0;
                 long dni = 0;
                 User user = new User();
@@ -202,6 +205,7 @@ namespace ClinicaFrba
             {
                 MessageBox.Show(excep.Message);
             }
+             * */
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

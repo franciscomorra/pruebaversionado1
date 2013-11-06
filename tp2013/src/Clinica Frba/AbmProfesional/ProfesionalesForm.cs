@@ -9,15 +9,17 @@ using System.Windows.Forms;
 using ClinicaFrba.Core;
 using ClinicaFrba.Comun;
 using ClinicaFrba.Negocio;
-using ClinicaFrba.Login;
+using ClinicaFrba.AbmProfesional;
 
 namespace ClinicaFrba.AbmProfesional
 {
     [PermissionRequired(Functionalities.AdministrarProfesionales)]
     public partial class ProfesionalesForm : Form
     {
-        private ProfesionalManager _manager = new ProfesionalManager();
-        public event EventHandler<UserSelectedEventArgs> OnUserSelected;
+        private ProfesionalManager _ProfesionalManager = new ProfesionalManager();
+        private bool _isSearchMode = false;
+        public event EventHandler<ProfesionalSelectedEventArgs> OnProfesionalSelected;
+        public event EventHandler<ProfesionalSavedEventArgs> OnProfesionalSaved;
 
         public ProfesionalesForm()
         {
@@ -27,17 +29,29 @@ namespace ClinicaFrba.AbmProfesional
         public void SetSearchMode()
         {
             buttonsPanel.Visible = false;
+            _isSearchMode = true;
         }
 
         private void ProfesionalesForm_Load(object sender, EventArgs e)
         {
-            var bindingSource = new BindingSource();
-            var table = _manager.GetAll();
-            table.Remove(new Profesional() { UserID = Session.User.UserID });
-            profesionalesGrid.AutoGenerateColumns = false;
-            profesionalesGrid.DataSourceChanged += new EventHandler(profesionalesGrid_DataSourceChanged);
-            profesionalesGrid.DataSource = table;
-            profesionalesGrid.DoubleClick += new EventHandler(profesionalesGrid_DoubleClick);
+            try
+            {
+                var dataSource = _ProfesionalManager.GetAll();
+                if (_isSearchMode)
+                {
+                    dataSource.Remove(new Profesional() { UserID = Session.Profesional.UserID });
+                }
+
+                profesionalesGrid.AutoGenerateColumns = false;
+                profesionalesGrid.DataSourceChanged += new EventHandler(profesionalesGrid_DataSourceChanged);
+                dataSource.Remove(new Profesional() { UserID = Session.Profesional.UserID });
+                profesionalesGrid.DataSource = dataSource;
+                profesionalesGrid.DoubleClick += new EventHandler(profesionalesGrid_DoubleClick);
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+            }
         }
 
         void profesionalesGrid_DataSourceChanged(object sender, EventArgs e)
@@ -52,11 +66,11 @@ namespace ClinicaFrba.AbmProfesional
             var row = profesionalesGrid.SelectedRows[0];
             var profesional = row.DataBoundItem as Profesional;
 
-            if (OnUserSelected != null)
+            if (OnProfesionalSelected != null)
             {
-                OnUserSelected(this, new UserSelectedEventArgs()
+                OnProfesionalSelected(this, new ProfesionalSelectedEventArgs()
                 {
-                    User = profesional as User
+                    Profesional = profesional
                 });
             }
         }
@@ -71,7 +85,7 @@ namespace ClinicaFrba.AbmProfesional
             {
                 try
                 {
-                    _manager.Delete(profesional);
+                    _ProfesionalManager.Delete(profesional);
                     var dataSource = profesionalesGrid.DataSource as BindingList<Profesional>;
                     dataSource.Remove(profesional);
                     profesionalesGrid.Refresh();
@@ -89,18 +103,19 @@ namespace ClinicaFrba.AbmProfesional
             if (profesionalesGrid.SelectedRows == null || profesionalesGrid.SelectedRows.Count == 0) return;
             var row = profesionalesGrid.SelectedRows[0];
             var profesional = row.DataBoundItem as Profesional;
+            /*
             var regForm = new RegistroForm();
-            regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
-            regForm.SetUser(profesional, new Profile() { Nombre = "Profesional"});
+            regForm.OnProfesionalSaved += new EventHandler<ProfesionalSavedEventArgs>(regForm_OnProfesionalSaved);
+            regForm.SetProfesional(profesional, new Profile() { Nombre = "Profesional"});
 
-            ViewsManager.LoadModal(regForm);
+            ViewsManager.LoadModal(regForm);*/
         }
 
-        void regForm_OnUserSaved(object sender, UserSavedEventArgs e)
+        void regForm_OnProfesionalSaved(object sender, ProfesionalSavedEventArgs e)
         {
-            MessageBox.Show("Se han guardado los datos del profesional " + e.Username);
+            MessageBox.Show("Se han guardado los datos del profesional " + e.Profesional.DetallePersona.Apellido);
             var dataSource = profesionalesGrid.DataSource as BindingList<Profesional>;
-            var profesional = e.User as Profesional;
+            var profesional = e.Profesional;
             if (dataSource.Contains(profesional)) dataSource.Remove(profesional);
             dataSource.Add(profesional);
             profesionalesGrid.DataSource = new BindingList<Profesional>(dataSource.OrderBy(x => x.DetallePersona.Apellido).ToList());
@@ -109,10 +124,11 @@ namespace ClinicaFrba.AbmProfesional
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            var regForm = new RegistroForm();
-            regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
+            /*var regForm = new RegistroForm();
+            regForm.OnProfesionalSaved += new EventHandler<ProfesionalSavedEventArgs>(regForm_OnProfesionalSaved);
             regForm.Profile = new Profile() { Nombre = "Profesional" };
             ViewsManager.LoadModal(regForm);
+        */
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -120,16 +136,20 @@ namespace ClinicaFrba.AbmProfesional
             txtApellido.Text = string.Empty;
             txtMatricula.Text = string.Empty;
             txtEmail.Text = string.Empty;
-            profesionalesGrid.DataSource = _manager.GetAll();
+            profesionalesGrid.DataSource = _ProfesionalManager.GetAll();
             profesionalesGrid.Refresh();
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            var profesionales = _manager.GetAll();
+            var profesionales = _ProfesionalManager.GetAll();
             if (!string.IsNullOrEmpty(txtApellido.Text))
             {
                 profesionales = new BindingList<Profesional>(profesionales.Where(x => x.DetallePersona.Apellido.ToLowerInvariant().Contains(txtApellido.Text.ToLowerInvariant())).ToList());
+            }
+            if (!string.IsNullOrEmpty(txtNombre.Text))
+            {
+                profesionales = new BindingList<Profesional>(profesionales.Where(x => x.DetallePersona.Nombre.ToLowerInvariant().Contains(txtNombre.Text.ToLowerInvariant())).ToList());
             }
             if (!string.IsNullOrEmpty(txtEmail.Text))
             {
@@ -139,7 +159,7 @@ namespace ClinicaFrba.AbmProfesional
             {
                 profesionales = new BindingList<Profesional>(profesionales.Where(x => x.Matricula.ToLowerInvariant().Equals(txtMatricula.Text.ToLowerInvariant())).ToList());
             }
-            profesionales.Remove(new Profesional() { UserID = Session.User.UserID });
+            profesionales.Remove(new Profesional() { UserID = Session.Profesional.UserID });
             profesionalesGrid.DataSource = profesionales;
             profesionalesGrid.Refresh();
         }

@@ -34,3 +34,8 @@ C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica 
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.RegistroUsuario.RegistroUsuario.resources
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.exe
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\bin\Release\ClinicaFrba.exe.config
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.AbmTurno.TurnosForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.AddEditAfliliadoForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.AddEditAfiliadoForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.AddEditProfesionalForm.resources

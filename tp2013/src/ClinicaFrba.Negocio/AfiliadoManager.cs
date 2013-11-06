@@ -21,7 +21,7 @@ namespace ClinicaFrba.Negocio
         {
             Afiliado afiliado = new Afiliado();
             var row = SqlDataAccess.ExecuteDataRowQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "GetAfiliadoInfo",SqlDataAccessArgs
+                "[SHARPS].GetAfiliadoInfo", SqlDataAccessArgs
                 .CreateWith("@userId", userID)
                 .Arguments);
             if (row != null && row != null)
@@ -77,12 +77,14 @@ namespace ClinicaFrba.Negocio
         
         public BindingList<Afiliado> GetAll()
         {
+            
             if (SessionData.Contains("Afiliados"))
             {
                 return SessionData.Get<BindingList<Afiliado>>("Afiliados");
             }
+            
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "GetAfiliados");
+                "[SHARPS].GetAfiliados");
             var afiliados = new BindingList<Afiliado>();
             if (result != null && result.Rows != null)
             {
@@ -119,6 +121,7 @@ namespace ClinicaFrba.Negocio
                        
                 }
             }
+            
             SessionData.Set("Afiliados", afiliados);
             return afiliados;
         }

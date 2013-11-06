@@ -10,9 +10,11 @@ namespace ClinicaFrba.Comun
         //public static Profile Profile = Profile.Profesional;
         public string Matricula { get; set; }
         public List<Especialidad> Especialidades { get; set; }
+        
         public override string ToString()
         {
             return Matricula;
         }
+        
     }
 }

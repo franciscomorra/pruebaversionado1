@@ -12,18 +12,19 @@ namespace ClinicaFrba.Core
     /// </summary>
     class Session
     {
-        /// <summary>
-        /// Obtiene la instancia del usuario logueado actualmente en el sistema
-        /// </summary>
-        public static User User { get; private set; }
 
-        /// <summary>
-        /// Inicia una sesion para un usuario en particular
-        /// </summary>
-        /// <param name="user">Usuario que se esta logueando</param>
+        public static User User { get; private set; } //El que se esta logueando
+        //Los siguientes son para la seleccion entre formularios
+        public static Afiliado Afiliado { get; private set; } 
+        public static Profesional Profesional { get; private set; }
+        public static Turno Turno { get; private set; }
+
         public static void StartSession(User user)
         {
-            User = user;
+            User = user; //Recibe la info del usuario
+            Afiliado = new Afiliado();
+            Profesional = new Profesional();
+            Turno = new Turno();
             ViewsManager.LoadMenu();
         }
 
@@ -32,7 +33,10 @@ namespace ClinicaFrba.Core
         /// </summary>
         public static void Salir()
         {
-            User = null;
+            User = null;//Limpia la info del usuario
+            Afiliado = null;
+            Profesional = null;
+            Turno = null;
             ViewsManager.BorrarMenu();
         }
     }

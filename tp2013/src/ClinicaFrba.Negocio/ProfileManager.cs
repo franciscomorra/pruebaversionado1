@@ -13,13 +13,13 @@ namespace ClinicaFrba.Negocio
 {
     public class ProfileManager
     {
-        public BindingList<Profile> GetAllProfiles()
+        public List<Profile> GetAllProfiles()
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(
                 ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "GetPerfiles"
+                "[SHARPS].GetPerfiles"
             );
-            var perfiles = new BindingList<Profile>();
+            var perfiles = new List<Profile>();
             var functionalitiesManager = new FunctionalitiesManager();
             foreach (DataRow row in result.Rows)
             {
@@ -40,7 +40,7 @@ namespace ClinicaFrba.Negocio
         {
             Profile perfil = new Profile();
             var row = SqlDataAccess.ExecuteDataRowQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "GetProfileInfo",SqlDataAccessArgs
+                "[SHARPS].GetProfileInfo", SqlDataAccessArgs
                 .CreateWith("@NombrePerfil", NombrePerfil)
                 .Arguments);
 

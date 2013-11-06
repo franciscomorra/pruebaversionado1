@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.profesionalesGrid = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RazonSocial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Matricula = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEliminar = new System.Windows.Forms.Button();
@@ -44,10 +42,12 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.groupBox = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtMatricula = new System.Windows.Forms.TextBox();
+            this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.profesionalesGrid)).BeginInit();
             this.buttonsPanel.SuspendLayout();
@@ -63,8 +63,6 @@
             this.profesionalesGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.profesionalesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.profesionalesGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.RazonSocial,
             this.Matricula,
             this.Email});
             this.profesionalesGrid.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -75,25 +73,10 @@
             this.profesionalesGrid.Size = new System.Drawing.Size(952, 396);
             this.profesionalesGrid.TabIndex = 6;
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "UserID";
-            this.dataGridViewTextBoxColumn1.FillWeight = 20.30457F;
-            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // RazonSocial
-            // 
-            this.RazonSocial.DataPropertyName = "RazonSocial";
-            this.RazonSocial.FillWeight = 179.6954F;
-            this.RazonSocial.HeaderText = "Razón Social";
-            this.RazonSocial.Name = "RazonSocial";
-            this.RazonSocial.ReadOnly = true;
-            // 
             // Matricula
             // 
             this.Matricula.DataPropertyName = "Matricula";
+            this.Matricula.FillWeight = 27.52253F;
             this.Matricula.HeaderText = "Matricula";
             this.Matricula.Name = "Matricula";
             this.Matricula.ReadOnly = true;
@@ -101,7 +84,8 @@
             // Email
             // 
             this.Email.DataPropertyName = "DetallePersona";
-            this.Email.HeaderText = "Email";
+            this.Email.FillWeight = 153.2087F;
+            this.Email.HeaderText = "Nombre";
             this.Email.Name = "Email";
             this.Email.ReadOnly = true;
             // 
@@ -210,10 +194,12 @@
             this.groupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox.Controls.Add(this.label4);
+            this.groupBox.Controls.Add(this.label1);
             this.groupBox.Controls.Add(this.label3);
             this.groupBox.Controls.Add(this.label2);
             this.groupBox.Controls.Add(this.txtEmail);
             this.groupBox.Controls.Add(this.txtMatricula);
+            this.groupBox.Controls.Add(this.txtNombre);
             this.groupBox.Controls.Add(this.txtApellido);
             this.groupBox.Location = new System.Drawing.Point(12, 6);
             this.groupBox.Name = "groupBox";
@@ -224,12 +210,23 @@
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(38, 48);
+            this.label4.Location = new System.Drawing.Point(669, 48);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(50, 13);
             this.label4.TabIndex = 7;
             this.label4.Text = "Matricula";
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(38, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Nombre";
             // 
             // label3
             // 
@@ -260,10 +257,19 @@
             // 
             // txtMatricula
             // 
-            this.txtMatricula.Location = new System.Drawing.Point(94, 45);
+            this.txtMatricula.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMatricula.Location = new System.Drawing.Point(725, 45);
             this.txtMatricula.Name = "txtMatricula";
             this.txtMatricula.Size = new System.Drawing.Size(197, 20);
             this.txtMatricula.TabIndex = 1;
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtNombre.Location = new System.Drawing.Point(94, 45);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(197, 20);
+            this.txtNombre.TabIndex = 0;
             // 
             // txtApellido
             // 
@@ -296,10 +302,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView profesionalesGrid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RazonSocial;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Matricula;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Panel buttonsPanel;
@@ -316,5 +318,9 @@
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.Label lblResults;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Matricula;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
     }
 }

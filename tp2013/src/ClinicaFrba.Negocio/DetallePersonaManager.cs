@@ -17,7 +17,7 @@ namespace ClinicaFrba.Negocio
             if (transaction != null)
             {
                 return SqlDataAccess.ExecuteScalarQuery<int>(
-                    "InsertDetallePersona", SqlDataAccessArgs
+                    "[SHARPS].InsertDetallePersona", SqlDataAccessArgs
                     .CreateWith(
                         "@Telefono", user.DetallePersona.Telefono)
                     .And("@Email", user.DetallePersona.Email)
@@ -33,7 +33,7 @@ namespace ClinicaFrba.Negocio
                     transaction);
             }
             return SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "InsertDetallePersona", SqlDataAccessArgs
+                "[SHARPS].InsertDetallePersona", SqlDataAccessArgs
                 .CreateWith(
                         "@Telefono", user.DetallePersona.Telefono)
                     .And("@Email", user.DetallePersona.Email)
@@ -51,7 +51,7 @@ namespace ClinicaFrba.Negocio
         internal void UpdateDetallePersona(User user)
         {
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "UpdateDetallePersona", SqlDataAccessArgs
+                "[SHARPS].UpdateDetallePersona", SqlDataAccessArgs
                 .CreateWith(
                     "@Telefono", user.DetallePersona.Telefono)
                     .And("@Email", user.DetallePersona.Email)

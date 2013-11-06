@@ -41,7 +41,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnGenerarReceta = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
             this.panelAcciones = new System.Windows.Forms.Panel();
             this.panelConsulta = new System.Windows.Forms.Panel();
             this.btnBuscarBono = new System.Windows.Forms.Button();
@@ -73,6 +73,7 @@
             this.btnBuscarAfiliado.TabIndex = 34;
             this.btnBuscarAfiliado.Text = "Buscar";
             this.btnBuscarAfiliado.UseVisualStyleBackColor = true;
+            this.btnBuscarAfiliado.Click += new System.EventHandler(this.btnBuscarAfiliado_Click);
             // 
             // lblAfiliado
             // 
@@ -103,12 +104,13 @@
             // 
             // btnBuscarProfesional
             // 
-            this.btnBuscarProfesional.Location = new System.Drawing.Point(180, 7);
+            this.btnBuscarProfesional.Location = new System.Drawing.Point(186, 7);
             this.btnBuscarProfesional.Name = "btnBuscarProfesional";
             this.btnBuscarProfesional.Size = new System.Drawing.Size(75, 23);
             this.btnBuscarProfesional.TabIndex = 34;
             this.btnBuscarProfesional.Text = "Buscar";
             this.btnBuscarProfesional.UseVisualStyleBackColor = true;
+            this.btnBuscarProfesional.Click += new System.EventHandler(this.btnBuscarProfesional_Click);
             // 
             // lblProf
             // 
@@ -121,7 +123,7 @@
             // 
             // txtProfesional
             // 
-            this.txtProfesional.Location = new System.Drawing.Point(71, 9);
+            this.txtProfesional.Location = new System.Drawing.Point(77, 9);
             this.txtProfesional.Name = "txtProfesional";
             this.txtProfesional.ReadOnly = true;
             this.txtProfesional.Size = new System.Drawing.Size(100, 20);
@@ -169,15 +171,17 @@
             this.btnGenerarReceta.TabIndex = 28;
             this.btnGenerarReceta.Text = "GenerarReceta";
             this.btnGenerarReceta.UseVisualStyleBackColor = true;
+            this.btnGenerarReceta.Click += new System.EventHandler(this.btnGenerarReceta_Click);
             // 
-            // button1
+            // btnGuardar
             // 
-            this.button1.Location = new System.Drawing.Point(387, 112);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(126, 23);
-            this.button1.TabIndex = 29;
-            this.button1.Text = "Solo Guardar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnGuardar.Location = new System.Drawing.Point(387, 112);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(126, 23);
+            this.btnGuardar.TabIndex = 29;
+            this.btnGuardar.Text = "Solo Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.button1_Click);
             // 
             // panelAcciones
             // 
@@ -207,6 +211,7 @@
             this.btnBuscarBono.TabIndex = 34;
             this.btnBuscarBono.Text = "Buscar";
             this.btnBuscarBono.UseVisualStyleBackColor = true;
+            this.btnBuscarBono.Click += new System.EventHandler(this.btnBuscarBono_Click);
             // 
             // label3
             // 
@@ -228,7 +233,7 @@
             // panelResultado
             // 
             this.panelResultado.Controls.Add(this.label1);
-            this.panelResultado.Controls.Add(this.button1);
+            this.panelResultado.Controls.Add(this.btnGuardar);
             this.panelResultado.Controls.Add(this.textBox2);
             this.panelResultado.Controls.Add(this.textBox1);
             this.panelResultado.Controls.Add(this.label2);
@@ -275,7 +280,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btnGenerarReceta;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Panel panelAcciones;
         private System.Windows.Forms.Panel panelConsulta;
         private System.Windows.Forms.Button btnBuscarBono;

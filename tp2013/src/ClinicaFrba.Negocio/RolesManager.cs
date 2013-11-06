@@ -16,7 +16,7 @@ namespace ClinicaFrba.Negocio
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(
                 ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "GetRolesByPerfil", SqlDataAccessArgs
+                "[SHARPS].GetRolesByPerfil", SqlDataAccessArgs
                 .CreateWith("@Perfil", perfil.Nombre)
             .Arguments);
 
@@ -40,7 +40,7 @@ namespace ClinicaFrba.Negocio
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(
                 ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "GetRoles"
+                "[SHARPS].GetRoles"
             );
             var roles = new BindingList<Rol>();
             var functionalitiesManager = new FunctionalitiesManager();
@@ -67,7 +67,7 @@ namespace ClinicaFrba.Negocio
         public void DeleteRole(Rol rol)
         {
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "DeleteRole", SqlDataAccessArgs
+                "[SHARPS].DeleteRole", SqlDataAccessArgs
                 .CreateWith("@Rol_ID", rol.ID)
             .Arguments);
         }
@@ -81,7 +81,7 @@ namespace ClinicaFrba.Negocio
         private void InsertRole(Rol rol)
         {
             var roleId = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "InsertRole", SqlDataAccessArgs
+                "[SHARPS].InsertRole", SqlDataAccessArgs
                 .CreateWith("@Description", rol.Nombre)
             .Arguments);
             rol.ID = roleId;
@@ -91,7 +91,7 @@ namespace ClinicaFrba.Negocio
         private void UpdateRole(Rol rol)
         {
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "UpdateRole", SqlDataAccessArgs
+                "[SHARPS].UpdateRole", SqlDataAccessArgs
                 .CreateWith("@Description", rol.Nombre)
                 .And("@ID", rol.ID)
             .Arguments);
@@ -113,7 +113,7 @@ namespace ClinicaFrba.Negocio
         public BindingList<Rol> GetUserRoles(int userID)//Buscar los roles de un usuario
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "GetUserRoles", SqlDataAccessArgs
+                "[SHARPS].GetUserRoles", SqlDataAccessArgs
                 .CreateWith("@userID", userID).Arguments);
 
             var roles = new BindingList<Rol>();

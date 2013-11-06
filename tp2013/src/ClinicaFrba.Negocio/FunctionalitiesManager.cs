@@ -34,7 +34,7 @@ namespace ClinicaFrba.Negocio
         public void DeleteRoleFunctionalities(Rol rol)//Borra las funcionalidades de un rol
         {
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "DeleteRoleFunctionalities", SqlDataAccessArgs
+                "[SHARPS].DeleteRoleFunctionalities", SqlDataAccessArgs
                 .CreateWith("@Rol_ID", rol.ID)
             .Arguments);
         }
@@ -42,7 +42,7 @@ namespace ClinicaFrba.Negocio
         public void InsertRoleFunctionality(Rol rol, Functionalities functionality)//Inserta las funcionalidades a un rol
         {
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "InsertRoleFunctionality", SqlDataAccessArgs
+                "[SHARPS].InsertRoleFunctionality", SqlDataAccessArgs
                 .CreateWith("@Rol_ID", rol.ID)
                 .And("@Funcionalidad", functionality.ToString())
             .Arguments);
@@ -52,7 +52,7 @@ namespace ClinicaFrba.Negocio
         {
             var ret = new List<Functionalities>();
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "GetRoleFunctionalities", SqlDataAccessArgs
+                "[SHARPS].GetRoleFunctionalities", SqlDataAccessArgs
                 .CreateWith("@Rol_ID", roleId)
             .Arguments);
 
@@ -72,7 +72,7 @@ namespace ClinicaFrba.Negocio
         {
             var ret = new List<Functionalities>();
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "GetProfileFunctionalities", SqlDataAccessArgs
+                "[SHARPS].GetProfileFunctionalities", SqlDataAccessArgs
                 .CreateWith("@Perfil_Id", profileId)
             .Arguments);
 

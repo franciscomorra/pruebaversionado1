@@ -16,7 +16,7 @@ namespace ClinicaFrba.Negocio
         {
             var ret = new List<Turno>();
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "GetTurnos", SqlDataAccessArgs
+                "[SHARPS].GetTurnos", SqlDataAccessArgs
                 .CreateWith("@userId", userID)
                 .Arguments);
             if (result != null)

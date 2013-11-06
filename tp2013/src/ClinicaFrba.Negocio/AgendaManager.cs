@@ -14,7 +14,7 @@ namespace ClinicaFrba.Negocio
         public void GuardarAgenda(Agenda agenda) {
 
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "InsertAgendaProfesional", SqlDataAccessArgs
+                "[SHARPS].InsertAgendaProfesional", SqlDataAccessArgs
                 .CreateWith(
                     "@FechaDesde", agenda.FechaDesde)
                     .And("@FechaHasta", agenda.FechaHasta)

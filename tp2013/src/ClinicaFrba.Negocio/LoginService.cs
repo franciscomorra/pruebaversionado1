@@ -21,7 +21,7 @@ namespace ClinicaFrba.Negocio
 
             var encryptedPassword = ComputeHash(password, new SHA256Managed());
             DataRow result = SqlDataAccess.ExecuteDataRowQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "Login", SqlDataAccessArgs
+                "[SHARPS].Login", SqlDataAccessArgs
                 .CreateWith("@Nombre", userName)
                 .And("@Password", encryptedPassword)
                 .Arguments);
@@ -44,7 +44,7 @@ namespace ClinicaFrba.Negocio
             var encryptedOldPassword = ComputeHash(oldPassword, new SHA256Managed());
             var encryptedNewPassword = ComputeHash(newPassword, new SHA256Managed());
             var result = SqlDataAccess.ExecuteScalarQuery<object>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "UpdateUserPassword", SqlDataAccessArgs
+                "[SHARPS].UpdateUserPassword", SqlDataAccessArgs
                 .CreateWith("@ID_Usuario", user.UserID)
                 .And("@OldPassword", encryptedOldPassword)
                 .And("@NewPassword", encryptedNewPassword)
@@ -65,7 +65,7 @@ namespace ClinicaFrba.Negocio
         {
                 
             var result = SqlDataAccess.ExecuteScalarQuery<object>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "GetUserLoginAttempts", SqlDataAccessArgs
+                "[SHARPS].GetUserLoginAttempts", SqlDataAccessArgs
                 .CreateWith("@Nombre", userName)
             .Arguments);
 

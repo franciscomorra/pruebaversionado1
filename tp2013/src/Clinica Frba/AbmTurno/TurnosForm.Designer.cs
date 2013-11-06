@@ -124,7 +124,6 @@
             this.panelAfiliado.Name = "panelAfiliado";
             this.panelAfiliado.Size = new System.Drawing.Size(831, 43);
             this.panelAfiliado.TabIndex = 23;
-            this.panelAfiliado.Visible = false;
             // 
             // btnBuscarAfiliado
             // 
@@ -134,6 +133,7 @@
             this.btnBuscarAfiliado.TabIndex = 34;
             this.btnBuscarAfiliado.Text = "Buscar";
             this.btnBuscarAfiliado.UseVisualStyleBackColor = true;
+            this.btnBuscarAfiliado.Click += new System.EventHandler(this.btnBuscarAfiliado_Click);
             // 
             // lblAfiliado
             // 
