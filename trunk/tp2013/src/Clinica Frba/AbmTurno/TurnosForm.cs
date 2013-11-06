@@ -10,7 +10,10 @@ using ClinicaFrba.Core;
 using ClinicaFrba.Login;
 using ClinicaFrba.Comun;
 using ClinicaFrba.Negocio;
+
+using ClinicaFrba.AbmAfiliado;
 using System.Configuration;
+
 
 namespace ClinicaFrba.AbmTurno
 {
@@ -19,7 +22,8 @@ namespace ClinicaFrba.AbmTurno
     {
         private bool _isSearchMode = false;
         private TurnosManager _turnosManager = new TurnosManager();
-        private Afiliado _afiliado = new Afiliado();
+        private Afiliado _afiliado;
+        private AfiliadosForm _afiliadosForm;
 
         public TurnosForm()
         {
@@ -42,6 +46,25 @@ namespace ClinicaFrba.AbmTurno
         {
             var dataSource = dgvTurnos.DataSource as BindingList<Turno>;
             lblResults.Text = dataSource.Count.ToString();
+        }
+
+        private void btnBuscarAfiliado_Click(object sender, EventArgs e)
+        {
+            if (_afiliadosForm == null)
+            {
+                _afiliadosForm = new AfiliadosForm();
+                _afiliadosForm.SetSearchMode();
+                _afiliadosForm.OnAfiliadoSelected += new EventHandler<AfiliadoSelectedEventArgs>(_afiliadosForm_OnAfiliadoSelected);
+            }
+            ViewsManager.LoadModal(_afiliadosForm);
+        }
+
+        void _afiliadosForm_OnAfiliadoSelected(object sender, AfiliadoSelectedEventArgs e)
+        {
+            _afiliado = e.Afiliado;
+            txtAfiliado.Text = _afiliado.DetallePersona.Apellido + ", " + _afiliado.DetallePersona.Nombre;
+            _afiliadosForm.Hide();
+
         }
 
     }

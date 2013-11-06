@@ -20,7 +20,7 @@ namespace ClinicaFrba.Negocio
             Profesional profesional = new Profesional();
             EspecialidadesManager espMan = new EspecialidadesManager();
             var row = SqlDataAccess.ExecuteDataRowQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "GetProfesionalInfo", SqlDataAccessArgs
+                "[SHARPS].GetProfesionalInfo", SqlDataAccessArgs
                 .CreateWith("@userId", userID)
                 .Arguments);
 
@@ -48,38 +48,44 @@ namespace ClinicaFrba.Negocio
         }
         public BindingList<Profesional> GetAll()
         {
+            
+            if (SessionData.Contains("Profesionales"))
+            {
+                return SessionData.Get<BindingList<Profesional>>("Profesionales");
+            }
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "GetProfesionales");
-            var data = new BindingList<Profesional>();
+                "[SHARPS].GetProfesionales");
+            var profesionales = new BindingList<Profesional>();
             if (result != null && result.Rows != null)
             {
-                EspecialidadesManager espMan = new EspecialidadesManager();
                 foreach (DataRow row in result.Rows)
                 {
-                    data.Add(new Profesional()
-                    {
-                        UserID = int.Parse(row["ID"].ToString()),
-                        UserName = row["UserName"].ToString(),
-                        Matricula = row["RazonSocial"].ToString(),
-                        Especialidades = espMan.GetAllForUser(int.Parse(row["ID"].ToString())),
-                        DetallePersona = new DetallesPersona()
-                        {
-                            Apellido = row["Apellido"].ToString(),
-                            Direccion = row["Direccion"].ToString(),
-                            DNI = long.Parse(row["DNI"].ToString()),
-                            Email = row["Email"].ToString(),
-                            Nombre = row["Nombre"].ToString(),
-                            FechaNacimiento = Convert.ToDateTime(row["FechaNacimiento"]),
-                            Telefono = long.Parse(row["Telefono"].ToString()),
-                            Sexo = (TipoSexo)Enum.Parse(typeof(TipoSexo), row["Sexo"].ToString()),
-                            TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString())
-                        }
-                    });
+                    Profesional profesional = new Profesional();
+                    profesional.UserID = int.Parse(row["ID"].ToString());
+                    profesional.UserName = row["UserName"].ToString();
+
+                    if (!DBNull.Value.Equals(row["Matricula"]))
+                        profesional.Matricula = row["Matricula"].ToString();
+
+                    profesional.DetallePersona = new DetallesPersona();
+                    profesional.DetallePersona.Apellido = row["Apellido"].ToString();
+                    profesional.DetallePersona.Nombre = row["Nombre"].ToString();
+                    profesional.DetallePersona.FechaNacimiento = Convert.ToDateTime(row["FechaNacimiento"]);
+                    profesional.DetallePersona.DNI = long.Parse(row["DNI"].ToString());
+                    profesional.DetallePersona.Email = row["Email"].ToString();
+                    profesional.DetallePersona.Direccion = row["Direccion"].ToString();
+                    profesional.DetallePersona.Telefono = long.Parse(row["Telefono"].ToString());
+                    if (!DBNull.Value.Equals(row["Sexo"]))
+                        profesional.DetallePersona.Sexo = (TipoSexo)Enum.Parse(typeof(TipoSexo), row["Sexo"].ToString());
+                    if (!DBNull.Value.Equals(row["TipoDoc"])) 
+                        profesional.DetallePersona.TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString());
+                    profesionales.Add(profesional);
+
                 }
             }
-            return data;
+            SessionData.Set("Profesionales", profesionales);
+            return profesionales;
         }
-
         public void GuardarProfesional(Profesional profesional, string password)
         {
             var usersManager = new UsersManager();
@@ -96,7 +102,7 @@ namespace ClinicaFrba.Negocio
                     var detalleID = entityDetailManager.AddDetallePersona(profesional as User);
 
                     SqlDataAccess.ExecuteNonQuery(
-                        "InsertProfesional", SqlDataAccessArgs
+                        "[SHARPS].InsertProfesional", SqlDataAccessArgs
                         .CreateWith("@Matricula", profesional.Matricula)
                         .And("@ID", profesional.UserID)
                         .And("@Rol", profesional.RoleID)
@@ -117,7 +123,7 @@ namespace ClinicaFrba.Negocio
             {
                 entityDetailManager.UpdateDetallePersona(profesional as User);
                 SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                    "UpdateProfesional", SqlDataAccessArgs
+                    "[SHARPS].UpdateProfesional", SqlDataAccessArgs
                     .CreateWith("@Matricula", profesional.Matricula)
                     .And("@ID", profesional.UserID)
                     .Arguments);
@@ -133,12 +139,20 @@ namespace ClinicaFrba.Negocio
         public void InsertarEspecialidades(Profesional profesional) {
             foreach (var especialidad in profesional.Especialidades){
                 SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
-                    "InsertSpeciality", SqlDataAccessArgs
+                    "[SHARPS].InsertSpeciality", SqlDataAccessArgs
                     .CreateWith("@MedicoID", profesional.UserID)
                     .And("@Especialidad", especialidad)
                 .Arguments);
             }
         }
 
+        public void CancelarTurnos(int usuarioID, DateTime fecha) {
+            SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
+                "[SHARPS].CancelarDiaProfesional", SqlDataAccessArgs
+                .CreateWith("@MedicoID", usuarioID)
+                .And("@Fecha", fecha)
+                .Arguments);
+        
+        }
     }
 }

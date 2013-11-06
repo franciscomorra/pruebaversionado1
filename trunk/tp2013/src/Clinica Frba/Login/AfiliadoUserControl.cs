@@ -17,6 +17,8 @@ namespace ClinicaFrba.Login
 
         public Afiliado GetAfiliado()
         {
+            return new Afiliado();
+            /*
             int CantHijos = 0;
            
             if (string.IsNullOrEmpty(txtMotivo.Text.Trim()))
@@ -26,11 +28,12 @@ namespace ClinicaFrba.Login
             _afiliado.CantHijos = CantHijos;
             _afiliado.MotivoCambio = txtMotivo.Text.Trim();
             return _afiliado;
+            **/ 
         }
 
         public void SetUser(Afiliado afiliado)
         {
-            _afiliado = afiliado;
+            /*_afiliado = afiliado;
             
             
             cbxPlanMedico.SelectedItem = afiliado.PlanMedico;
@@ -42,20 +45,20 @@ namespace ClinicaFrba.Login
             }
 
             
-
+            */
         }
 
         public AfiliadoUserControl()
         {
             InitializeComponent();
-            _afiliado = new Afiliado();
+            /*_afiliado = new Afiliado();
             //Rellenar Sexo
             var manager = new PlanesMedicosManager();
             var planesMedicos = manager.GetAll();
             cbxPlanMedico.DisplayMember = "Name";
             planesMedicos.ForEach(x => cbxPlanMedico.Items.Add(x));
             cbxPlanMedico.SelectedIndex = 0;
-
+            
             var items = Enum.GetValues(typeof(EstadoCivil)).Cast<EstadoCivil>().ToList();
             items.ForEach(x => cbxEstadoCivil.Items.Add(x));
             cbxEstadoCivil.DisplayMember = "Name";
@@ -72,7 +75,7 @@ namespace ClinicaFrba.Login
                 cbxRoles.SelectedIndex = 0;
             }
 
-
+            */
         }
 
         private void AfiliadoUserControl_Load(object sender, EventArgs e)

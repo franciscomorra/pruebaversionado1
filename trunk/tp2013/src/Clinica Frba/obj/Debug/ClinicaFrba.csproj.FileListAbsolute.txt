@@ -77,3 +77,6 @@ C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica 
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.RegistroResultadoAtencion.RegistroResultadoAtencion.resources
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\bin\Debug\ClinicaFrba.exe.config
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.AbmTurno.TurnosForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.AddEditAfiliadoForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.AddEditProfesionalForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.Login.DetallesPersonaUserControl.resources

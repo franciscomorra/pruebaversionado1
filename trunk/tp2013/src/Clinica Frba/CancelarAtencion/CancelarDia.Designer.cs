@@ -28,27 +28,59 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panelProfesional = new System.Windows.Forms.Panel();
-            this.btnBuscarProfesional = new System.Windows.Forms.Button();
-            this.lblProf = new System.Windows.Forms.Label();
-            this.txtProfesional = new System.Windows.Forms.TextBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panelAcciones = new System.Windows.Forms.Panel();
+            this.panelProfesional = new System.Windows.Forms.Panel();
+            this.btnBuscarProfesional = new System.Windows.Forms.Button();
+            this.lblProf = new System.Windows.Forms.Label();
+            this.txtProfesional = new System.Windows.Forms.TextBox();
             this.panelProfesional.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(73, 70);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(214, 20);
+            this.dateTimePicker1.TabIndex = 25;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(109, 96);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(178, 23);
+            this.btnCancelar.TabIndex = 26;
+            this.btnCancelar.Text = "Cancelar Turnos del Dia";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(8, 70);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(37, 13);
+            this.label1.TabIndex = 32;
+            this.label1.Text = "Fecha";
+            // 
+            // panelAcciones
+            // 
+            this.panelAcciones.Location = new System.Drawing.Point(2, 57);
+            this.panelAcciones.Name = "panelAcciones";
+            this.panelAcciones.Size = new System.Drawing.Size(298, 73);
+            this.panelAcciones.TabIndex = 33;
             // 
             // panelProfesional
             // 
             this.panelProfesional.Controls.Add(this.btnBuscarProfesional);
             this.panelProfesional.Controls.Add(this.lblProf);
             this.panelProfesional.Controls.Add(this.txtProfesional);
-            this.panelProfesional.Location = new System.Drawing.Point(2, 3);
+            this.panelProfesional.Location = new System.Drawing.Point(2, 8);
             this.panelProfesional.Name = "panelProfesional";
-            this.panelProfesional.Size = new System.Drawing.Size(298, 43);
-            this.panelProfesional.TabIndex = 24;
-            this.panelProfesional.Visible = false;
+            this.panelProfesional.Size = new System.Drawing.Size(307, 43);
+            this.panelProfesional.TabIndex = 34;
             // 
             // btnBuscarProfesional
             // 
@@ -58,6 +90,7 @@
             this.btnBuscarProfesional.TabIndex = 34;
             this.btnBuscarProfesional.Text = "Buscar";
             this.btnBuscarProfesional.UseVisualStyleBackColor = true;
+            this.btnBuscarProfesional.Click += new System.EventHandler(this.btnBuscarProfesional_Click_1);
             // 
             // lblProf
             // 
@@ -76,47 +109,15 @@
             this.txtProfesional.Size = new System.Drawing.Size(100, 20);
             this.txtProfesional.TabIndex = 33;
             // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(73, 70);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(214, 20);
-            this.dateTimePicker1.TabIndex = 25;
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Location = new System.Drawing.Point(109, 96);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(178, 23);
-            this.btnCancelar.TabIndex = 26;
-            this.btnCancelar.Text = "Cancelar Turnos del Dia";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 70);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 13);
-            this.label1.TabIndex = 32;
-            this.label1.Text = "Fecha";
-            // 
-            // panelAcciones
-            // 
-            this.panelAcciones.Location = new System.Drawing.Point(2, 57);
-            this.panelAcciones.Name = "panelAcciones";
-            this.panelAcciones.Size = new System.Drawing.Size(298, 73);
-            this.panelAcciones.TabIndex = 33;
-            // 
             // CancelarDia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(303, 138);
+            this.ClientSize = new System.Drawing.Size(480, 197);
+            this.Controls.Add(this.panelProfesional);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.panelProfesional);
             this.Controls.Add(this.panelAcciones);
             this.Name = "CancelarDia";
             this.Text = "Cancelar Turnos del Dia";
@@ -129,14 +130,14 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panelProfesional;
-        private System.Windows.Forms.Button btnBuscarProfesional;
-        private System.Windows.Forms.Label lblProf;
-        private System.Windows.Forms.TextBox txtProfesional;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panelAcciones;
+        private System.Windows.Forms.Panel panelProfesional;
+        private System.Windows.Forms.Button btnBuscarProfesional;
+        private System.Windows.Forms.Label lblProf;
+        private System.Windows.Forms.TextBox txtProfesional;
 
     }
 }

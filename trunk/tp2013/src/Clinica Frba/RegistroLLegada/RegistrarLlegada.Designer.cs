@@ -65,6 +65,7 @@
             this.btnBuscarTurno.TabIndex = 34;
             this.btnBuscarTurno.Text = "Buscar";
             this.btnBuscarTurno.UseVisualStyleBackColor = true;
+            this.btnBuscarTurno.Click += new System.EventHandler(this.btnBuscarTurno_Click);
             // 
             // lblTurno
             // 
@@ -101,6 +102,7 @@
             this.btnBuscarAfiliado.TabIndex = 34;
             this.btnBuscarAfiliado.Text = "Buscar";
             this.btnBuscarAfiliado.UseVisualStyleBackColor = true;
+            this.btnBuscarAfiliado.Click += new System.EventHandler(this.btnBuscarAfiliado_Click);
             // 
             // lblAfiliado
             // 
@@ -138,6 +140,7 @@
             this.btnBuscarBonoC.TabIndex = 34;
             this.btnBuscarBonoC.Text = "Buscar";
             this.btnBuscarBonoC.UseVisualStyleBackColor = true;
+            this.btnBuscarBonoC.Click += new System.EventHandler(this.btnBuscarBonoC_Click);
             // 
             // lblBono
             // 
@@ -164,6 +167,7 @@
             this.btnRegistrar.TabIndex = 26;
             this.btnRegistrar.Text = "Registrar Llegada de Paciente";
             this.btnRegistrar.UseVisualStyleBackColor = true;
+            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
             // RegistrarLlegada
             // 

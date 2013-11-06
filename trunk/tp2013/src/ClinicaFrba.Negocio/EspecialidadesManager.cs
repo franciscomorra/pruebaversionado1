@@ -16,7 +16,7 @@ namespace ClinicaFrba.Negocio
         {
             var ret = new List<Especialidad>();
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "GetEspecialidades", SqlDataAccessArgs
+                "[SHARPS].GetEspecialidadesForUser", SqlDataAccessArgs
                 .CreateWith("@userId", userID)
                 .Arguments);
             if (result != null)
@@ -41,7 +41,7 @@ namespace ClinicaFrba.Negocio
             }
             var ret = new List<Especialidad>();
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "GetEspecialidades");
+                "[SHARPS].GetEspecialidades");
             if (result != null)
             {
                 foreach (DataRow row in result.Rows)

@@ -31,25 +31,30 @@ namespace ClinicaFrba
                 cbxPerfiles.DataSource = perfiles;
                 cbxPerfiles.DisplayMember = "Nombre";
                 cbxPerfiles.SelectedIndex = 0;
-                perfilPanel.Show();
-                rolPanel.Hide();
+                //perfilPanel.Show();
+                //rolPanel.Hide();
             }
 
         }
         public AddEditRoleForm(Rol rol)
         {
-            var perfiles = profileMan.GetAllProfiles();
-            if (perfiles.Count > 1)
+           
+            try
             {
-                cbxPerfiles.DataSource = perfiles;
-                cbxPerfiles.DisplayMember = "Nombre";
+                var perfiles = profileMan.GetAllProfiles();
+                perfiles = profileMan.GetAllProfiles();
+                perfiles.ForEach(x => cbxPerfiles.Items.Add(x));
                 cbxPerfiles.SelectedIndex = 0;
-                perfilPanel.Show();
-                rolPanel.Hide();
+                //perfilPanel.Show();
+                ///rolPanel.Hide();
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
             }
 
-            cbxPerfiles.Enabled = false;
-            rolPanel.Show();
+            //cbxPerfiles.Enabled = false;
+            //rolPanel.Show();
             this.Rol = rol;
             this.Perfil = rol.Perfil;
             InitializeComponent();
@@ -72,7 +77,7 @@ namespace ClinicaFrba
                 lstFuncionalidades.Items.Add(item, RoleHasFunctionality(item));
             }
 
-            txtNombre.Text = Rol.Nombre;
+            //txtNombre.Text = Rol.Nombre;
         }
 
         private bool RoleHasFunctionality(Functionalities functionality)
@@ -114,8 +119,8 @@ namespace ClinicaFrba
             {
                 lstFuncionalidades.Items.Add(item, RoleHasFunctionality(item));
             }
-            rolPanel.Show();
-            perfilPanel.Hide();
+            //rolPanel.Show();
+            //perfilPanel.Hide();
         }
     }
 }

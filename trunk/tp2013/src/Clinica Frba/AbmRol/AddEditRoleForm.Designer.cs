@@ -101,12 +101,10 @@
             // 
             this.perfilPanel.Controls.Add(this.cbxPerfiles);
             this.perfilPanel.Controls.Add(this.label3);
-            this.perfilPanel.Enabled = false;
             this.perfilPanel.Location = new System.Drawing.Point(3, 3);
             this.perfilPanel.Name = "perfilPanel";
             this.perfilPanel.Size = new System.Drawing.Size(278, 33);
             this.perfilPanel.TabIndex = 6;
-            this.perfilPanel.Visible = false;
             // 
             // cbxPerfiles
             // 

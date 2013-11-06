@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using ClinicaFrba.Core;
 using ClinicaFrba.Comun;
 using ClinicaFrba.Negocio;
-using ClinicaFrba.Login;
+using ClinicaFrba.AbmAfiliado;
 
 namespace ClinicaFrba.AbmAfiliado
 {
@@ -18,7 +18,7 @@ namespace ClinicaFrba.AbmAfiliado
     {
         private AfiliadoManager _afiliadoManager = new AfiliadoManager();
         private bool _isSearchMode = false;
-        public event EventHandler<UserSelectedEventArgs> OnUserSelected;
+        public event EventHandler<AfiliadoSelectedEventArgs> OnAfiliadoSelected;
 
         public AfiliadosForm()
         {
@@ -38,11 +38,11 @@ namespace ClinicaFrba.AbmAfiliado
                 var dataSource = _afiliadoManager.GetAll();
                 if (_isSearchMode)
                 {
-                    dataSource.Remove(new Afiliado() { UserID = Session.User.UserID });
+                    dataSource.Remove(new Afiliado() { UserID = Session.Afiliado.UserID });
                 }
                 dgvAfiliados.AutoGenerateColumns = false;
                 dgvAfiliados.DataSourceChanged += new EventHandler(dgvAfiliados_DataSourceChanged);
-                dataSource.Remove(new Afiliado() { UserID = Session.User.UserID });
+                dataSource.Remove(new Afiliado() { UserID = Session.User.UserID});
                 dgvAfiliados.DataSource = dataSource;
                 dgvAfiliados.DoubleClick += new EventHandler(dgvAfiliados_DoubleClick);
             }
@@ -58,21 +58,21 @@ namespace ClinicaFrba.AbmAfiliado
             lblResults.Text = dataSource.Count.ToString();
         }
 
-        void dgvAfiliados_DoubleClick(object sender, EventArgs e)
+        void dgvAfiliados_DoubleClick(object sender, EventArgs e) //Seleccion de afiliado, para otros forms
         {
             if (dgvAfiliados.SelectedRows == null || dgvAfiliados.SelectedRows.Count == 0) return;
             var row = dgvAfiliados.SelectedRows[0];
             var afiliado = row.DataBoundItem as Afiliado;
-            if (OnUserSelected != null)
+            if (OnAfiliadoSelected != null)
             {
-                OnUserSelected(this, new UserSelectedEventArgs()
+                OnAfiliadoSelected(this, new AfiliadoSelectedEventArgs()
                 {
-                    User = afiliado as User
+                    Afiliado = afiliado
                 });
             }
         }
 
-        private void btnEliminar_Click(object sender, EventArgs e)
+        private void btnEliminar_Click(object sender, EventArgs e) //Eliminando afiliado
         {
             if (dgvAfiliados.SelectedRows == null || dgvAfiliados.SelectedRows.Count == 0) return;
             var row = dgvAfiliados.SelectedRows[0];
@@ -96,17 +96,16 @@ namespace ClinicaFrba.AbmAfiliado
             }
         }
 
-        private void btnModificar_Click(object sender, EventArgs e)
+        private void btnModificar_Click(object sender, EventArgs e) //Modificando afiliado existente
         {
            try{
-                if (dgvAfiliados.SelectedRows == null || dgvAfiliados.SelectedRows.Count == 0) return;
-                var row = dgvAfiliados.SelectedRows[0];
-                var afiliado = row.DataBoundItem as User;
-                var regForm = new RegistroForm();
-                regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
-                regForm.SetUser(afiliado, new Profile() {Nombre="Afiliado"});
-
-                ViewsManager.LoadModal(regForm);
+               if (dgvAfiliados.SelectedRows == null || dgvAfiliados.SelectedRows.Count == 0) return;
+               var row = dgvAfiliados.SelectedRows[0];
+               var afiliado = row.DataBoundItem as Afiliado;
+               var afliadoModificarForm = new AddEditAfiliadoForm();
+               afliadoModificarForm.OnAfiliadoSaved += new EventHandler<AfiliadoSavedEventArgs>(afiliadosForm_OnAfiliadoSaved);
+               //afliadoModificarForm.SetAfiliado(afiliado);
+               ViewsManager.LoadModal(afliadoModificarForm);
             }
             catch (System.Exception excep)
             {
@@ -114,24 +113,22 @@ namespace ClinicaFrba.AbmAfiliado
             }
         }
 
-        void regForm_OnUserSaved(object sender, UserSavedEventArgs e)
+        void afiliadosForm_OnAfiliadoSaved(object sender, AfiliadoSavedEventArgs e) //Nuevo afiliado se guardo
         {
             var dataSource = dgvAfiliados.DataSource as BindingList<Afiliado>;
-            var afiliado = e.User as Afiliado;
+            var afiliado = e.Afiliado;
             if (dataSource.Contains(afiliado)) dataSource.Remove(afiliado);
             dataSource.Add(afiliado);
             dgvAfiliados.DataSource = new BindingList<Afiliado>(dataSource.OrderBy(x => x.DetallePersona.Apellido + x.DetallePersona.Nombre).ToList());
             dgvAfiliados.Refresh();
-            MessageBox.Show("Se han guardado los datos del afiliado " + e.Username);
+            MessageBox.Show("Se han guardado los datos del afiliado " + e.Afiliado);
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            var regForm = new RegistroForm();
-            regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
-
-            regForm.Profile = new Profile() { Nombre = "Afiliado"};
-            ViewsManager.LoadModal(regForm);
+            var afiliadoAgregarForm = new AddEditAfiliadoForm(); //HACER!
+            afiliadoAgregarForm.OnAfiliadoSaved += new EventHandler<AfiliadoSavedEventArgs>(afiliadosForm_OnAfiliadoSaved);
+            ViewsManager.LoadModal(afiliadoAgregarForm);
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)

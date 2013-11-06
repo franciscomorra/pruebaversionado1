@@ -15,7 +15,7 @@ namespace ClinicaFrba.Negocio
         public void DeleteAccount(User user)
         {
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "DeleteUser", SqlDataAccessArgs
+                "[SHARPS].DeleteUser", SqlDataAccessArgs
                 .CreateWith("@User_ID", user.UserID)
             .Arguments);
         }
@@ -29,7 +29,7 @@ namespace ClinicaFrba.Negocio
             if (transaction != null)
             {
                  result = SqlDataAccess.ExecuteScalarQuery<int>(
-                     "InsertUser", SqlDataAccessArgs
+                     "[SHARPS].InsertUser", SqlDataAccessArgs
                     .CreateWith("@UserName", user.UserName)
                     .And("@Password", encryptedPass)
                 .Arguments, transaction);
@@ -38,7 +38,7 @@ namespace ClinicaFrba.Negocio
             else
             {
                  result = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                    "InsertUser", SqlDataAccessArgs
+                    "[SHARPS].InsertUser", SqlDataAccessArgs
                     .CreateWith("@UserName", user.UserName)
                     .And("@Password", encryptedPass)
                 .Arguments);

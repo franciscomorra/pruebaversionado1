@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using ClinicaFrba.Core;
 using ClinicaFrba.AbmProfesional;
-using ClinicaFrba.Login;
 using ClinicaFrba.Comun;
 using ClinicaFrba.Negocio;
 using System.Configuration;
@@ -18,7 +17,7 @@ namespace ClinicaFrba.RegistrarAgenda
     [PermissionRequired(Functionalities.RegistrarAgenda)]
     public partial class RegistrarAgenda : Form
     {
-        private User _user;
+        private Profesional _profesional;
         private ProfesionalesForm _profesionalesForm;
         private Agenda _agenda = new Agenda();
         private AgendaManager mgr = new AgendaManager();
@@ -47,25 +46,27 @@ namespace ClinicaFrba.RegistrarAgenda
             //Validar datos y guardar por fecha cambiada
             mgr.GuardarAgenda(_agenda);
         }
-
+        
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             if (_profesionalesForm == null)
             {
                 _profesionalesForm = new ProfesionalesForm();
                 _profesionalesForm.SetSearchMode();
-                _profesionalesForm.OnUserSelected += new EventHandler<UserSelectedEventArgs>(profesionalesForm_OnUserSelected);
+                _profesionalesForm.OnProfesionalSelected += new EventHandler<ProfesionalSelectedEventArgs>(profesionalesForm_OnProfesionalSelected);
             }
             ViewsManager.LoadModal(_profesionalesForm);
         }
-        
-        void profesionalesForm_OnUserSelected(object sender, UserSelectedEventArgs e)
+
+        void profesionalesForm_OnProfesionalSelected(object sender, ProfesionalSelectedEventArgs e)
         {
-            _user = e.User;
-            txtProfesional.Text = _user.UserName;
+            _profesional = e.Profesional;
+            txtProfesional.Text = "Dr. " + _profesional.DetallePersona.Apellido + ", " + _profesional.DetallePersona.Nombre;
             _profesionalesForm.Hide();
             rellenarAgendas();
         }
+
+
         private void rellenarAgendas()
         {
             //RELLENAR DIAS DE AGENDAS!
