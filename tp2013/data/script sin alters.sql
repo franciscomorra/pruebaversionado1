@@ -264,8 +264,8 @@ CREATE TABLE [SHARPS].Turnos (
 	Afiliado [int],
 	Estado [int]  ,
 	FechaHoraLlegada datetime,
-	Agenda datetime,--Tiene que ser [int],
-	Profesional [int] --No tiene que ir!
+	Agenda int,--Tiene que ser [int],
+	--Profesional [int] --No tiene que ir!
 CONSTRAINT [PK_Turnos] PRIMARY KEY CLUSTERED 
 (
 	[Numero] ASC
@@ -473,7 +473,7 @@ SELECT distinct m.Bono_Farmacia_Numero , m.Bono_Farmacia_Fecha_Impresion, a.Usua
   INNER JOIN [SHARPS].Usuarios a on CAST(m.Paciente_DNI AS Nvarchar(MAX))= a.Username
   WHERE m.Turno_Fecha is NULL AND m.Bono_Farmacia_Numero is not null   
 GO
-/*
+
 --Rellenando Agendas
 PRINT 'Rellenando Agendas...'
 INSERT INTO [SHARPS].Agendas(Profesional,Horario)
@@ -487,17 +487,18 @@ order by 1
 --Ingresando Turnos
 PRINT 'Ingresando los Turnos...'
 GO
-INSERT INTO [SHARPS].Turnos (Numero,Afiliado,Agenda)
-SELECT distinct m.Turno_Numero , u.UsuarioID , a.AgendaID 
+INSERT INTO [SHARPS].Turnos (Numero , Afiliado , Agenda)
+SELECT distinct m.Turno_Numero , U.UsuarioID , a.AgendaID 
 FROM gd_esquema.Maestra m
 INNER JOIN [SHARPS].Agendas a ON a.Horario = m.Turno_Fecha
 INNER JOIN [SHARPS].Usuarios x ON x.UsuarioID = a.Profesional
-INNER JOIN [SHARPS].Usuarios U on u.Username = CAST(m.Paciente_Dni AS Nvarchar(MAX))
-WHERE m.Turno_Fecha is not null
+INNER JOIN [SHARPS].Usuarios U on U.Username = CAST(m.Paciente_Dni AS Nvarchar(MAX))
+WHERE m.Turno_Fecha is not null and CAST(m.Medico_DNI AS Nvarchar(MAX)) = x.Username
 ORDER by 1
-*/
 
---Ingresando Turnos
+
+
+/*--Ingresando Turnos
 DELETE FROM [SHARPS].TURNOS
 PRINT 'Ingresando los Turnos...'
 GO
@@ -515,10 +516,10 @@ PRINT 'Rellenando Agendas...'
 INSERT INTO [SHARPS].Agendas(Profesional,Horario)
 SELECT t.Profesional,t.Agenda
 FROM [SHARPS].Turnos t
-
+*/
 
 PRINT 'Rellenando Consultas...'
-INSERT INTO [SHARPS].Consultas(Turno,Bono,Sintomas,Enfermedad)
+INSERT INTO [SHARPS].Consultas(Turno,Bono,Sintomas,Enfermedad,Numero_Consulta)
 SELECT  distinct m.Turno_Numero , m.Bono_Consulta_Numero,m.Consulta_Sintomas,m.Consulta_Enfermedades
 FROM gd_esquema.Maestra m 
 INNER JOIN [SHARPS].Turnos t ON t.Numero = m.Turno_Numero
