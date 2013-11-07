@@ -36,6 +36,7 @@
             this.btnBuscarProfesional = new System.Windows.Forms.Button();
             this.lblProf = new System.Windows.Forms.Label();
             this.txtProfesional = new System.Windows.Forms.TextBox();
+            this.panelAcciones.SuspendLayout();
             this.panelProfesional.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,14 +44,14 @@
             // 
             this.dateTimePicker1.Location = new System.Drawing.Point(73, 70);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(214, 20);
+            this.dateTimePicker1.Size = new System.Drawing.Size(341, 20);
             this.dateTimePicker1.TabIndex = 25;
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(109, 96);
+            this.btnCancelar.Location = new System.Drawing.Point(9, 39);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(178, 23);
+            this.btnCancelar.Size = new System.Drawing.Size(403, 23);
             this.btnCancelar.TabIndex = 26;
             this.btnCancelar.Text = "Cancelar Turnos del Dia";
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -67,9 +68,10 @@
             // 
             // panelAcciones
             // 
+            this.panelAcciones.Controls.Add(this.btnCancelar);
             this.panelAcciones.Location = new System.Drawing.Point(2, 57);
             this.panelAcciones.Name = "panelAcciones";
-            this.panelAcciones.Size = new System.Drawing.Size(298, 73);
+            this.panelAcciones.Size = new System.Drawing.Size(435, 73);
             this.panelAcciones.TabIndex = 33;
             // 
             // panelProfesional
@@ -79,12 +81,12 @@
             this.panelProfesional.Controls.Add(this.txtProfesional);
             this.panelProfesional.Location = new System.Drawing.Point(2, 8);
             this.panelProfesional.Name = "panelProfesional";
-            this.panelProfesional.Size = new System.Drawing.Size(307, 43);
+            this.panelProfesional.Size = new System.Drawing.Size(435, 43);
             this.panelProfesional.TabIndex = 34;
             // 
             // btnBuscarProfesional
             // 
-            this.btnBuscarProfesional.Location = new System.Drawing.Point(180, 7);
+            this.btnBuscarProfesional.Location = new System.Drawing.Point(337, 7);
             this.btnBuscarProfesional.Name = "btnBuscarProfesional";
             this.btnBuscarProfesional.Size = new System.Drawing.Size(75, 23);
             this.btnBuscarProfesional.TabIndex = 34;
@@ -106,21 +108,22 @@
             this.txtProfesional.Location = new System.Drawing.Point(71, 9);
             this.txtProfesional.Name = "txtProfesional";
             this.txtProfesional.ReadOnly = true;
-            this.txtProfesional.Size = new System.Drawing.Size(100, 20);
+            this.txtProfesional.Size = new System.Drawing.Size(250, 20);
             this.txtProfesional.TabIndex = 33;
             // 
             // CancelarDia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(480, 197);
+            this.ClientSize = new System.Drawing.Size(445, 138);
             this.Controls.Add(this.panelProfesional);
-            this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.panelAcciones);
             this.Name = "CancelarDia";
             this.Text = "Cancelar Turnos del Dia";
+            this.Load += new System.EventHandler(this.CancelarDia_Load);
+            this.panelAcciones.ResumeLayout(false);
             this.panelProfesional.ResumeLayout(false);
             this.panelProfesional.PerformLayout();
             this.ResumeLayout(false);

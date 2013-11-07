@@ -173,7 +173,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(180, 7);
+            this.btnBuscar.Location = new System.Drawing.Point(327, 9);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 34;
@@ -195,7 +195,7 @@
             this.txtProfesional.Location = new System.Drawing.Point(71, 9);
             this.txtProfesional.Name = "txtProfesional";
             this.txtProfesional.ReadOnly = true;
-            this.txtProfesional.Size = new System.Drawing.Size(100, 20);
+            this.txtProfesional.Size = new System.Drawing.Size(250, 20);
             this.txtProfesional.TabIndex = 33;
             // 
             // cbxLunesIN

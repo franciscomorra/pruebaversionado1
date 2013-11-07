@@ -30,7 +30,6 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtNombre = new System.Windows.Forms.TextBox();
             this.lstFuncionalidades = new System.Windows.Forms.CheckedListBox();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
@@ -38,6 +37,7 @@
             this.cbxPerfiles = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.rolPanel = new System.Windows.Forms.Panel();
+            this.txtNombreRol = new System.Windows.Forms.TextBox();
             this.perfilPanel.SuspendLayout();
             this.rolPanel.SuspendLayout();
             this.SuspendLayout();
@@ -59,14 +59,6 @@
             this.label2.Size = new System.Drawing.Size(84, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Funcionalidades";
-            // 
-            // txtNombre
-            // 
-            this.txtNombre.Location = new System.Drawing.Point(113, 2);
-            this.txtNombre.MaxLength = 100;
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(156, 20);
-            this.txtNombre.TabIndex = 2;
             // 
             // lstFuncionalidades
             // 
@@ -126,14 +118,21 @@
             // 
             // rolPanel
             // 
+            this.rolPanel.Controls.Add(this.txtNombreRol);
             this.rolPanel.Controls.Add(this.lstFuncionalidades);
-            this.rolPanel.Controls.Add(this.txtNombre);
             this.rolPanel.Controls.Add(this.label2);
             this.rolPanel.Controls.Add(this.label1);
             this.rolPanel.Location = new System.Drawing.Point(3, 41);
             this.rolPanel.Name = "rolPanel";
             this.rolPanel.Size = new System.Drawing.Size(278, 173);
             this.rolPanel.TabIndex = 7;
+            // 
+            // txtNombreRol
+            // 
+            this.txtNombreRol.Location = new System.Drawing.Point(113, 5);
+            this.txtNombreRol.Name = "txtNombreRol";
+            this.txtNombreRol.Size = new System.Drawing.Size(156, 20);
+            this.txtNombreRol.TabIndex = 34;
             // 
             // AddEditRoleForm
             // 
@@ -151,7 +150,7 @@
             this.MinimizeBox = false;
             this.Name = "AddEditRoleForm";
             this.ShowIcon = false;
-            this.Load += new System.EventHandler(this.AddEditRoleForm_Load);
+           // this.Load += new System.EventHandler(this.AddEditRoleForm_Load);
             this.perfilPanel.ResumeLayout(false);
             this.perfilPanel.PerformLayout();
             this.rolPanel.ResumeLayout(false);
@@ -164,7 +163,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.CheckedListBox lstFuncionalidades;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnClose;
@@ -172,5 +170,6 @@
         private System.Windows.Forms.ComboBox cbxPerfiles;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel rolPanel;
+        private System.Windows.Forms.TextBox txtNombreRol;
     }
 }

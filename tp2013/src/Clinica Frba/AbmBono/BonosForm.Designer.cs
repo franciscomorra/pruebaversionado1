@@ -1,6 +1,6 @@
-﻿namespace ClinicaFrba.AbmTurno
+﻿namespace ClinicaFrba.AbmBono
 {
-    partial class TurnosForm
+    partial class BonosForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,15 +31,15 @@
             this.buttonsPanel = new System.Windows.Forms.Panel();
             this.lblResults = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
-            this.dgvTurnos = new System.Windows.Forms.DataGridView();
+            this.dgvBonos = new System.Windows.Forms.DataGridView();
             this.panelAfiliado = new System.Windows.Forms.Panel();
             this.btnBuscarAfiliado = new System.Windows.Forms.Button();
             this.lblAfiliado = new System.Windows.Forms.Label();
             this.txtAfiliado = new System.Windows.Forms.TextBox();
-            this.btnCancelar = new System.Windows.Forms.Button();
             this.buttonsPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTurnos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBonos)).BeginInit();
             this.panelAfiliado.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,6 +81,15 @@
             this.label5.TabIndex = 3;
             this.label5.Text = "resultados";
             // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(93, 10);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 2;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            // 
             // btnAgregar
             // 
             this.btnAgregar.Location = new System.Drawing.Point(12, 10);
@@ -89,23 +98,22 @@
             this.btnAgregar.TabIndex = 0;
             this.btnAgregar.Text = "Nuevo";
             this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
-            // dgvTurnos
+            // dgvBonos
             // 
-            this.dgvTurnos.AllowUserToAddRows = false;
-            this.dgvTurnos.AllowUserToDeleteRows = false;
-            this.dgvTurnos.AllowUserToOrderColumns = true;
-            this.dgvTurnos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTurnos.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvTurnos.Location = new System.Drawing.Point(0, 96);
-            this.dgvTurnos.MultiSelect = false;
-            this.dgvTurnos.Name = "dgvTurnos";
-            this.dgvTurnos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTurnos.Size = new System.Drawing.Size(834, 422);
-            this.dgvTurnos.TabIndex = 5;
-            this.dgvTurnos.DataSourceChanged += new System.EventHandler(this.dgvTurnos_DataSourceChanged);
+            this.dgvBonos.AllowUserToAddRows = false;
+            this.dgvBonos.AllowUserToDeleteRows = false;
+            this.dgvBonos.AllowUserToOrderColumns = true;
+            this.dgvBonos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvBonos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBonos.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvBonos.Location = new System.Drawing.Point(0, 96);
+            this.dgvBonos.MultiSelect = false;
+            this.dgvBonos.Name = "dgvBonos";
+            this.dgvBonos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvBonos.Size = new System.Drawing.Size(834, 422);
+            this.dgvBonos.TabIndex = 5;
+            this.dgvBonos.DataSourceChanged += new System.EventHandler(this.dgvBonos_DataSourceChanged);
             // 
             // panelAfiliado
             // 
@@ -144,30 +152,20 @@
             this.txtAfiliado.Size = new System.Drawing.Size(250, 20);
             this.txtAfiliado.TabIndex = 33;
             // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Location = new System.Drawing.Point(93, 10);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(106, 23);
-            this.btnCancelar.TabIndex = 2;
-            this.btnCancelar.Text = "Cancelar Turno";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // TurnosForm
+            // BonosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 518);
             this.Controls.Add(this.panelAfiliado);
-            this.Controls.Add(this.dgvTurnos);
+            this.Controls.Add(this.dgvBonos);
             this.Controls.Add(this.buttonsPanel);
-            this.Name = "TurnosForm";
-            this.Text = "Administrar Turnos";
-            this.Load += new System.EventHandler(this.TurnosForm_Load);
+            this.Name = "BonosForm";
+            this.Text = "Administrar Bonos";
+            this.Load += new System.EventHandler(this.BonosForm_Load);
             this.buttonsPanel.ResumeLayout(false);
             this.buttonsPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTurnos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBonos)).EndInit();
             this.panelAfiliado.ResumeLayout(false);
             this.panelAfiliado.PerformLayout();
             this.ResumeLayout(false);
@@ -179,12 +177,12 @@
         private System.Windows.Forms.Panel buttonsPanel;
         private System.Windows.Forms.Label lblResults;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.DataGridView dgvTurnos;
+        private System.Windows.Forms.DataGridView dgvBonos;
         private System.Windows.Forms.Panel panelAfiliado;
         private System.Windows.Forms.Button btnBuscarAfiliado;
         private System.Windows.Forms.Label lblAfiliado;
         private System.Windows.Forms.TextBox txtAfiliado;
-        private System.Windows.Forms.Button btnCancelar;
     }
 }

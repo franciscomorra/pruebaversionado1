@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using ClinicaFrba.Comun;
 
-namespace ClinicaFrba.Login
+namespace ClinicaFrba.AbmBono
 {
-    public class UserSelectedEventArgs : EventArgs
+    public class BonoSelectedEventArgs : EventArgs
     {
-        public User User { get; set; }
+        public Bono Bono { get; set; }
     }
 }

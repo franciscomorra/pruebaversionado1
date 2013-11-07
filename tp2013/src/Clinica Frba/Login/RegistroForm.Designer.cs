@@ -51,7 +51,6 @@ namespace ClinicaFrba
             this.label8 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.btnAsignarPerfil = new System.Windows.Forms.Button();
             this.lblPerfil = new System.Windows.Forms.Label();
             this.cbxProfiles = new System.Windows.Forms.ComboBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
@@ -61,7 +60,7 @@ namespace ClinicaFrba
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(363, 456);
+            this.btnSave.Location = new System.Drawing.Point(363, 566);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 0;
@@ -73,7 +72,7 @@ namespace ClinicaFrba
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(23, 456);
+            this.btnCancel.Location = new System.Drawing.Point(23, 566);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -102,9 +101,9 @@ namespace ClinicaFrba
             this.userPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.userPanel.Location = new System.Drawing.Point(23, 289);
+            this.userPanel.Location = new System.Drawing.Point(1, 289);
             this.userPanel.Name = "userPanel";
-            this.userPanel.Size = new System.Drawing.Size(415, 161);
+            this.userPanel.Size = new System.Drawing.Size(437, 271);
             this.userPanel.TabIndex = 10;
             // 
             // cbxTipoDNI
@@ -246,15 +245,6 @@ namespace ClinicaFrba
             this.label10.TabIndex = 33;
             this.label10.Text = "Nombre";
             // 
-            // btnAsignarPerfil
-            // 
-            this.btnAsignarPerfil.Location = new System.Drawing.Point(326, 260);
-            this.btnAsignarPerfil.Name = "btnAsignarPerfil";
-            this.btnAsignarPerfil.Size = new System.Drawing.Size(112, 23);
-            this.btnAsignarPerfil.TabIndex = 52;
-            this.btnAsignarPerfil.Text = "Asignar otro Perfil";
-            this.btnAsignarPerfil.UseVisualStyleBackColor = true;
-            // 
             // lblPerfil
             // 
             this.lblPerfil.AutoSize = true;
@@ -272,7 +262,7 @@ namespace ClinicaFrba
             this.cbxProfiles.Size = new System.Drawing.Size(200, 21);
             this.cbxProfiles.Sorted = true;
             this.cbxProfiles.TabIndex = 50;
-            this.cbxProfiles.SelectedIndexChanged += new System.EventHandler(this.cbxProfiles_SelectedIndexChanged_1);
+            this.cbxProfiles.SelectedIndexChanged += new System.EventHandler(this.cbxProfiles_SelectedIndexChanged);
             // 
             // txtPassword
             // 
@@ -284,11 +274,11 @@ namespace ClinicaFrba
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 55);
+            this.label2.Location = new System.Drawing.Point(52, 55);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(102, 13);
+            this.label2.Size = new System.Drawing.Size(61, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Cambiar Contraseña";
+            this.label2.Text = "Contraseña";
             // 
             // RegistroForm
             // 
@@ -296,8 +286,7 @@ namespace ClinicaFrba
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(444, 507);
-            this.Controls.Add(this.btnAsignarPerfil);
+            this.ClientSize = new System.Drawing.Size(444, 617);
             this.Controls.Add(this.lblPerfil);
             this.Controls.Add(this.cbxProfiles);
             this.Controls.Add(this.cbxTipoDNI);
@@ -356,7 +345,6 @@ namespace ClinicaFrba
         private Label label8;
         private TextBox txtNombre;
         private Label label10;
-        private Button btnAsignarPerfil;
         private Label lblPerfil;
         private ComboBox cbxProfiles;
         private TextBox txtPassword;

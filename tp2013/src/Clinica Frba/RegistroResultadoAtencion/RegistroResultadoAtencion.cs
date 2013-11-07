@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using ClinicaFrba.Core;
 using ClinicaFrba.Comun;
-
+using System.Configuration;
 using ClinicaFrba.AbmProfesional;
 using ClinicaFrba.AbmAfiliado;
 
@@ -42,7 +42,7 @@ namespace ClinicaFrba.RegistroResultadoAtencion
             _profesional = e.Profesional;
             txtProfesional.Text = "Dr. " + _profesional.DetallePersona.Apellido + ", " + _profesional.DetallePersona.Nombre;
             _profesionalesForm.Hide();
-            panelAcciones.Location = new Point(0, 0);
+            //panelAcciones.Location = new Point(0, 0);
             panelAcciones.Show();
         }
 
@@ -67,7 +67,7 @@ namespace ClinicaFrba.RegistroResultadoAtencion
         }
 
 
-        private void btnBuscarBono_Click(object sender, EventArgs e)
+        private void btnBuscarTurno_Click(object sender, EventArgs e)
         {
 
         }
@@ -79,6 +79,8 @@ namespace ClinicaFrba.RegistroResultadoAtencion
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+
 
         }
 

@@ -43,15 +43,15 @@
             this.btnGenerarReceta = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.panelAcciones = new System.Windows.Forms.Panel();
-            this.panelConsulta = new System.Windows.Forms.Panel();
-            this.btnBuscarBono = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtBonoConsulta = new System.Windows.Forms.TextBox();
+            this.panelTurno = new System.Windows.Forms.Panel();
+            this.btnBuscarTurno = new System.Windows.Forms.Button();
+            this.lblTurno = new System.Windows.Forms.Label();
+            this.txtTurno = new System.Windows.Forms.TextBox();
             this.panelResultado = new System.Windows.Forms.Panel();
             this.panelAfiliado.SuspendLayout();
             this.panelProfesional.SuspendLayout();
             this.panelAcciones.SuspendLayout();
-            this.panelConsulta.SuspendLayout();
+            this.panelTurno.SuspendLayout();
             this.panelResultado.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,12 +62,12 @@
             this.panelAfiliado.Controls.Add(this.txtAfiliado);
             this.panelAfiliado.Location = new System.Drawing.Point(6, 3);
             this.panelAfiliado.Name = "panelAfiliado";
-            this.panelAfiliado.Size = new System.Drawing.Size(532, 43);
+            this.panelAfiliado.Size = new System.Drawing.Size(415, 43);
             this.panelAfiliado.TabIndex = 24;
             // 
             // btnBuscarAfiliado
             // 
-            this.btnBuscarAfiliado.Location = new System.Drawing.Point(180, 7);
+            this.btnBuscarAfiliado.Location = new System.Drawing.Point(327, 7);
             this.btnBuscarAfiliado.Name = "btnBuscarAfiliado";
             this.btnBuscarAfiliado.Size = new System.Drawing.Size(75, 23);
             this.btnBuscarAfiliado.TabIndex = 34;
@@ -89,7 +89,7 @@
             this.txtAfiliado.Location = new System.Drawing.Point(71, 9);
             this.txtAfiliado.Name = "txtAfiliado";
             this.txtAfiliado.ReadOnly = true;
-            this.txtAfiliado.Size = new System.Drawing.Size(100, 20);
+            this.txtAfiliado.Size = new System.Drawing.Size(250, 20);
             this.txtAfiliado.TabIndex = 33;
             // 
             // panelProfesional
@@ -99,12 +99,12 @@
             this.panelProfesional.Controls.Add(this.txtProfesional);
             this.panelProfesional.Location = new System.Drawing.Point(0, 0);
             this.panelProfesional.Name = "panelProfesional";
-            this.panelProfesional.Size = new System.Drawing.Size(538, 43);
+            this.panelProfesional.Size = new System.Drawing.Size(421, 43);
             this.panelProfesional.TabIndex = 23;
             // 
             // btnBuscarProfesional
             // 
-            this.btnBuscarProfesional.Location = new System.Drawing.Point(186, 7);
+            this.btnBuscarProfesional.Location = new System.Drawing.Point(333, 7);
             this.btnBuscarProfesional.Name = "btnBuscarProfesional";
             this.btnBuscarProfesional.Size = new System.Drawing.Size(75, 23);
             this.btnBuscarProfesional.TabIndex = 34;
@@ -126,7 +126,7 @@
             this.txtProfesional.Location = new System.Drawing.Point(77, 9);
             this.txtProfesional.Name = "txtProfesional";
             this.txtProfesional.ReadOnly = true;
-            this.txtProfesional.Size = new System.Drawing.Size(100, 20);
+            this.txtProfesional.Size = new System.Drawing.Size(250, 20);
             this.txtProfesional.TabIndex = 33;
             // 
             // label1
@@ -152,7 +152,7 @@
             this.textBox2.Location = new System.Drawing.Point(71, 10);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(442, 45);
+            this.textBox2.Size = new System.Drawing.Size(331, 45);
             this.textBox2.TabIndex = 27;
             // 
             // textBox1
@@ -160,12 +160,12 @@
             this.textBox1.Location = new System.Drawing.Point(71, 61);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(442, 45);
+            this.textBox1.Size = new System.Drawing.Size(331, 45);
             this.textBox1.TabIndex = 27;
             // 
             // btnGenerarReceta
             // 
-            this.btnGenerarReceta.Location = new System.Drawing.Point(255, 112);
+            this.btnGenerarReceta.Location = new System.Drawing.Point(71, 112);
             this.btnGenerarReceta.Name = "btnGenerarReceta";
             this.btnGenerarReceta.Size = new System.Drawing.Size(126, 23);
             this.btnGenerarReceta.TabIndex = 28;
@@ -175,7 +175,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(387, 112);
+            this.btnGuardar.Location = new System.Drawing.Point(276, 112);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(126, 23);
             this.btnGuardar.TabIndex = 29;
@@ -185,50 +185,50 @@
             // 
             // panelAcciones
             // 
-            this.panelAcciones.Controls.Add(this.panelConsulta);
+            this.panelAcciones.Controls.Add(this.panelTurno);
             this.panelAcciones.Controls.Add(this.panelAfiliado);
             this.panelAcciones.Controls.Add(this.panelResultado);
             this.panelAcciones.Location = new System.Drawing.Point(0, 45);
             this.panelAcciones.Name = "panelAcciones";
-            this.panelAcciones.Size = new System.Drawing.Size(546, 255);
+            this.panelAcciones.Size = new System.Drawing.Size(434, 255);
             this.panelAcciones.TabIndex = 30;
             // 
-            // panelConsulta
+            // panelTurno
             // 
-            this.panelConsulta.Controls.Add(this.btnBuscarBono);
-            this.panelConsulta.Controls.Add(this.label3);
-            this.panelConsulta.Controls.Add(this.txtBonoConsulta);
-            this.panelConsulta.Location = new System.Drawing.Point(6, 52);
-            this.panelConsulta.Name = "panelConsulta";
-            this.panelConsulta.Size = new System.Drawing.Size(532, 43);
-            this.panelConsulta.TabIndex = 24;
+            this.panelTurno.Controls.Add(this.btnBuscarTurno);
+            this.panelTurno.Controls.Add(this.lblTurno);
+            this.panelTurno.Controls.Add(this.txtTurno);
+            this.panelTurno.Location = new System.Drawing.Point(6, 52);
+            this.panelTurno.Name = "panelTurno";
+            this.panelTurno.Size = new System.Drawing.Size(417, 43);
+            this.panelTurno.TabIndex = 35;
             // 
-            // btnBuscarBono
+            // btnBuscarTurno
             // 
-            this.btnBuscarBono.Location = new System.Drawing.Point(180, 7);
-            this.btnBuscarBono.Name = "btnBuscarBono";
-            this.btnBuscarBono.Size = new System.Drawing.Size(75, 23);
-            this.btnBuscarBono.TabIndex = 34;
-            this.btnBuscarBono.Text = "Buscar";
-            this.btnBuscarBono.UseVisualStyleBackColor = true;
-            this.btnBuscarBono.Click += new System.EventHandler(this.btnBuscarBono_Click);
+            this.btnBuscarTurno.Location = new System.Drawing.Point(327, 7);
+            this.btnBuscarTurno.Name = "btnBuscarTurno";
+            this.btnBuscarTurno.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscarTurno.TabIndex = 34;
+            this.btnBuscarTurno.Text = "Buscar";
+            this.btnBuscarTurno.UseVisualStyleBackColor = true;
+            this.btnBuscarTurno.Click += new System.EventHandler(this.btnBuscarTurno_Click);
             // 
-            // label3
+            // lblTurno
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 12);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 13);
-            this.label3.TabIndex = 32;
-            this.label3.Text = "Bono";
+            this.lblTurno.AutoSize = true;
+            this.lblTurno.Location = new System.Drawing.Point(6, 12);
+            this.lblTurno.Name = "lblTurno";
+            this.lblTurno.Size = new System.Drawing.Size(35, 13);
+            this.lblTurno.TabIndex = 32;
+            this.lblTurno.Text = "Turno";
             // 
-            // txtBonoConsulta
+            // txtTurno
             // 
-            this.txtBonoConsulta.Location = new System.Drawing.Point(71, 9);
-            this.txtBonoConsulta.Name = "txtBonoConsulta";
-            this.txtBonoConsulta.ReadOnly = true;
-            this.txtBonoConsulta.Size = new System.Drawing.Size(100, 20);
-            this.txtBonoConsulta.TabIndex = 33;
+            this.txtTurno.Location = new System.Drawing.Point(71, 9);
+            this.txtTurno.Name = "txtTurno";
+            this.txtTurno.ReadOnly = true;
+            this.txtTurno.Size = new System.Drawing.Size(250, 20);
+            this.txtTurno.TabIndex = 33;
             // 
             // panelResultado
             // 
@@ -240,14 +240,14 @@
             this.panelResultado.Controls.Add(this.btnGenerarReceta);
             this.panelResultado.Location = new System.Drawing.Point(6, 101);
             this.panelResultado.Name = "panelResultado";
-            this.panelResultado.Size = new System.Drawing.Size(532, 146);
+            this.panelResultado.Size = new System.Drawing.Size(415, 146);
             this.panelResultado.TabIndex = 30;
             // 
             // RegistroResultadoAtencion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(550, 312);
+            this.ClientSize = new System.Drawing.Size(443, 312);
             this.Controls.Add(this.panelProfesional);
             this.Controls.Add(this.panelAcciones);
             this.Name = "RegistroResultadoAtencion";
@@ -257,8 +257,8 @@
             this.panelProfesional.ResumeLayout(false);
             this.panelProfesional.PerformLayout();
             this.panelAcciones.ResumeLayout(false);
-            this.panelConsulta.ResumeLayout(false);
-            this.panelConsulta.PerformLayout();
+            this.panelTurno.ResumeLayout(false);
+            this.panelTurno.PerformLayout();
             this.panelResultado.ResumeLayout(false);
             this.panelResultado.PerformLayout();
             this.ResumeLayout(false);
@@ -282,10 +282,10 @@
         private System.Windows.Forms.Button btnGenerarReceta;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Panel panelAcciones;
-        private System.Windows.Forms.Panel panelConsulta;
-        private System.Windows.Forms.Button btnBuscarBono;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtBonoConsulta;
         private System.Windows.Forms.Panel panelResultado;
+        private System.Windows.Forms.Panel panelTurno;
+        private System.Windows.Forms.Button btnBuscarTurno;
+        private System.Windows.Forms.Label lblTurno;
+        private System.Windows.Forms.TextBox txtTurno;
     }
 }

@@ -82,7 +82,7 @@ namespace ClinicaFrba.Negocio
         {
             var roleId = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].InsertRole", SqlDataAccessArgs
-                .CreateWith("@Description", rol.Nombre)
+                .CreateWith("@Description", rol.Nombre).And("@PerfilID",rol.Perfil.ID)
             .Arguments);
             rol.ID = roleId;
             UpdateRoleFunctionalities(rol);

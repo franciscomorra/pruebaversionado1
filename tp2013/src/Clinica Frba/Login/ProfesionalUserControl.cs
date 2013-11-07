@@ -17,27 +17,28 @@ namespace ClinicaFrba.Login
         public Profesional GetProfesional()
         {
 
-            if (clbEspecialidades.SelectedItems == null) {
-                throw new Exception("Debe elegir al menos Una especialidad"); 
-                //PROBAR!!!!
-            }
+            var especialidades = clbEspecialidades.CheckedItems.Cast<Especialidad>().ToList();
+            if (especialidades.Count == 0)
+                throw new Exception("Debe seleccionar al menos una ciudad!");
             if (string.IsNullOrEmpty(txtMatricula.Text.Trim()))
                 throw new Exception("La Matricula es obligatoria!");
-
             _profesional.Matricula = txtMatricula.Text.Trim();
-            /* HACER ESTO; COMO ES??
-            _profesional.Especialidades = clbEspecialidades.SelectedItems;
-            clbEspecialidades.ForEach(x => _profesional.Especialidades.Add(x))
-            */
+            _profesional.Especialidades = especialidades;
             return _profesional;
         }
 
         public void SetUser(Profesional profesional)
         {
             _profesional = profesional;
-            //SELECCIONAR LAS ESPECIALIDADES DEL PROFESIONAL
             var especialidadesManager = new EspecialidadesManager();
             List<Especialidad> especialidadesProfesional = especialidadesManager.GetAllForUser(profesional.UserID);
+            _profesional.Especialidades = especialidadesProfesional;
+            foreach (var especialidad in _profesional.Especialidades)
+            {
+                clbEspecialidades.SetItemChecked(clbEspecialidades.Items.IndexOf(especialidad), true);
+            }
+            
+            
             //clbEspecialidades.SelectedIndices = especialidadesProfesional;
         }
 

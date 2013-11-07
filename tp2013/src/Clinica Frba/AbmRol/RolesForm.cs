@@ -66,10 +66,11 @@ namespace ClinicaFrba.AbmRol
                 if (dataSource.Contains(e.Rol)) dataSource.Remove(e.Rol);
                 dataSource.Add(e.Rol);
                 rolesDataGridView.Refresh();
+                lblResults.Text = dataSource.Count.ToString();
             }
-            catch
+            catch (System.Exception excep)
             {
-                MessageBox.Show("Error al guardar el rol");
+                MessageBox.Show(excep.Message);
             }
         }
 
@@ -87,21 +88,27 @@ namespace ClinicaFrba.AbmRol
                     var dataSource = rolesDataGridView.DataSource as BindingList<Rol>;
                     dataSource.Remove(rol);
                     rolesDataGridView.Refresh();
+                    lblResults.Text = dataSource.Count.ToString();
                     MessageBox.Show(string.Format("Rol {0} eliminado", rol.Nombre));
+
                 }
-                catch
+                catch (System.Exception excep)
                 {
-                    MessageBox.Show("Error al eliminar el rol");
+                    MessageBox.Show(excep.Message);
                 }
             }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
+            
             if (rolesDataGridView.SelectedRows == null || rolesDataGridView.SelectedRows.Count == 0) return;
             var row = rolesDataGridView.SelectedRows[0];
             var rol = row.DataBoundItem as Rol;
-            var addEditForm = new AddEditRoleForm(rol);
+            if(rol.Nombre == "Administrador")
+                throw new Exception("No se puede editar el rol de administrador");
+            var addEditForm = new AddEditRoleForm();
+            addEditForm.Set(rol);
             addEditForm.OnRoleUpdated += new EventHandler<RoleUpdatedEventArgs>(addEditForm_OnRoleUpdated);
             ViewsManager.LoadModal(addEditForm);
         }

@@ -36,6 +36,30 @@ namespace ClinicaFrba.Negocio
             return perfiles;
         }
 
+        public List<Profile> GetAllProfilesForRegistration()
+        {
+            var result = SqlDataAccess.ExecuteDataTableQuery(
+                ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "[SHARPS].GetPerfiles"
+            );
+            var perfiles = new List<Profile>();
+            var functionalitiesManager = new FunctionalitiesManager();
+            foreach (DataRow row in result.Rows)
+            {
+                var profile = new Profile()
+                {
+                    ID = int.Parse(row["ID"].ToString()),
+                    Nombre = row["Descripcion"].ToString(),
+                    //Functionalities = functionalitiesManager.GetProfileFunctionalities(int.Parse(row["ID"].ToString()))
+
+                };
+                if(profile.Nombre == "Afiliado" || profile.Nombre == "Profesional")
+                    perfiles.Add(profile);
+            }
+
+            return perfiles;
+        }
+
         public Profile getInfo(string NombrePerfil) 
         {
             Profile perfil = new Profile();

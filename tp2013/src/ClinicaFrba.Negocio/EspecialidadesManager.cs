@@ -41,7 +41,7 @@ namespace ClinicaFrba.Negocio
             }
             var ret = new List<Especialidad>();
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "[SHARPS].GetEspecialidades");
+                "[SHARPS].GetAllEspecialidades");
             if (result != null)
             {
                 foreach (DataRow row in result.Rows)

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using ClinicaFrba.Comun;
 
-namespace ClinicaFrba.AbmAfiliado
+namespace ClinicaFrba.AbmTurno
 {
-    public class AfiliadoSavedEventArgs : EventArgs
+    public class TurnoSelectedEventArgs : EventArgs
     {
-        public Afiliado Afiliado { get; set; }
+        public Turno Turno { get; set; }
     }
 }

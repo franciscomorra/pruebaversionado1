@@ -1,4 +1,4 @@
-﻿namespace ClinicaFrba.CompraBono
+﻿namespace ClinicaFrba.AbmBono
 {
     partial class ComprarBono
     {
@@ -133,7 +133,7 @@
             // lblTotal
             // 
             this.lblTotal.AutoSize = true;
-            this.lblTotal.Location = new System.Drawing.Point(278, 64);
+            this.lblTotal.Location = new System.Drawing.Point(289, 64);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(13, 13);
             this.lblTotal.TabIndex = 19;
@@ -156,6 +156,7 @@
             this.btnComprar.TabIndex = 20;
             this.btnComprar.Text = "Comprar";
             this.btnComprar.UseVisualStyleBackColor = true;
+            this.btnComprar.Click += new System.EventHandler(this.btnComprar_Click);
             // 
             // panelAfiliado
             // 
@@ -164,13 +165,13 @@
             this.panelAfiliado.Controls.Add(this.txtAfiliado);
             this.panelAfiliado.Location = new System.Drawing.Point(0, 0);
             this.panelAfiliado.Name = "panelAfiliado";
-            this.panelAfiliado.Size = new System.Drawing.Size(368, 43);
+            this.panelAfiliado.Size = new System.Drawing.Size(410, 43);
             this.panelAfiliado.TabIndex = 21;
             this.panelAfiliado.Visible = false;
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(180, 7);
+            this.btnBuscar.Location = new System.Drawing.Point(327, 7);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 34;
@@ -192,7 +193,7 @@
             this.txtAfiliado.Location = new System.Drawing.Point(71, 9);
             this.txtAfiliado.Name = "txtAfiliado";
             this.txtAfiliado.ReadOnly = true;
-            this.txtAfiliado.Size = new System.Drawing.Size(100, 20);
+            this.txtAfiliado.Size = new System.Drawing.Size(250, 20);
             this.txtAfiliado.TabIndex = 33;
             // 
             // panelCompra
@@ -211,14 +212,14 @@
             this.panelCompra.Controls.Add(this.cbxCantConsulta);
             this.panelCompra.Location = new System.Drawing.Point(0, 49);
             this.panelCompra.Name = "panelCompra";
-            this.panelCompra.Size = new System.Drawing.Size(368, 128);
+            this.panelCompra.Size = new System.Drawing.Size(410, 128);
             this.panelCompra.TabIndex = 22;
             // 
             // ComprarBono
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(370, 181);
+            this.ClientSize = new System.Drawing.Size(416, 181);
             this.Controls.Add(this.panelCompra);
             this.Controls.Add(this.panelAfiliado);
             this.Name = "ComprarBono";

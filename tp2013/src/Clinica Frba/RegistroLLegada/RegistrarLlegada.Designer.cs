@@ -53,13 +53,13 @@
             this.panelTurno.Controls.Add(this.txtTurno);
             this.panelTurno.Location = new System.Drawing.Point(12, 61);
             this.panelTurno.Name = "panelTurno";
-            this.panelTurno.Size = new System.Drawing.Size(618, 43);
+            this.panelTurno.Size = new System.Drawing.Size(417, 43);
             this.panelTurno.TabIndex = 24;
             this.panelTurno.Visible = false;
             // 
             // btnBuscarTurno
             // 
-            this.btnBuscarTurno.Location = new System.Drawing.Point(180, 7);
+            this.btnBuscarTurno.Location = new System.Drawing.Point(327, 7);
             this.btnBuscarTurno.Name = "btnBuscarTurno";
             this.btnBuscarTurno.Size = new System.Drawing.Size(75, 23);
             this.btnBuscarTurno.TabIndex = 34;
@@ -81,7 +81,7 @@
             this.txtTurno.Location = new System.Drawing.Point(71, 9);
             this.txtTurno.Name = "txtTurno";
             this.txtTurno.ReadOnly = true;
-            this.txtTurno.Size = new System.Drawing.Size(100, 20);
+            this.txtTurno.Size = new System.Drawing.Size(250, 20);
             this.txtTurno.TabIndex = 33;
             // 
             // panelAfiliado
@@ -91,12 +91,12 @@
             this.panelAfiliado.Controls.Add(this.txtAfiliado);
             this.panelAfiliado.Location = new System.Drawing.Point(12, 12);
             this.panelAfiliado.Name = "panelAfiliado";
-            this.panelAfiliado.Size = new System.Drawing.Size(618, 43);
+            this.panelAfiliado.Size = new System.Drawing.Size(417, 43);
             this.panelAfiliado.TabIndex = 23;
             // 
             // btnBuscarAfiliado
             // 
-            this.btnBuscarAfiliado.Location = new System.Drawing.Point(180, 7);
+            this.btnBuscarAfiliado.Location = new System.Drawing.Point(327, 7);
             this.btnBuscarAfiliado.Name = "btnBuscarAfiliado";
             this.btnBuscarAfiliado.Size = new System.Drawing.Size(75, 23);
             this.btnBuscarAfiliado.TabIndex = 34;
@@ -118,7 +118,7 @@
             this.txtAfiliado.Location = new System.Drawing.Point(71, 9);
             this.txtAfiliado.Name = "txtAfiliado";
             this.txtAfiliado.ReadOnly = true;
-            this.txtAfiliado.Size = new System.Drawing.Size(100, 20);
+            this.txtAfiliado.Size = new System.Drawing.Size(250, 20);
             this.txtAfiliado.TabIndex = 33;
             // 
             // panelBono
@@ -128,13 +128,13 @@
             this.panelBono.Controls.Add(this.txtBono);
             this.panelBono.Location = new System.Drawing.Point(12, 110);
             this.panelBono.Name = "panelBono";
-            this.panelBono.Size = new System.Drawing.Size(618, 43);
+            this.panelBono.Size = new System.Drawing.Size(417, 43);
             this.panelBono.TabIndex = 25;
             this.panelBono.Visible = false;
             // 
             // btnBuscarBonoC
             // 
-            this.btnBuscarBonoC.Location = new System.Drawing.Point(180, 7);
+            this.btnBuscarBonoC.Location = new System.Drawing.Point(327, 7);
             this.btnBuscarBonoC.Name = "btnBuscarBonoC";
             this.btnBuscarBonoC.Size = new System.Drawing.Size(75, 23);
             this.btnBuscarBonoC.TabIndex = 34;
@@ -156,14 +156,14 @@
             this.txtBono.Location = new System.Drawing.Point(71, 9);
             this.txtBono.Name = "txtBono";
             this.txtBono.ReadOnly = true;
-            this.txtBono.Size = new System.Drawing.Size(100, 20);
+            this.txtBono.Size = new System.Drawing.Size(250, 20);
             this.txtBono.TabIndex = 33;
             // 
             // btnRegistrar
             // 
             this.btnRegistrar.Location = new System.Drawing.Point(12, 160);
             this.btnRegistrar.Name = "btnRegistrar";
-            this.btnRegistrar.Size = new System.Drawing.Size(618, 23);
+            this.btnRegistrar.Size = new System.Drawing.Size(417, 23);
             this.btnRegistrar.TabIndex = 26;
             this.btnRegistrar.Text = "Registrar Llegada de Paciente";
             this.btnRegistrar.UseVisualStyleBackColor = true;
@@ -173,7 +173,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(632, 189);
+            this.ClientSize = new System.Drawing.Size(445, 189);
             this.Controls.Add(this.btnRegistrar);
             this.Controls.Add(this.panelBono);
             this.Controls.Add(this.panelTurno);

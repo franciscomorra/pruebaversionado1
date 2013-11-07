@@ -10,6 +10,7 @@ using ClinicaFrba.Core;
 using ClinicaFrba.Comun;
 using ClinicaFrba.Negocio;
 using ClinicaFrba.AbmAfiliado;
+using ClinicaFrba.Login;
 
 namespace ClinicaFrba.AbmAfiliado
 {
@@ -89,10 +90,14 @@ namespace ClinicaFrba.AbmAfiliado
                     MessageBox.Show(string.Format("Afiliado {0} {1} eliminado", afiliado.DetallePersona.Nombre.Trim(), afiliado.DetallePersona.Apellido.Trim()));
                     
                 }
+                catch (System.Exception excep)
+                {
+                    MessageBox.Show(excep.Message);
+                }/*
                 catch
                 {
                     MessageBox.Show("Error al eliminar el afiliado");
-                }
+                }*/
             }
         }
 
@@ -102,10 +107,21 @@ namespace ClinicaFrba.AbmAfiliado
                if (dgvAfiliados.SelectedRows == null || dgvAfiliados.SelectedRows.Count == 0) return;
                var row = dgvAfiliados.SelectedRows[0];
                var afiliado = row.DataBoundItem as Afiliado;
+               var regForm = new RegistroForm();
+               regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
+               regForm.SetUser(afiliado);
+
+               ViewsManager.LoadModal(regForm);
+
+               /*
+               if (dgvAfiliados.SelectedRows == null || dgvAfiliados.SelectedRows.Count == 0) return;
+               var row = dgvAfiliados.SelectedRows[0];
+               var afiliado = row.DataBoundItem as Afiliado;
                var afliadoModificarForm = new AddEditAfiliadoForm();
                afliadoModificarForm.OnAfiliadoSaved += new EventHandler<AfiliadoSavedEventArgs>(afiliadosForm_OnAfiliadoSaved);
                //afliadoModificarForm.SetAfiliado(afiliado);
                ViewsManager.LoadModal(afliadoModificarForm);
+                **/
             }
             catch (System.Exception excep)
             {
@@ -113,24 +129,36 @@ namespace ClinicaFrba.AbmAfiliado
             }
         }
 
-        void afiliadosForm_OnAfiliadoSaved(object sender, AfiliadoSavedEventArgs e) //Nuevo afiliado se guardo
+        void regForm_OnUserSaved(object sender, UserSavedEventArgs e)
         {
             var dataSource = dgvAfiliados.DataSource as BindingList<Afiliado>;
-            var afiliado = e.Afiliado;
+            var afiliado = e.User as Afiliado;
             if (dataSource.Contains(afiliado)) dataSource.Remove(afiliado);
             dataSource.Add(afiliado);
             dgvAfiliados.DataSource = new BindingList<Afiliado>(dataSource.OrderBy(x => x.DetallePersona.Apellido + x.DetallePersona.Nombre).ToList());
             dgvAfiliados.Refresh();
-            MessageBox.Show("Se han guardado los datos del afiliado " + e.Afiliado);
+            MessageBox.Show("Se han guardado los datos del Afiliado " + e.Username);
         }
+
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            var regForm = new RegistroForm();
+            
+            regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
+            Profile _perfil = new Profile(){ Nombre = "Afiliado"};
+
+            regForm.Profile = _perfil;
+            ViewsManager.LoadModal(regForm);
+        }
+        /*
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
             var afiliadoAgregarForm = new AddEditAfiliadoForm(); //HACER!
-            afiliadoAgregarForm.OnAfiliadoSaved += new EventHandler<AfiliadoSavedEventArgs>(afiliadosForm_OnAfiliadoSaved);
+            afiliadoAgregarForm.OnAfiliadoSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
             ViewsManager.LoadModal(afiliadoAgregarForm);
         }
-
+        */
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             txtApellido.Text = string.Empty;
