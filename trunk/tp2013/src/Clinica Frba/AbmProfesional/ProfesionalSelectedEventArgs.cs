@@ -8,6 +8,6 @@ namespace ClinicaFrba.AbmProfesional
 {
     public class ProfesionalSelectedEventArgs : EventArgs
     {
-        public Profesional Profesional { get; set;}
+        public Profesional Profesional { get; set; }
     }
 }

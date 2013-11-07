@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using ClinicaFrba.Core;
 using ClinicaFrba.AbmProfesional;
 using ClinicaFrba.AbmAfiliado;
+using ClinicaFrba.AbmBono;
 using ClinicaFrba.Comun;
 using ClinicaFrba.Negocio;
 using System.Configuration;
@@ -21,7 +22,9 @@ namespace ClinicaFrba.GenerarReceta
         private Profesional _profesional;
         private ProfesionalesForm _profesionalesForm;
         private Afiliado _afiliado;
-        private AfiliadosForm _afiliadosForm;
+        private AfiliadosForm _afiliadosForm; 
+        //private BonosForm _bonosForm;
+        private Bono _bono;
 
         public GenerarReceta()
         {
@@ -94,10 +97,26 @@ namespace ClinicaFrba.GenerarReceta
 
         }
 
+        /*
         private void btnBuscarBonoF_Click(object sender, EventArgs e)
         {
-
+            if (_bonosForm == null)
+            {
+                _bonosForm = new BonosForm();
+                _bonosForm.SetSearchMode();
+                _bonosForm.SetFarmaciaOnly();
+                _bonosForm.OnBonoSelected += new EventHandler<BonoSelectedEventArgs>(_bonosForm_OnBonoSelected);
+            }
+            ViewsManager.LoadModal(_afiliadosForm);
         }
+
+        void _bonosForm_OnBonoSelected(object sender, BonoSelectedEventArgs e)
+        {
+            _bono = e.Bono;
+            txtBono.Text = _bono.Numero.ToString();
+            //_afiliadosForm.Hide();
+            panelTurno.Show();
+        }*/
 
     }
 }

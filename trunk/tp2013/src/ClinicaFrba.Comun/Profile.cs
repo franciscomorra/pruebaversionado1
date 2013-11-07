@@ -18,6 +18,10 @@ namespace ClinicaFrba.Comun
             if (!(obj is Profile)) return false;
             return ((Profile)obj).Nombre == this.Nombre;
         }
+        public override string ToString()
+        {
+            return Nombre;
+        }
 
         public override int GetHashCode()
         {

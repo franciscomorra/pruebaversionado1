@@ -75,14 +75,14 @@ namespace ClinicaFrba.Login
                        var manager = new AfiliadoManager();
                        var usuario = manager.getInfo(user.UserID);
                        var regForm = new RegistroForm();
-                       regForm.SetUser(usuario,rolSelected.Perfil);
+                       regForm.SetUser(usuario);
                     }
                     else if (user.Perfil.Nombre == "Profesional") 
                     {
                        var manager = new ProfesionalManager();
                        var usuario = manager.getInfo(user.UserID);
                        var regForm = new RegistroForm();
-                       regForm.SetUser(usuario, rolSelected.Perfil);
+                       regForm.SetUser(usuario);
                     }
                 }
                 ViewsManager.LimpiarVistas();

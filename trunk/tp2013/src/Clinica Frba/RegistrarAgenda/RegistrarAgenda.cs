@@ -23,27 +23,30 @@ namespace ClinicaFrba.RegistrarAgenda
         private AgendaManager mgr = new AgendaManager();
         public RegistrarAgenda()
         {
-            //CARGAR HORARIOS LABORALES EN LAS LISTAS
-
             InitializeComponent();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+
+            if (dtDesde.Value < dtHasta.Value) {      
+            //    throw new Exception("La fecha hasta ser mayor a desde!");
+            }
+
+            TimeSpan diferencia  = dtHasta.Value - dtDesde.Value;
+            if (diferencia.TotalDays > 120 || diferencia.TotalDays < 1) {
+                throw new Exception("Error de fecha!");
             
+            }
             _agenda.FechaDesde = dtDesde.Value;
             _agenda.FechaHasta = dtHasta.Value;
+
             //RELLENAR AGENDA LUNES - SABADO
             /*
-            if (_agenda.FechaDesde - ) < 120 dias )
-            {
-            }
             if (calcularCantidadTotalHoras() > 40) { 
             
             }
            */
-
-            //Validar datos y guardar por fecha cambiada
             mgr.GuardarAgenda(_agenda);
         }
         
@@ -88,7 +91,12 @@ namespace ClinicaFrba.RegistrarAgenda
             {
                 txtProfesional.Text = Session.User.UserID.ToString();
                 panelProfesional.Hide();
+                rellenarAgendas();
             }
+            dtDesde.MinDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(1);
+            dtHasta.MinDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(1);
+            dtDesde.MaxDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(120);
+            dtHasta.Value = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(120);
         }
 
     }

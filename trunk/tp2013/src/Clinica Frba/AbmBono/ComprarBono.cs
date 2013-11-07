@@ -13,7 +13,7 @@ using ClinicaFrba.Comun;
 using ClinicaFrba.Negocio;
 using System.Configuration;
 
-namespace ClinicaFrba.CompraBono
+namespace ClinicaFrba.AbmBono
 {
     [PermissionRequired(Functionalities.ComprarBonos)]
     public partial class ComprarBono : Form
@@ -22,6 +22,7 @@ namespace ClinicaFrba.CompraBono
         private AfiliadosForm _afiliadosForm;
         private AfiliadoManager _afiliadoMan = new AfiliadoManager();
         private Afiliado afiliado;
+        private BonosManager _bonoManager = new BonosManager();
         public ComprarBono()
         {
             InitializeComponent();
@@ -91,6 +92,41 @@ namespace ClinicaFrba.CompraBono
             int totalFarmacia = cbxCantFarmacia.SelectedIndex * afiliado.PlanMedico.PrecioFarmacia;
             int total = totalConsulta + totalFarmacia;
             lblTotal.Text = total.ToString();
+        }
+
+        private void btnComprar_Click(object sender, EventArgs e)
+        {
+            int i = 0;
+            if (cbxCantConsulta.SelectedIndex > 0)
+            {
+                MessageBox.Show("Por favor, anote los numeros de bono a continuacion");
+                for (i = 0; i < cbxCantConsulta.SelectedIndex; i++)
+                {
+                    Bono bono = new Bono();
+                    bono.Fecha = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
+                    bono.AfiliadoCompro = afiliado;
+                    bono.Precio = afiliado.PlanMedico.PrecioConsulta;
+                    bono.TipodeBono = TipoBono.Consulta;
+                    int numeroBono = _bonoManager.Comprar(bono);
+                    MessageBox.Show("Bono Numero: " + numeroBono.ToString());
+                }
+            }
+            if (cbxCantFarmacia.SelectedIndex > 0)
+            {
+                MessageBox.Show("Por favor, anote los numeros de bono a continuacion");
+                for (i = 0; i < cbxCantFarmacia.SelectedIndex; i++)
+                {
+                    Bono bono = new Bono();
+                    bono.Fecha = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
+                    bono.AfiliadoCompro = afiliado;
+                    bono.Precio = afiliado.PlanMedico.PrecioFarmacia;
+                    bono.TipodeBono = TipoBono.Receta;
+                    int numeroBono = _bonoManager.Comprar(bono);
+                    MessageBox.Show("Bono Numero: " + numeroBono.ToString());
+                }
+            }
+
+
         }
 
 

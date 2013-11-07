@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Afiliado.cs" />
     <Compile Include="Agenda.cs" />
+    <Compile Include="Bono.cs" />
     <Compile Include="DetallesPersona.cs" />
     <Compile Include="Especialidad.cs" />
     <Compile Include="Functionalities.cs" />

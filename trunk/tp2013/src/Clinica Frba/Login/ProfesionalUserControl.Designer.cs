@@ -79,7 +79,7 @@
             this.panel1.Controls.Add(this.clbEspecialidades);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.txtMatricula);
-            this.panel1.Location = new System.Drawing.Point(7, 3);
+            this.panel1.Location = new System.Drawing.Point(26, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(329, 147);
             this.panel1.TabIndex = 30;
@@ -96,7 +96,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(17, 159);
+            this.label13.Location = new System.Drawing.Point(36, 159);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(78, 13);
             this.label13.TabIndex = 33;
@@ -105,7 +105,7 @@
             // cbxRoles
             // 
             this.cbxRoles.FormattingEnabled = true;
-            this.cbxRoles.Location = new System.Drawing.Point(103, 156);
+            this.cbxRoles.Location = new System.Drawing.Point(122, 156);
             this.cbxRoles.Name = "cbxRoles";
             this.cbxRoles.Size = new System.Drawing.Size(200, 21);
             this.cbxRoles.TabIndex = 32;
@@ -118,7 +118,7 @@
             this.Controls.Add(this.cbxRoles);
             this.Controls.Add(this.panel1);
             this.Name = "ProfesionalUserControl";
-            this.Size = new System.Drawing.Size(336, 187);
+            this.Size = new System.Drawing.Size(437, 271);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

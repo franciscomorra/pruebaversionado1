@@ -10,6 +10,7 @@ using ClinicaFrba.Core;
 using ClinicaFrba.Comun;
 using ClinicaFrba.Negocio;
 using ClinicaFrba.AbmProfesional;
+using ClinicaFrba.Login;
 
 namespace ClinicaFrba.AbmProfesional
 {
@@ -19,7 +20,7 @@ namespace ClinicaFrba.AbmProfesional
         private ProfesionalManager _ProfesionalManager = new ProfesionalManager();
         private bool _isSearchMode = false;
         public event EventHandler<ProfesionalSelectedEventArgs> OnProfesionalSelected;
-        public event EventHandler<ProfesionalSavedEventArgs> OnProfesionalSaved;
+        public event EventHandler<UserSavedEventArgs> OnUserSaved;
 
         public ProfesionalesForm()
         {
@@ -91,24 +92,68 @@ namespace ClinicaFrba.AbmProfesional
                     profesionalesGrid.Refresh();
                     MessageBox.Show(string.Format("Profesional {0} eliminado", profesional.DetallePersona.Apellido.Trim()));
                 }
-                catch
+                catch (System.Exception excep)
                 {
-                    MessageBox.Show("Error al eliminar el profesional");
+                    MessageBox.Show(excep.Message);
                 }
             }
         }
+
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
             if (profesionalesGrid.SelectedRows == null || profesionalesGrid.SelectedRows.Count == 0) return;
             var row = profesionalesGrid.SelectedRows[0];
             var profesional = row.DataBoundItem as Profesional;
-            /*
             var regForm = new RegistroForm();
-            regForm.OnProfesionalSaved += new EventHandler<ProfesionalSavedEventArgs>(regForm_OnProfesionalSaved);
-            regForm.SetProfesional(profesional, new Profile() { Nombre = "Profesional"});
+            regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
+            regForm.SetUser(profesional);
 
-            ViewsManager.LoadModal(regForm);*/
+            ViewsManager.LoadModal(regForm);
+        }
+
+        void regForm_OnUserSaved(object sender, UserSavedEventArgs e)
+        {
+            var dataSource = profesionalesGrid.DataSource as BindingList<Profesional>;
+            var profesional = e.User as Profesional;
+            if (dataSource.Contains(profesional)) dataSource.Remove(profesional);
+            dataSource.Add(profesional);
+            profesionalesGrid.DataSource = new BindingList<Profesional>(dataSource.OrderBy(x => x.DetallePersona.Apellido + x.DetallePersona.Nombre).ToList());
+            profesionalesGrid.Refresh();
+            MessageBox.Show("Se han guardado los datos del profesional " + e.Username);
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            var regForm = new RegistroForm();
+            regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
+            Profile _perfil = new Profile() { Nombre = "Profesional" };
+            regForm.Profile = _perfil;
+            ViewsManager.LoadModal(regForm);
+        }
+
+
+
+
+
+
+
+
+
+
+        /*
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (profesionalesGrid.SelectedRows == null || profesionalesGrid.SelectedRows.Count == 0) return;
+            var row = profesionalesGrid.SelectedRows[0];
+            var profesional = row.DataBoundItem as Profesional;
+            
+            //var regForm = new RegistroForm();
+            //regForm.OnProfesionalSaved += new EventHandler<ProfesionalSavedEventArgs>(regForm_OnProfesionalSaved);
+            //regForm.SetProfesional(profesional, new Profile() { Nombre = "Profesional"});
+
+            ViewsManager.LoadModal(regForm);
         }
 
         void regForm_OnProfesionalSaved(object sender, ProfesionalSavedEventArgs e)
@@ -124,13 +169,13 @@ namespace ClinicaFrba.AbmProfesional
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            /*var regForm = new RegistroForm();
-            regForm.OnProfesionalSaved += new EventHandler<ProfesionalSavedEventArgs>(regForm_OnProfesionalSaved);
-            regForm.Profile = new Profile() { Nombre = "Profesional" };
-            ViewsManager.LoadModal(regForm);
-        */
-        }
-
+            //var regForm = new RegistroForm();
+            //regForm.OnProfesionalSaved += new EventHandler<ProfesionalSavedEventArgs>(regForm_OnProfesionalSaved);
+            //regForm.Profile = new Profile() { Nombre = "Profesional" };
+        //    ViewsManager.LoadModal(regForm);
+        
+        }*/
+        
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             txtApellido.Text = string.Empty;

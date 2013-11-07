@@ -55,6 +55,11 @@ namespace ClinicaFrba.CancelarAtencion
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             DateTime fecha = dateTimePicker1.Value;
+            var sysDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
+            if (fecha < sysDate)
+            {
+                throw new Exception("La fecha debe ser mayor a la actual!");
+            }
             try
             {
                 _profesionalManager.CancelarTurnos(_profesional.UserID,fecha);
@@ -63,6 +68,13 @@ namespace ClinicaFrba.CancelarAtencion
             {
                 MessageBox.Show(excep.Message);
             }
+        }
+
+        private void CancelarDia_Load(object sender, EventArgs e)
+        {
+            dateTimePicker1.Value = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(1);
+
+            dateTimePicker1.MinDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(1);
         }
 
 

@@ -8,6 +8,6 @@ namespace ClinicaFrba.AbmAfiliado
 {
     public class AfiliadoSelectedEventArgs : EventArgs
     {
-        public Afiliado Afiliado { get; set;}
+        public Afiliado Afiliado { get; set; }
     }
 }

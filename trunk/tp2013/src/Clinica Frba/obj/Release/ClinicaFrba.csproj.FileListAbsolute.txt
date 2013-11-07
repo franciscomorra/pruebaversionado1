@@ -39,3 +39,5 @@ C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica 
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.AddEditAfliliadoForm.resources
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.AddEditAfiliadoForm.resources
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.AddEditProfesionalForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.AbmBono.BonosForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.Login.DetallesPersonaUserControl.resources

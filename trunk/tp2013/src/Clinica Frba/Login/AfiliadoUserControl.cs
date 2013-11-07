@@ -17,23 +17,24 @@ namespace ClinicaFrba.Login
 
         public Afiliado GetAfiliado()
         {
-            return new Afiliado();
-            /*
-            int CantHijos = 0;
+            _afiliado = new Afiliado();
+            int cantHijos;
+            if (!int.TryParse(txtHijos.Text, out cantHijos))
+                throw new Exception("La cantidad de hijos debe ser numérica!");
            
             if (string.IsNullOrEmpty(txtMotivo.Text.Trim()))
                 throw new Exception("El Motivo es obligatorio!"); 
             _afiliado.EstadoCivil = (EstadoCivil)Enum.Parse(typeof(EstadoCivil),cbxEstadoCivil.SelectedItem.ToString());
             _afiliado.PlanMedico = (PlanMedico)cbxPlanMedico.SelectedItem;
-            _afiliado.CantHijos = CantHijos;
+            _afiliado.CantHijos = cantHijos;
             _afiliado.MotivoCambio = txtMotivo.Text.Trim();
             return _afiliado;
-            **/ 
+             
         }
 
         public void SetUser(Afiliado afiliado)
         {
-            /*_afiliado = afiliado;
+            _afiliado = afiliado;
             
             
             cbxPlanMedico.SelectedItem = afiliado.PlanMedico;
@@ -45,13 +46,13 @@ namespace ClinicaFrba.Login
             }
 
             
-            */
+            
         }
 
         public AfiliadoUserControl()
         {
             InitializeComponent();
-            /*_afiliado = new Afiliado();
+            _afiliado = new Afiliado();
             //Rellenar Sexo
             var manager = new PlanesMedicosManager();
             var planesMedicos = manager.GetAll();
@@ -75,7 +76,7 @@ namespace ClinicaFrba.Login
                 cbxRoles.SelectedIndex = 0;
             }
 
-            */
+            
         }
 
         private void AfiliadoUserControl_Load(object sender, EventArgs e)

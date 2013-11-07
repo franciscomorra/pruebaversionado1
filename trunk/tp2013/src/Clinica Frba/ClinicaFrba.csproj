@@ -64,20 +64,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbmAfiliado\AddEditAfiliadoForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AbmAfiliado\AddEditAfiliadoForm.Designer.cs">
-      <DependentUpon>AddEditAfiliadoForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AbmAfiliado\AfiliadoSelectedEventArgs.cs" />
     <Compile Include="AbmAfiliado\AfiliadosForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AbmAfiliado\AfiliadosForm.Designer.cs">
       <DependentUpon>AfiliadosForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmAfiliado\AfiliadoSavedEventArgs.cs" />
+    <Compile Include="AbmAfiliado\AfiliadoSelectedEventArgs.cs" />
+    <Compile Include="AbmTurno\TurnoSelectedEventArgs.cs" />
     <Compile Include="AbmEspecialidadesMedicas\AbmEspecialidadesMedicas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,13 +84,6 @@
     <Compile Include="AbmPlanes\AbmPlanes.Designer.cs">
       <DependentUpon>AbmPlanes.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmProfesional\AddEditProfesionalForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AbmProfesional\AddEditProfesionalForm.Designer.cs">
-      <DependentUpon>AddEditProfesionalForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AbmProfesional\ProfesionalSavedEventArgs.cs" />
     <Compile Include="AbmProfesional\ProfesionalSelectedEventArgs.cs" />
     <Compile Include="AbmProfesional\ProfesionalesForm.cs">
       <SubType>Form</SubType>
@@ -129,12 +116,19 @@
     <Compile Include="CancelarAtencion\CancelarDia.Designer.cs">
       <DependentUpon>CancelarDia.cs</DependentUpon>
     </Compile>
-    <Compile Include="CompraBono\ComprarBono.cs">
+    <Compile Include="AbmBono\ComprarBono.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CompraBono\ComprarBono.Designer.cs">
+    <Compile Include="AbmBono\ComprarBono.Designer.cs">
       <DependentUpon>ComprarBono.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmBono\BonosForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmBono\BonosForm.Designer.cs">
+      <DependentUpon>BonosForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmBono\BonoSelectedEventArgs.cs" />
     <Compile Include="Core\AppExceptionHandler.cs" />
     <Compile Include="Core\NonNavigableAttribute.cs" />
     <Compile Include="Core\PermissionRequiredAttribute.cs" />
@@ -152,12 +146,6 @@
     </Compile>
     <Compile Include="ListadoEstadistico\ListadoEstadisticoForm.Designer.cs">
       <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Login\DetallesPersonaUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Login\DetallesPersonaUserControl.Designer.cs">
-      <DependentUpon>DetallesPersonaUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\LoginForm.cs">
       <SubType>Form</SubType>
@@ -184,7 +172,6 @@
       <DependentUpon>RegistroForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\UserSavedEventArgs.cs" />
-    <Compile Include="Login\UserSelectedEventArgs.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,9 +180,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AbmAfiliado\AddEditAfiliadoForm.resx">
-      <DependentUpon>AddEditAfiliadoForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AbmAfiliado\AfiliadosForm.resx">
       <DependentUpon>AfiliadosForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -204,9 +188,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmPlanes\AbmPlanes.resx">
       <DependentUpon>AbmPlanes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AbmProfesional\AddEditProfesionalForm.resx">
-      <DependentUpon>AddEditProfesionalForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmProfesional\ProfesionalesForm.resx">
       <DependentUpon>ProfesionalesForm.cs</DependentUpon>
@@ -223,17 +204,17 @@
     <EmbeddedResource Include="CancelarAtencion\CancelarDia.resx">
       <DependentUpon>CancelarDia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CompraBono\ComprarBono.resx">
+    <EmbeddedResource Include="AbmBono\ComprarBono.resx">
       <DependentUpon>ComprarBono.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmBono\BonosForm.resx">
+      <DependentUpon>BonosForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GenerarRecetas\GenerarReceta.resx">
       <DependentUpon>GenerarReceta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListadoEstadistico\ListadoEstadisticoForm.resx">
       <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Login\DetallesPersonaUserControl.resx">
-      <DependentUpon>DetallesPersonaUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

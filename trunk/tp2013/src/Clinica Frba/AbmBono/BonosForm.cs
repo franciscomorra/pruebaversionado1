@@ -15,17 +15,17 @@ using ClinicaFrba.AbmAfiliado;
 using System.Configuration;
 
 
-namespace ClinicaFrba.AbmTurno
+namespace ClinicaFrba.AbmBono
 {
-    [PermissionRequired(Functionalities.AdministrarTurnos)]
-    public partial class TurnosForm : Form
+    [NonNavigable]
+    public partial class BonosForm : Form
     {
         private bool _isSearchMode = false;
-        private TurnosManager _turnosManager = new TurnosManager();
+        private BonosManager _bonosManager = new BonosManager();
         private Afiliado _afiliado;
         private AfiliadosForm _afiliadosForm;
 
-        public TurnosForm()
+        public BonosForm()
         {
             InitializeComponent();
         }
@@ -35,16 +35,16 @@ namespace ClinicaFrba.AbmTurno
             _isSearchMode = true;
         }
 
-        private void TurnosForm_Load(object sender, EventArgs e)
+        private void BonosForm_Load(object sender, EventArgs e)
         {
-            var dataSource = _turnosManager.GetAll(_afiliado.UserID);
-            dgvTurnos.DataSourceChanged += new EventHandler(dgvTurnos_DataSourceChanged);
-            dgvTurnos.DataSource = dataSource;
+            var dataSource = _bonosManager.GetAll(_afiliado.UserID);
+            dgvBonos.DataSourceChanged += new EventHandler(dgvBonos_DataSourceChanged);
+            dgvBonos.DataSource = dataSource;
         }
 
-        private void dgvTurnos_DataSourceChanged(object sender, EventArgs e)
+        private void dgvBonos_DataSourceChanged(object sender, EventArgs e)
         {
-            var dataSource = dgvTurnos.DataSource as BindingList<Turno>;
+            var dataSource = dgvBonos.DataSource as BindingList<Bono>;
             lblResults.Text = dataSource.Count.ToString();
         }
 
@@ -65,26 +65,6 @@ namespace ClinicaFrba.AbmTurno
             txtAfiliado.Text = _afiliado.DetallePersona.Apellido + ", " + _afiliado.DetallePersona.Nombre;
             _afiliadosForm.Hide();
 
-        }
-
-        private void btnAgregar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            if (dgvTurnos.SelectedRows == null || dgvTurnos.SelectedRows.Count == 0) return;
-            var row = dgvTurnos.SelectedRows[0];
-            
-            var turno = row.DataBoundItem as Turno;
-            /*
-            var pedirTurnoForm = new PedirTurnoForm();
-
-            addEditForm.Set(rol);
-            addEditForm.OnRoleUpdated += new EventHandler<RoleUpdatedEventArgs>(addEditForm_OnRoleUpdated);
-            ViewsManager.LoadModal(addEditForm);
-             * */
         }
 
     }
