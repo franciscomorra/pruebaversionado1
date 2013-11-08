@@ -398,10 +398,15 @@ AS
 BEGIN TRANSACTION
 
 INSERT INTO [SHARPS].Afiliados (GrupoFamiliar , UsuarioID , TipoAfiliado , CantHijos , Activo , PlanMedico )
-VALUES (@nroAfiliado +1 , @ID , NULL , @CantHijos ,1 , @PlanMedico)
+VALUES (@nroAfiliado +1 , @ID , NULL , @CantHijos ,1 , @PlanMedico)----VER LO DEL +1 YA QUE HAY CAMPO TIPO DE AFILIADO
+
+INSERT INTO [SHARPS].Usuarios_Roles (Usuario, Rol) 
+VALUES (@ID , @RolAfiliado)
+
+UPDATE [SHARPS].Roles SET  Descripcion = 'Afiliado' , Activo = 1, Perfil = 1
+WHERE RolID = @RolAfiliado
 
 
-----la parte de rol
 
 COMMIT TRANSACTION
 
@@ -419,7 +424,7 @@ VALUES (@Matricula , 1 , @ID)
 INSERT INTO [SHARPS].Usuarios_Roles (Usuario, Rol) --CREA UN NUEVO PROFESIONAL PERO YA ME DA EL NROL QUE VA A TENER?
 VALUES (@ID , @Rol)
 
-UPDATE [SHARPS].Roles SET  Descripcion = 'profesional' , Activo = 1, Perfil = 2
+UPDATE [SHARPS].Roles SET  Descripcion = 'Profesional' , Activo = 1, Perfil = 2
 WHERE RolID = @Rol 
 
 COMMIT TRANSACTION
@@ -461,8 +466,93 @@ CREATE PROCEDURE [SHARPS].CancelarDiaProfesional
 
 AS
 BEGIN
+
+
+
+UPDATE [SHARPS].Estados_Turno
+SET MotivoCancelacion = 'cancelacion medico'  ---<---  REVISAR
+,Descripcion ='cancelado'
+FROM [SHARPS].Estados_Turno ET
+INNER JOIN Agendas A  ON A.AgendaID = @MedicoID
+INNER JOIN  [SHARPS].Turnos T ON T.Estado = ET.Estado
+WHERE T.Agenda = A.AgendaID AND CONVERT(CHAR(10), T.FechaHoraLlegada ,112) = @Fecha
+
 END
 GO
 
 
-CREATE PROCEDURE [SHARPS].
+CREATE PROCEDURE [SHARPS].GetBonos
+
+@userId int
+
+AS
+BEGIN
+
+SELECT BC.Fecha_Impresion AS Fecha , BC.NumeroDeBono AS Numero , P.Precio_Bono_Consulta AS Precio
+FROM [SHARPS].BonosConsulta BC
+INNER JOIN Planes_Medicos P ON P.Codigo = BC.PlanMedico
+WHERE BC.Afiliado_Compro = @userId
+UNION
+SELECT BF.Fecha_Impresion AS Fecha, BF.NumeroDeBono AS Numero ,P.Precio_Bono_Farmacia AS Precio
+FROM [SHARPS].BonosFarmacia BF
+INNER JOIN Planes_Medicos P ON P.Codigo = BF.PlanMedico
+WHERE BF.Afiliado_Compro = @userId
+
+
+
+END
+GO
+
+
+
+CREATE PROCEDURE [SHARPS].ComprarBonoConsulta
+@Precio INT,
+@AfiliadoCompro INT,
+@Fecha DATE
+AS 
+BEGIN
+DECLARE @NUMEROBONO INT
+DECLARE @PLAN INT
+SELECT @PLAN = A.PlanMedico FROM Afiliados A WHERE A.UsuarioID = @AfiliadoCompro
+SELECT @NUMEROBONO = MAX(NumeroDeBono) + 1 FROM [SHARPS].BonosConsulta -----REVISAR PARA EL NUMERO DE FARMACIA TAMBIEN
+INSERT INTO [SHARPS].BonosConsulta (NumeroDeBono,PlanMedico,Fecha_Impresion,Afiliado_Compro)
+VALUES (@NUMEROBONO , @PLAN , @Fecha , @AfiliadoCompro)
+END
+GO
+
+
+
+CREATE PROCEDURE [SHARPS].ComprarBonoReceta --<-- TERMINAR DE REVISAR
+@Precio INT,
+@AfiliadoCompro INT,
+@Fecha DATE
+AS 
+BEGIN
+DECLARE @NUMEROBONO INT
+DECLARE @PLAN INT
+SELECT @PLAN = A.PlanMedico FROM Afiliados A WHERE A.UsuarioID = @AfiliadoCompro
+SELECT @NUMEROBONO = MAX(NumeroDeBono) + 1 FROM [SHARPS].BonosConsulta -----REVISAR PARA EL NUMERO DE FARMACIA TAMBIEN
+INSERT INTO [SHARPS].BonosFarmacia(NumeroDeBono,PlanMedico,Fecha_Impresion,Afiliado_Compro)
+VALUES (@NUMEROBONO , @PLAN , @Fecha , @AfiliadoCompro)
+END
+GO
+
+
+
+CREATE PROCEDURE [SHARPS].GetTurnos
+@userId INT
+
+
+AS
+BEGIN
+
+SELECT T.FechaHoraLlegada as Fecha ,T.Numero as Numero ,A.Profesional AS UserProfesional ,P.Matricula AS Matricula
+FROM Turnos T
+INNER JOIN Agendas A ON A.AgendaID = T.Agenda
+INNER JOIN Profesionales P ON P.UsuarioID = A.Profesional
+WHERE T.Afiliado = @userId
+
+END
+GO
+
+
