@@ -1,4 +1,4 @@
-CREATE PROCEDURE SHARPS.UpdateUserPassword
+CREATE PROCEDURE [SHARPS].UpdateUserPassword
 	@ID_Usuario int,
 	@OldPassword nvarchar(255),
 	@NewPassword nvarchar(255)
@@ -61,10 +61,10 @@ AS
 BEGIN
 select distinct u.username UserName , pm.codigo Plan_ID , pm.Precio_Bono_Consulta PrecioConsulta, pm.Precio_Bono_Farmacia PrecioFarmacia, a.cantHijos CantHijos, ((a.GrupoFamiliar*100)+a.tipoAfiliado) nroAfiliado, a.estadoCivil EstadoCivil, dp.apellido Apellido, dp.nombre Nombre, dp.sexo Sexo
 , dp.mail Email,dp.fechaNac FechaNacimiento, dp.TipoDNI TipoDoc, dp.telefono Telefono, dp.direccion Direccion, dp.dni DNI
-from Usuarios u
-inner join Afiliados a on a.usuarioID = @userId
-inner join Planes_Medicos pm on pm.codigo = a.planMedico
-inner join Detalles_Persona dp on dp.usuarioID = @userId
+from [SHARPS].Usuarios u
+inner join [SHARPS].Afiliados a on a.usuarioID = @userId
+inner join [SHARPS].Planes_Medicos pm on pm.codigo = a.planMedico
+inner join [SHARPS].Detalles_Persona dp on dp.usuarioID = @userId
 WHERE u.usuarioID = @userId
 END
 
@@ -88,17 +88,17 @@ create procedure [InsertAfiliado]
 @PlanMedico numeric(18,0),
 @ID numeric (18,0),
 @EstadoCivil nchar(10),
-@CantHijos int,
-@NroAfiliado numeric(18,0)
+@CantHijos int
 
 as 
-begin
-SELECT @NroAfiliado = MAX(nroAfiliado) + 101 FROM Afiliados
-insert into Afiliados (nroAfiliado , planMedico , cantHijos , estadoCivil , userId)
-values (@NroAfiliado , @PlanMedico , @CantHijos , @EstadoCivil , @ID) 
-end 
-go
-
+begin  transaction 
+declare @NroAfiliado int
+declare @codCivil int
+select @codCivil = Codigo from [SHARPS].Estados_Civiles where Descripcion = @EstadoCivil
+SELECT @NroAfiliado = MAX(GrupoFamiliar) + 101 FROM [SHARPS].Afiliados
+insert into [SHARPS].Afiliados (GrupoFamiliar , planMedico , cantHijos , estadoCivil , UsuarioID)
+values (@NroAfiliado , @PlanMedico , @CantHijos ,@codCivil  , @ID) 
+commit transaction 
 
 
 
@@ -129,14 +129,12 @@ create procedure [UpdateAfiliado]
 @Motivo char(10)
 as 
 begin
-
-update Afiliados set planMedico = @PlanMedico , estadoCivil = @EstadoCivil , cantHijos = @CantHijos 
-where userId = @ID
-
-
-
-insert into Cambios_Afiliado (motivo , fecha , afiliado)
-values (@Motivo , GETDATE() , nroAfiliado) --- ver lo del nro de afiliado
+declare @nroAfiliado int
+select @nroAfiliado = a.GrupoFamiliar from SHARPS.Afiliados a where a.UsuarioID = @ID
+update [SHARPS].Afiliados set planMedico = @PlanMedico , estadoCivil = @EstadoCivil , cantHijos = @CantHijos 
+where usuarioId = @ID
+insert into [SHARPS].Cambios_Afiliado(Motivo_Cambio , Fecha , Afiliado)
+values (@Motivo , GETDATE() ,@nroAfiliado )
 
 end
 go
@@ -189,7 +187,6 @@ where p.detallesPerf = @nombrePerfil
 
 
 
-----HACER LA DE TODOS LOS ROLES
 
 
 create procedure [InsertDetallePersona]
@@ -207,7 +204,7 @@ create procedure [InsertDetallePersona]
 
 as
 begin
-insert into Detalles_Persona (telefono ,tipo , sexo, userId , direccion , apellido , nombre , mail , fechaNac,dni)
+insert into [SHARPS].Detalles_Persona (telefono ,TipoDNI , sexo, UsuarioID , direccion , apellido , nombre , mail , fechaNac,dni)
 values ( @Telefono , @TipoDNI , @Sexo , @ID_Usuario , @Direccion , @Apellido , @Nombre , @Email , @FechaNacimiento , @DNI)
 
 end 
@@ -230,10 +227,10 @@ create procedure [UpdateDetallePersona]
 as
 begin
 
-update Detalles_Persona set
+update [SHARPS].Detalles_Persona set
 telefono = @Telefono , mail = @Email , nombre = @Nombre , apellido = @Apellido , direccion = @Direccion 
-, dni = @DNI , tipo = @TipoDNI  , sexo = @Sexo , fechaNac = @FechaNacimiento
-where @ID_Usuario = userId
+, dni = @DNI , tipoDNI = @TipoDNI  , sexo = @Sexo , fechaNac = @FechaNacimiento
+where @ID_Usuario = UsuarioID
 
 end
 go
@@ -293,3 +290,179 @@ go
 
 
 --- cuando mandes cambios de especialidades , borrar todo lo relacionado con el medico y insert lo nuevo.
+
+
+
+
+
+
+
+--------------------------------------------------------------
+
+CREATE PROCEDURE [UpdateDetallePersona]
+
+@Telefono numeric (18,0),
+@Email varchar(255),
+@Nombre varchar(255),
+@Apellido varchar(255),
+@DNI numeric (18,0),
+@TipoDNI varchar(255),
+@Sexo char(10),
+@FechaNacimiento date,
+@Direccion varchar(255),
+@ID_Usuario numeric (18,0)
+
+AS
+BEGIN
+
+UPDATE [SHARPS].Detalles_Persona SET
+telefono = @Telefono , mail = @Email , nombre = @Nombre , apellido = @Apellido , direccion = @Direccion 
+, dni = @DNI , TipoDNI = @TipoDNI  , sexo = @Sexo , fechaNac = @FechaNacimiento
+WHERE @ID_Usuario = UsuarioID
+
+END
+GO
+
+
+CREATE PROCEDURE [InsertDetallePersona]
+
+@Telefono numeric (18,0),
+@Email varchar(255),
+@Nombre varchar(255),
+@Apellido varchar(255),
+@DNI numeric (18,0),
+@TipoDNI varchar(255),
+@Sexo char(10),
+@FechaNacimiento date,
+@Direccion varchar(255),
+@ID_Usuario numeric (18,0)
+
+AS
+BEGIN
+INSERT INTO [SHARPS].Detalles_Persona (telefono ,TipoDNI , sexo, UsuarioID , direccion , apellido , nombre , mail , fechaNac,dni)
+VALUES ( @Telefono , @TipoDNI , @Sexo , @ID_Usuario , @Direccion , @Apellido , @Nombre , @Email , @FechaNacimiento , @DNI)
+
+END 
+GO
+
+
+
+
+
+CREATE PROCEDURE [InsertAfiliado]
+@PlanMedico numeric(18,0),
+@ID numeric (18,0),
+@EstadoCivil nchar(10),
+@CantHijos int
+
+AS 
+BEGIN  TRANSACTION 
+DECLARE @NroAfiliado int
+DECLARE @codCivil int
+SELECT @codCivil = Codigo from [SHARPS].Estados_Civiles where Descripcion = @EstadoCivil
+SELECT @NroAfiliado = MAX(GrupoFamiliar) + 101 FROM [SHARPS].Afiliados
+INSERT INTO [SHARPS].Afiliados (GrupoFamiliar , planMedico , cantHijos , estadoCivil , UsuarioID)
+VALUES (@NroAfiliado , @PlanMedico , @CantHijos ,@codCivil  , @ID) 
+COMMIT TRANSACTION 
+
+
+CREATE PROCEDURE [UpdateAfiliado]
+
+@PlanMedico numeric(18,0),
+@ID numeric (18,0),
+@EstadoCivil nchar(10),
+@CantHijos int,
+@RolAfiliado numeric(10,2), 
+@Motivo char(10)
+AS 
+BEGIN
+DECLARE @nroAfiliado int
+SELECT @nroAfiliado = a.GrupoFamiliar from SHARPS.Afiliados a WHERE a.UsuarioID = @ID
+UPDATE [SHARPS].Afiliados set planMedico = @PlanMedico , estadoCivil = @EstadoCivil , cantHijos = @CantHijos 
+WHERE usuarioId = @ID
+INSERT INTO [SHARPS].Cambios_Afiliado(Motivo_Cambio , Fecha , Afiliado)
+VALUES (@Motivo , GETDATE() ,@nroAfiliado )
+
+END
+GO
+
+
+CREATE PROCEDURE InsertMiembroGrupoFamiliar
+@PlanMedico int,
+@ID int,
+@EstadoCivil int,
+@CantHijos int,
+@RolAfiliado nvarchar(MAX),
+@nroAfiliado int   -------------sera grupo familiar
+AS
+BEGIN TRANSACTION
+
+INSERT INTO [SHARPS].Afiliados (GrupoFamiliar , UsuarioID , TipoAfiliado , CantHijos , Activo , PlanMedico )
+VALUES (@nroAfiliado +1 , @ID , NULL , @CantHijos ,1 , @PlanMedico)
+
+
+----la parte de rol
+
+COMMIT TRANSACTION
+
+
+CREATE PROCEDURE [SHARPS].InsertProfesional
+@Matricula  int,
+@ID int,
+@Rol int
+
+AS
+BEGIN TRANSACTION
+INSERT INTO Profesionales (Matricula , Activo , UsuarioID)
+VALUES (@Matricula , 1 , @ID)
+
+INSERT INTO [SHARPS].Usuarios_Roles (Usuario, Rol) --CREA UN NUEVO PROFESIONAL PERO YA ME DA EL NROL QUE VA A TENER?
+VALUES (@ID , @Rol)
+
+UPDATE [SHARPS].Roles SET  Descripcion = 'profesional' , Activo = 1, Perfil = 2
+WHERE RolID = @Rol 
+
+COMMIT TRANSACTION
+
+
+
+CREATE PROCEDURE [SHARPS].UpdateProfesional
+@Matricula int,
+@ID int
+
+AS
+BEGIN
+
+UPDATE [SHARPS].Profesionales SET Matricula = @Matricula 
+WHERE UsuarioID = @ID 
+
+END
+GO
+
+
+CREATE PROCEDURE [SHARPS].InsertSpeciality
+@MedicoID int,
+@Especialidad int
+
+AS
+BEGIN
+INSERT INTO [SHARPS].Profesionales_Especialidades (Profesional , Especialidad) VALUES (@MedicoID , @Especialidad)
+/*SELECT TOP 1  @MedicoID , E.Codigo
+FROM Especialidades E
+WHERE E.Descripcion = @Especialidad*/
+
+END
+GO
+
+
+CREATE PROCEDURE [SHARPS].CancelarDiaProfesional
+@MedicoID int,
+@Fecha date
+
+AS
+BEGIN
+END
+GO
+
+
+CREATE PROCEDURE [SHARPS].
