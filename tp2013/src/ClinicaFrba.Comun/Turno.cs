@@ -9,6 +9,7 @@ namespace ClinicaFrba.Comun
     {
         public int Numero { get; set; }
         public Profesional Profesional { get; set; }
+        public Afiliado Afiliado { get; set; }
         public DateTime Fecha { get; set; }
     }
 }

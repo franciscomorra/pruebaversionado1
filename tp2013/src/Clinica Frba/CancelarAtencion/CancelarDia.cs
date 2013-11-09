@@ -43,9 +43,8 @@ namespace ClinicaFrba.CancelarAtencion
         void profesionalesForm_OnProfesionalSelected(object sender, ProfesionalSelectedEventArgs e)
         {
             _profesional = e.Profesional;
-            txtProfesional.Text = "Dr. " + _profesional.DetallePersona.Apellido + ", " + _profesional.DetallePersona.Nombre;
-            _profesionalesForm.Hide();
-            panelAcciones.Location = new Point(0, 0);
+            txtProfesional.Text = _profesional.ToString();
+            _profesionalesForm.Close();
             panelAcciones.Show();
         }
 
@@ -72,6 +71,14 @@ namespace ClinicaFrba.CancelarAtencion
 
         private void CancelarDia_Load(object sender, EventArgs e)
         {
+            if (Session.User.Perfil.Nombre == "Profesional")
+            {
+                _profesional = Session.User as Profesional;
+                panelProfesional.Visible = false;
+            }
+            else {
+                panelProfesional.Visible = true;
+            }
             dateTimePicker1.Value = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(1);
 
             dateTimePicker1.MinDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(1);

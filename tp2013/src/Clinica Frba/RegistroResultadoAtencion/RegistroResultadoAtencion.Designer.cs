@@ -42,17 +42,15 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnGenerarReceta = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
-            this.panelAcciones = new System.Windows.Forms.Panel();
             this.panelTurno = new System.Windows.Forms.Panel();
             this.btnBuscarTurno = new System.Windows.Forms.Button();
             this.lblTurno = new System.Windows.Forms.Label();
             this.txtTurno = new System.Windows.Forms.TextBox();
-            this.panelResultado = new System.Windows.Forms.Panel();
+            this.panelAcciones = new System.Windows.Forms.Panel();
             this.panelAfiliado.SuspendLayout();
             this.panelProfesional.SuspendLayout();
-            this.panelAcciones.SuspendLayout();
             this.panelTurno.SuspendLayout();
-            this.panelResultado.SuspendLayout();
+            this.panelAcciones.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelAfiliado
@@ -60,10 +58,11 @@
             this.panelAfiliado.Controls.Add(this.btnBuscarAfiliado);
             this.panelAfiliado.Controls.Add(this.lblAfiliado);
             this.panelAfiliado.Controls.Add(this.txtAfiliado);
-            this.panelAfiliado.Location = new System.Drawing.Point(6, 3);
+            this.panelAfiliado.Location = new System.Drawing.Point(0, 49);
             this.panelAfiliado.Name = "panelAfiliado";
-            this.panelAfiliado.Size = new System.Drawing.Size(415, 43);
+            this.panelAfiliado.Size = new System.Drawing.Size(421, 43);
             this.panelAfiliado.TabIndex = 24;
+            this.panelAfiliado.Visible = false;
             // 
             // btnBuscarAfiliado
             // 
@@ -183,25 +182,16 @@
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.button1_Click);
             // 
-            // panelAcciones
-            // 
-            this.panelAcciones.Controls.Add(this.panelTurno);
-            this.panelAcciones.Controls.Add(this.panelAfiliado);
-            this.panelAcciones.Controls.Add(this.panelResultado);
-            this.panelAcciones.Location = new System.Drawing.Point(0, 45);
-            this.panelAcciones.Name = "panelAcciones";
-            this.panelAcciones.Size = new System.Drawing.Size(434, 255);
-            this.panelAcciones.TabIndex = 30;
-            // 
             // panelTurno
             // 
             this.panelTurno.Controls.Add(this.btnBuscarTurno);
             this.panelTurno.Controls.Add(this.lblTurno);
             this.panelTurno.Controls.Add(this.txtTurno);
-            this.panelTurno.Location = new System.Drawing.Point(6, 52);
+            this.panelTurno.Location = new System.Drawing.Point(0, 98);
             this.panelTurno.Name = "panelTurno";
-            this.panelTurno.Size = new System.Drawing.Size(417, 43);
+            this.panelTurno.Size = new System.Drawing.Size(421, 43);
             this.panelTurno.TabIndex = 35;
+            this.panelTurno.Visible = false;
             // 
             // btnBuscarTurno
             // 
@@ -230,37 +220,40 @@
             this.txtTurno.Size = new System.Drawing.Size(250, 20);
             this.txtTurno.TabIndex = 33;
             // 
-            // panelResultado
+            // panelAcciones
             // 
-            this.panelResultado.Controls.Add(this.label1);
-            this.panelResultado.Controls.Add(this.btnGuardar);
-            this.panelResultado.Controls.Add(this.textBox2);
-            this.panelResultado.Controls.Add(this.textBox1);
-            this.panelResultado.Controls.Add(this.label2);
-            this.panelResultado.Controls.Add(this.btnGenerarReceta);
-            this.panelResultado.Location = new System.Drawing.Point(6, 101);
-            this.panelResultado.Name = "panelResultado";
-            this.panelResultado.Size = new System.Drawing.Size(415, 146);
-            this.panelResultado.TabIndex = 30;
+            this.panelAcciones.Controls.Add(this.label1);
+            this.panelAcciones.Controls.Add(this.btnGuardar);
+            this.panelAcciones.Controls.Add(this.textBox2);
+            this.panelAcciones.Controls.Add(this.textBox1);
+            this.panelAcciones.Controls.Add(this.label2);
+            this.panelAcciones.Controls.Add(this.btnGenerarReceta);
+            this.panelAcciones.Location = new System.Drawing.Point(0, 147);
+            this.panelAcciones.Name = "panelAcciones";
+            this.panelAcciones.Size = new System.Drawing.Size(431, 146);
+            this.panelAcciones.TabIndex = 30;
+            this.panelAcciones.Visible = false;
             // 
             // RegistroResultadoAtencion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(443, 312);
-            this.Controls.Add(this.panelProfesional);
+            this.ClientSize = new System.Drawing.Size(443, 319);
             this.Controls.Add(this.panelAcciones);
+            this.Controls.Add(this.panelTurno);
+            this.Controls.Add(this.panelProfesional);
+            this.Controls.Add(this.panelAfiliado);
             this.Name = "RegistroResultadoAtencion";
             this.Text = "Registrar Resultado de Atencion";
+            this.Load += new System.EventHandler(this.RegistroResultadoAtencion_Load);
             this.panelAfiliado.ResumeLayout(false);
             this.panelAfiliado.PerformLayout();
             this.panelProfesional.ResumeLayout(false);
             this.panelProfesional.PerformLayout();
-            this.panelAcciones.ResumeLayout(false);
             this.panelTurno.ResumeLayout(false);
             this.panelTurno.PerformLayout();
-            this.panelResultado.ResumeLayout(false);
-            this.panelResultado.PerformLayout();
+            this.panelAcciones.ResumeLayout(false);
+            this.panelAcciones.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -282,7 +275,6 @@
         private System.Windows.Forms.Button btnGenerarReceta;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Panel panelAcciones;
-        private System.Windows.Forms.Panel panelResultado;
         private System.Windows.Forms.Panel panelTurno;
         private System.Windows.Forms.Button btnBuscarTurno;
         private System.Windows.Forms.Label lblTurno;

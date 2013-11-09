@@ -50,7 +50,6 @@ namespace ClinicaFrba.Negocio
                 {
                     ID = int.Parse(row["ID"].ToString()),
                     Nombre = row["Descripcion"].ToString(),
-                    //Perfil = (Profile)Enum.Parse(typeof(Profile), row["Perfil"].ToString()),
                     Perfil = new Profile(){
 
                         ID = int.Parse(row["PerfilID"].ToString()),

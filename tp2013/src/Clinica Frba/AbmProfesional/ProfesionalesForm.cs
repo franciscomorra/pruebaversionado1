@@ -45,7 +45,7 @@ namespace ClinicaFrba.AbmProfesional
 
                 profesionalesGrid.AutoGenerateColumns = false;
                 profesionalesGrid.DataSourceChanged += new EventHandler(profesionalesGrid_DataSourceChanged);
-                dataSource.Remove(new Profesional() { UserID = Session.Profesional.UserID });
+                dataSource.Remove(new Profesional() { UserID = Session.User.UserID });
                 profesionalesGrid.DataSource = dataSource;
                 profesionalesGrid.DoubleClick += new EventHandler(profesionalesGrid_DoubleClick);
             }

@@ -26,5 +26,10 @@ namespace ClinicaFrba.Comun
         {
             return ID.GetHashCode();
         }
+
+        public override string ToString()
+        {
+            return Nombre+" (Perfil: "+Perfil+")";
+        }
     }
 }
