@@ -78,3 +78,4 @@ C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica 
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.AbmTurno.TurnosForm.resources
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.AbmBono.BonosForm.resources
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.AbmBono.ComprarBono.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.AbmTurno.PedirTurnoForm.resources

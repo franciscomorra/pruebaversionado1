@@ -21,6 +21,8 @@ namespace ClinicaFrba.AbmTurno
     public partial class TurnosForm : Form
     {
         private bool _isSearchMode = false;
+        public event EventHandler<TurnoSelectedEventArgs> OnTurnoselected;
+        private Turno turno = new Turno();
         private TurnosManager _turnosManager = new TurnosManager();
         private Afiliado _afiliado;
         private AfiliadosForm _afiliadosForm;
@@ -29,24 +31,27 @@ namespace ClinicaFrba.AbmTurno
         {
             InitializeComponent();
         }
-        public void SetSearchMode()
+        public void SetSearchMode(Afiliado afiliado)
         {
+            _afiliado = afiliado;
             buttonsPanel.Visible = false;
             _isSearchMode = true;
         }
 
         private void TurnosForm_Load(object sender, EventArgs e)
         {
-            var dataSource = _turnosManager.GetAll(_afiliado.UserID);
-            dgvTurnos.DataSourceChanged += new EventHandler(dgvTurnos_DataSourceChanged);
-            dgvTurnos.DataSource = dataSource;
+            panelAfiliado.Visible = true;
+            if (Session.User.Perfil.Nombre == "Afiliado" || _afiliado != null)
+            {
+                if(_afiliado == null)
+                    _afiliado = Session.User as Afiliado;
+                panelAfiliado.Visible = false;
+                var dataSource = _turnosManager.GetAll(_afiliado);
+                dgvTurnos.DataSource = dataSource;
+            }
+
         }
 
-        private void dgvTurnos_DataSourceChanged(object sender, EventArgs e)
-        {
-            var dataSource = dgvTurnos.DataSource as BindingList<Turno>;
-            lblResults.Text = dataSource.Count.ToString();
-        }
 
         private void btnBuscarAfiliado_Click(object sender, EventArgs e)
         {
@@ -62,15 +67,37 @@ namespace ClinicaFrba.AbmTurno
         void _afiliadosForm_OnAfiliadoSelected(object sender, AfiliadoSelectedEventArgs e)
         {
             _afiliado = e.Afiliado;
-            txtAfiliado.Text = _afiliado.DetallePersona.Apellido + ", " + _afiliado.DetallePersona.Nombre;
+            txtAfiliado.Text = _afiliado.ToString();
             _afiliadosForm.Hide();
+            var dataSource = _turnosManager.GetAll(_afiliado);
+            dgvTurnos.DataSource = dataSource;
 
         }
+
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-
+            var addTurnoForm = new PedirTurnoForm();
+            addTurnoForm._afiliado = _afiliado;
+            addTurnoForm.OnTurnoUpdated += new EventHandler<TurnoUpdatedEventArgs>(pedirTurnoOnTurnoUpdated);
+            ViewsManager.LoadModal(addTurnoForm);
         }
+
+        void pedirTurnoOnTurnoUpdated(object sender, TurnoUpdatedEventArgs e)
+        {
+            try
+            {
+                var dataSource = dgvTurnos.DataSource as BindingList<Turno>;
+                MessageBox.Show(string.Format("Turno {0} guardado correctamente", e.Turno.Fecha.ToString()));
+                dataSource.Add(e.Turno);
+                dgvTurnos.Refresh();
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+            }
+        }
+
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -78,14 +105,36 @@ namespace ClinicaFrba.AbmTurno
             var row = dgvTurnos.SelectedRows[0];
             
             var turno = row.DataBoundItem as Turno;
-            /*
+            
             var pedirTurnoForm = new PedirTurnoForm();
-
+            /*
             addEditForm.Set(rol);
             addEditForm.OnRoleUpdated += new EventHandler<RoleUpdatedEventArgs>(addEditForm_OnRoleUpdated);
             ViewsManager.LoadModal(addEditForm);
-             * */
+*/
         }
+
+
+
+        private void dgvTurnos_CellContentDoubleClick(object sender, EventArgs e)
+        {
+            if (dgvTurnos.SelectedRows == null || dgvTurnos.SelectedRows.Count == 0) return;
+            var row = dgvTurnos.SelectedRows[0];
+            var turno = row.DataBoundItem as Turno;
+            if (OnTurnoselected != null)
+            {
+                OnTurnoselected(this, new TurnoSelectedEventArgs()
+                {
+                    Turno = turno
+                });
+            }
+            this.Close();
+        }
+
+
+
+
+
 
     }
 }

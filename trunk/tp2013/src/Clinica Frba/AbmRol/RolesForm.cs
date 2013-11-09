@@ -105,8 +105,9 @@ namespace ClinicaFrba.AbmRol
             if (rolesDataGridView.SelectedRows == null || rolesDataGridView.SelectedRows.Count == 0) return;
             var row = rolesDataGridView.SelectedRows[0];
             var rol = row.DataBoundItem as Rol;
-            if(rol.Nombre == "Administrador")
-                throw new Exception("No se puede editar el rol de administrador");
+            //Que no se puedan borrar los roles por defecto!
+            if(rol.Nombre == "Administrador" || rol.Nombre == "Afiliado" || rol.Nombre == "Profesional" || rol.Nombre == "Administrativo")
+                throw new Exception("No se puede editar el rol "+rol.ToString()+" debido a una regla de negocio");
             var addEditForm = new AddEditRoleForm();
             addEditForm.Set(rol);
             addEditForm.OnRoleUpdated += new EventHandler<RoleUpdatedEventArgs>(addEditForm_OnRoleUpdated);

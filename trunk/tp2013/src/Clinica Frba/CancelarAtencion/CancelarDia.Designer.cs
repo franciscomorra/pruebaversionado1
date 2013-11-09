@@ -73,6 +73,7 @@
             this.panelAcciones.Name = "panelAcciones";
             this.panelAcciones.Size = new System.Drawing.Size(435, 73);
             this.panelAcciones.TabIndex = 33;
+            this.panelAcciones.Visible = false;
             // 
             // panelProfesional
             // 

@@ -12,5 +12,10 @@ namespace ClinicaFrba.Comun
         public int CantHijos { get; set; }
         public PlanMedico PlanMedico { get; set; }
         public string MotivoCambio { get; set; }
+
+        public override string ToString()
+        {
+            return this.DetallePersona.Apellido +", "+this.DetallePersona.Nombre;
+        }
     }
 }

@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using ClinicaFrba.Core;
 using ClinicaFrba.AbmProfesional;
 using ClinicaFrba.AbmAfiliado;
+using ClinicaFrba.AbmTurno;
 using ClinicaFrba.AbmBono;
 using ClinicaFrba.Comun;
 using ClinicaFrba.Negocio;
@@ -22,9 +23,10 @@ namespace ClinicaFrba.GenerarReceta
         private Profesional _profesional;
         private ProfesionalesForm _profesionalesForm;
         private Afiliado _afiliado;
-        private AfiliadosForm _afiliadosForm; 
-        //private BonosForm _bonosForm;
-        private Bono _bono;
+        private AfiliadosForm _afiliadosForm;
+        private Turno _turno;
+        private TurnosForm _turnosForm;
+
 
         public GenerarReceta()
         {
@@ -66,7 +68,7 @@ namespace ClinicaFrba.GenerarReceta
         void profesionalesForm_OnProfesionalSelected(object sender, ProfesionalSelectedEventArgs e)
         {
             _profesional = e.Profesional;
-            txtProfesional.Text = "Dr. " + _profesional.DetallePersona.Apellido + ", " + _profesional.DetallePersona.Nombre;
+            txtProfesional.Text = _profesional.ToString();
             _profesionalesForm.Hide();
             panelAcciones.Location = new Point(0, 0);
             panelAcciones.Show();
@@ -94,7 +96,21 @@ namespace ClinicaFrba.GenerarReceta
 
         private void btnBuscarTurno_Click(object sender, EventArgs e)
         {
+            if (_turnosForm == null)
+            {
+                _turnosForm = new TurnosForm();
+                _turnosForm.SetSearchMode(_afiliado);
+                _turnosForm.OnTurnoselected += new EventHandler<TurnoSelectedEventArgs>(_turnosForm_OnTurnoSelected);
+            }
+            ViewsManager.LoadModal(_turnosForm);
+        }
 
+        void _turnosForm_OnTurnoSelected(object sender, TurnoSelectedEventArgs e)
+        {
+            _turno = e.Turno;
+            txtTurno.Text = _turno.Fecha.ToString();
+            _turnosForm.Hide();
+            panelBono.Show();
         }
 
         /*

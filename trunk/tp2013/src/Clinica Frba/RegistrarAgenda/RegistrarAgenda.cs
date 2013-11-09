@@ -36,17 +36,16 @@ namespace ClinicaFrba.RegistrarAgenda
             TimeSpan diferencia  = dtHasta.Value - dtDesde.Value;
             if (diferencia.TotalDays > 120 || diferencia.TotalDays < 1) {
                 throw new Exception("Error de fecha!");
-            
             }
             _agenda.FechaDesde = dtDesde.Value;
             _agenda.FechaHasta = dtHasta.Value;
 
-            //RELLENAR AGENDA LUNES - SABADO
-            /*
-            if (calcularCantidadTotalHoras() > 40) { 
-            
+            //MessageBox.Show(cbxSabOUT.SelectedItem.ToString());
+            //MessageBox.Show(cbxSabIN.SelectedIndex.ToString());
+            if (calcularCantidadTotalHoras() > 40) {
+                throw new Exception("La carga horaria debe ser menor que 40!!");
             }
-           */
+           
             mgr.GuardarAgenda(_agenda);
         }
         
@@ -64,7 +63,7 @@ namespace ClinicaFrba.RegistrarAgenda
         void profesionalesForm_OnProfesionalSelected(object sender, ProfesionalSelectedEventArgs e)
         {
             _profesional = e.Profesional;
-            txtProfesional.Text = "Dr. " + _profesional.DetallePersona.Apellido + ", " + _profesional.DetallePersona.Nombre;
+            txtProfesional.Text = _profesional.ToString();
             _profesionalesForm.Hide();
             rellenarAgendas();
         }
@@ -72,12 +71,53 @@ namespace ClinicaFrba.RegistrarAgenda
 
         private void rellenarAgendas()
         {
-            //RELLENAR DIAS DE AGENDAS!
+            DateTime time = DateTime.Today;
+            for (DateTime _time = time.AddHours(7); _time < time.AddHours(20); _time = _time.AddMinutes(30)) 
+            {
+                cbxLunesIN.Items.Add(_time.ToShortTimeString());
+                cbxLunesOUT.Items.Add(_time.AddMinutes(30).ToShortTimeString());
+                cbxMartesIN.Items.Add(_time.ToShortTimeString());
+                cbxMartesOUT.Items.Add(_time.AddMinutes(30).ToShortTimeString());
+                cbxMiercIN.Items.Add(_time.ToShortTimeString());
+                cbxMiercOUT.Items.Add(_time.AddMinutes(30).ToShortTimeString());
+                cbxJueIN.Items.Add(_time.ToShortTimeString());
+                cbxJueOUT.Items.Add(_time.AddMinutes(30).ToShortTimeString());
+                cbxViesIN.Items.Add(_time.ToShortTimeString());
+                cbxVieOUT.Items.Add(_time.AddMinutes(30).ToShortTimeString());
+            }
+            time = DateTime.Today;
+            for (DateTime _time = time.AddHours(10); _time < time.AddHours(15); _time = _time.AddMinutes(30))
+            {
+                cbxSabIN.Items.Add(_time.ToShortTimeString());
+                cbxSabOUT.Items.Add(_time.AddMinutes(30).ToShortTimeString());
+
+            }
         }
-        private int calcularCantidadTotalHoras()
+
+
+
+            //for(hora = 700; hora < 2000; hora)
+
+        private double calcularCantidadTotalHoras()
         {
-            //VA CAMPO POR CAMPO Y SUMA
-            return 0;
+            double contador = 0;
+            if (cbxLunesIN.SelectedIndex >= 0) {
+                if(cbxLunesOUT.SelectedIndex <0)
+                    throw new Exception("Complete la hora de salida de los lunes!");
+                if(cbxLunesOUT.SelectedIndex < cbxLunesIN.SelectedIndex)
+                    throw new Exception("Error de hora en los lunes!");
+                
+                var horaIN =  cbxLunesIN.SelectedItem;
+                               MessageBox.Show(horaIN.ToString());
+                TimeSpan diferencia = (DateTime)cbxLunesIN.SelectedItem - (DateTime)cbxLunesOUT.SelectedItem;
+                if (diferencia.TotalDays > 0)
+                {
+                    contador = contador + diferencia.TotalHours;
+                }
+            }
+
+
+            return contador;
         }
 
         private void RegistrarAgenda_Load(object sender, EventArgs e)
@@ -91,12 +131,13 @@ namespace ClinicaFrba.RegistrarAgenda
             {
                 txtProfesional.Text = Session.User.UserID.ToString();
                 panelProfesional.Hide();
-                rellenarAgendas();
+
             }
+            rellenarAgendas();
             dtDesde.MinDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(1);
             dtHasta.MinDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(1);
-            dtDesde.MaxDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(120);
             dtHasta.Value = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(120);
+            dtDesde.Value = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(1);
         }
 
     }

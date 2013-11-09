@@ -167,6 +167,7 @@
             this.btnRegistrar.TabIndex = 26;
             this.btnRegistrar.Text = "Registrar Llegada de Paciente";
             this.btnRegistrar.UseVisualStyleBackColor = true;
+            this.btnRegistrar.Visible = false;
             this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
             // RegistrarLlegada

@@ -29,15 +29,13 @@
         private void InitializeComponent()
         {
             this.buttonsPanel = new System.Windows.Forms.Panel();
-            this.lblResults = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.dgvTurnos = new System.Windows.Forms.DataGridView();
             this.panelAfiliado = new System.Windows.Forms.Panel();
             this.btnBuscarAfiliado = new System.Windows.Forms.Button();
             this.lblAfiliado = new System.Windows.Forms.Label();
             this.txtAfiliado = new System.Windows.Forms.TextBox();
-            this.btnCancelar = new System.Windows.Forms.Button();
             this.buttonsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTurnos)).BeginInit();
             this.panelAfiliado.SuspendLayout();
@@ -46,8 +44,6 @@
             // buttonsPanel
             // 
             this.buttonsPanel.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.buttonsPanel.Controls.Add(this.lblResults);
-            this.buttonsPanel.Controls.Add(this.label5);
             this.buttonsPanel.Controls.Add(this.btnCancelar);
             this.buttonsPanel.Controls.Add(this.btnAgregar);
             this.buttonsPanel.Location = new System.Drawing.Point(0, 51);
@@ -55,31 +51,15 @@
             this.buttonsPanel.Size = new System.Drawing.Size(834, 39);
             this.buttonsPanel.TabIndex = 4;
             // 
-            // lblResults
+            // btnCancelar
             // 
-            this.lblResults.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblResults.AutoSize = true;
-            this.lblResults.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.lblResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResults.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblResults.Location = new System.Drawing.Point(746, 20);
-            this.lblResults.Name = "lblResults";
-            this.lblResults.Size = new System.Drawing.Size(14, 13);
-            this.lblResults.TabIndex = 4;
-            this.lblResults.Text = "0";
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label5.Location = new System.Drawing.Point(766, 20);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 13);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "resultados";
+            this.btnCancelar.Location = new System.Drawing.Point(93, 10);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(106, 23);
+            this.btnCancelar.TabIndex = 2;
+            this.btnCancelar.Text = "Cancelar Turno";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnAgregar
             // 
@@ -102,10 +82,11 @@
             this.dgvTurnos.Location = new System.Drawing.Point(0, 96);
             this.dgvTurnos.MultiSelect = false;
             this.dgvTurnos.Name = "dgvTurnos";
+            this.dgvTurnos.ReadOnly = true;
             this.dgvTurnos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTurnos.Size = new System.Drawing.Size(834, 422);
             this.dgvTurnos.TabIndex = 5;
-            this.dgvTurnos.DataSourceChanged += new System.EventHandler(this.dgvTurnos_DataSourceChanged);
+            this.dgvTurnos.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTurnos_CellContentDoubleClick);
             // 
             // panelAfiliado
             // 
@@ -144,16 +125,6 @@
             this.txtAfiliado.Size = new System.Drawing.Size(250, 20);
             this.txtAfiliado.TabIndex = 33;
             // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Location = new System.Drawing.Point(93, 10);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(106, 23);
-            this.btnCancelar.TabIndex = 2;
-            this.btnCancelar.Text = "Cancelar Turno";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
             // TurnosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -166,7 +137,6 @@
             this.Text = "Administrar Turnos";
             this.Load += new System.EventHandler(this.TurnosForm_Load);
             this.buttonsPanel.ResumeLayout(false);
-            this.buttonsPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTurnos)).EndInit();
             this.panelAfiliado.ResumeLayout(false);
             this.panelAfiliado.PerformLayout();
@@ -177,8 +147,6 @@
         #endregion
 
         private System.Windows.Forms.Panel buttonsPanel;
-        private System.Windows.Forms.Label lblResults;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.DataGridView dgvTurnos;
         private System.Windows.Forms.Panel panelAfiliado;

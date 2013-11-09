@@ -11,7 +11,7 @@ using ClinicaFrba.Comun;
 using System.Configuration;
 using ClinicaFrba.AbmProfesional;
 using ClinicaFrba.AbmAfiliado;
-
+using ClinicaFrba.AbmTurno;
 namespace ClinicaFrba.RegistroResultadoAtencion
 {
     [PermissionRequired(Functionalities.RegistroResultadoAtencion)]
@@ -21,6 +21,8 @@ namespace ClinicaFrba.RegistroResultadoAtencion
         private ProfesionalesForm _profesionalesForm;
         private Afiliado _afiliado;
         private AfiliadosForm _afiliadosForm;
+        private Turno _turno;
+        private TurnosForm _turnosForm;
         
         public RegistroResultadoAtencion()
         {
@@ -40,10 +42,10 @@ namespace ClinicaFrba.RegistroResultadoAtencion
         void profesionalesForm_OnProfesionalSelected(object sender, ProfesionalSelectedEventArgs e)
         {
             _profesional = e.Profesional;
-            txtProfesional.Text = "Dr. " + _profesional.DetallePersona.Apellido + ", " + _profesional.DetallePersona.Nombre;
+            txtProfesional.Text = _profesional.ToString();
             _profesionalesForm.Hide();
             //panelAcciones.Location = new Point(0, 0);
-            panelAcciones.Show();
+            panelAfiliado.Visible = true;
         }
 
 
@@ -64,12 +66,26 @@ namespace ClinicaFrba.RegistroResultadoAtencion
             _afiliado = e.Afiliado;
             txtAfiliado.Text = _afiliado.DetallePersona.Apellido + ", " + _afiliado.DetallePersona.Nombre;
             _afiliadosForm.Hide();
+            panelTurno.Visible = true;
         }
-
 
         private void btnBuscarTurno_Click(object sender, EventArgs e)
         {
+            if (_turnosForm == null)
+            {
+                _turnosForm = new TurnosForm();
+                _turnosForm.SetSearchMode(_afiliado);
+                _turnosForm.OnTurnoselected += new EventHandler<TurnoSelectedEventArgs>(_turnosForm_OnTurnoSelected);
+            }
+            ViewsManager.LoadModal(_turnosForm);
+        }
 
+        void _turnosForm_OnTurnoSelected(object sender, TurnoSelectedEventArgs e)
+        {
+            _turno = e.Turno;
+            txtTurno.Text = _turno.Fecha.ToString();
+            _turnosForm.Hide();
+            panelAcciones.Visible = true;
         }
 
         private void btnGenerarReceta_Click(object sender, EventArgs e)
@@ -82,6 +98,20 @@ namespace ClinicaFrba.RegistroResultadoAtencion
 
 
 
+        }
+
+        private void RegistroResultadoAtencion_Load(object sender, EventArgs e)
+        {
+            panelAcciones.Visible = false;
+            panelAfiliado.Visible = false;
+            panelTurno.Visible = false;
+            if (Session.User.Perfil.Nombre == "Profesional") {
+                this._profesional = Session.User as Profesional;
+                panelProfesional.Visible = false;
+                panelAfiliado.Visible = true;
+            }else{ 
+                panelProfesional.Visible = true;
+            }
         }
 
     }
