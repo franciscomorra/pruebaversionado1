@@ -453,7 +453,7 @@ SELECT distinct m.Medico_DNI,NULL,m.Medico_Telefono,m.Medico_Direccion,NULL,m.Me
 PRINT 'Ingresando las Entidades de Profesionales...'
 
 INSERT INTO [SHARPS].Profesionales (Matricula, UsuarioID , Activo)
-SELECT DISTINCT (RANK() OVER (ORDER BY m.Medico_DNI DESC)+ 723), u.UsuarioID, 1 
+SELECT DISTINCT NULL, u.UsuarioID, 1 
 FROM gd_esquema.Maestra m
 INNER JOIN [SHARPS].Usuarios u ON u.Username= CAST(m.Medico_DNI AS Nvarchar(MAX))
 
