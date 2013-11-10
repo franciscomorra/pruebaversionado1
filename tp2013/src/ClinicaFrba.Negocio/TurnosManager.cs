@@ -16,7 +16,7 @@ namespace ClinicaFrba.Negocio
         {
             var ret = new List<Turno>();
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "[SHARPS].GetTurnos", SqlDataAccessArgs
+                "[SHARPS].GetAllTurnos", SqlDataAccessArgs
                 .CreateWith("@userId", afiliado.UserID)
                 .Arguments);
             if (result != null)
@@ -32,9 +32,7 @@ namespace ClinicaFrba.Negocio
                             Matricula = row["Matricula"].ToString(),
                         },
                         Afiliado = afiliado
-
                     });
-
                 }
             }
             return ret;
@@ -63,7 +61,6 @@ namespace ClinicaFrba.Negocio
             return ret;
         }
         public void SaveTurno(Turno turno) {
-
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].InsertTurno", SqlDataAccessArgs
                 .CreateWith(
@@ -71,9 +68,17 @@ namespace ClinicaFrba.Negocio
                     .And("@Profesional_ID", turno.Profesional.UserID)
                     .And("@Afiliado_ID", turno.Afiliado.UserID)
             .Arguments);
-
         }
-        
+        public void RegistrarLlegada(Turno turno)
+        {
+            SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "[SHARPS].RegistrarLlegada", SqlDataAccessArgs
+                .CreateWith(
+                    "@HoraLlegada", Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]))
+                    .And("@Profesional_ID", turno.Profesional.UserID)
+                    .And("@Afiliado_ID", turno.Afiliado.UserID)
+            .Arguments);
+        }        
         
 
     }

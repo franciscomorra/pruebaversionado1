@@ -30,7 +30,7 @@ namespace ClinicaFrba.RegistrarAgenda
         {
 
             if (dtDesde.Value < dtHasta.Value) {      
-            //    throw new Exception("La fecha hasta ser mayor a desde!");
+                throw new Exception("La fecha hasta ser mayor a desde!");
             }
 
             TimeSpan diferencia  = dtHasta.Value - dtDesde.Value;
@@ -40,13 +40,47 @@ namespace ClinicaFrba.RegistrarAgenda
             _agenda.FechaDesde = dtDesde.Value;
             _agenda.FechaHasta = dtHasta.Value;
 
-            //MessageBox.Show(cbxSabOUT.SelectedItem.ToString());
-            //MessageBox.Show(cbxSabIN.SelectedIndex.ToString());
-            if (calcularCantidadTotalHoras() > 40) {
+            if (calcularCantidadTotalHoras().TotalHours >= 40)
                 throw new Exception("La carga horaria debe ser menor que 40!!");
+            if (cbxLunesIN.SelectedIndex > 0)
+            {
+                _agenda.LunesIN = Convert.ToDateTime(cbxLunesIN.SelectedItem);
+                _agenda.LunesOUT = Convert.ToDateTime(cbxLunesOUT.SelectedItem);
             }
-           
-            mgr.GuardarAgenda(_agenda);
+            if (cbxMartesIN.SelectedIndex > 0)
+            {
+                _agenda.MartesIN = Convert.ToDateTime(cbxMartesIN.SelectedItem);
+                _agenda.MartesOUT = Convert.ToDateTime(cbxMartesOUT.SelectedItem);
+            }
+            if (cbxMiercIN.SelectedIndex > 0)
+            {
+                _agenda.MiercolesIN = Convert.ToDateTime(cbxMiercIN.SelectedItem);
+                _agenda.MiercolesOUT = Convert.ToDateTime(cbxMiercOUT.SelectedItem);
+            }
+            if (cbxJueIN.SelectedIndex > 0)
+            {
+                _agenda.JuevesIN = Convert.ToDateTime(cbxJueIN.SelectedItem);
+                _agenda.JuevesOUT = Convert.ToDateTime(cbxJueOUT.SelectedItem);
+            }
+            if (cbxViesIN.SelectedIndex > 0)
+            {
+                _agenda.ViernesIN = Convert.ToDateTime(cbxViesIN.SelectedItem);
+                _agenda.ViernesOUT = Convert.ToDateTime(cbxVieOUT.SelectedItem);
+            }
+            if (cbxSabIN.SelectedIndex > 0)
+            {
+                _agenda.SabadoIN = Convert.ToDateTime(cbxSabIN.SelectedItem);
+                _agenda.SabadoOUT = Convert.ToDateTime(cbxSabOUT.SelectedItem);
+            }
+
+            try
+            {
+                mgr.GuardarAgenda(_agenda);
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+            }
         }
         
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -54,7 +88,7 @@ namespace ClinicaFrba.RegistrarAgenda
             if (_profesionalesForm == null)
             {
                 _profesionalesForm = new ProfesionalesForm();
-                _profesionalesForm.SetSearchMode();
+                _profesionalesForm.ModoBusqueda();
                 _profesionalesForm.OnProfesionalSelected += new EventHandler<ProfesionalSelectedEventArgs>(profesionalesForm_OnProfesionalSelected);
             }
             ViewsManager.LoadModal(_profesionalesForm);
@@ -65,13 +99,35 @@ namespace ClinicaFrba.RegistrarAgenda
             _profesional = e.Profesional;
             txtProfesional.Text = _profesional.ToString();
             _profesionalesForm.Hide();
-            rellenarAgendas();
+            rellenarCombos();
+            panelAcciones.Visible = true;
+
         }
 
 
-        private void rellenarAgendas()
+        private void rellenarCombos()
         {
             DateTime time = DateTime.Today;
+            cbxLunesIN.Items.Add("--");
+            cbxLunesIN.SelectedIndex = 0;
+            cbxLunesOUT.Items.Add("--");
+            cbxLunesOUT.SelectedIndex = 0;
+            cbxMartesIN.Items.Add("--");
+            cbxMartesIN.SelectedIndex = 0;
+            cbxMartesOUT.Items.Add("--");
+            cbxMartesOUT.SelectedIndex = 0;
+            cbxMiercIN.Items.Add("--");
+            cbxMiercIN.SelectedIndex = 0;
+            cbxMiercOUT.Items.Add("--");
+            cbxMiercOUT.SelectedIndex = 0;
+            cbxJueIN.Items.Add("--");
+            cbxJueIN.SelectedIndex = 0;
+            cbxJueOUT.Items.Add("--");
+            cbxJueOUT.SelectedIndex = 0;
+            cbxViesIN.Items.Add("--");
+            cbxViesIN.SelectedIndex = 0;
+            cbxVieOUT.Items.Add("--");
+            cbxVieOUT.SelectedIndex = 0;
             for (DateTime _time = time.AddHours(7); _time < time.AddHours(20); _time = _time.AddMinutes(30)) 
             {
                 cbxLunesIN.Items.Add(_time.ToShortTimeString());
@@ -86,6 +142,10 @@ namespace ClinicaFrba.RegistrarAgenda
                 cbxVieOUT.Items.Add(_time.AddMinutes(30).ToShortTimeString());
             }
             time = DateTime.Today;
+            cbxSabIN.Items.Add("--");
+            cbxSabIN.SelectedIndex = 0;
+            cbxSabOUT.Items.Add("--");
+            cbxSabOUT.SelectedIndex = 0;
             for (DateTime _time = time.AddHours(10); _time < time.AddHours(15); _time = _time.AddMinutes(30))
             {
                 cbxSabIN.Items.Add(_time.ToShortTimeString());
@@ -93,47 +153,93 @@ namespace ClinicaFrba.RegistrarAgenda
 
             }
         }
-
-
-
-            //for(hora = 700; hora < 2000; hora)
-
-        private double calcularCantidadTotalHoras()
+        private TimeSpan calcularCantidadTotalHoras()
         {
-            double contador = 0;
-            if (cbxLunesIN.SelectedIndex >= 0) {
-                if(cbxLunesOUT.SelectedIndex <0)
+            TimeSpan contador = new TimeSpan();
+            TimeSpan diferencia = contador;
+            if (cbxLunesIN.SelectedIndex > 0) 
+            {
+                if(cbxLunesOUT.SelectedIndex <1)
                     throw new Exception("Complete la hora de salida de los lunes!");
                 if(cbxLunesOUT.SelectedIndex < cbxLunesIN.SelectedIndex)
                     throw new Exception("Error de hora en los lunes!");
-                
-                var horaIN =  cbxLunesIN.SelectedItem;
-                               MessageBox.Show(horaIN.ToString());
-                TimeSpan diferencia = (DateTime)cbxLunesIN.SelectedItem - (DateTime)cbxLunesOUT.SelectedItem;
+                diferencia = Convert.ToDateTime(cbxLunesOUT.SelectedItem) - Convert.ToDateTime(cbxLunesIN.SelectedItem);
                 if (diferencia.TotalDays > 0)
-                {
-                    contador = contador + diferencia.TotalHours;
-                }
+                    contador = contador + diferencia;
+            }
+
+            if (cbxMartesIN.SelectedIndex > 0)
+            {
+                if (cbxMartesOUT.SelectedIndex < 1)
+                    throw new Exception("Complete la hora de salida de los Martes!");
+                if (cbxMartesOUT.SelectedIndex < cbxMartesIN.SelectedIndex)
+                    throw new Exception("Error de hora en los Martes!");
+                diferencia = Convert.ToDateTime(cbxMartesOUT.SelectedItem) - Convert.ToDateTime(cbxMartesIN.SelectedItem);
+                if (diferencia.TotalDays > 0)
+                    contador = contador + diferencia;
             }
 
 
+            if (cbxMiercIN.SelectedIndex > 0)
+            {
+                if (cbxMiercOUT.SelectedIndex < 1)
+                    throw new Exception("Complete la hora de salida de los Miercoles!");
+                if (cbxMiercOUT.SelectedIndex < cbxMiercIN.SelectedIndex)
+                    throw new Exception("Error de hora en los Miercoles!");
+                diferencia = Convert.ToDateTime(cbxMiercOUT.SelectedItem) - Convert.ToDateTime(cbxMiercIN.SelectedItem);
+                if (diferencia.TotalDays > 0)
+                    contador = contador + diferencia;
+            }
+
+            if (cbxJueIN.SelectedIndex > 0)
+            {
+                if (cbxJueOUT.SelectedIndex < 1)
+                    throw new Exception("Complete la hora de salida de los Jueves!");
+                if (cbxJueOUT.SelectedIndex < cbxJueIN.SelectedIndex)
+                    throw new Exception("Error de hora en los Jueves!");
+                diferencia = Convert.ToDateTime(cbxJueOUT.SelectedItem) - Convert.ToDateTime(cbxJueIN.SelectedItem);
+                if (diferencia.TotalDays > 0)
+                    contador = contador + diferencia;
+            }
+
+
+            if (cbxViesIN.SelectedIndex > 0)
+            {
+                if (cbxVieOUT.SelectedIndex < 1)
+                    throw new Exception("Complete la hora de salida de los Viernes!!");
+                if (cbxVieOUT.SelectedIndex < cbxViesIN.SelectedIndex)
+                    throw new Exception("Error de hora en los Viernes!");
+                diferencia = Convert.ToDateTime(cbxVieOUT.SelectedItem) - Convert.ToDateTime(cbxViesIN.SelectedItem);
+                if (diferencia.TotalDays > 0)
+                    contador = contador + diferencia;
+            }
+
+            if (cbxSabIN.SelectedIndex > 0)
+            {
+                if (cbxSabOUT.SelectedIndex < 1)
+                    throw new Exception("Complete la hora de salida de los Sabados!");
+                if (cbxSabOUT.SelectedIndex < cbxSabIN.SelectedIndex)
+                    throw new Exception("Error de hora en los Sabados!");
+                diferencia = Convert.ToDateTime(cbxSabOUT.SelectedItem) - Convert.ToDateTime(cbxSabIN.SelectedItem);
+                if (diferencia.TotalDays > 0)
+                    contador = contador + diferencia;
+            }
             return contador;
         }
-
         private void RegistrarAgenda_Load(object sender, EventArgs e)
         {
             if (Session.User.Perfil.Nombre != "Profesional")
             {
-                //panelProfesional.Show();
                 panelProfesional.Visible = true;
+                panelAcciones.Visible = false;
             }
             else
             {
                 txtProfesional.Text = Session.User.UserID.ToString();
                 panelProfesional.Hide();
-
+                panelAcciones.Visible = true;
             }
-            rellenarAgendas();
+            rellenarCombos();
             dtDesde.MinDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(1);
             dtHasta.MinDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(1);
             dtHasta.Value = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(120);

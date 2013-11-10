@@ -22,8 +22,6 @@ C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica 
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.AddEditRoleForm.resources
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.AbmRol.RolesForm.resources
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.CancelarAtencion.CancelarDia.resources
-C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.CompraBono.ComprarBono.resources
-C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.GenerarReceta.GenerarReceta.resources
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.ListadoEstadistico.ListadoEstadisticoForm.resources
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.Login.ProfesionalUserControl.resources
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.Login.AfiliadoUserControl.resources
@@ -36,8 +34,7 @@ C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica 
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.pdb
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\bin\Release\ClinicaFrba.exe.config
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.AbmTurno.TurnosForm.resources
-C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.AddEditAfliliadoForm.resources
-C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.AddEditAfiliadoForm.resources
-C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.AddEditProfesionalForm.resources
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.AbmBono.BonosForm.resources
-C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.Login.DetallesPersonaUserControl.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.AbmTurno.PedirTurnoForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.AbmBono.ComprarBonoForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.GenerarReceta.GenerarRecetaForm.resources

@@ -1,6 +1,6 @@
 ﻿namespace ClinicaFrba.GenerarReceta
 {
-    partial class GenerarReceta
+    partial class GenerarRecetaForm
     {
         /// <summary>
         /// Required designer variable.
@@ -199,7 +199,7 @@
             this.btnBuscarBonoF.TabIndex = 34;
             this.btnBuscarBonoF.Text = "Buscar";
             this.btnBuscarBonoF.UseVisualStyleBackColor = true;
-            //this.btnBuscarBonoF.Click += new System.EventHandler(this.btnBuscarBonoF_Click);
+            this.btnBuscarBonoF.Click += new System.EventHandler(this.btnBuscarBonoF_Click);
             // 
             // lblBono
             // 
@@ -272,7 +272,7 @@
             this.panelAcciones.TabIndex = 24;
             this.panelAcciones.Visible = false;
             // 
-            // GenerarReceta
+            // GenerarRecetaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -283,7 +283,7 @@
             this.Controls.Add(this.panelAfiliado);
             this.Controls.Add(this.panelProfesional);
             this.Controls.Add(this.panelAcciones);
-            this.Name = "GenerarReceta";
+            this.Name = "GenerarRecetaForm";
             this.Text = "Generar Receta";
             this.Load += new System.EventHandler(this.GenerarReceta_Load);
             this.panelProfesional.ResumeLayout(false);

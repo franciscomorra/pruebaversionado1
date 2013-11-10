@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.buttonsPanel = new System.Windows.Forms.Panel();
-            this.lblResults = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.dgvBonos = new System.Windows.Forms.DataGridView();
             this.panelAfiliado = new System.Windows.Forms.Panel();
@@ -46,49 +43,11 @@
             // buttonsPanel
             // 
             this.buttonsPanel.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.buttonsPanel.Controls.Add(this.lblResults);
-            this.buttonsPanel.Controls.Add(this.label5);
-            this.buttonsPanel.Controls.Add(this.btnCancelar);
             this.buttonsPanel.Controls.Add(this.btnAgregar);
             this.buttonsPanel.Location = new System.Drawing.Point(0, 51);
             this.buttonsPanel.Name = "buttonsPanel";
             this.buttonsPanel.Size = new System.Drawing.Size(834, 39);
             this.buttonsPanel.TabIndex = 4;
-            // 
-            // lblResults
-            // 
-            this.lblResults.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblResults.AutoSize = true;
-            this.lblResults.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.lblResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResults.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblResults.Location = new System.Drawing.Point(746, 20);
-            this.lblResults.Name = "lblResults";
-            this.lblResults.Size = new System.Drawing.Size(14, 13);
-            this.lblResults.TabIndex = 4;
-            this.lblResults.Text = "0";
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label5.Location = new System.Drawing.Point(766, 20);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 13);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "resultados";
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Location = new System.Drawing.Point(93, 10);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 2;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
             // 
             // btnAgregar
             // 
@@ -98,6 +57,7 @@
             this.btnAgregar.TabIndex = 0;
             this.btnAgregar.Text = "Nuevo";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // dgvBonos
             // 
@@ -113,7 +73,6 @@
             this.dgvBonos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvBonos.Size = new System.Drawing.Size(834, 422);
             this.dgvBonos.TabIndex = 5;
-            this.dgvBonos.DataSourceChanged += new System.EventHandler(this.dgvBonos_DataSourceChanged);
             // 
             // panelAfiliado
             // 
@@ -164,7 +123,6 @@
             this.Text = "Administrar Bonos";
             this.Load += new System.EventHandler(this.BonosForm_Load);
             this.buttonsPanel.ResumeLayout(false);
-            this.buttonsPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBonos)).EndInit();
             this.panelAfiliado.ResumeLayout(false);
             this.panelAfiliado.PerformLayout();
@@ -175,9 +133,6 @@
         #endregion
 
         private System.Windows.Forms.Panel buttonsPanel;
-        private System.Windows.Forms.Label lblResults;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.DataGridView dgvBonos;
         private System.Windows.Forms.Panel panelAfiliado;

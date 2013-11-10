@@ -17,28 +17,25 @@ using System.Configuration;
 
 namespace ClinicaFrba.GenerarReceta
 {
-    [PermissionRequired(Functionalities.GenerarRecetas)]
-    public partial class GenerarReceta : Form
+   // [PermissionRequired(Functionalities.GenerarRecetas)]
+    [NonNavigable]
+    public partial class GenerarRecetaForm : Form
     {
-        private Profesional _profesional;
+        public Profesional _profesional;
         private ProfesionalesForm _profesionalesForm;
-        private Afiliado _afiliado;
+        public Afiliado _afiliado;
         private AfiliadosForm _afiliadosForm;
-        private Turno _turno;
+        public Turno _turno;
         private TurnosForm _turnosForm;
-
-
-        public GenerarReceta()
+        public Bono _bonoFarmacia;
+        private BonosForm _bonosForm;
+        public event EventHandler<RecetaUpdatedEventArgs> OnRecetaUpdated;
+        public RecetasManager _recetaManager = new RecetasManager();
+        private Receta _receta;
+        public GenerarRecetaForm()
         {
-
             InitializeComponent();
         }
-
-        private void btnGuardar_Click(object sender, EventArgs e)
-        {
-          
-        }
-
         private void GenerarReceta_Load(object sender, EventArgs e)
         {
             if (Session.User.Perfil.Nombre == "Profesional")
@@ -60,7 +57,7 @@ namespace ClinicaFrba.GenerarReceta
             if (_profesionalesForm == null)
             {
                 _profesionalesForm = new ProfesionalesForm();
-                _profesionalesForm.SetSearchMode();
+                _profesionalesForm.ModoBusqueda();
                 _profesionalesForm.OnProfesionalSelected += new EventHandler<ProfesionalSelectedEventArgs>(profesionalesForm_OnProfesionalSelected);
             }
             ViewsManager.LoadModal(_profesionalesForm);
@@ -81,7 +78,7 @@ namespace ClinicaFrba.GenerarReceta
             if (_afiliadosForm == null)
             {
                 _afiliadosForm = new AfiliadosForm();
-                _afiliadosForm.SetSearchMode();
+                _afiliadosForm.ModoBusqueda();
                 _afiliadosForm.OnAfiliadoSelected += new EventHandler<AfiliadoSelectedEventArgs>(_afiliadosForm_OnAfiliadoSelected);            }
             ViewsManager.LoadModal(_afiliadosForm);
         }
@@ -99,7 +96,7 @@ namespace ClinicaFrba.GenerarReceta
             if (_turnosForm == null)
             {
                 _turnosForm = new TurnosForm();
-                _turnosForm.SetSearchMode(_afiliado);
+                _turnosForm.ModoBusqueda(_afiliado);
                 _turnosForm.OnTurnoselected += new EventHandler<TurnoSelectedEventArgs>(_turnosForm_OnTurnoSelected);
             }
             ViewsManager.LoadModal(_turnosForm);
@@ -113,26 +110,46 @@ namespace ClinicaFrba.GenerarReceta
             panelBono.Show();
         }
 
-        /*
         private void btnBuscarBonoF_Click(object sender, EventArgs e)
         {
             if (_bonosForm == null)
             {
                 _bonosForm = new BonosForm();
-                _bonosForm.SetSearchMode();
-                _bonosForm.SetFarmaciaOnly();
-                _bonosForm.OnBonoSelected += new EventHandler<BonoSelectedEventArgs>(_bonosForm_OnBonoSelected);
+                _bonosForm.ModoBusqueda(_afiliado, TipoBono.Farmacia);
+                _bonosForm.OnBonoselected += new EventHandler<BonoSelectedEventArgs>(_bonosForm_OnBonoSelected);
             }
-            ViewsManager.LoadModal(_afiliadosForm);
+            ViewsManager.LoadModal(_bonosForm);
         }
 
         void _bonosForm_OnBonoSelected(object sender, BonoSelectedEventArgs e)
         {
-            _bono = e.Bono;
-            txtBono.Text = _bono.Numero.ToString();
-            //_afiliadosForm.Hide();
-            panelTurno.Show();
-        }*/
+            _bonoFarmacia = e.Bono;
+            txtBono.Text = _bonoFarmacia.Numero.ToString();
+            _bonosForm.Hide();
+            panelBono.Show();
+        }
+        private List<Medicamento> getMedicamentos() { 
+            List<Medicamento> listado = new List<Medicamento>();
+
+            return listado;
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            _receta = new Receta() { 
+                BonoFarmacia = _bonoFarmacia,
+                Fecha = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]),
+                Medicamentos = getMedicamentos()
+            };
+            _recetaManager.Save(_receta);
+
+
+            if (OnRecetaUpdated != null)
+                OnRecetaUpdated(this, new RecetaUpdatedEventArgs() { Receta = _receta });
+            this.Close();
+
+
+        }
 
     }
 }

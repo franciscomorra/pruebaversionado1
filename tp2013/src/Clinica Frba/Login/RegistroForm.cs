@@ -23,7 +23,7 @@ namespace ClinicaFrba
         private Profesional _profesional = new Profesional();
         private Afiliado _afiliado = new Afiliado();
         private ProfileManager _profmanager = new ProfileManager();
-        private bool _updatingData = false;
+
         public Profile Profile
         {
             get
@@ -60,7 +60,6 @@ namespace ClinicaFrba
 
         public void SetUser(User user)
         {
-            _updatingData = true;
             txtUsername.Text = user.UserName;
             txtApellido.Text = user.DetallePersona.Apellido.Trim();
             txtNombre.Text = user.DetallePersona.Nombre.Trim();
@@ -293,7 +292,7 @@ namespace ClinicaFrba
 
         }
 
-        private void cbxProfiles_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void cbxProfiles_SelectedIndexChanged(object sender, EventArgs e)
         {
             try{
 

@@ -20,14 +20,14 @@ namespace ClinicaFrba.AbmProfesional
         private ProfesionalManager _ProfesionalManager = new ProfesionalManager();
         private bool _isSearchMode = false;
         public event EventHandler<ProfesionalSelectedEventArgs> OnProfesionalSelected;
-        public event EventHandler<UserSavedEventArgs> OnUserSaved;
+
 
         public ProfesionalesForm()
         {
             InitializeComponent();
         }
 
-        public void SetSearchMode()
+        public void ModoBusqueda()
         {
             buttonsPanel.Visible = false;
             _isSearchMode = true;
@@ -40,7 +40,7 @@ namespace ClinicaFrba.AbmProfesional
                 var dataSource = _ProfesionalManager.GetAll();
                 if (_isSearchMode)
                 {
-                    dataSource.Remove(new Profesional() { UserID = Session.Profesional.UserID });
+                    dataSource.Remove(new Profesional() { UserID = Session.User.UserID });
                 }
 
                 profesionalesGrid.AutoGenerateColumns = false;
@@ -204,7 +204,7 @@ namespace ClinicaFrba.AbmProfesional
             {
                 profesionales = new BindingList<Profesional>(profesionales.Where(x => x.Matricula.ToLowerInvariant().Equals(txtMatricula.Text.ToLowerInvariant())).ToList());
             }
-            profesionales.Remove(new Profesional() { UserID = Session.Profesional.UserID });
+            profesionales.Remove(new Profesional() { UserID = Session.User.UserID });
             profesionalesGrid.DataSource = profesionales;
             profesionalesGrid.Refresh();
         }

@@ -9,12 +9,19 @@ namespace ClinicaFrba.Comun
     {
         public DateTime FechaDesde { get; set; }
         public DateTime FechaHasta { get; set; }
-        public TimeSpan Lunes { get; set; }
-        public TimeSpan Martes { get; set; }
-        public TimeSpan Miercoles { get; set; }
-        public TimeSpan Jueves { get; set; }
-        public TimeSpan Viernes { get; set; }
-        public TimeSpan Sabado { get; set; }
+        public DateTime LunesIN { get; set; }
+        public DateTime LunesOUT { get; set; }
+        public DateTime MartesIN { get; set; }
+        public DateTime MartesOUT { get; set; }
+        public DateTime MiercolesIN { get; set; }
+        public DateTime MiercolesOUT { get; set; }
+        public DateTime JuevesIN { get; set; }
+        public DateTime JuevesOUT { get; set; }
+        public DateTime ViernesIN { get; set; }
+        public DateTime ViernesOUT { get; set; }
+        public DateTime SabadoIN { get; set; }
+        public DateTime SabadoOUT { get; set; }
+
 
     }
 }

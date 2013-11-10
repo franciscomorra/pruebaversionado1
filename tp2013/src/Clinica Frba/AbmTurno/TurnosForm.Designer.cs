@@ -36,6 +36,7 @@
             this.btnBuscarAfiliado = new System.Windows.Forms.Button();
             this.lblAfiliado = new System.Windows.Forms.Label();
             this.txtAfiliado = new System.Windows.Forms.TextBox();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTurnos)).BeginInit();
             this.panelAfiliado.SuspendLayout();
@@ -78,6 +79,8 @@
             this.dgvTurnos.AllowUserToOrderColumns = true;
             this.dgvTurnos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTurnos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Fecha});
             this.dgvTurnos.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvTurnos.Location = new System.Drawing.Point(0, 96);
             this.dgvTurnos.MultiSelect = false;
@@ -86,7 +89,6 @@
             this.dgvTurnos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTurnos.Size = new System.Drawing.Size(834, 422);
             this.dgvTurnos.TabIndex = 5;
-            this.dgvTurnos.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTurnos_CellContentDoubleClick);
             // 
             // panelAfiliado
             // 
@@ -125,6 +127,13 @@
             this.txtAfiliado.Size = new System.Drawing.Size(250, 20);
             this.txtAfiliado.TabIndex = 33;
             // 
+            // Fecha
+            // 
+            this.Fecha.DataPropertyName = "Fecha";
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.Name = "Fecha";
+            this.Fecha.ReadOnly = true;
+            // 
             // TurnosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -154,5 +163,6 @@
         private System.Windows.Forms.Label lblAfiliado;
         private System.Windows.Forms.TextBox txtAfiliado;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
     }
 }

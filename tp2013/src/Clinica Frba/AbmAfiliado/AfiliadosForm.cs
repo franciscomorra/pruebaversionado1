@@ -25,8 +25,7 @@ namespace ClinicaFrba.AbmAfiliado
         {
             InitializeComponent();
         }
-
-        public void SetSearchMode()
+        public void ModoBusqueda() //Usado para cuando se busca a un usuario
         {
             buttonsPanel.Visible = false;
             _isSearchMode = true;
@@ -39,7 +38,7 @@ namespace ClinicaFrba.AbmAfiliado
                 var dataSource = _afiliadoManager.GetAll();
                 if (_isSearchMode)
                 {
-                    dataSource.Remove(new Afiliado() { UserID = Session.Afiliado.UserID });
+                    dataSource.Remove(new Afiliado() { UserID = Session.User.UserID });
                 }
                 dgvAfiliados.AutoGenerateColumns = false;
                 dgvAfiliados.DataSourceChanged += new EventHandler(dgvAfiliados_DataSourceChanged);

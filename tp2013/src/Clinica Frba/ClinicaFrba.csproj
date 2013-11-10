@@ -71,6 +71,7 @@
       <DependentUpon>AfiliadosForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmAfiliado\AfiliadoSelectedEventArgs.cs" />
+    <Compile Include="AbmBono\BonoUpdatedEventArgs.cs" />
     <Compile Include="AbmTurno\TurnoUpdatedEventArgs.cs" />
     <Compile Include="AbmTurno\PedirTurnoForm.cs">
       <SubType>Form</SubType>
@@ -123,11 +124,11 @@
     <Compile Include="CancelarAtencion\CancelarDia.Designer.cs">
       <DependentUpon>CancelarDia.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmBono\ComprarBono.cs">
+    <Compile Include="AbmBono\ComprarBonoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmBono\ComprarBono.Designer.cs">
-      <DependentUpon>ComprarBono.cs</DependentUpon>
+    <Compile Include="AbmBono\ComprarBonoForm.Designer.cs">
+      <DependentUpon>ComprarBonoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmBono\BonosForm.cs">
       <SubType>Form</SubType>
@@ -148,6 +149,7 @@
     <Compile Include="GenerarRecetas\GenerarReceta.Designer.cs">
       <DependentUpon>GenerarReceta.cs</DependentUpon>
     </Compile>
+    <Compile Include="GenerarRecetas\RecetaUpdatedEventArgs.cs" />
     <Compile Include="ListadoEstadistico\ListadoEstadisticoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,8 +216,8 @@
     <EmbeddedResource Include="CancelarAtencion\CancelarDia.resx">
       <DependentUpon>CancelarDia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AbmBono\ComprarBono.resx">
-      <DependentUpon>ComprarBono.cs</DependentUpon>
+    <EmbeddedResource Include="AbmBono\ComprarBonoForm.resx">
+      <DependentUpon>ComprarBonoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmBono\BonosForm.resx">
       <DependentUpon>BonosForm.cs</DependentUpon>

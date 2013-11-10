@@ -30,12 +30,12 @@ namespace ClinicaFrba.CancelarAtencion
 
 
 
-        private void btnBuscarProfesional_Click_1(object sender, EventArgs e)
+        private void btnBuscarProfesional_Click(object sender, EventArgs e)
         {
             if (_profesionalesForm == null)
             {
                 _profesionalesForm = new ProfesionalesForm();
-                _profesionalesForm.SetSearchMode();
+                _profesionalesForm.ModoBusqueda();
                 _profesionalesForm.OnProfesionalSelected += new EventHandler<ProfesionalSelectedEventArgs>(profesionalesForm_OnProfesionalSelected);
             }
             ViewsManager.LoadModal(_profesionalesForm);

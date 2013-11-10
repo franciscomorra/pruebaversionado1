@@ -18,7 +18,7 @@ namespace ClinicaFrba.Comun
         public Profile Perfil{ get; set; }
         public BindingList<Rol> Roles { get; set; } 
         public string UserName { get; set; }
-        public string FaltanDatos { get; set; }
+        public bool FaltanDatos { get; set; }
         public DetallesPersona DetallePersona { get; set; }
 
         public User()
