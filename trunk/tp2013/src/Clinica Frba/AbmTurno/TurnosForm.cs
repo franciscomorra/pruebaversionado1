@@ -21,6 +21,8 @@ namespace ClinicaFrba.AbmTurno
     public partial class TurnosForm : Form
     {
         private bool _isSearchMode = false;
+        private bool _soloTurnosdeHoy = false;
+
         public event EventHandler<TurnoSelectedEventArgs> OnTurnoselected;
         private Turno turno = new Turno();
         private TurnosManager _turnosManager = new TurnosManager();
@@ -35,35 +37,45 @@ namespace ClinicaFrba.AbmTurno
         {
             _afiliado = afiliado;
             buttonsPanel.Visible = false;
+            btnBuscarAfiliado.Visible = false;
+            txtAfiliado.Text = _afiliado.ToString();
             panelAcciones.Visible = true;
             _isSearchMode = true;
         }
+        public void SoloTurnosdeHoy()
+        {
+            _soloTurnosdeHoy = true;
+        }
+        public void RefreshDataGrid()
+        {
+            var dataSource = _turnosManager.GetAll(_afiliado,_soloTurnosdeHoy);
+            dgvTurnos.AutoGenerateColumns = false; 
+            dgvTurnos.DataSource = dataSource;
 
+            dgvTurnos.DoubleClick += new EventHandler(dgvTurnos_CellContentDoubleClick);
+
+        }
         private void TurnosForm_Load(object sender, EventArgs e)
         {
-            panelAfiliado.Visible = true;
-            panelAcciones.Visible = false;
+
             if (Session.User.Perfil.Nombre == "Afiliado")
             {
                 _afiliado = new Afiliado();
                 _afiliado.UserID = Session.User.UserID;
                 _afiliado.DetallePersona = Session.User.DetallePersona;
-                //_afiliado = Session.User as Afiliado;
                 btnBuscarAfiliado.Visible = false;
                 txtAfiliado.Text = Session.User.ToString();
                 panelAcciones.Visible = true;
-                var dataSource = _turnosManager.GetAll(_afiliado);
-                dgvTurnos.DataSource = dataSource;
-                dgvTurnos.AutoGenerateColumns = false;
-                dgvTurnos.DoubleClick += new EventHandler(dgvTurnos_CellContentDoubleClick);
+                RefreshDataGrid();
             }
-            else if (_isSearchMode) {
-                var dataSource = _turnosManager.GetAll(_afiliado);
-                dgvTurnos.DataSource = dataSource;
-                dgvTurnos.AutoGenerateColumns = false;
-                dgvTurnos.DoubleClick += new EventHandler(dgvTurnos_CellContentDoubleClick);
+            else if (_isSearchMode)
+            {
+                RefreshDataGrid();
             }
-
+            else 
+            {
+                btnBuscarAfiliado.Visible = true;
+            }
         }
 
 
@@ -83,8 +95,7 @@ namespace ClinicaFrba.AbmTurno
             _afiliado = e.Afiliado;
             txtAfiliado.Text = _afiliado.ToString();
             _afiliadosForm.Hide();
-            var dataSource = _turnosManager.GetAll(_afiliado);
-            dgvTurnos.DataSource = dataSource;
+            RefreshDataGrid();
             panelAcciones.Visible = true;
         }
 
@@ -103,8 +114,7 @@ namespace ClinicaFrba.AbmTurno
             {
                 var dataSource = dgvTurnos.DataSource as BindingList<Turno>;
                 MessageBox.Show(string.Format("Turno {0} guardado correctamente", e.Turno.Fecha.ToString()));
-                dataSource.Add(e.Turno);
-                dgvTurnos.Refresh();
+                RefreshDataGrid();
             }
             catch (System.Exception excep)
             {
@@ -118,13 +128,8 @@ namespace ClinicaFrba.AbmTurno
             if (dgvTurnos.SelectedRows == null || dgvTurnos.SelectedRows.Count == 0) return;
             var row = dgvTurnos.SelectedRows[0];
             var turno = row.DataBoundItem as Turno;
-            
-            var pedirTurnoForm = new PedirTurnoForm();
-            /*
-            addEditForm.Set(rol);
-            addEditForm.OnRoleUpdated += new EventHandler<RoleUpdatedEventArgs>(addEditForm_OnRoleUpdated);
-            ViewsManager.LoadModal(addEditForm);
-*/
+            _turnosManager.CancelarTurno(turno);
+            MessageBox.Show(string.Format("Turno {0} cancelado correctamente", turno.Fecha.ToString()));
         }
 
 

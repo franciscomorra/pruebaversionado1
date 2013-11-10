@@ -69,5 +69,15 @@ namespace ClinicaFrba.Login
             cbxRoles.SelectedIndex = 0;
         }
 
+        private void btnBuscarConyuge_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBuscarPadre_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

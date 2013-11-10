@@ -116,7 +116,7 @@
             this.panelHorario.Controls.Add(this.label1);
             this.panelHorario.Location = new System.Drawing.Point(5, 29);
             this.panelHorario.Name = "panelHorario";
-            this.panelHorario.Size = new System.Drawing.Size(413, 100);
+            this.panelHorario.Size = new System.Drawing.Size(413, 70);
             this.panelHorario.TabIndex = 20;
             // 
             // btnConfirmar

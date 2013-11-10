@@ -12,16 +12,26 @@ namespace ClinicaFrba.Negocio
 {
     public class TurnosManager
     {
-        public List<Turno> GetAll(Afiliado afiliado)
+        public List<Turno> GetAll(Afiliado afiliado,bool soloTurnosHoy)
         {
             var ret = new List<Turno>();
-            var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "[SHARPS].GetAllTurnos", SqlDataAccessArgs
-                .CreateWith("@userId", afiliado.UserID)
-                .Arguments);
-            if (result != null)
+            DataTable resultado;
+
+            if(soloTurnosHoy)
+                 resultado = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                    "[SHARPS].GetTurnosAfiliadoDate", SqlDataAccessArgs
+                    .CreateWith("@profesionalID", afiliado.UserID)
+                    .And("@fecha", Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]))
+                    .Arguments);
+            else
+                 resultado = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                    "[SHARPS].GetAllAfiliadoTurnos", SqlDataAccessArgs
+                    .CreateWith("@userId", afiliado.UserID)
+                    .Arguments);
+
+            if (resultado != null)
             {
-                foreach (DataRow row in result.Rows)
+                foreach (DataRow row in resultado.Rows)
                 {
                     ret.Add(new Turno()
                     {
@@ -41,9 +51,9 @@ namespace ClinicaFrba.Negocio
         public List<Turno> GetTurnosForFecha(Profesional profesional, DateTime fecha)
         {
 
-            var ret = new List<Turno>();
+            List<Turno> ret = new List<Turno>();
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "[SHARPS].GetTurnos", SqlDataAccessArgs
+                "[SHARPS].GetTurnosByProfesional", SqlDataAccessArgs
                 .CreateWith("@profesionalID", profesional.UserID)
                 .And("@fecha",fecha)
                 .Arguments);
@@ -78,8 +88,17 @@ namespace ClinicaFrba.Negocio
                     .And("@Profesional_ID", turno.Profesional.UserID)
                     .And("@Afiliado_ID", turno.Afiliado.UserID)
             .Arguments);
-        }        
-        
-
+        }
+        public void CancelarTurno(Turno turno)
+        {
+            
+            SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "[SHARPS].RegistrarLlegada", SqlDataAccessArgs
+                .CreateWith(
+                    "@HoraLlegada", Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]))
+                    .And("@Profesional_ID", turno.Profesional.UserID)
+                    .And("@Afiliado_ID", turno.Afiliado.UserID)
+            .Arguments);
+        }
     }
 }

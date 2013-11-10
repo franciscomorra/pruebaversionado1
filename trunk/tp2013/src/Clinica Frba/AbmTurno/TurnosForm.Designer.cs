@@ -79,6 +79,8 @@
             this.dgvTurnos.AllowUserToAddRows = false;
             this.dgvTurnos.AllowUserToDeleteRows = false;
             this.dgvTurnos.AllowUserToOrderColumns = true;
+            this.dgvTurnos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvTurnos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTurnos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
