@@ -80,12 +80,11 @@ namespace ClinicaFrba.RegistroResultadoAtencion
 
         private void btnBuscarTurno_Click(object sender, EventArgs e)
         {
-            if (_turnosForm == null)
-            {
-                _turnosForm = new TurnosForm();
-                _turnosForm.ModoBusqueda(_afiliado);
-                _turnosForm.OnTurnoselected += new EventHandler<TurnoSelectedEventArgs>(_turnosForm_OnTurnoSelected);
-            }
+            _turnosForm = new TurnosForm();
+            _turnosForm.ModoBusqueda(_afiliado);
+
+            _turnosForm.SoloTurnosdeHoy();
+            _turnosForm.OnTurnoselected += new EventHandler<TurnoSelectedEventArgs>(_turnosForm_OnTurnoSelected);
             ViewsManager.LoadModal(_turnosForm);
         }
 

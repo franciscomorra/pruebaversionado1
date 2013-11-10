@@ -6,12 +6,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Configuration;
 using ClinicaFrba.Core;
 using ClinicaFrba.Negocio;
 using ClinicaFrba.Comun;
 using ClinicaFrba.AbmAfiliado;
 using ClinicaFrba.AbmTurno;
 using ClinicaFrba.AbmBono;
+
 namespace ClinicaFrba.RegistroLlegada
 {
     [PermissionRequired(Functionalities.RegistroLlegada)]
@@ -44,7 +46,7 @@ namespace ClinicaFrba.RegistroLlegada
         void _afiliadosForm_OnAfiliadoSelected(object sender, AfiliadoSelectedEventArgs e)
         {
             _afiliado = e.Afiliado;
-            txtAfiliado.Text = _afiliado.DetallePersona.Apellido + ", " + _afiliado.DetallePersona.Nombre;
+            txtAfiliado.Text = _afiliado.ToString();
             _afiliadosForm.Hide();
             panelTurno.Show();
         }
@@ -55,6 +57,7 @@ namespace ClinicaFrba.RegistroLlegada
             {
                 _turnosForm = new TurnosForm();
                 _turnosForm.ModoBusqueda(_afiliado);
+                _turnosForm.SoloTurnosdeHoy();
                 _turnosForm.OnTurnoselected += new EventHandler<TurnoSelectedEventArgs>(_turnosForm_OnTurnoSelected);
             }
             ViewsManager.LoadModal(_turnosForm);
@@ -90,8 +93,11 @@ namespace ClinicaFrba.RegistroLlegada
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            
-
+            if (_turno.Fecha > Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddMinutes(15))
+            {
+                throw new Exception("El usuario debia registrarse 15 minutos antes!");
+            }
+            _turnosManager.RegistrarLlegada(_turno);
 
         }
     }

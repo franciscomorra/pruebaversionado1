@@ -38,6 +38,8 @@ namespace ClinicaFrba.AbmBono
         {
             _afiliado = afiliado;
             buttonsPanel.Visible = false;
+            btnBuscarAfiliado.Visible = false;
+            txtAfiliado.Text = _afiliado.ToString();
             _isSearchMode = true;
             if (tipo == TipoBono.Farmacia)
             {

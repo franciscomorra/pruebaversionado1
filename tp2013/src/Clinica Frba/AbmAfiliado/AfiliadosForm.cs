@@ -92,11 +92,7 @@ namespace ClinicaFrba.AbmAfiliado
                 catch (System.Exception excep)
                 {
                     MessageBox.Show(excep.Message);
-                }/*
-                catch
-                {
-                    MessageBox.Show("Error al eliminar el afiliado");
-                }*/
+                }
             }
         }
 
@@ -150,14 +146,6 @@ namespace ClinicaFrba.AbmAfiliado
             regForm.Profile = _perfil;
             ViewsManager.LoadModal(regForm);
         }
-        /*
-        private void btnAgregar_Click(object sender, EventArgs e)
-        {
-            var afiliadoAgregarForm = new AddEditAfiliadoForm(); //HACER!
-            afiliadoAgregarForm.OnAfiliadoSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
-            ViewsManager.LoadModal(afiliadoAgregarForm);
-        }
-        */
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             txtApellido.Text = string.Empty;
