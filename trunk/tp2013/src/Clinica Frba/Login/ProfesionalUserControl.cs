@@ -16,7 +16,6 @@ namespace ClinicaFrba.Login
         private Profesional _profesional;
         public Profesional GetProfesional()
         {
-
             var especialidades = clbEspecialidades.CheckedItems.Cast<Especialidad>().ToList();
             if (especialidades.Count == 0)
                 throw new Exception("Debe seleccionar al menos una ciudad!");
@@ -37,8 +36,6 @@ namespace ClinicaFrba.Login
             {
                 clbEspecialidades.SetItemChecked(clbEspecialidades.Items.IndexOf(especialidad), true);
             }
-            
-            
             //clbEspecialidades.SelectedIndices = especialidadesProfesional;
         }
 
@@ -49,18 +46,12 @@ namespace ClinicaFrba.Login
             var manager = new EspecialidadesManager();
             var especialidades = manager.GetAll();
             especialidades.ForEach(x => clbEspecialidades.Items.Add(x, false));
-
-            clbEspecialidades.DisplayMember = "Name";
-
+            clbEspecialidades.DisplayMember = "Nombre";
             RolesManager rman = new RolesManager();
-            Profile perfilMasc = new Profile() { Nombre = "Profesional" };
-            var roles = rman.GetRolesByPerfil(perfilMasc);
-            if (roles.Count > 1)
-            {
-                cbxRoles.DataSource = roles;
-                cbxRoles.DisplayMember = "Nombre";
-                cbxRoles.SelectedIndex = 0;
-            }
+            var roles = rman.GetRolesByPerfil(new Profile() { Nombre = "Profesional" });
+            cbxRoles.DataSource = roles;
+            cbxRoles.DisplayMember = "Nombre";
+            cbxRoles.SelectedIndex = 0;
         }
 
         private void ProfesionalUserControl_Load(object sender, EventArgs e)

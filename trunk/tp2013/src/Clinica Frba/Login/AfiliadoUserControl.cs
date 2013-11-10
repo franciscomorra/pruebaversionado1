@@ -29,14 +29,11 @@ namespace ClinicaFrba.Login
             _afiliado.CantHijos = cantHijos;
             _afiliado.MotivoCambio = txtMotivo.Text.Trim();
             return _afiliado;
-             
         }
 
         public void SetUser(Afiliado afiliado)
         {
             _afiliado = afiliado;
-            
-            
             cbxPlanMedico.SelectedItem = afiliado.PlanMedico;
             cbxEstadoCivil.SelectedItem = afiliado.EstadoCivil;
             txtHijos.Text = afiliado.CantHijos.ToString();
@@ -59,29 +56,18 @@ namespace ClinicaFrba.Login
             cbxPlanMedico.DisplayMember = "Name";
             planesMedicos.ForEach(x => cbxPlanMedico.Items.Add(x));
             cbxPlanMedico.SelectedIndex = 0;
-            
+
             var items = Enum.GetValues(typeof(EstadoCivil)).Cast<EstadoCivil>().ToList();
             items.ForEach(x => cbxEstadoCivil.Items.Add(x));
             cbxEstadoCivil.DisplayMember = "Name";
             cbxPlanMedico.SelectedIndex = 0;
 
             RolesManager rman = new RolesManager();
-
-            Profile perfilMasc = new Profile() { Nombre = "Afiliado" };
-            var roles = rman.GetRolesByPerfil(perfilMasc);
-            if (roles.Count > 1)
-            {
-                cbxRoles.DataSource = roles;
-                cbxRoles.DisplayMember = "Nombre";
-                cbxRoles.SelectedIndex = 0;
-            }
-
-            
+            var roles = rman.GetRolesByPerfil(new Profile() { Nombre = "Afiliado" });
+            cbxRoles.DataSource = roles;
+            cbxRoles.DisplayMember = "Nombre";
+            cbxRoles.SelectedIndex = 0;
         }
 
-        private void AfiliadoUserControl_Load(object sender, EventArgs e)
-        {
-            
-        }
     }
 }

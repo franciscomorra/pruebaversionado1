@@ -20,6 +20,7 @@ namespace ClinicaFrba.Login
         User user;
         LoginService svc = new LoginService();
         RolesManager rolManager = new RolesManager();
+        DetallePersonaManager detallesManager = new DetallePersonaManager();
         public LoginForm()
         {
             InitializeComponent();
@@ -52,6 +53,7 @@ namespace ClinicaFrba.Login
                 user.RoleID = rol.ID;
                 user.Perfil = rol.Perfil;
                 svc.SetUserFunctionalities(user);
+                user.DetallePersona = detallesManager.getDetalles(user.UserID);
                 Session.StartSession(user);
                 ViewsManager.LimpiarVistas();
             }

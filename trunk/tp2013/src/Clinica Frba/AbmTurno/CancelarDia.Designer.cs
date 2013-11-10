@@ -1,4 +1,4 @@
-﻿namespace ClinicaFrba.CancelarAtencion
+﻿namespace ClinicaFrba.AbmTurno
 {
     partial class CancelarDia
     {
@@ -42,7 +42,7 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(73, 70);
+            this.dateTimePicker1.Location = new System.Drawing.Point(71, 9);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(341, 20);
             this.dateTimePicker1.TabIndex = 25;
@@ -60,7 +60,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 70);
+            this.label1.Location = new System.Drawing.Point(10, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(37, 13);
             this.label1.TabIndex = 32;
@@ -69,6 +69,8 @@
             // panelAcciones
             // 
             this.panelAcciones.Controls.Add(this.btnCancelar);
+            this.panelAcciones.Controls.Add(this.label1);
+            this.panelAcciones.Controls.Add(this.dateTimePicker1);
             this.panelAcciones.Location = new System.Drawing.Point(2, 57);
             this.panelAcciones.Name = "panelAcciones";
             this.panelAcciones.Size = new System.Drawing.Size(435, 73);
@@ -118,17 +120,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(445, 138);
             this.Controls.Add(this.panelProfesional);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.panelAcciones);
             this.Name = "CancelarDia";
             this.Text = "Cancelar Turnos del Dia";
             this.Load += new System.EventHandler(this.CancelarDia_Load);
             this.panelAcciones.ResumeLayout(false);
+            this.panelAcciones.PerformLayout();
             this.panelProfesional.ResumeLayout(false);
             this.panelProfesional.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

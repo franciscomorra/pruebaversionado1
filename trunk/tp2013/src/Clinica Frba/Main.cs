@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Configuration;
 using System.Windows.Forms;
 using ClinicaFrba.Negocio;
 using ClinicaFrba.Comun;
@@ -26,7 +27,7 @@ namespace ClinicaFrba
         {
             //Setear a esta ventana como la principal del sistema
             ViewsManager.SetMainWindow(this);
-
+            lblFecha.Text = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).ToString();
             //Mostrar Login
             ViewsManager.LoadView(new LoginForm());
         }

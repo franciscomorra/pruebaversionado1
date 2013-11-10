@@ -13,12 +13,11 @@ using ClinicaFrba.Negocio;
 using System.Configuration;
 
 
-namespace ClinicaFrba.CancelarAtencion
+namespace ClinicaFrba.AbmTurno
 {
     [PermissionRequired(Functionalities.CancelarDia)]
     public partial class CancelarDia : Form
     {
-
         private Profesional _profesional;
         private ProfesionalesForm _profesionalesForm;
         private ProfesionalManager _profesionalManager = new ProfesionalManager();
@@ -26,10 +25,6 @@ namespace ClinicaFrba.CancelarAtencion
         {
             InitializeComponent();
         }
-
-
-
-
         private void btnBuscarProfesional_Click(object sender, EventArgs e)
         {
             if (_profesionalesForm == null)
@@ -47,10 +42,6 @@ namespace ClinicaFrba.CancelarAtencion
             _profesionalesForm.Close();
             panelAcciones.Show();
         }
-
-
-
-
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             DateTime fecha = dateTimePicker1.Value;
@@ -73,19 +64,18 @@ namespace ClinicaFrba.CancelarAtencion
         {
             if (Session.User.Perfil.Nombre == "Profesional")
             {
-                _profesional = Session.User as Profesional;
-                panelProfesional.Visible = false;
+                _profesional = new Profesional();
+                _profesional.UserID = Session.User.UserID;
+                _profesional.DetallePersona = Session.User.DetallePersona;
+                txtProfesional.Text = _profesional.ToString();
+                btnBuscarProfesional.Visible = false;
+                panelAcciones.Show();
             }
             else {
-                panelProfesional.Visible = true;
+                btnBuscarProfesional.Visible = true;
             }
             dateTimePicker1.Value = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(1);
-
             dateTimePicker1.MinDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(1);
         }
-
-
-
-
     }
 }

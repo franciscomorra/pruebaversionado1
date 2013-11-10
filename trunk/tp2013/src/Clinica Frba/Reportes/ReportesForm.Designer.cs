@@ -1,6 +1,6 @@
-﻿namespace ClinicaFrba.ListadoEstadistico
+﻿namespace ClinicaFrba.ReportesForm
 {
-    partial class ListadoEstadisticoForm
+    partial class ReportesForm
     {
         /// <summary>
         /// Required designer variable.
@@ -131,7 +131,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.cbxReportType);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -143,11 +143,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(27, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(99, 13);
+            this.label1.Size = new System.Drawing.Size(84, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Tipo de Reporte";
             // 

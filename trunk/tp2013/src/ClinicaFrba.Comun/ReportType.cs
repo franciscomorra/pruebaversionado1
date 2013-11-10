@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ClinicaFrba.Comun
 {
-    public class ReportType
+    public class TipoReporte
     {
         public string StoredProcedure { get; set; }
         public string ReportDescription { get; set; }
@@ -15,7 +15,7 @@ namespace ClinicaFrba.Comun
             return ReportDescription;
         }
 
-        public ReportType(string storedProcedure, string description)
+        public TipoReporte(string storedProcedure, string description)
         {
             StoredProcedure = storedProcedure;
             ReportDescription = description;

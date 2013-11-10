@@ -115,6 +115,7 @@
             this.txtHijos.Name = "txtHijos";
             this.txtHijos.Size = new System.Drawing.Size(200, 20);
             this.txtHijos.TabIndex = 23;
+            this.txtHijos.Text = "0";
             // 
             // cbxEstadoCivil
             // 
@@ -172,7 +173,6 @@
             this.Controls.Add(this.label10);
             this.Name = "AfiliadoUserControl";
             this.Size = new System.Drawing.Size(437, 271);
-            this.Load += new System.EventHandler(this.AfiliadoUserControl_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panelMotivo.ResumeLayout(false);

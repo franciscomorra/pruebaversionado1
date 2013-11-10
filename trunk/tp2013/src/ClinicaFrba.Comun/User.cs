@@ -29,7 +29,7 @@ namespace ClinicaFrba.Comun
 
         public override string ToString()
         {
-            return UserName;
+            return DetallePersona.Apellido+", "+DetallePersona.Nombre;
         }
 
         public override bool Equals(object obj)

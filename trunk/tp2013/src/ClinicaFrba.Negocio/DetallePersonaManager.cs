@@ -65,5 +65,33 @@ namespace ClinicaFrba.Negocio
                     .And("@ID_Usuario", user.UserID)
             .Arguments);
         }
+
+
+        public DetallesPersona getDetalles(int userID)
+        {
+            DetallesPersona detalles = new DetallesPersona();
+
+            var row = SqlDataAccess.ExecuteDataRowQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "[SHARPS].GetDetallesPersona", SqlDataAccessArgs
+                .CreateWith("@userId", userID)
+                .Arguments);
+
+            if (row != null && row != null)
+            {
+                    detalles.Apellido = row["Apellido"].ToString();
+                    detalles.Nombre = row["Nombre"].ToString();
+                    detalles.FechaNacimiento = Convert.ToDateTime(row["FechaNacimiento"]);
+                    detalles.DNI = long.Parse(row["DNI"].ToString());
+                    detalles.Email = row["Email"].ToString();
+                    detalles.Direccion = row["Direccion"].ToString();
+                    detalles.Telefono = long.Parse(row["Telefono"].ToString());
+                    if (!DBNull.Value.Equals(row["Sexo"]))
+                        detalles.Sexo = (TipoSexo)Enum.Parse(typeof(TipoSexo), row["Sexo"].ToString());
+                    if (!DBNull.Value.Equals(row["TipoDoc"]))
+                        detalles.TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString());
+            };
+
+            return detalles;
+        }
     }
 }

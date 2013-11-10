@@ -26,7 +26,7 @@ namespace ClinicaFrba.Negocio
                     ret.Add(new Especialidad()
                     {
                         ID = int.Parse(row["ID"].ToString()),
-                        Name = row["Descripcion"].ToString()
+                        Nombre = row["Descripcion"].ToString()
                     });
 
                 }
@@ -48,7 +48,7 @@ namespace ClinicaFrba.Negocio
                 {
                     ret.Add(new Especialidad() { 
                         ID = int.Parse(row["ID"].ToString()), 
-                        Name = row["Descripcion"].ToString() });
+                        Nombre = row["Descripcion"].ToString() });
                         
                 }
             }

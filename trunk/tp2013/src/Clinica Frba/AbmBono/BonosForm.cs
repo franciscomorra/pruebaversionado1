@@ -54,12 +54,15 @@ namespace ClinicaFrba.AbmBono
 
         private void BonosForm_Load(object sender, EventArgs e)
         {
-            panelAfiliado.Visible = true;
+            btnBuscarAfiliado.Visible = true;
             if (Session.User.Perfil.Nombre == "Afiliado" || _afiliado != null)
             {
                 if (_afiliado == null)
+                {
                     _afiliado = Session.User as Afiliado;
-                panelAfiliado.Visible = false;
+                    txtAfiliado.Text = _afiliado.ToString();
+                    btnBuscarAfiliado.Visible = false;
+                }
                 var bonos = _bonosManager.GetAll(_afiliado);
                 if (_soloConsulta)
                     bonos = new List<Bono>(bonos.Where(x => x.TipodeBono == TipoBono.Consulta).ToList());
@@ -89,7 +92,6 @@ namespace ClinicaFrba.AbmBono
             _afiliado = e.Afiliado;
             txtAfiliado.Text = _afiliado.ToString();
             _afiliadosForm.Hide();
-
             var bonos = _bonosManager.GetAll(_afiliado);
             if (_soloConsulta)
                 bonos = new List<Bono>(bonos.Where(x => x.TipodeBono == TipoBono.Consulta).ToList());

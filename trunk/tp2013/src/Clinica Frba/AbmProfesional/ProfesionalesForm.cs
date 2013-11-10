@@ -18,9 +18,11 @@ namespace ClinicaFrba.AbmProfesional
     public partial class ProfesionalesForm : Form
     {
         private ProfesionalManager _ProfesionalManager = new ProfesionalManager();
+        private EspecialidadesManager _EspecialidadesManager = new EspecialidadesManager();
+        
         private bool _isSearchMode = false;
         public event EventHandler<ProfesionalSelectedEventArgs> OnProfesionalSelected;
-
+        
 
         public ProfesionalesForm()
         {
@@ -37,6 +39,14 @@ namespace ClinicaFrba.AbmProfesional
         {
             try
             {
+                List<Especialidad> especialidades = new List<Especialidad>();
+                Especialidad especialidadVacio = new Especialidad();
+                especialidadVacio.Nombre = "--";
+                especialidades.Add(especialidadVacio);
+                especialidades.AddRange(_EspecialidadesManager.GetAll());
+                
+                cbxEspecialidad.DataSource = especialidades;
+                cbxEspecialidad.DisplayMember = "Nombre";
                 var dataSource = _ProfesionalManager.GetAll();
                 if (_isSearchMode)
                 {
@@ -131,56 +141,13 @@ namespace ClinicaFrba.AbmProfesional
             regForm.Profile = _perfil;
             ViewsManager.LoadModal(regForm);
         }
-
-
-
-
-
-
-
-
-
-
-        /*
-
-        private void btnModificar_Click(object sender, EventArgs e)
-        {
-            if (profesionalesGrid.SelectedRows == null || profesionalesGrid.SelectedRows.Count == 0) return;
-            var row = profesionalesGrid.SelectedRows[0];
-            var profesional = row.DataBoundItem as Profesional;
-            
-            //var regForm = new RegistroForm();
-            //regForm.OnProfesionalSaved += new EventHandler<ProfesionalSavedEventArgs>(regForm_OnProfesionalSaved);
-            //regForm.SetProfesional(profesional, new Profile() { Nombre = "Profesional"});
-
-            ViewsManager.LoadModal(regForm);
-        }
-
-        void regForm_OnProfesionalSaved(object sender, ProfesionalSavedEventArgs e)
-        {
-            MessageBox.Show("Se han guardado los datos del profesional " + e.Profesional.DetallePersona.Apellido);
-            var dataSource = profesionalesGrid.DataSource as BindingList<Profesional>;
-            var profesional = e.Profesional;
-            if (dataSource.Contains(profesional)) dataSource.Remove(profesional);
-            dataSource.Add(profesional);
-            profesionalesGrid.DataSource = new BindingList<Profesional>(dataSource.OrderBy(x => x.DetallePersona.Apellido).ToList());
-            profesionalesGrid.Refresh();
-        }
-
-        private void btnAgregar_Click(object sender, EventArgs e)
-        {
-            //var regForm = new RegistroForm();
-            //regForm.OnProfesionalSaved += new EventHandler<ProfesionalSavedEventArgs>(regForm_OnProfesionalSaved);
-            //regForm.Profile = new Profile() { Nombre = "Profesional" };
-        //    ViewsManager.LoadModal(regForm);
-        
-        }*/
         
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             txtApellido.Text = string.Empty;
             txtMatricula.Text = string.Empty;
-            txtEmail.Text = string.Empty;
+            
+            cbxEspecialidad.SelectedIndex = 0;
             profesionalesGrid.DataSource = _ProfesionalManager.GetAll();
             profesionalesGrid.Refresh();
         }
@@ -196,9 +163,13 @@ namespace ClinicaFrba.AbmProfesional
             {
                 profesionales = new BindingList<Profesional>(profesionales.Where(x => x.DetallePersona.Nombre.ToLowerInvariant().Contains(txtNombre.Text.ToLowerInvariant())).ToList());
             }
-            if (!string.IsNullOrEmpty(txtEmail.Text))
+
+
+            if (cbxEspecialidad.SelectedIndex!=0)
             {
-                profesionales = new BindingList<Profesional>(profesionales.Where(x => x.DetallePersona.Email.ToLowerInvariant().Contains(txtEmail.Text.ToLowerInvariant())).ToList());
+                Especialidad especialidadSeleccionada = (Especialidad)cbxEspecialidad.SelectedItem;
+
+                profesionales = new BindingList<Profesional>(profesionales.Where(x => x.Especialidades.Contains(especialidadSeleccionada)).ToList());
             }
             if (!string.IsNullOrEmpty(txtMatricula.Text))
             {

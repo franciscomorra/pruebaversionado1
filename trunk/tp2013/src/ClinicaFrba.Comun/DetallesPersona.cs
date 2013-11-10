@@ -18,7 +18,7 @@ namespace ClinicaFrba.Comun
         public DateTime FechaNacimiento { get; set; }
         public override string ToString()
         {
-            return Nombre+ " "+Apellido;
+            return Apellido +", "+Nombre;
         }
     }
     public enum TipoDoc

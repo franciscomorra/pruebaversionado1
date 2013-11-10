@@ -118,10 +118,10 @@
     <Compile Include="AbmTurno\TurnosForm.Designer.cs">
       <DependentUpon>TurnosForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CancelarAtencion\CancelarDia.cs">
+    <Compile Include="AbmTurno\CancelarDia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CancelarAtencion\CancelarDia.Designer.cs">
+    <Compile Include="AbmTurno\CancelarDia.Designer.cs">
       <DependentUpon>CancelarDia.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmBono\ComprarBonoForm.cs">
@@ -150,11 +150,11 @@
       <DependentUpon>GenerarReceta.cs</DependentUpon>
     </Compile>
     <Compile Include="GenerarRecetas\RecetaUpdatedEventArgs.cs" />
-    <Compile Include="ListadoEstadistico\ListadoEstadisticoForm.cs">
+    <Compile Include="Reportes\ReportesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ListadoEstadistico\ListadoEstadisticoForm.Designer.cs">
-      <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>
+    <Compile Include="Reportes\ReportesForm.Designer.cs">
+      <DependentUpon>ReportesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\LoginForm.cs">
       <SubType>Form</SubType>
@@ -213,7 +213,7 @@
     <EmbeddedResource Include="AbmTurno\TurnosForm.resx">
       <DependentUpon>TurnosForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CancelarAtencion\CancelarDia.resx">
+    <EmbeddedResource Include="AbmTurno\CancelarDia.resx">
       <DependentUpon>CancelarDia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmBono\ComprarBonoForm.resx">
@@ -225,8 +225,8 @@
     <EmbeddedResource Include="GenerarRecetas\GenerarReceta.resx">
       <DependentUpon>GenerarReceta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ListadoEstadistico\ListadoEstadisticoForm.resx">
-      <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>
+    <EmbeddedResource Include="Reportes\ReportesForm.resx">
+      <DependentUpon>ReportesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

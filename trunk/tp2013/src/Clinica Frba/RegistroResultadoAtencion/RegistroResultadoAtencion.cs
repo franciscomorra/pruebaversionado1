@@ -112,15 +112,18 @@ namespace ClinicaFrba.RegistroResultadoAtencion
 
         private void btnGenerarReceta_Click(object sender, EventArgs e)
         {
-            
-            if (_contadorRecetas <= 5) {
-                if (!_consultaAlmacenada) {
+
+            if (_contadorRecetas <= 5)
+            {
+                if (!_consultaAlmacenada)
+                {
                     _consulta = rellenarConsulta();
                     _consultasManager.Save(_consulta);
-                }    
-            
+                }
             }
-
+            else { 
+                throw new Exception("No se pueden agregar mas de cinco recetas");
+            }
             _recetaForm = new GenerarRecetaForm();
             _recetaForm._afiliado = _afiliado;
             _recetaForm._profesional = _profesional;
@@ -152,11 +155,14 @@ namespace ClinicaFrba.RegistroResultadoAtencion
             panelAfiliado.Visible = false;
             panelTurno.Visible = false;
             if (Session.User.Perfil.Nombre == "Profesional") {
-                this._profesional = Session.User as Profesional;
-                panelProfesional.Visible = false;
+                _profesional = new Profesional();
+                _profesional.UserID = Session.User.UserID;
+                _profesional.DetallePersona = Session.User.DetallePersona;
+                txtProfesional.Text = _profesional.ToString();
+                btnBuscarProfesional.Visible = false;
                 panelAfiliado.Visible = true;
-            }else{ 
-                panelProfesional.Visible = true;
+            }else{
+                btnBuscarProfesional.Visible = true;
             }
         }
 
