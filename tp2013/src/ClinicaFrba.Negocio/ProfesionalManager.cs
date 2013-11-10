@@ -58,6 +58,7 @@ namespace ClinicaFrba.Negocio
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].GetProfesionales");
             var profesionales = new BindingList<Profesional>();
+            EspecialidadesManager espMan = new EspecialidadesManager();
             if (result != null && result.Rows != null)
             {
                 foreach (DataRow row in result.Rows)
@@ -81,6 +82,7 @@ namespace ClinicaFrba.Negocio
                         profesional.DetallePersona.Sexo = (TipoSexo)Enum.Parse(typeof(TipoSexo), row["Sexo"].ToString());
                     if (!DBNull.Value.Equals(row["TipoDoc"])) 
                         profesional.DetallePersona.TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString());
+                    profesional.Especialidades = espMan.GetAllForUser(profesional.UserID);
                     profesionales.Add(profesional);
 
                 }

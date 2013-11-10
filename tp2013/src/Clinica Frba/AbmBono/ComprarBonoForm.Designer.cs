@@ -167,7 +167,6 @@
             this.panelAfiliado.Name = "panelAfiliado";
             this.panelAfiliado.Size = new System.Drawing.Size(410, 43);
             this.panelAfiliado.TabIndex = 21;
-            this.panelAfiliado.Visible = false;
             // 
             // btnBuscar
             // 
@@ -215,14 +214,14 @@
             this.panelCompra.Size = new System.Drawing.Size(410, 128);
             this.panelCompra.TabIndex = 22;
             // 
-            // ComprarBono
+            // ComprarBonoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(416, 181);
             this.Controls.Add(this.panelCompra);
             this.Controls.Add(this.panelAfiliado);
-            this.Name = "ComprarBono";
+            this.Name = "ComprarBonoForm";
             this.Text = "Comprar Bonos";
             this.Load += new System.EventHandler(this.ComprarBono_Load);
             this.panelAfiliado.ResumeLayout(false);

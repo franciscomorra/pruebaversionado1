@@ -56,15 +56,15 @@ namespace ClinicaFrba.AbmTurno
         private void dtTurno_ValueChanged(object sender, EventArgs e)
         {
             //Rellenar Combobox con horas posibles!
+            List<Turno> turnos = _turnosManager.GetTurnosForFecha(_profesional, dtTurno.Value);
+            cbxHorarios.DataSource = turnos;
+            
             panelHorario.Visible = true;
         }
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            //Agregar Turno
             _turnosManager.SaveTurno(_turno);
-
-
             if (OnTurnoUpdated != null)
                 OnTurnoUpdated(this, new TurnoUpdatedEventArgs() { Turno = _turno });
             this.Close();

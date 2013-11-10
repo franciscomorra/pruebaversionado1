@@ -32,14 +32,16 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.dgvTurnos = new System.Windows.Forms.DataGridView();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelAfiliado = new System.Windows.Forms.Panel();
             this.btnBuscarAfiliado = new System.Windows.Forms.Button();
             this.lblAfiliado = new System.Windows.Forms.Label();
             this.txtAfiliado = new System.Windows.Forms.TextBox();
-            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panelAcciones = new System.Windows.Forms.Panel();
             this.buttonsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTurnos)).BeginInit();
             this.panelAfiliado.SuspendLayout();
+            this.panelAcciones.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonsPanel
@@ -47,9 +49,9 @@
             this.buttonsPanel.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonsPanel.Controls.Add(this.btnCancelar);
             this.buttonsPanel.Controls.Add(this.btnAgregar);
-            this.buttonsPanel.Location = new System.Drawing.Point(0, 51);
+            this.buttonsPanel.Location = new System.Drawing.Point(3, 3);
             this.buttonsPanel.Name = "buttonsPanel";
-            this.buttonsPanel.Size = new System.Drawing.Size(834, 39);
+            this.buttonsPanel.Size = new System.Drawing.Size(828, 39);
             this.buttonsPanel.TabIndex = 4;
             // 
             // btnCancelar
@@ -81,14 +83,20 @@
             this.dgvTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTurnos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Fecha});
-            this.dgvTurnos.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvTurnos.Location = new System.Drawing.Point(0, 96);
+            this.dgvTurnos.Location = new System.Drawing.Point(3, 48);
             this.dgvTurnos.MultiSelect = false;
             this.dgvTurnos.Name = "dgvTurnos";
             this.dgvTurnos.ReadOnly = true;
             this.dgvTurnos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTurnos.Size = new System.Drawing.Size(834, 422);
+            this.dgvTurnos.Size = new System.Drawing.Size(828, 208);
             this.dgvTurnos.TabIndex = 5;
+            // 
+            // Fecha
+            // 
+            this.Fecha.DataPropertyName = "Fecha";
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.Name = "Fecha";
+            this.Fecha.ReadOnly = true;
             // 
             // panelAfiliado
             // 
@@ -127,21 +135,22 @@
             this.txtAfiliado.Size = new System.Drawing.Size(250, 20);
             this.txtAfiliado.TabIndex = 33;
             // 
-            // Fecha
+            // panelAcciones
             // 
-            this.Fecha.DataPropertyName = "Fecha";
-            this.Fecha.HeaderText = "Fecha";
-            this.Fecha.Name = "Fecha";
-            this.Fecha.ReadOnly = true;
+            this.panelAcciones.Controls.Add(this.dgvTurnos);
+            this.panelAcciones.Controls.Add(this.buttonsPanel);
+            this.panelAcciones.Location = new System.Drawing.Point(0, 52);
+            this.panelAcciones.Name = "panelAcciones";
+            this.panelAcciones.Size = new System.Drawing.Size(842, 262);
+            this.panelAcciones.TabIndex = 24;
             // 
             // TurnosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(834, 518);
+            this.ClientSize = new System.Drawing.Size(843, 320);
+            this.Controls.Add(this.panelAcciones);
             this.Controls.Add(this.panelAfiliado);
-            this.Controls.Add(this.dgvTurnos);
-            this.Controls.Add(this.buttonsPanel);
             this.Name = "TurnosForm";
             this.Text = "Administrar Turnos";
             this.Load += new System.EventHandler(this.TurnosForm_Load);
@@ -149,6 +158,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvTurnos)).EndInit();
             this.panelAfiliado.ResumeLayout(false);
             this.panelAfiliado.PerformLayout();
+            this.panelAcciones.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -164,5 +174,6 @@
         private System.Windows.Forms.TextBox txtAfiliado;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
+        private System.Windows.Forms.Panel panelAcciones;
     }
 }

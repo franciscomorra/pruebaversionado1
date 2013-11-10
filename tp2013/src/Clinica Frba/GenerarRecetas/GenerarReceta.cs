@@ -40,13 +40,15 @@ namespace ClinicaFrba.GenerarReceta
         {
             if (Session.User.Perfil.Nombre == "Profesional")
             {
-                _profesional = new Profesional() { UserID = Session.User.UserID};
-                panelProfesional.Hide();
-                panelAcciones.Top = 0;
+                _profesional = new Profesional();
+                _profesional.UserID = Session.User.UserID;
+                _profesional.DetallePersona = Session.User.DetallePersona;
+                txtProfesional.Text = _profesional.ToString();
+                btnBuscarProfesional.Hide();
             }
             else
             {
-                panelProfesional.Show();
+                btnBuscarProfesional.Show();
                 panelAcciones.Hide();
             }
 

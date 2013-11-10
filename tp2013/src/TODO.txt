@@ -1,65 +1,31 @@
-Mientras estan los procedimientos SQL:
-	Hacer abm de turnos, 
-		Seleccion de Afiliado->Se oculta si es perfil afiliado o si viene por parametros
-		Botones:
-			Nuevo->Pedir Turno
-			Cancelar->Agarra el seleccionado y lo cancela
-		Filtros:
-			profesional, especialidad, fecha
-		Datagrid:
-			Turnos
-	Hacer abm de bonos
-		Seleccion de Afiliado->Se oculta si es perfil afiliado o si viene por parametros
-		Filtro de tipos->Consulta o Farmacia, se oculta si viene por parametros
-		Botones
-			Comprar->Compra de Bonos
-		Filtros
-			Ningunos?
-
-
 1. ABM de Rol
 		SIN NOVEDAD!!!
 2. Login y Seguridad
 		SIN NOVEDAD!!!!!!
 4. ABM de Afiliados
 		SIN NOVEDAD LISTADO 
-		
 		Hacer parte de agregar/modificar, tiene que ver mucho con profesionales
 5. ABM de Profesional
-		Ver error choto!
-		-Hacer procedimientos faltantes, para el listado
-		-ver el tema de agregar/modificar, tiene que ver mucho con afiliados
+		SIN NOVEDAD LISTADO (filtrar por especialidad)
+		Hacer parte de agregar/modificar, tiene que ver mucho con afiliados
 8. Registrar Agenda Profesional.
-		Falta rellenar combos de 7.00 a 20.00 y sab de 10.00 a 15.00
-		Falta validar la carga horaria (48hs)
 		Falta guardar en db, ver como garcha!
 9. Compra de Bonos.
-
 		Falta guardar bonos
 		Falta validar cliente activo
-
+		abm bonos->Error cuando muestra
 10. Pedido de turno
-
-		Formulario con datagrid que va a ser usado por otras funcionalidades Rellenar
-			Tiene filtros de profesional, especialidad y fecha (si se le pasa por parametro, filtra los resultados del dia)
-		
-		Formulario de nuevo turno ->Todo
-			Seleccionar Profesional
-			Combobox con los primeros 10 turnos (va a mostrar fecha y hora) disponibles
-			Aceptar crea un turno
+		Ver errores
+		abm turnos->Error cuando muestra
 11. Registro de llegada para atención médica
-		Seleccionar Turno (hace falta un formulario que muestre los turnos), campos de filtrado son profesional, especialidad, fecha (se le pasa la del sistema)
-		Seleccionar bono consulta (hace falta un formulario que muestre los bonos farmacia y consultas y que se pueda filtrar)
-		Boton registrar llegada (si la hora es 15 minutos antes que la hora del turno, consumir bono y cambiar estado de turno)
+		Validar 15 minutos y mismo dia
+		SQL de registrar llegada
 12. Registro de resultado para atención médica
-		Hacer logica
-		Boton generar receta (que guarda los cambios y abre formulario de recetas con nro de turno)
+		Ver errores
+		SQL
 13. Cancelar atención médica		
-		FALTA PROCEDIMIENTOS
+		SQL (errores)
 14. Receta médica
-
-		Falta ABM de bonos
-		Rellenar el combo de medicamentos.
-		Al hacer click, mandar a db, que verifique uqe la cantidad sea menor que 5 por bono
+		
 15. Listado Estadístico
 		FALTA PROCEDIMIENTOS

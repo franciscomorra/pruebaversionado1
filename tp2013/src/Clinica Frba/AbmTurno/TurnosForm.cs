@@ -35,21 +35,32 @@ namespace ClinicaFrba.AbmTurno
         {
             _afiliado = afiliado;
             buttonsPanel.Visible = false;
+            panelAcciones.Visible = true;
             _isSearchMode = true;
         }
 
         private void TurnosForm_Load(object sender, EventArgs e)
         {
             panelAfiliado.Visible = true;
-            if (Session.User.Perfil.Nombre == "Afiliado" || _afiliado != null)
+            panelAcciones.Visible = false;
+            if (Session.User.Perfil.Nombre == "Afiliado")
             {
-                if(_afiliado == null)
-                    _afiliado = Session.User as Afiliado;
-                panelAfiliado.Visible = false;
+                _afiliado = new Afiliado();
+                _afiliado.UserID = Session.User.UserID;
+                _afiliado.DetallePersona = Session.User.DetallePersona;
+                //_afiliado = Session.User as Afiliado;
+                btnBuscarAfiliado.Visible = false;
+                txtAfiliado.Text = Session.User.ToString();
+                panelAcciones.Visible = true;
                 var dataSource = _turnosManager.GetAll(_afiliado);
                 dgvTurnos.DataSource = dataSource;
                 dgvTurnos.AutoGenerateColumns = false;
-
+                dgvTurnos.DoubleClick += new EventHandler(dgvTurnos_CellContentDoubleClick);
+            }
+            else if (_isSearchMode) {
+                var dataSource = _turnosManager.GetAll(_afiliado);
+                dgvTurnos.DataSource = dataSource;
+                dgvTurnos.AutoGenerateColumns = false;
                 dgvTurnos.DoubleClick += new EventHandler(dgvTurnos_CellContentDoubleClick);
             }
 
@@ -74,7 +85,7 @@ namespace ClinicaFrba.AbmTurno
             _afiliadosForm.Hide();
             var dataSource = _turnosManager.GetAll(_afiliado);
             dgvTurnos.DataSource = dataSource;
-
+            panelAcciones.Visible = true;
         }
 
 
@@ -106,7 +117,6 @@ namespace ClinicaFrba.AbmTurno
         {
             if (dgvTurnos.SelectedRows == null || dgvTurnos.SelectedRows.Count == 0) return;
             var row = dgvTurnos.SelectedRows[0];
-            
             var turno = row.DataBoundItem as Turno;
             
             var pedirTurnoForm = new PedirTurnoForm();

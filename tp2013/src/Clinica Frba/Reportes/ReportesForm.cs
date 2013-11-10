@@ -10,21 +10,21 @@ using ClinicaFrba.Core;
 using ClinicaFrba.Comun;
 using ClinicaFrba.Negocio;
 
-namespace ClinicaFrba.ListadoEstadistico
+namespace ClinicaFrba.ReportesForm
 {
     [PermissionRequired(Functionalities.ListarEstadisticas)]
-    public partial class ListadoEstadisticoForm : Form
+    public partial class ReportesForm : Form
     {
-        private ReportManager _reportManager = new ReportManager();
+        private ReportesManager _reporteManager = new ReportesManager();
 
-        public ListadoEstadisticoForm()
+        public ReportesForm()
         {
             InitializeComponent();
         }
 
         private void ListadoEstadisticoForm_Load(object sender, EventArgs e)
         {
-            cbxReportType.DataSource = _reportManager.GetReportTypes();
+            cbxReportType.DataSource = _reporteManager.GetReportTypes();
             cbxReportType.SelectedIndex = 0;
             dtpHasta.Value = DateTime.Now;
             dtpDesde.Value = DateTime.Now.Subtract(TimeSpan.FromDays(180));
@@ -36,7 +36,7 @@ namespace ClinicaFrba.ListadoEstadistico
             {
                 MessageBox.Show("La fecha desde debe ser menor o igual que la fecha hasta");
             }
-            dataGridView.DataSource = _reportManager.GetReport(cbxReportType.SelectedItem as ReportType, dtpDesde.Value, dtpHasta.Value);
+            dataGridView.DataSource = _reporteManager.GetReporte(cbxReportType.SelectedItem as TipoReporte, dtpDesde.Value, dtpHasta.Value);
             dataGridView.Refresh();
         }
     }

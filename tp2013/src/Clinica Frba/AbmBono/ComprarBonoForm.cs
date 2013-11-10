@@ -18,8 +18,9 @@ namespace ClinicaFrba.AbmBono
     [PermissionRequired(Functionalities.ComprarBonos)]
     public partial class ComprarBonoForm : Form
     {
-        private User _user;
+
         private AfiliadosForm _afiliadosForm;
+        private Afiliado _afiliado;
         private AfiliadoManager _afiliadoMan = new AfiliadoManager();
         public Afiliado afiliado;
         private BonosManager _bonoManager = new BonosManager();
@@ -43,16 +44,22 @@ namespace ClinicaFrba.AbmBono
 
         void afiliadosForm_OnAfiliadoSelected(object sender, AfiliadoSelectedEventArgs e)
         {
-            _user = e.Afiliado;
-            txtAfiliado.Text = _user.DetallePersona.Apellido+", " + _user.DetallePersona.Nombre;
+            _afiliado = e.Afiliado;
+            txtAfiliado.Text = e.Afiliado.ToString() ;
             _afiliadosForm.Hide();
             rellenarPrecios();
             panelCompra.Show();
         }
         private void rellenarPrecios()
         { 
-            
-            afiliado = _afiliadoMan.getInfo(_user.UserID);
+            try
+            {
+                afiliado = _afiliadoMan.getInfo(_afiliado.UserID);
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+            }
             lblprecioConsulta.Text = afiliado.PlanMedico.PrecioConsulta.ToString();
             lblprecioFarmacia.Text = afiliado.PlanMedico.PrecioFarmacia.ToString();
             lblTotal.Text = "0";
@@ -77,8 +84,14 @@ namespace ClinicaFrba.AbmBono
                 }
                 else
                 {
-                    txtAfiliado.Text = Session.User.UserID.ToString();
-                    panelAfiliado.Hide();
+
+
+                    _afiliado = new Afiliado();
+                    _afiliado.UserID = Session.User.UserID;
+                    _afiliado.DetallePersona = Session.User.DetallePersona;
+                    txtAfiliado.Text = _afiliado.ToString();
+                    //_afiliado = Session.User as Afiliado;
+                    btnBuscar.Visible = false;
                     rellenarPrecios();
                     panelCompra.Show();
                 }
@@ -99,44 +112,53 @@ namespace ClinicaFrba.AbmBono
 
         private void btnComprar_Click(object sender, EventArgs e)
         {
-            int i = 0;
-            List<Bono> bonos = new List<Bono>();
-            if (cbxCantConsulta.SelectedIndex > 0)
+            try
             {
-                MessageBox.Show("Por favor, anote los numeros de bono a continuacion");
-                for (i = 0; i < cbxCantConsulta.SelectedIndex; i++)
+                int i = 0;
+                List<Bono> bonos = new List<Bono>();
+                if (cbxCantConsulta.SelectedIndex > 0)
                 {
-                    Bono bono = new Bono();
-                    bono.Fecha = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
-                    bono.AfiliadoCompro = afiliado;
-                    bono.Precio = afiliado.PlanMedico.PrecioConsulta;
-                    bono.TipodeBono = TipoBono.Consulta;
-                    int numeroBono = _bonoManager.Comprar(bono);
-                    MessageBox.Show("Bono Numero: " + numeroBono.ToString());
-                    bonos.Add(bono);
+                    for (i = 0; i < cbxCantConsulta.SelectedIndex; i++)
+                    {
+                        Bono bono = new Bono();
+                        bono.Fecha = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
+                        bono.AfiliadoCompro = afiliado;
+                        bono.Precio = afiliado.PlanMedico.PrecioConsulta;
+                        bono.TipodeBono = TipoBono.Consulta;
+                        int numeroBono = _bonoManager.Comprar(bono);
+                        bonos.Add(bono);
+                    }
                 }
+                if (cbxCantFarmacia.SelectedIndex > 0)
+                {
+                    for (i = 0; i < cbxCantFarmacia.SelectedIndex; i++)
+                    {
+                        Bono bono = new Bono();
+                        bono.Fecha = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
+                        bono.AfiliadoCompro = afiliado;
+                        bono.Precio = afiliado.PlanMedico.PrecioFarmacia;
+                        bono.TipodeBono = TipoBono.Farmacia;
+                        int numeroBono = _bonoManager.Comprar(bono);
+                        bonos.Add(bono);
+                    }
+                }
+                string mensaje = "Se han asignado los siguientes bonos: \n";
+                foreach(Bono bono in bonos)
+                {
+                    mensaje = mensaje +" " +bono.Numero.ToString()+ " \n";
+                }
+                MessageBox.Show(mensaje);
+                /*
+                if (OnBonosUpdated != null)
+                    OnBonosUpdated(this, new BonoUpdatedEventArgs() { Bonos = bonos});
+                
+                 * */
+                this.Close();
             }
-            if (cbxCantFarmacia.SelectedIndex > 0)
+            catch (System.Exception excep)
             {
-                MessageBox.Show("Por favor, anote los numeros de bono a continuacion");
-                for (i = 0; i < cbxCantFarmacia.SelectedIndex; i++)
-                {
-                    Bono bono = new Bono();
-                    bono.Fecha = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
-                    bono.AfiliadoCompro = afiliado;
-                    bono.Precio = afiliado.PlanMedico.PrecioFarmacia;
-                    bono.TipodeBono = TipoBono.Farmacia;
-                    int numeroBono = _bonoManager.Comprar(bono);
-                    MessageBox.Show("Bono Numero: " + numeroBono.ToString());
-                    bonos.Add(bono);
-                }
+                MessageBox.Show(excep.Message);
             }
-            /*
-            if (OnBonosUpdated != null)
-                OnBonosUpdated(this, new BonoUpdatedEventArgs() { Bonos = bonos});
-            
-             * */
-            this.Close();
 
         }
 

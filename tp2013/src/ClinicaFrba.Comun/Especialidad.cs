@@ -8,7 +8,7 @@ namespace ClinicaFrba.Comun
     public class Especialidad
     {
         public int ID { get; set; }
-        public string Name { get; set; }
+        public string Nombre { get; set; }
         public List<TiposEspecialidad> TiposEspecialidad { get; set; }
 
         public override bool Equals(object obj)

@@ -169,7 +169,6 @@
             this.panelProfesional.Name = "panelProfesional";
             this.panelProfesional.Size = new System.Drawing.Size(632, 43);
             this.panelProfesional.TabIndex = 15;
-            this.panelProfesional.Visible = false;
             // 
             // btnBuscar
             // 

@@ -29,17 +29,13 @@ namespace ClinicaFrba.RegistrarAgenda
         private void btnGuardar_Click(object sender, EventArgs e)
         {
 
-            if (dtDesde.Value < dtHasta.Value) {      
+            if (dtDesde.Value < dtHasta.Value)      
                 throw new Exception("La fecha hasta ser mayor a desde!");
-            }
-
             TimeSpan diferencia  = dtHasta.Value - dtDesde.Value;
-            if (diferencia.TotalDays > 120 || diferencia.TotalDays < 1) {
+            if (diferencia.TotalDays > 120 || diferencia.TotalDays < 1)
                 throw new Exception("Error de fecha!");
-            }
             _agenda.FechaDesde = dtDesde.Value;
             _agenda.FechaHasta = dtHasta.Value;
-
             if (calcularCantidadTotalHoras().TotalHours >= 40)
                 throw new Exception("La carga horaria debe ser menor que 40!!");
             if (cbxLunesIN.SelectedIndex > 0)
@@ -72,7 +68,6 @@ namespace ClinicaFrba.RegistrarAgenda
                 _agenda.SabadoIN = Convert.ToDateTime(cbxSabIN.SelectedItem);
                 _agenda.SabadoOUT = Convert.ToDateTime(cbxSabOUT.SelectedItem);
             }
-
             try
             {
                 mgr.GuardarAgenda(_agenda);
@@ -230,13 +225,17 @@ namespace ClinicaFrba.RegistrarAgenda
         {
             if (Session.User.Perfil.Nombre != "Profesional")
             {
-                panelProfesional.Visible = true;
+                btnBuscar.Visible = true;
                 panelAcciones.Visible = false;
             }
             else
             {
-                txtProfesional.Text = Session.User.UserID.ToString();
-                panelProfesional.Hide();
+                _profesional = new Profesional();
+                _profesional.UserID = Session.User.UserID;
+                _profesional.DetallePersona = Session.User.DetallePersona;
+                txtProfesional.Text = _profesional.ToString();
+
+                btnBuscar.Hide();
                 panelAcciones.Visible = true;
             }
             rellenarCombos();

@@ -119,6 +119,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "ProfesionalUserControl";
             this.Size = new System.Drawing.Size(437, 271);
+            
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

@@ -35,10 +35,10 @@
             this.dtTurno = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.panelFecha = new System.Windows.Forms.Panel();
-            this.btnConfirmar = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panelHorario = new System.Windows.Forms.Panel();
+            this.btnConfirmar = new System.Windows.Forms.Button();
+            this.cbxHorarios = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.panelProfesional.SuspendLayout();
             this.panelFecha.SuspendLayout();
             this.panelHorario.SuspendLayout();
@@ -83,7 +83,7 @@
             // 
             // dtTurno
             // 
-            this.dtTurno.Location = new System.Drawing.Point(115, 3);
+            this.dtTurno.Location = new System.Drawing.Point(121, 3);
             this.dtTurno.Name = "dtTurno";
             this.dtTurno.Size = new System.Drawing.Size(200, 20);
             this.dtTurno.TabIndex = 17;
@@ -109,6 +109,16 @@
             this.panelFecha.Size = new System.Drawing.Size(435, 141);
             this.panelFecha.TabIndex = 19;
             // 
+            // panelHorario
+            // 
+            this.panelHorario.Controls.Add(this.btnConfirmar);
+            this.panelHorario.Controls.Add(this.cbxHorarios);
+            this.panelHorario.Controls.Add(this.label1);
+            this.panelHorario.Location = new System.Drawing.Point(5, 29);
+            this.panelHorario.Name = "panelHorario";
+            this.panelHorario.Size = new System.Drawing.Size(413, 100);
+            this.panelHorario.TabIndex = 20;
+            // 
             // btnConfirmar
             // 
             this.btnConfirmar.Location = new System.Drawing.Point(234, 40);
@@ -119,6 +129,14 @@
             this.btnConfirmar.UseVisualStyleBackColor = true;
             this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
+            // cbxHorarios
+            // 
+            this.cbxHorarios.FormattingEnabled = true;
+            this.cbxHorarios.Location = new System.Drawing.Point(116, 9);
+            this.cbxHorarios.Name = "cbxHorarios";
+            this.cbxHorarios.Size = new System.Drawing.Size(200, 21);
+            this.cbxHorarios.TabIndex = 19;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -127,24 +145,6 @@
             this.label1.Size = new System.Drawing.Size(97, 13);
             this.label1.TabIndex = 20;
             this.label1.Text = "Seleccione Horario";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(110, 12);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(200, 21);
-            this.comboBox1.TabIndex = 19;
-            // 
-            // panelHorario
-            // 
-            this.panelHorario.Controls.Add(this.btnConfirmar);
-            this.panelHorario.Controls.Add(this.comboBox1);
-            this.panelHorario.Controls.Add(this.label1);
-            this.panelHorario.Location = new System.Drawing.Point(5, 29);
-            this.panelHorario.Name = "panelHorario";
-            this.panelHorario.Size = new System.Drawing.Size(413, 100);
-            this.panelHorario.TabIndex = 20;
             // 
             // PedirTurnoForm
             // 
@@ -176,7 +176,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panelFecha;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbxHorarios;
         private System.Windows.Forms.Button btnConfirmar;
         private System.Windows.Forms.Panel panelHorario;
     }

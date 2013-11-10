@@ -45,10 +45,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtMatricula = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
+            this.cbxEspecialidad = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.profesionalesGrid)).BeginInit();
             this.buttonsPanel.SuspendLayout();
             this.searchPanel.SuspendLayout();
@@ -193,11 +193,11 @@
             // 
             this.groupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox.Controls.Add(this.cbxEspecialidad);
             this.groupBox.Controls.Add(this.label4);
             this.groupBox.Controls.Add(this.label1);
             this.groupBox.Controls.Add(this.label3);
             this.groupBox.Controls.Add(this.label2);
-            this.groupBox.Controls.Add(this.txtEmail);
             this.groupBox.Controls.Add(this.txtMatricula);
             this.groupBox.Controls.Add(this.txtNombre);
             this.groupBox.Controls.Add(this.txtApellido);
@@ -241,19 +241,11 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(687, 22);
+            this.label2.Location = new System.Drawing.Point(652, 22);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(32, 13);
+            this.label2.Size = new System.Drawing.Size(67, 13);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Email";
-            // 
-            // txtEmail
-            // 
-            this.txtEmail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEmail.Location = new System.Drawing.Point(725, 19);
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(197, 20);
-            this.txtEmail.TabIndex = 3;
+            this.label2.Text = "Especialidad";
             // 
             // txtMatricula
             // 
@@ -277,6 +269,15 @@
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(197, 20);
             this.txtApellido.TabIndex = 0;
+            // 
+            // cbxEspecialidad
+            // 
+            this.cbxEspecialidad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxEspecialidad.FormattingEnabled = true;
+            this.cbxEspecialidad.Location = new System.Drawing.Point(725, 18);
+            this.cbxEspecialidad.Name = "cbxEspecialidad";
+            this.cbxEspecialidad.Size = new System.Drawing.Size(203, 21);
+            this.cbxEspecialidad.TabIndex = 8;
             // 
             // ProfesionalesForm
             // 
@@ -313,7 +314,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtMatricula;
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.Label lblResults;
@@ -322,5 +322,6 @@
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Matricula;
         private System.Windows.Forms.DataGridViewTextBoxColumn Email;
+        private System.Windows.Forms.ComboBox cbxEspecialidad;
     }
 }
