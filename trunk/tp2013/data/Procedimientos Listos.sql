@@ -514,8 +514,8 @@ BEGIN
 DECLARE @NUMEROBONO INT
 DECLARE @PLAN INT
 SELECT @PLAN = A.PlanMedico FROM Afiliados A WHERE A.UsuarioID = @AfiliadoCompro
-SELECT @NUMEROBONO = MAX(NumeroDeBono) + 1 FROM [SHARPS].BonosConsulta -----REVISAR PARA EL NUMERO DE FARMACIA TAMBIEN
-INSERT INTO [SHARPS].BonosConsulta (NumeroDeBono,PlanMedico,Fecha_Impresion,Afiliado_Compro)
+SELECT @NUMEROBONO = MAX(NumeroDeBono) + 1 FROM [SHARPS].Bonos_Consulta 
+INSERT INTO [SHARPS].Bonos_Consulta (NumeroDeBono,PlanMedico,Fecha_Impresion,Afiliado_Compro)
 VALUES (@NUMEROBONO , @PLAN , @Fecha , @AfiliadoCompro)
 END
 GO
@@ -531,8 +531,8 @@ BEGIN
 DECLARE @NUMEROBONO INT
 DECLARE @PLAN INT
 SELECT @PLAN = A.PlanMedico FROM Afiliados A WHERE A.UsuarioID = @AfiliadoCompro
-SELECT @NUMEROBONO = MAX(NumeroDeBono) + 1 FROM [SHARPS].BonosConsulta -----REVISAR PARA EL NUMERO DE FARMACIA TAMBIEN
-INSERT INTO [SHARPS].BonosFarmacia(NumeroDeBono,PlanMedico,Fecha_Impresion,Afiliado_Compro)
+SELECT @NUMEROBONO = MAX(NumeroDeBono) + 1 FROM [SHARPS].Bonos_Farmacia
+INSERT INTO [SHARPS].Bonos_Farmacia(NumeroDeBono,PlanMedico,Fecha_Impresion,Afiliado_Compro)
 VALUES (@NUMEROBONO , @PLAN , @Fecha , @AfiliadoCompro)
 END
 GO
@@ -554,5 +554,46 @@ WHERE T.Afiliado = @userId
 
 END
 GO
+
+
+
+CREATE PROCEDURE [SHARPS].GetTurnos
+@profesionalID INT,
+@fecha DATE
+
+AS
+BEGIN
+
+SELECT Hora , Minuto, CONVERT(CHAR(10), T.FechaHoraLlegada ,112) AS Fecha ------<<--------terminar
+FROM Turnos T
+INNER JOIN Agendas A ON A.Profesional = @profesionalID
+WHERE A.AgendaID = T.Agenda
+
+END
+GO
+
+
+CREATE PROCEDURE [SHARPS].InsertTurno
+@Fecha DATE,
+@Profesional_ID INT,
+@Afiliado_ID INT
+
+AS
+BEGIN
+
+DECLARE @IDAGENDA INT
+DECLARE @ESTADO INT
+DECLARE @NUMERO INT
+SELECT @NUMERO = MAX(Numero) + 1 FROM [SHARPS].Turnos
+SELECT @IDAGENDA = AgendaID FROM [SHARPS].Agendas A WHERE A.Profesional = @Profesional_ID
+INSERT INTO [SHARPS].Estados_Turno (Descripcion, MotivoCancelacion)
+VALUES (NULL,NULL)
+SELECT @ESTADO = MAX(Estado)FROM [SHARPS].Estados_Turno
+
+
+INSERT INTO [SHARPS].Turnos (Numero , Afiliado , Estado , FechaHoraLlegada , Agenda )
+VALUES (@NUMERO , @Afiliado_ID, @ESTADO, @Fecha,@IDAGENDA)
+END
+GO 
 
 
