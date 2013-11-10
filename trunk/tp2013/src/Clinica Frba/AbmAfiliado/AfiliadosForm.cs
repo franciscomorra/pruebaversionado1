@@ -136,17 +136,19 @@ namespace ClinicaFrba.AbmAfiliado
         }
 
 
-        private void btnAgregar_Click(object sender, EventArgs e)
+        private void btnAgregar_Click(object sender, EventArgs e) //Nuevo Afiliado
         {
-            var regForm = new RegistroForm();
+            var regForm = new RegistroForm(); //Registro para usuarios
             
             regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
-            Profile _perfil = new Profile(){ Nombre = "Afiliado"};
+            Perfil _perfil = new Perfil(){ Nombre = "Afiliado"};
 
-            regForm.Profile = _perfil;
+            regForm.perfil = _perfil;
+            
             ViewsManager.LoadModal(regForm);
+
         }
-        private void btnLimpiar_Click(object sender, EventArgs e)
+        private void btnLimpiar_Click(object sender, EventArgs e) //Limpiar Filtros
         {
             txtApellido.Text = string.Empty;
             txtNombre.Text = string.Empty;
@@ -156,7 +158,7 @@ namespace ClinicaFrba.AbmAfiliado
             dgvAfiliados.Refresh();
         }
 
-        private void btnBuscar_Click(object sender, EventArgs e)
+        private void btnBuscar_Click(object sender, EventArgs e) //Filtros
         {
             long nroAfiliado = 0;
             if (!string.IsNullOrEmpty(txtAfiliadoNro.Text) && !long.TryParse(txtAfiliadoNro.Text, out nroAfiliado))

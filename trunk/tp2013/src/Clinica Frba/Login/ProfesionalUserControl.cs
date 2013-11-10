@@ -48,7 +48,7 @@ namespace ClinicaFrba.Login
             especialidades.ForEach(x => clbEspecialidades.Items.Add(x, false));
             clbEspecialidades.DisplayMember = "Nombre";
             RolesManager rman = new RolesManager();
-            var roles = rman.GetRolesByPerfil(new Profile() { Nombre = "Profesional" });
+            var roles = rman.GetRolesByPerfil(new Perfil() { Nombre = "Profesional" });
             cbxRoles.DataSource = roles;
             cbxRoles.DisplayMember = "Nombre";
             cbxRoles.SelectedIndex = 0;

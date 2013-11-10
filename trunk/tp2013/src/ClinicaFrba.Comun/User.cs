@@ -15,7 +15,7 @@ namespace ClinicaFrba.Comun
         public List<Functionalities> Permissions { get; private set; }
         public int UserID { get; set; }
         public int RoleID { get; set; }
-        public Profile Perfil{ get; set; }
+        public Perfil Perfil{ get; set; }
         public BindingList<Rol> Roles { get; set; } 
         public string UserName { get; set; }
         public bool FaltanDatos { get; set; }

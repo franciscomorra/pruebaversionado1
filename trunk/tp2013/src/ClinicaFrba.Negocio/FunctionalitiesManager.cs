@@ -68,11 +68,11 @@ namespace ClinicaFrba.Negocio
 
             return ret;
         }
-        public List<Functionalities> GetProfileFunctionalities(int profileId)//Saca las funcionalidades de un rol
+        public List<Functionalities> GetPerfilFunctionalities(int profileId)//Saca las funcionalidades de un rol
         {
             var ret = new List<Functionalities>();
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "[SHARPS].GetProfileFunctionalities", SqlDataAccessArgs
+                "[SHARPS].GetPerfilFunctionalities", SqlDataAccessArgs
                 .CreateWith("@Perfil_Id", profileId)
             .Arguments);
 

@@ -17,38 +17,29 @@ namespace ClinicaFrba
     public partial class RegistroForm : Form
     {
         public event EventHandler<UserSavedEventArgs> OnUserSaved;
-        private List<Profile> Profiles;
+        private List<Perfil> Perfils;
         private AfiliadoUserControl afiliadoUserControl = new AfiliadoUserControl();
         private ProfesionalUserControl profesionalUserControl = new ProfesionalUserControl();
         private Profesional _profesional = new Profesional();
         private Afiliado _afiliado = new Afiliado();
-        private ProfileManager _profmanager = new ProfileManager();
-
-        public Profile Profile
-        {
-            get
-            {
-                return (Profile)cbxProfiles.SelectedItem;
-            }
-            set
-            {
-                cbxProfiles.SelectedItem = value;
-                cbxProfiles.Enabled = false;
-                cbxProfiles.Visible = false;
-                lblPerfil.Visible = false;
-            }
-        }
+        private PerfilManager _perfilesManager = new PerfilManager();
+        public bool elegirPerfil = true;
+        public Perfil perfil;
 
         public RegistroForm()
         {
+            bool puedeModificarAfiliados = Session.User.Permissions.Contains(Functionalities.AdministrarAfiliados);
+            bool puedeModificarProfesionales = Session.User.Permissions.Contains(Functionalities.AdministrarProfesionales);
+            if ((puedeModificarAfiliados && !puedeModificarProfesionales) || (puedeModificarProfesionales && !puedeModificarAfiliados))
+                elegirPerfil = false;
 
             InitializeComponent(); 
             try
             {
-                Profiles = _profmanager.GetAllProfilesForRegistration();
-                Profiles.ForEach(x => cbxProfiles.Items.Add(x));
-                cbxProfiles.SelectedIndex = 0;
-                cbxProfiles.DisplayMember = "Nombre";
+                Perfils = _perfilesManager.GetAllPerfilsForRegistration();
+                Perfils.ForEach(x => cbxPerfils.Items.Add(x));
+                cbxPerfils.SelectedIndex = 0;
+                cbxPerfils.DisplayMember = "Nombre";
                 cbxSexo.DataSource = Enum.GetValues(typeof(TipoSexo)).Cast<TipoSexo>().ToList();
                 cbxTipoDNI.DataSource = Enum.GetValues(typeof(TipoDoc)).Cast<TipoDoc>().ToList();
             }
@@ -69,39 +60,40 @@ namespace ClinicaFrba
             txtDireccion.Text = user.DetallePersona.Direccion.Trim();
             txtTelefono.Text = user.DetallePersona.Telefono.ToString();
             txtMail.Text = user.DetallePersona.Email.Trim();
-           // cbxProfiles.Enabled = false;
-            Profile perfil = new Profile();
+           // cbxPerfils.Enabled = false;
+            Perfil perfil = new Perfil();
             if (user is Afiliado)
             {
                 _afiliado = user as Afiliado;
-                perfil = _profmanager.getInfo("Afiliado");
-                cbxProfiles.SelectedItem = perfil;
-                afiliadoUserControl.SetUser(_afiliado);
+                perfil = _perfilesManager.getInfo("Afiliado");
+                cbxPerfils.SelectedItem = perfil;
             }
             else if (user is Profesional)
             {
                 _profesional = user as Profesional;
-                perfil = _profmanager.getInfo("Profesional");
-                cbxProfiles.SelectedItem = perfil;
-                profesionalUserControl.SetUser(_profesional);
+                perfil = _perfilesManager.getInfo("Profesional");
+                cbxPerfils.SelectedItem = perfil;
             }
         }
 
         private void RegistroForm_Load(object sender, EventArgs e)
         {
-
+            if (!elegirPerfil)
+                cbxPerfils.Enabled = false;
         }
 
-        private void cbxProfiles_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbxPerfils_SelectedIndexChanged(object sender, EventArgs e)
         {
             userPanel.Controls.Clear();
 
-            if (Profile.Nombre == "Afiliado")
+            if (perfil.Nombre == "Afiliado")
             {
+                afiliadoUserControl.SetUser(_afiliado);
                 userPanel.Controls.Add(afiliadoUserControl);
             }
-            else if (Profile.Nombre == "Profesional")
+            else if (perfil.Nombre == "Profesional")
             {
+                profesionalUserControl.SetUser(_profesional);
                 userPanel.Controls.Add(profesionalUserControl);
             }
             else {
@@ -139,7 +131,7 @@ namespace ClinicaFrba
             user.DetallePersona.Email = txtMail.Text.Trim();
 
             
-            if (Profile.Nombre == "Afiliado")
+            if (perfil.Nombre == "Afiliado")
             {
                 _afiliado = ((AfiliadoUserControl)afiliadoUserControl).GetAfiliado();
                 _afiliado.UserName = txtUsername.Text;
@@ -148,7 +140,7 @@ namespace ClinicaFrba
                 manager.GuardarAfiliado(_afiliado, txtPassword.Text);
 
             }
-            else if (Profile.Nombre == "Profesional")
+            else if (perfil.Nombre == "Profesional")
             {
                 _profesional = ((ProfesionalUserControl)profesionalUserControl).GetProfesional();
                 _profesional.DetallePersona = user.DetallePersona;
@@ -206,19 +198,19 @@ namespace ClinicaFrba
         public event EventHandler<UserSavedEventArgs> OnUserSaved;
 
         private bool _updatingData = false;
-        ProfileManager _perfilManager = new ProfileManager();
+        PerfilManager _perfilManager = new PerfilManager();
         RolesManager _rolesManager = new RolesManager();
-        public Profile Profile
+        public Perfil Perfil
         {
             get
             {
-                return (Profile)cbxProfiles.SelectedItem;
+                return (Perfil)cbxPerfils.SelectedItem;
             }
             set
             {
-                cbxProfiles.SelectedItem = value;
-                cbxProfiles.Enabled = false;
-                cbxProfiles.Visible = false;
+                cbxPerfils.SelectedItem = value;
+                cbxPerfils.Enabled = false;
+                cbxPerfils.Visible = false;
                 lblPerfil.Visible = false;
             }
         }
@@ -229,13 +221,13 @@ namespace ClinicaFrba
             InitializeComponent();
         }
         
-        public void SetUser(User user, Profile perfil)
+        public void SetUser(User user, Perfil perfil)
         {
 
                _updatingData = true;
                txtUsername.Text = user.UserName;
                txtUsername.Enabled = true;
-              // cbxProfiles.Enabled = false;
+              // cbxPerfils.Enabled = false;
 
                //Inicio detalles de persona
                txtApellido.Text = user.DetallePersona.Apellido.Trim();
@@ -250,12 +242,12 @@ namespace ClinicaFrba
 
             
                BindingList<Rol> listadoRoles = _rolesManager.GetUserRoles(user.UserID);
-               ProfileManager prmanager = new ProfileManager();
+               PerfilManager prmanager = new PerfilManager();
                perfil = prmanager.getInfo(perfil.Nombre);
 
                if (listadoRoles.Count == 1) {
-                   cbxProfiles.Enabled = false;
-                   cbxProfiles.SelectedIndex = cbxProfiles.Items.IndexOf(perfil);
+                   cbxPerfils.Enabled = false;
+                   cbxPerfils.SelectedIndex = cbxPerfils.Items.IndexOf(perfil);
                }
 
                if (perfil.Nombre == "Afiliado") {
@@ -279,11 +271,11 @@ namespace ClinicaFrba
             {
                 cbxSexo.DataSource = Enum.GetValues(typeof(TipoSexo)).Cast<TipoSexo>().ToList();
                 cbxTipoDNI.DataSource = Enum.GetValues(typeof(TipoDoc)).Cast<TipoDoc>().ToList();
-                var manager = new ProfileManager();
-                var perfiles = manager.GetAllProfiles();
-                cbxProfiles.DataSource = perfiles;
-                cbxProfiles.DisplayMember = "Nombre";
-                cbxProfiles.SelectedIndex = 0;
+                var manager = new PerfilManager();
+                var perfiles = manager.GetAllPerfils();
+                cbxPerfils.DataSource = perfiles;
+                cbxPerfils.DisplayMember = "Nombre";
+                cbxPerfils.SelectedIndex = 0;
             }
             catch (System.Exception excep)
             {
@@ -292,12 +284,12 @@ namespace ClinicaFrba
 
         }
 
-        private void cbxProfiles_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbxPerfils_SelectedIndexChanged(object sender, EventArgs e)
         {
             try{
 
                 userPanel.Controls.Clear();
-                Profile perfilSelected = (Profile)cbxProfiles.SelectedItem;
+                Perfil perfilSelected = (Perfil)cbxPerfils.SelectedItem;
                 if (perfilSelected.Nombre.ToString() == "Afiliado")
                 {
                     AfiliadoUserControl afiliadoUserControl = new AfiliadoUserControl();
@@ -349,7 +341,7 @@ namespace ClinicaFrba
                 user.DetallePersona.Email = txtMail.Text.Trim();
 
 
-                if (Profile.Nombre == "Afiliado")
+                if (Perfil.Nombre == "Afiliado")
                 {
                     Afiliado afiliado = new Afiliado();
                     AfiliadoUserControl afiliadoUserControl = new AfiliadoUserControl();

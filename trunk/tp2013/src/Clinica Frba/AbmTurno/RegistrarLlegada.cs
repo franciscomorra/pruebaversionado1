@@ -11,10 +11,9 @@ using ClinicaFrba.Core;
 using ClinicaFrba.Negocio;
 using ClinicaFrba.Comun;
 using ClinicaFrba.AbmAfiliado;
-using ClinicaFrba.AbmTurno;
 using ClinicaFrba.AbmBono;
 
-namespace ClinicaFrba.RegistroLlegada
+namespace ClinicaFrba.AbmTurno
 {
     [PermissionRequired(Functionalities.RegistroLlegada)]
     public partial class RegistrarLlegada : Form

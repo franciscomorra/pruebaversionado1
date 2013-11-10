@@ -13,9 +13,8 @@ using System.Configuration;
 using ClinicaFrba.AbmProfesional;
 using ClinicaFrba.AbmAfiliado;
 using ClinicaFrba.AbmTurno;
-using ClinicaFrba.GenerarReceta;
 
-namespace ClinicaFrba.RegistroResultadoAtencion
+namespace ClinicaFrba.Consultas
 {
     [PermissionRequired(Functionalities.RegistroResultadoAtencion)]
     public partial class RegistroResultadoAtencion : Form

@@ -17,17 +17,17 @@ namespace ClinicaFrba
     public partial class AddEditRoleForm : Form
     {
         //public AddEditRoleForm() : this(new Rol()) { }
-        private ProfileManager profileMan = new ProfileManager();
+        private PerfilManager profileMan = new PerfilManager();
         private FunctionalitiesManager functMan = new FunctionalitiesManager();
         private Rol _rol = new Rol();
-        private Profile _perfil = new Profile();
+        private Perfil _perfil = new Perfil();
         public event EventHandler<RoleUpdatedEventArgs> OnRoleUpdated;
 
 
         public AddEditRoleForm()
         {
             InitializeComponent();
-            var perfiles = profileMan.GetAllProfiles();
+            var perfiles = profileMan.GetAllPerfils();
             if (perfiles.Count > 1)
             {
                 cbxPerfiles.DataSource = perfiles;
@@ -40,7 +40,7 @@ namespace ClinicaFrba
         {
             _rol = rol;
             cbxPerfiles.SelectedItem = _rol.Perfil;
-            var functionalities = functMan.GetProfileFunctionalities(_rol.Perfil.ID);
+            var functionalities = functMan.GetPerfilFunctionalities(_rol.Perfil.ID);
             lstFuncionalidades.Items.Clear();
             foreach (var item in functionalities)
             {
@@ -53,12 +53,12 @@ namespace ClinicaFrba
 
         private void cbxPerfiles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var profileMan = new ProfileManager();
-            if ((Profile)cbxPerfiles.SelectedItem != null)
+            var profileMan = new PerfilManager();
+            if ((Perfil)cbxPerfiles.SelectedItem != null)
             {
-                _perfil = (Profile)cbxPerfiles.SelectedItem;
+                _perfil = (Perfil)cbxPerfiles.SelectedItem;
 
-                var functionalities = functMan.GetProfileFunctionalities(_perfil.ID);
+                var functionalities = functMan.GetPerfilFunctionalities(_perfil.ID);
                 lstFuncionalidades.Items.Clear();
                 foreach (var item in functionalities)
                 {
@@ -88,7 +88,7 @@ namespace ClinicaFrba
                     _rol.Functionalities.Add(item);
                 }
                 _rol.Nombre = txtNombreRol.Text;
-                _rol.Perfil = (Profile)cbxPerfiles.SelectedItem;
+                _rol.Perfil = (Perfil)cbxPerfiles.SelectedItem;
                 if (OnRoleUpdated != null)
                     OnRoleUpdated(this, new RoleUpdatedEventArgs() { Rol = _rol });
                 this.Close();

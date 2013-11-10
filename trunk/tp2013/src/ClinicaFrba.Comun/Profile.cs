@@ -5,18 +5,18 @@ using System.Text;
 
 namespace ClinicaFrba.Comun
 {
-    public class Profile
+    public class Perfil
     {
         public int ID { get; set; }
         public string Nombre { get; set; }
         public List<Functionalities> Functionalities { get; set; }
 
-        public Profile(){}
+        public Perfil(){}
 
         public override bool Equals(object obj)
         {
-            if (!(obj is Profile)) return false;
-            return ((Profile)obj).Nombre == this.Nombre;
+            if (!(obj is Perfil)) return false;
+            return ((Perfil)obj).Nombre == this.Nombre;
         }
         public override string ToString()
         {
@@ -31,7 +31,7 @@ namespace ClinicaFrba.Comun
 }
     
     /*
-    public enum Profile
+    public enum Perfil
     {
         Afiliado,
         Profesional,

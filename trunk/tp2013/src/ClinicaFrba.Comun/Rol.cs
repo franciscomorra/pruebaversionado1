@@ -9,7 +9,7 @@ namespace ClinicaFrba.Comun
     {
         public int ID { get; set; }
         public string Nombre { get; set; }        
-        public Profile Perfil { get; set; }
+        public Perfil Perfil { get; set; }
 
         public List<Functionalities> Functionalities { get; set; }
 

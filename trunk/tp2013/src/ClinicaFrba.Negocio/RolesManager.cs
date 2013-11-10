@@ -12,7 +12,7 @@ namespace ClinicaFrba.Negocio
 {
     public class RolesManager
     {
-        public BindingList<Rol> GetRolesByPerfil(Profile perfil)
+        public BindingList<Rol> GetRolesByPerfil(Perfil perfil)
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(
                 ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
@@ -50,7 +50,7 @@ namespace ClinicaFrba.Negocio
                 {
                     ID = int.Parse(row["ID"].ToString()),
                     Nombre = row["Descripcion"].ToString(),
-                    Perfil = new Profile(){
+                    Perfil = new Perfil(){
 
                         ID = int.Parse(row["PerfilID"].ToString()),
                         Nombre = row["PerfilNombre"].ToString()
@@ -127,7 +127,7 @@ namespace ClinicaFrba.Negocio
                         ID = int.Parse(row["ID"].ToString()),
                         Nombre = row["Descripcion"].ToString()
                     };
-                    rol.Perfil = new Profile();
+                    rol.Perfil = new Perfil();
                     rol.Perfil.ID = int.Parse(row["PerfilId"].ToString());
                     rol.Perfil.Nombre = row["PerfilNombre"].ToString();
                     roles.Add(rol);

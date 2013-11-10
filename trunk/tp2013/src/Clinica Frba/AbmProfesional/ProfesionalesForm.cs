@@ -137,8 +137,8 @@ namespace ClinicaFrba.AbmProfesional
         {
             var regForm = new RegistroForm();
             regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
-            Profile _perfil = new Profile() { Nombre = "Profesional" };
-            regForm.Profile = _perfil;
+            Perfil _perfil = new Perfil() { Nombre = "Profesional" };
+            regForm.perfil = _perfil;
             ViewsManager.LoadModal(regForm);
         }
         

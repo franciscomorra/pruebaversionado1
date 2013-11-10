@@ -1,4 +1,4 @@
-﻿namespace ClinicaFrba.RegistroResultadoAtencion
+﻿namespace ClinicaFrba.Consultas
 {
     partial class RegistroResultadoAtencion
     {

@@ -11,23 +11,23 @@ using System.ComponentModel;
 
 namespace ClinicaFrba.Negocio
 {
-    public class ProfileManager
+    public class PerfilManager
     {
-        public List<Profile> GetAllProfiles()
+        public List<Perfil> GetAllPerfils()
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(
                 ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].GetPerfiles"
             );
-            var perfiles = new List<Profile>();
+            var perfiles = new List<Perfil>();
             var functionalitiesManager = new FunctionalitiesManager();
             foreach (DataRow row in result.Rows)
             {
-                var profile = new Profile()
+                var profile = new Perfil()
                 {
                     ID = int.Parse(row["ID"].ToString()),
                     Nombre = row["Descripcion"].ToString(),
-                    //Functionalities = functionalitiesManager.GetProfileFunctionalities(int.Parse(row["ID"].ToString()))
+                    //Functionalities = functionalitiesManager.GetPerfilFunctionalities(int.Parse(row["ID"].ToString()))
 
                 };
                 perfiles.Add(profile);
@@ -36,21 +36,21 @@ namespace ClinicaFrba.Negocio
             return perfiles;
         }
 
-        public List<Profile> GetAllProfilesForRegistration()
+        public List<Perfil> GetAllPerfilsForRegistration()
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(
                 ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].GetPerfiles"
             );
-            var perfiles = new List<Profile>();
+            var perfiles = new List<Perfil>();
             var functionalitiesManager = new FunctionalitiesManager();
             foreach (DataRow row in result.Rows)
             {
-                var profile = new Profile()
+                var profile = new Perfil()
                 {
                     ID = int.Parse(row["ID"].ToString()),
                     Nombre = row["Descripcion"].ToString(),
-                    //Functionalities = functionalitiesManager.GetProfileFunctionalities(int.Parse(row["ID"].ToString()))
+                    //Functionalities = functionalitiesManager.GetPerfilFunctionalities(int.Parse(row["ID"].ToString()))
 
                 };
                 if(profile.Nombre == "Afiliado" || profile.Nombre == "Profesional")
@@ -60,11 +60,11 @@ namespace ClinicaFrba.Negocio
             return perfiles;
         }
 
-        public Profile getInfo(string NombrePerfil) 
+        public Perfil getInfo(string NombrePerfil) 
         {
-            Profile perfil = new Profile();
+            Perfil perfil = new Perfil();
             var row = SqlDataAccess.ExecuteDataRowQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "[SHARPS].GetProfileInfo", SqlDataAccessArgs
+                "[SHARPS].GetPerfilInfo", SqlDataAccessArgs
                 .CreateWith("@NombrePerfil", NombrePerfil)
                 .Arguments);
 
@@ -72,7 +72,7 @@ namespace ClinicaFrba.Negocio
             {
                 perfil.Nombre = NombrePerfil;
                 perfil.ID = int.Parse(row["PerfilId"].ToString());
-                //perfil.Functionalities = functionalitiesManager.GetProfileFunctionalities(int.Parse(row["ID"].ToString()))
+                //perfil.Functionalities = functionalitiesManager.GetPerfilFunctionalities(int.Parse(row["ID"].ToString()))
             }
             return perfil;
         }

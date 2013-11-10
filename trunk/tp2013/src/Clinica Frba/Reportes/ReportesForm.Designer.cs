@@ -157,10 +157,10 @@
             this.cbxReportType.FormattingEnabled = true;
             this.cbxReportType.Location = new System.Drawing.Point(117, 12);
             this.cbxReportType.Name = "cbxReportType";
-            this.cbxReportType.Size = new System.Drawing.Size(400, 21);
+            this.cbxReportType.Size = new System.Drawing.Size(765, 21);
             this.cbxReportType.TabIndex = 0;
             // 
-            // ListadoEstadisticoForm
+            // ReportesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -168,7 +168,7 @@
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.searchPanel);
             this.Controls.Add(this.panel1);
-            this.Name = "ListadoEstadisticoForm";
+            this.Name = "ReportesForm";
             this.Text = "Listados Estadisticos";
             this.Load += new System.EventHandler(this.ListadoEstadisticoForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
