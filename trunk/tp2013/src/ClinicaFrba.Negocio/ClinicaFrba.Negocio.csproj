@@ -49,6 +49,9 @@
     <Compile Include="AfiliadoManager.cs" />
     <Compile Include="AgendaManager.cs" />
     <Compile Include="BonosManager.cs" />
+    <Compile Include="ConsultasManager.cs" />
+    <Compile Include="MedicamentosManager.cs" />
+    <Compile Include="RecetasManager.cs" />
     <Compile Include="DetallePersonaManager.cs" />
     <Compile Include="EspecialidadesManager.cs" />
     <Compile Include="FunctionalitiesManager.cs" />

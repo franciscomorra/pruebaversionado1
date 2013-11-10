@@ -27,6 +27,8 @@ namespace ClinicaFrba.Negocio
             if (row != null && row != null)
             {
                 profesional.UserName = row["UserName"].ToString();
+                profesional.UserID = userID;
+                profesional.FaltanDatos = bool.Parse(row["FaltanDatos"].ToString());
                 profesional.Matricula = row["matricula"].ToString();
                 profesional.Especialidades = espMan.GetAllForUser(userID);
                 profesional.DetallePersona = new DetallesPersona()

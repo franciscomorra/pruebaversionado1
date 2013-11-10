@@ -78,10 +78,10 @@
             // 
             // txtTurno
             // 
-            this.txtTurno.Location = new System.Drawing.Point(71, 9);
+            this.txtTurno.Location = new System.Drawing.Point(88, 9);
             this.txtTurno.Name = "txtTurno";
             this.txtTurno.ReadOnly = true;
-            this.txtTurno.Size = new System.Drawing.Size(250, 20);
+            this.txtTurno.Size = new System.Drawing.Size(233, 20);
             this.txtTurno.TabIndex = 33;
             // 
             // panelAfiliado
@@ -115,10 +115,10 @@
             // 
             // txtAfiliado
             // 
-            this.txtAfiliado.Location = new System.Drawing.Point(71, 9);
+            this.txtAfiliado.Location = new System.Drawing.Point(88, 9);
             this.txtAfiliado.Name = "txtAfiliado";
             this.txtAfiliado.ReadOnly = true;
-            this.txtAfiliado.Size = new System.Drawing.Size(250, 20);
+            this.txtAfiliado.Size = new System.Drawing.Size(233, 20);
             this.txtAfiliado.TabIndex = 33;
             // 
             // panelBono
@@ -147,16 +147,16 @@
             this.lblBono.AutoSize = true;
             this.lblBono.Location = new System.Drawing.Point(6, 12);
             this.lblBono.Name = "lblBono";
-            this.lblBono.Size = new System.Drawing.Size(32, 13);
+            this.lblBono.Size = new System.Drawing.Size(76, 13);
             this.lblBono.TabIndex = 32;
-            this.lblBono.Text = "Bono";
+            this.lblBono.Text = "Bono Consulta";
             // 
             // txtBono
             // 
-            this.txtBono.Location = new System.Drawing.Point(71, 9);
+            this.txtBono.Location = new System.Drawing.Point(88, 9);
             this.txtBono.Name = "txtBono";
             this.txtBono.ReadOnly = true;
-            this.txtBono.Size = new System.Drawing.Size(250, 20);
+            this.txtBono.Size = new System.Drawing.Size(233, 20);
             this.txtBono.TabIndex = 33;
             // 
             // btnRegistrar

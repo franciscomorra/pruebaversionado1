@@ -32,8 +32,6 @@ namespace ClinicaFrba.Negocio
             {
                 UserID = int.Parse(result["ID"].ToString()),
                 UserName = result["Nombre"].ToString(),
-                //FaltanDatos = result["Estado"].ToString(),
-                FaltanDatos = "false"
             };
 
             return user;

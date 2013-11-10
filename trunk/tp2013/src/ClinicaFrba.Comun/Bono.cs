@@ -17,6 +17,6 @@ namespace ClinicaFrba.Comun
     public enum TipoBono
     {
         Consulta,
-        Receta
+        Farmacia
     }
 }

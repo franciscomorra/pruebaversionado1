@@ -12,30 +12,26 @@ namespace ClinicaFrba.Negocio
 {
     public class BonosManager
     {
-        public List<Bono> GetAll(int userID)
+        public List<Bono> GetAll(Afiliado afiliado)
         {
             var ret = new List<Bono>();
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].GetBonos", SqlDataAccessArgs
-                .CreateWith("@userId", userID)
+                .CreateWith("@userId", afiliado.UserID)
                 .Arguments);
             if (result != null)
             {
                 foreach (DataRow row in result.Rows)
                 {
+                    var tipoBono = row["TipoBono"].ToString();
                     ret.Add(new Bono()
                     {
                         Fecha = Convert.ToDateTime(row["Fecha"]),
                         Numero = int.Parse(row["Numero"].ToString()),
+                        TipodeBono = (TipoBono)Enum.Parse(typeof(TipoBono), tipoBono),
+                        AfiliadoCompro = afiliado,
                         Precio = int.Parse(row["Precio"].ToString()),
-                        //TipoBono = 
-                        AfiliadoCompro = new Afiliado()
-                        {
-                            UserID = int.Parse(row["UserIDAfiliado"].ToString()),
-                        },
-
                     });
-
                 }
             }
             return ret;
@@ -48,7 +44,7 @@ namespace ClinicaFrba.Negocio
                 result = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                     "[SHARPS].ComprarBonoConsulta", SqlDataAccessArgs
                    .CreateWith("@Precio", bono.Precio)
-                   .And("@Fecha", bono.Precio)
+                   .And("@Fecha", bono.Fecha)
                    .And("@AfiliadoCompro", bono.AfiliadoCompro.UserID)
                .Arguments);
                 return result;

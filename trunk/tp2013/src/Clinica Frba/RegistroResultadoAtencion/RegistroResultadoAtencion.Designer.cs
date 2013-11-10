@@ -38,8 +38,8 @@
             this.txtProfesional = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtSintomas = new System.Windows.Forms.TextBox();
+            this.txtDiagnostico = new System.Windows.Forms.TextBox();
             this.btnGenerarReceta = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.panelTurno = new System.Windows.Forms.Panel();
@@ -103,7 +103,7 @@
             // 
             // btnBuscarProfesional
             // 
-            this.btnBuscarProfesional.Location = new System.Drawing.Point(333, 7);
+            this.btnBuscarProfesional.Location = new System.Drawing.Point(327, 10);
             this.btnBuscarProfesional.Name = "btnBuscarProfesional";
             this.btnBuscarProfesional.Size = new System.Drawing.Size(75, 23);
             this.btnBuscarProfesional.TabIndex = 34;
@@ -114,7 +114,7 @@
             // lblProf
             // 
             this.lblProf.AutoSize = true;
-            this.lblProf.Location = new System.Drawing.Point(6, 12);
+            this.lblProf.Location = new System.Drawing.Point(3, 12);
             this.lblProf.Name = "lblProf";
             this.lblProf.Size = new System.Drawing.Size(59, 13);
             this.lblProf.TabIndex = 32;
@@ -122,7 +122,7 @@
             // 
             // txtProfesional
             // 
-            this.txtProfesional.Location = new System.Drawing.Point(77, 9);
+            this.txtProfesional.Location = new System.Drawing.Point(71, 12);
             this.txtProfesional.Name = "txtProfesional";
             this.txtProfesional.ReadOnly = true;
             this.txtProfesional.Size = new System.Drawing.Size(250, 20);
@@ -146,21 +146,21 @@
             this.label2.TabIndex = 25;
             this.label2.Text = "Diagnostico";
             // 
-            // textBox2
+            // txtSintomas
             // 
-            this.textBox2.Location = new System.Drawing.Point(71, 10);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(331, 45);
-            this.textBox2.TabIndex = 27;
+            this.txtSintomas.Location = new System.Drawing.Point(71, 10);
+            this.txtSintomas.Multiline = true;
+            this.txtSintomas.Name = "txtSintomas";
+            this.txtSintomas.Size = new System.Drawing.Size(331, 45);
+            this.txtSintomas.TabIndex = 27;
             // 
-            // textBox1
+            // txtDiagnostico
             // 
-            this.textBox1.Location = new System.Drawing.Point(71, 61);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(331, 45);
-            this.textBox1.TabIndex = 27;
+            this.txtDiagnostico.Location = new System.Drawing.Point(71, 61);
+            this.txtDiagnostico.Multiline = true;
+            this.txtDiagnostico.Name = "txtDiagnostico";
+            this.txtDiagnostico.Size = new System.Drawing.Size(331, 45);
+            this.txtDiagnostico.TabIndex = 27;
             // 
             // btnGenerarReceta
             // 
@@ -180,7 +180,7 @@
             this.btnGuardar.TabIndex = 29;
             this.btnGuardar.Text = "Solo Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new System.EventHandler(this.button1_Click);
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // panelTurno
             // 
@@ -224,8 +224,8 @@
             // 
             this.panelAcciones.Controls.Add(this.label1);
             this.panelAcciones.Controls.Add(this.btnGuardar);
-            this.panelAcciones.Controls.Add(this.textBox2);
-            this.panelAcciones.Controls.Add(this.textBox1);
+            this.panelAcciones.Controls.Add(this.txtSintomas);
+            this.panelAcciones.Controls.Add(this.txtDiagnostico);
             this.panelAcciones.Controls.Add(this.label2);
             this.panelAcciones.Controls.Add(this.btnGenerarReceta);
             this.panelAcciones.Location = new System.Drawing.Point(0, 147);
@@ -270,8 +270,8 @@
         private System.Windows.Forms.TextBox txtProfesional;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtSintomas;
+        private System.Windows.Forms.TextBox txtDiagnostico;
         private System.Windows.Forms.Button btnGenerarReceta;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Panel panelAcciones;

@@ -15,16 +15,10 @@ namespace ClinicaFrba.Core
 
         public static User User { get; private set; } //El que se esta logueando
         //Los siguientes son para la seleccion entre formularios
-        public static Afiliado Afiliado { get; private set; } 
-        public static Profesional Profesional { get; private set; }
-        public static Turno Turno { get; private set; }
 
         public static void StartSession(User user)
         {
             User = user; //Recibe la info del usuario
-            Afiliado = new Afiliado();
-            Profesional = new Profesional();
-            Turno = new Turno();
             ViewsManager.LoadMenu();
         }
 
@@ -34,9 +28,6 @@ namespace ClinicaFrba.Core
         public static void Salir()
         {
             User = null;//Limpia la info del usuario
-            Afiliado = null;
-            Profesional = null;
-            Turno = null;
             ViewsManager.BorrarMenu();
         }
     }

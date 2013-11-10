@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ClinicaFrba.Core;
+using ClinicaFrba.Negocio;
 using ClinicaFrba.Comun;
 using ClinicaFrba.AbmAfiliado;
 using ClinicaFrba.AbmTurno;
-
+using ClinicaFrba.AbmBono;
 namespace ClinicaFrba.RegistroLlegada
 {
     [PermissionRequired(Functionalities.RegistroLlegada)]
@@ -18,9 +19,11 @@ namespace ClinicaFrba.RegistroLlegada
     {
         private Afiliado _afiliado;
         private AfiliadosForm _afiliadosForm;
-
         private Turno _turno;
         private TurnosForm _turnosForm;
+        private BonosForm _bonosForm;
+        private Bono _bono;
+        private TurnosManager _turnosManager = new TurnosManager();
 
         public RegistrarLlegada()
         {
@@ -32,7 +35,7 @@ namespace ClinicaFrba.RegistroLlegada
             if (_afiliadosForm == null)
             {
                 _afiliadosForm = new AfiliadosForm();
-                _afiliadosForm.SetSearchMode();
+                _afiliadosForm.ModoBusqueda();
                 _afiliadosForm.OnAfiliadoSelected += new EventHandler<AfiliadoSelectedEventArgs>(_afiliadosForm_OnAfiliadoSelected);
             }
             ViewsManager.LoadModal(_afiliadosForm);
@@ -51,7 +54,7 @@ namespace ClinicaFrba.RegistroLlegada
             if (_turnosForm == null)
             {
                 _turnosForm = new TurnosForm();
-                _turnosForm.SetSearchMode(_afiliado);
+                _turnosForm.ModoBusqueda(_afiliado);
                 _turnosForm.OnTurnoselected += new EventHandler<TurnoSelectedEventArgs>(_turnosForm_OnTurnoSelected);
             }
             ViewsManager.LoadModal(_turnosForm);
@@ -65,16 +68,30 @@ namespace ClinicaFrba.RegistroLlegada
             panelBono.Show();
         }
 
-
-
-
         private void btnBuscarBonoC_Click(object sender, EventArgs e)
         {
-
+            if (_bonosForm == null)
+            {
+                _bonosForm = new BonosForm();
+                _bonosForm.ModoBusqueda(_afiliado,TipoBono.Consulta);
+                _bonosForm.OnBonoselected += new EventHandler<BonoSelectedEventArgs>(_bonosForm_OnBonoSelected);
+            }
+            ViewsManager.LoadModal(_bonosForm);
         }
+
+        void _bonosForm_OnBonoSelected(object sender, BonoSelectedEventArgs e)
+        {
+            _bono = e.Bono;
+            txtBono.Text = _bono.Fecha.ToString();
+            _bonosForm.Hide();
+            btnRegistrar.Show();
+        }
+
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
+            
+
 
         }
     }

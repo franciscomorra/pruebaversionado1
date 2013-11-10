@@ -16,23 +16,26 @@ using System.Configuration;
 namespace ClinicaFrba.AbmBono
 {
     [PermissionRequired(Functionalities.ComprarBonos)]
-    public partial class ComprarBono : Form
+    public partial class ComprarBonoForm : Form
     {
         private User _user;
         private AfiliadosForm _afiliadosForm;
         private AfiliadoManager _afiliadoMan = new AfiliadoManager();
-        private Afiliado afiliado;
+        public Afiliado afiliado;
         private BonosManager _bonoManager = new BonosManager();
-        public ComprarBono()
+
+        public event EventHandler<BonoUpdatedEventArgs> OnBonosUpdated;
+
+        public ComprarBonoForm()
         {
             InitializeComponent();
         }
-        private void btnBuscar_Click_1(object sender, EventArgs e)
+        private void btnBuscar_Click(object sender, EventArgs e)
         {
             if (_afiliadosForm == null)
             {
                 _afiliadosForm = new AfiliadosForm();
-                _afiliadosForm.SetSearchMode();
+                _afiliadosForm.ModoBusqueda();
                 _afiliadosForm.OnAfiliadoSelected += new EventHandler<AfiliadoSelectedEventArgs>(afiliadosForm_OnAfiliadoSelected);
             }
             ViewsManager.LoadModal(_afiliadosForm);
@@ -97,6 +100,7 @@ namespace ClinicaFrba.AbmBono
         private void btnComprar_Click(object sender, EventArgs e)
         {
             int i = 0;
+            List<Bono> bonos = new List<Bono>();
             if (cbxCantConsulta.SelectedIndex > 0)
             {
                 MessageBox.Show("Por favor, anote los numeros de bono a continuacion");
@@ -109,6 +113,7 @@ namespace ClinicaFrba.AbmBono
                     bono.TipodeBono = TipoBono.Consulta;
                     int numeroBono = _bonoManager.Comprar(bono);
                     MessageBox.Show("Bono Numero: " + numeroBono.ToString());
+                    bonos.Add(bono);
                 }
             }
             if (cbxCantFarmacia.SelectedIndex > 0)
@@ -120,12 +125,18 @@ namespace ClinicaFrba.AbmBono
                     bono.Fecha = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
                     bono.AfiliadoCompro = afiliado;
                     bono.Precio = afiliado.PlanMedico.PrecioFarmacia;
-                    bono.TipodeBono = TipoBono.Receta;
+                    bono.TipodeBono = TipoBono.Farmacia;
                     int numeroBono = _bonoManager.Comprar(bono);
                     MessageBox.Show("Bono Numero: " + numeroBono.ToString());
+                    bonos.Add(bono);
                 }
             }
-
+            /*
+            if (OnBonosUpdated != null)
+                OnBonosUpdated(this, new BonoUpdatedEventArgs() { Bonos = bonos});
+            
+             * */
+            this.Close();
 
         }
 

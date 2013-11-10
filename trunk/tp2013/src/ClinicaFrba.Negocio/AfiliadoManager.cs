@@ -28,7 +28,8 @@ namespace ClinicaFrba.Negocio
             {
                 //afiliado.UserID = int.Parse(row["ID"].ToString());
                 afiliado.UserName = row["UserName"].ToString();
-
+                afiliado.UserID = userID;
+                //afiliado.FaltanDatos = bool.Parse(row["FaltanDatos"].ToString());
                 afiliado.PlanMedico = new PlanMedico();
                 afiliado.PlanMedico.ID = int.Parse(row["Plan_ID"].ToString());
                 afiliado.PlanMedico.PrecioConsulta = int.Parse(row["PrecioConsulta"].ToString());
@@ -52,8 +53,6 @@ namespace ClinicaFrba.Negocio
                 long grupoFamiliar = long.Parse(row["GrupoFamiliar"].ToString());
                 long tipoAfiliado = long.Parse(row["TipoAfiliado"].ToString());
                 afiliado.NroAfiliado = ((grupoFamiliar * 100) + tipoAfiliado);
-
-                afiliado.UserName = row["UserName"].ToString();
                 //afiliado.NroAfiliado = int.Parse(row["nroAfiliado"].ToString());
                 afiliado.PlanMedico = new PlanMedico()
                 {
@@ -77,12 +76,6 @@ namespace ClinicaFrba.Negocio
         
         public BindingList<Afiliado> GetAll()
         {
-            
-            if (SessionData.Contains("Afiliados"))
-            {
-                return SessionData.Get<BindingList<Afiliado>>("Afiliados");
-            }
-            
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].GetAfiliados");
             var afiliados = new BindingList<Afiliado>();
@@ -93,7 +86,7 @@ namespace ClinicaFrba.Negocio
                     Afiliado afiliado = new Afiliado();
                     afiliado.UserID = int.Parse(row["ID"].ToString());
                     afiliado.UserName = row["UserName"].ToString();
-
+                    //afiliado.FaltanDatos = bool.Parse(row["FaltanDatos"].ToString());
                     afiliado.PlanMedico = new PlanMedico();
                     afiliado.PlanMedico.ID = int.Parse(row["Plan_ID"].ToString());
                     afiliado.PlanMedico.PrecioConsulta = int.Parse(row["PrecioConsulta"].ToString());
@@ -121,8 +114,6 @@ namespace ClinicaFrba.Negocio
                        
                 }
             }
-            
-            SessionData.Set("Afiliados", afiliados);
             return afiliados;
         }
 
@@ -150,7 +141,7 @@ namespace ClinicaFrba.Negocio
                             .And("@CantHijos", afiliado.CantHijos)
                             .Arguments);
                     }
-                    else//Grupo Familiar
+                    else
                     {
                         afiliado.NroAfiliado = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                         "InsertMiembroGrupoFamiliar", SqlDataAccessArgs
@@ -162,7 +153,6 @@ namespace ClinicaFrba.Negocio
                         .And("@nroAfiliado", afiliado.NroAfiliado)//Hay que sumarle uno
                         .Arguments);
                     }
-
                     SessionData.Remove("Transaction");
                     SqlDataAccess.Commit(transaction);
                     return afiliado.NroAfiliado;
@@ -171,7 +161,6 @@ namespace ClinicaFrba.Negocio
                     afiliado.UserID = 0;
                     throw;
                 }
-
             }
             else
             {
@@ -191,7 +180,6 @@ namespace ClinicaFrba.Negocio
         public void Delete(Afiliado afiliado)
         {
             _usersManager.DeleteAccount(afiliado as User);
-            SessionData.Remove("Afiliados");
         }
     }
 }

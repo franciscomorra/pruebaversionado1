@@ -48,6 +48,9 @@
     <Compile Include="Afiliado.cs" />
     <Compile Include="Agenda.cs" />
     <Compile Include="Bono.cs" />
+    <Compile Include="Consulta.cs" />
+    <Compile Include="Medicamento.cs" />
+    <Compile Include="Receta.cs" />
     <Compile Include="DetallesPersona.cs" />
     <Compile Include="Especialidad.cs" />
     <Compile Include="Functionalities.cs" />

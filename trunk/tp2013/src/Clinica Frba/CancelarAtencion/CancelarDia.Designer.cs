@@ -93,7 +93,7 @@
             this.btnBuscarProfesional.TabIndex = 34;
             this.btnBuscarProfesional.Text = "Buscar";
             this.btnBuscarProfesional.UseVisualStyleBackColor = true;
-            this.btnBuscarProfesional.Click += new System.EventHandler(this.btnBuscarProfesional_Click_1);
+            this.btnBuscarProfesional.Click += new System.EventHandler(this.btnBuscarProfesional_Click);
             // 
             // lblProf
             // 

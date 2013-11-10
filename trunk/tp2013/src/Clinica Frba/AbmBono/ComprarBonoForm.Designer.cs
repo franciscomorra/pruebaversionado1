@@ -1,6 +1,6 @@
 ﻿namespace ClinicaFrba.AbmBono
 {
-    partial class ComprarBono
+    partial class ComprarBonoForm
     {
         /// <summary>
         /// Required designer variable.
@@ -177,7 +177,7 @@
             this.btnBuscar.TabIndex = 34;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click_1);
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // lblAfiliado
             // 

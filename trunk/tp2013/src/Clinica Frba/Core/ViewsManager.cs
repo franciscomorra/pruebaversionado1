@@ -63,26 +63,33 @@ namespace ClinicaFrba.Core
         /// </summary>
         public static void LoadMenu()
         {
-            
+            //Buscar los tipos de formularios en el ensamblado
             var formTypes = typeof(MainView).Assembly.GetTypes()
                 .Where(x => x.IsSubclassOf(typeof(Form)));
+            //Creo el dropdown
             var dropDown = new System.Windows.Forms.ToolStripMenuItem()
             {
                 Text = Session.User.Perfil.Nombre.ToString()
             };
+            //Ordeno los tipos
+
+            formTypes.OrderBy(x => x.FullName);
+
             foreach (var formType in formTypes)
             {
-
+                //Si no es nonnavigable o si el rol no tiene la funcionalidad
                 if (IsAccesibleForm(formType)) {
-                    var form = (Form)Activator.CreateInstance(formType);
-                    var menuItem = new ToolStripMenuItem(form.Text, null, new EventHandler(Navigate))
+                    Form form = (Form)Activator.CreateInstance(formType);
+                    ToolStripMenuItem menuItem = new ToolStripMenuItem(form.Text, null, new EventHandler(Navigate))
                     {
                         Tag = formType
                     };
-                    dropDown.DropDownItems.Add(menuItem);
+                    dropDown.DropDownItems.Add(menuItem); //Se agrega al dropdown
+
                 }
             }
-            var salir = new ToolStripMenuItem("Salir", null, new EventHandler(Logoff));
+            //Agrego salir
+            ToolStripMenuItem salir = new ToolStripMenuItem("Salir", null, new EventHandler(Logoff));
             dropDown.DropDownItems.Add(salir);
             _mainWindow.MainMenuStrip.Items.Add(dropDown);
         }

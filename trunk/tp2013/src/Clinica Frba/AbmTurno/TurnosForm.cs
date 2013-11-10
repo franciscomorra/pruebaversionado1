@@ -31,7 +31,7 @@ namespace ClinicaFrba.AbmTurno
         {
             InitializeComponent();
         }
-        public void SetSearchMode(Afiliado afiliado)
+        public void ModoBusqueda(Afiliado afiliado)
         {
             _afiliado = afiliado;
             buttonsPanel.Visible = false;
@@ -48,6 +48,9 @@ namespace ClinicaFrba.AbmTurno
                 panelAfiliado.Visible = false;
                 var dataSource = _turnosManager.GetAll(_afiliado);
                 dgvTurnos.DataSource = dataSource;
+                dgvTurnos.AutoGenerateColumns = false;
+
+                dgvTurnos.DoubleClick += new EventHandler(dgvTurnos_CellContentDoubleClick);
             }
 
         }
@@ -58,7 +61,7 @@ namespace ClinicaFrba.AbmTurno
             if (_afiliadosForm == null)
             {
                 _afiliadosForm = new AfiliadosForm();
-                _afiliadosForm.SetSearchMode();
+                _afiliadosForm.ModoBusqueda();
                 _afiliadosForm.OnAfiliadoSelected += new EventHandler<AfiliadoSelectedEventArgs>(_afiliadosForm_OnAfiliadoSelected);
             }
             ViewsManager.LoadModal(_afiliadosForm);
@@ -118,18 +121,23 @@ namespace ClinicaFrba.AbmTurno
 
         private void dgvTurnos_CellContentDoubleClick(object sender, EventArgs e)
         {
-            if (dgvTurnos.SelectedRows == null || dgvTurnos.SelectedRows.Count == 0) return;
-            var row = dgvTurnos.SelectedRows[0];
-            var turno = row.DataBoundItem as Turno;
-            if (OnTurnoselected != null)
+            if (_isSearchMode)
             {
-                OnTurnoselected(this, new TurnoSelectedEventArgs()
+                if (dgvTurnos.SelectedRows == null || dgvTurnos.SelectedRows.Count == 0) return;
+                var row = dgvTurnos.SelectedRows[0];
+                var turno = row.DataBoundItem as Turno;
+                if (OnTurnoselected != null)
                 {
-                    Turno = turno
-                });
+                    OnTurnoselected(this, new TurnoSelectedEventArgs()
+                    {
+                        Turno = turno
+                    });
+                }
+                this.Close();
             }
-            this.Close();
         }
+
+
 
 
 
