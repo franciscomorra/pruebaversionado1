@@ -1,4 +1,4 @@
-﻿namespace ClinicaFrba.GenerarReceta
+﻿namespace ClinicaFrba.Consultas
 {
     partial class GenerarRecetaForm
     {

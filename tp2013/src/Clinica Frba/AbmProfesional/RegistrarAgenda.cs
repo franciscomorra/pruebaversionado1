@@ -12,7 +12,7 @@ using ClinicaFrba.Comun;
 using ClinicaFrba.Negocio;
 using System.Configuration;
 
-namespace ClinicaFrba.RegistrarAgenda
+namespace ClinicaFrba.AbmProfesional
 {
     [PermissionRequired(Functionalities.RegistrarAgenda)]
     public partial class RegistrarAgenda : Form

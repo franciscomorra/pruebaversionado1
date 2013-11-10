@@ -63,7 +63,7 @@ namespace ClinicaFrba.Login
             cbxPlanMedico.SelectedIndex = 0;
 
             RolesManager rman = new RolesManager();
-            var roles = rman.GetRolesByPerfil(new Profile() { Nombre = "Afiliado" });
+            var roles = rman.GetRolesByPerfil(new Perfil() { Nombre = "Afiliado" });
             cbxRoles.DataSource = roles;
             cbxRoles.DisplayMember = "Nombre";
             cbxRoles.SelectedIndex = 0;

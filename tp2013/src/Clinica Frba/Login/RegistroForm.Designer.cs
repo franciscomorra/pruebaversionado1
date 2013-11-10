@@ -52,7 +52,7 @@ namespace ClinicaFrba
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.lblPerfil = new System.Windows.Forms.Label();
-            this.cbxProfiles = new System.Windows.Forms.ComboBox();
+            this.cbxPerfils = new System.Windows.Forms.ComboBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -254,15 +254,15 @@ namespace ClinicaFrba
             this.lblPerfil.TabIndex = 51;
             this.lblPerfil.Text = "Perfil";
             // 
-            // cbxProfiles
+            // cbxPerfils
             // 
-            this.cbxProfiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxProfiles.Location = new System.Drawing.Point(120, 260);
-            this.cbxProfiles.Name = "cbxProfiles";
-            this.cbxProfiles.Size = new System.Drawing.Size(200, 21);
-            this.cbxProfiles.Sorted = true;
-            this.cbxProfiles.TabIndex = 50;
-            this.cbxProfiles.SelectedIndexChanged += new System.EventHandler(this.cbxProfiles_SelectedIndexChanged);
+            this.cbxPerfils.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxPerfils.Location = new System.Drawing.Point(120, 260);
+            this.cbxPerfils.Name = "cbxPerfils";
+            this.cbxPerfils.Size = new System.Drawing.Size(200, 21);
+            this.cbxPerfils.Sorted = true;
+            this.cbxPerfils.TabIndex = 50;
+            this.cbxPerfils.SelectedIndexChanged += new System.EventHandler(this.cbxPerfils_SelectedIndexChanged);
             // 
             // txtPassword
             // 
@@ -288,7 +288,7 @@ namespace ClinicaFrba
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(444, 617);
             this.Controls.Add(this.lblPerfil);
-            this.Controls.Add(this.cbxProfiles);
+            this.Controls.Add(this.cbxPerfils);
             this.Controls.Add(this.cbxTipoDNI);
             this.Controls.Add(this.cbxSexo);
             this.Controls.Add(this.txtTelefono);
@@ -346,7 +346,7 @@ namespace ClinicaFrba
         private TextBox txtNombre;
         private Label label10;
         private Label lblPerfil;
-        private ComboBox cbxProfiles;
+        private ComboBox cbxPerfils;
         private TextBox txtPassword;
         private Label label2;
     }

@@ -1,4 +1,4 @@
-﻿namespace ClinicaFrba.RegistrarAgenda
+﻿namespace ClinicaFrba.AbmProfesional
 {
     partial class RegistrarAgenda
     {

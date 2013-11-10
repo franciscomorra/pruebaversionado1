@@ -7,7 +7,7 @@ namespace ClinicaFrba.Comun
 {
     public class Profesional : User
     {
-        //public static Profile Profile = Profile.Profesional;
+        //public static Perfil Perfil = Perfil.Profesional;
         public string Matricula { get; set; }
         public List<Especialidad> Especialidades { get; set; }
 

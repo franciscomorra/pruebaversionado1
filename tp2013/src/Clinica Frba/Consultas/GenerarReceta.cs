@@ -15,7 +15,7 @@ using ClinicaFrba.Comun;
 using ClinicaFrba.Negocio;
 using System.Configuration;
 
-namespace ClinicaFrba.GenerarReceta
+namespace ClinicaFrba.Consultas
 {
    // [PermissionRequired(Functionalities.GenerarRecetas)]
     [NonNavigable]

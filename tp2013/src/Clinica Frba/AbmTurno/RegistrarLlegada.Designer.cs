@@ -1,4 +1,4 @@
-﻿namespace ClinicaFrba.RegistroLlegada
+﻿namespace ClinicaFrba.AbmTurno
 {
     partial class RegistrarLlegada
     {

@@ -143,13 +143,13 @@
     <Compile Include="Core\Session.cs" />
     <Compile Include="Core\SqlExceptionHandler.cs" />
     <Compile Include="Core\ViewsManager.cs" />
-    <Compile Include="GenerarRecetas\GenerarReceta.cs">
+    <Compile Include="Consultas\GenerarReceta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GenerarRecetas\GenerarReceta.Designer.cs">
+    <Compile Include="Consultas\GenerarReceta.Designer.cs">
       <DependentUpon>GenerarReceta.cs</DependentUpon>
     </Compile>
-    <Compile Include="GenerarRecetas\RecetaUpdatedEventArgs.cs" />
+    <Compile Include="Consultas\RecetaUpdatedEventArgs.cs" />
     <Compile Include="Reportes\ReportesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,7 +222,7 @@
     <EmbeddedResource Include="AbmBono\BonosForm.resx">
       <DependentUpon>BonosForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GenerarRecetas\GenerarReceta.resx">
+    <EmbeddedResource Include="Consultas\GenerarReceta.resx">
       <DependentUpon>GenerarReceta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\ReportesForm.resx">
@@ -248,13 +248,13 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="RegistrarAgenda\RegistrarAgenda.resx">
+    <EmbeddedResource Include="AbmProfesional\RegistrarAgenda.resx">
       <DependentUpon>RegistrarAgenda.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RegistroLlegada\RegistrarLlegada.resx">
+    <EmbeddedResource Include="AbmTurno\RegistrarLlegada.resx">
       <DependentUpon>RegistrarLlegada.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RegistroResultadoAtencion\RegistroResultadoAtencion.resx">
+    <EmbeddedResource Include="Consultas\RegistroResultadoAtencion.resx">
       <DependentUpon>RegistroResultadoAtencion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RegistroUsuario\RegistroUsuario.resx">
@@ -275,22 +275,22 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="RegistrarAgenda\RegistrarAgenda.cs">
+    <Compile Include="AbmProfesional\RegistrarAgenda.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RegistrarAgenda\RegistrarAgenda.Designer.cs">
+    <Compile Include="AbmProfesional\RegistrarAgenda.Designer.cs">
       <DependentUpon>RegistrarAgenda.cs</DependentUpon>
     </Compile>
-    <Compile Include="RegistroLlegada\RegistrarLlegada.cs">
+    <Compile Include="AbmTurno\RegistrarLlegada.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RegistroLlegada\RegistrarLlegada.Designer.cs">
+    <Compile Include="AbmTurno\RegistrarLlegada.Designer.cs">
       <DependentUpon>RegistrarLlegada.cs</DependentUpon>
     </Compile>
-    <Compile Include="RegistroResultadoAtencion\RegistroResultadoAtencion.cs">
+    <Compile Include="Consultas\RegistroResultadoAtencion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RegistroResultadoAtencion\RegistroResultadoAtencion.Designer.cs">
+    <Compile Include="Consultas\RegistroResultadoAtencion.Designer.cs">
       <DependentUpon>RegistroResultadoAtencion.cs</DependentUpon>
     </Compile>
     <Compile Include="RegistroUsuario\RegistroUsuario.cs">
@@ -338,6 +338,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="RegistrarAgenda\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
