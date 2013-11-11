@@ -349,5 +349,17 @@ END
 GO 
 
 
+/*CREATE PROCEDURE [SHARPS].[ConsultasAfiliados]
+@AfiliadoID
+AS
+BEGIN
 
+UPDATE [SHARPS].Afiliados
+SET CantConsultas = CantConsultas + 1 
+INNER JOIN [SHARPS].Turnos t ON t.Afiliado = @AfiliadoID
+INNER JOIN [SHARPS].Turnos t ON t.Estado= et.Estado
+WHERE t.Estado ='Atendido'
 
+END
+GO
+*/
