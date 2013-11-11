@@ -18,6 +18,7 @@ CREATE TABLE [SHARPS].Afiliados (
 	UsuarioID [int],
 	TipoAfiliado [int],  
 	CantConsultas [int],  
+	Faltan_Datos [bit] default 0 ,
 CONSTRAINT [PK_Afiliados] PRIMARY KEY CLUSTERED 
 (
 	[UsuarioID] ASC
@@ -167,6 +168,7 @@ CREATE TABLE [SHARPS].Profesionales (
 	Matricula [int],
 	UsuarioID [int] NOT NULL,
 	Activo char(10),
+	Faltan_Datos [bit] default 0,
 CONSTRAINT [PK_Profesionales] PRIMARY KEY CLUSTERED 
 (
 	[UsuarioID] ASC
@@ -219,14 +221,14 @@ CREATE TABLE [SHARPS].Recetas (
 	RecetaID [int] identity(1,1),
 CONSTRAINT [PK_Recetas] PRIMARY KEY CLUSTERED 
 (
-	RecetaID ASC
+	[Bono_Farmacia] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 ;
 
 CREATE TABLE [SHARPS].Recetas_Medicamentos ( 
-	Receta [int],
+	Receta numeric(18,0),
 	Medicamento [int]
 ) 
 ;
@@ -310,7 +312,7 @@ GO
 ALTER TABLE [SHARPS].[Agendas] ADD  CONSTRAINT [DF_Agendas_Activo]  DEFAULT ((1)) FOR [Activo]
 GO
 
-ALTER TABLE [SHARPS].[Detalles_Persona] ADD  CONSTRAINT [DF_Detalles_Persona_Sexo]  DEFAULT (('M')) FOR [Sexo]
+ALTER TABLE [SHARPS].[Detalles_Persona] ADD  CONSTRAINT [DF_Detalles_Persona_Sexo]  DEFAULT (('Masculino')) FOR [Sexo]
 GO
 
 ALTER TABLE [SHARPS].[Especialidades] ADD  CONSTRAINT [DF_Especialidades_Activo]  DEFAULT ((1)) FOR [Activo]
@@ -342,7 +344,7 @@ ALTER TABLE [SHARPS].[Usuarios] ADD  CONSTRAINT [DF_Usuarios_Activo]  DEFAULT ((
 GO
 
 ALTER TABLE [SHARPS].[Recetas_Medicamentos]  WITH CHECK ADD  CONSTRAINT [FK_Recetas_Medicamentos_Recetas] FOREIGN KEY([Receta])
-REFERENCES [SHARPS].[Recetas] (RecetaID)
+REFERENCES [SHARPS].[Recetas] ([Bono_Farmacia])
 GO
 ALTER TABLE [SHARPS].[Recetas_Medicamentos] CHECK CONSTRAINT [FK_Recetas_Medicamentos_Recetas]
 GO
@@ -624,6 +626,14 @@ INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('Cancelado');
 INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('Activo');---todavia no es el dia del turno
 
 
+--Ingresando Planes
+PRINT 'Ingresando los Planes...'
+GO
+INSERT INTO [SHARPS].Planes_Medicos (Codigo,Descripcion,Precio_Bono_Consulta,Precio_Bono_Farmacia)
+SELECT distinct m.Plan_Med_Codigo, m.Plan_Med_Descripcion, m.Plan_Med_Precio_Bono_Consulta , m.Plan_Med_Precio_Bono_Farmacia
+FROM gd_esquema.Maestra m
+GO
+
 PRINT 'Ingresando los Usuarios de Afiliados...'
 INSERT INTO [SHARPS].Usuarios (Activo,Intentos,Username,Password)
 SELECT DISTINCT 1,0,LTRIM(RTRIM(CAST(Paciente_DNI AS Nvarchar(MAX)))),'E6-B8-70-50-BF-CB-81-43-FC-B8-DB-01-70-A4-DC-9E-D0-0D-90-4D-DD-3E-2A-4A-D1-B1-E8-DC-0F-DC-9B-E7' 
@@ -637,12 +647,12 @@ SELECT distinct m.Paciente_DNI,'DNI',m.Paciente_Telefono,m.Paciente_Direccion,'M
 FROM gd_esquema.Maestra m INNER JOIN [SHARPS].Usuarios u ON CAST(m.Paciente_DNI AS Nvarchar(MAX))=u.Username 
 
 PRINT 'Ingresando las Entidades de Afiliados...'
-INSERT INTO [SHARPS].Afiliados(GrupoFamiliar,Plan_Medico,Activo, Estado_Civil,CantHijos,TipoAfiliado,UsuarioID, CantConsultas)
-SELECT DISTINCT (RANK() OVER (ORDER BY m.Paciente_DNI DESC)* 100), m.Plan_Med_Codigo,1, es.Codigo,0,01,u.UsuarioID, NULL  
+INSERT INTO [SHARPS].Afiliados(GrupoFamiliar,Plan_Medico,Activo, Estado_Civil,CantHijos,TipoAfiliado,UsuarioID, CantConsultas , Faltan_Datos)
+SELECT DISTINCT (RANK() OVER (ORDER BY m.Paciente_DNI DESC)* 100), m.Plan_Med_Codigo,1, es.Codigo,0,01,u.UsuarioID, 0  ,1
 FROM [SHARPS].Usuarios u 
 INNER JOIN gd_esquema.Maestra m ON u.Username = CAST(m.Paciente_DNI AS Nvarchar(MAX))
 INNER JOIN [SHARPS].Estados_Civiles es ON es.Descripcion = 'Soltero'
-INNER JOIN [SHARPS].Afiliados af ON af.Activo = 0
+
 GO
 
 PRINT 'Ingresando los Usuarios de Profesionales...'
@@ -659,25 +669,25 @@ INNER JOIN [SHARPS].Usuarios u ON CAST(m.Medico_DNI AS Nvarchar(MAX))=u.Username
 
 PRINT 'Ingresando las Entidades de Profesionales...'
 
-INSERT INTO [SHARPS].Profesionales (Matricula, UsuarioID , Activo)
-SELECT DISTINCT NULL, u.UsuarioID, 1 
+INSERT INTO [SHARPS].Profesionales (Matricula, UsuarioID , Activo , Faltan_Datos)
+SELECT DISTINCT NULL, u.UsuarioID, 1 , 1
 FROM gd_esquema.Maestra m
 INNER JOIN [SHARPS].Usuarios u ON u.Username= CAST(m.Medico_DNI AS Nvarchar(MAX))
-INNER JOIN [SHARPS].Profesionales p ON p.Activo = 0
+
 
 PRINT 'Ingresando los Bonos Consulta'
 GO
 INSERT INTO [SHARPS].Bonos_Consulta(Numero,Fecha_Impresion,Afiliado_Compro,Plan_Medico)
 SELECT distinct m.Bono_Consulta_Numero , m.Bono_Consulta_Fecha_Impresion,a.UsuarioID , m.Plan_Med_Codigo  
   FROM gd_esquema.Maestra m
-  INNER JOIN [SHARPS].Usuarios a on CAST(m.Paciente_DNI AS Nvarchar(MAX))= a.UsuarioID
+  INNER JOIN [SHARPS].Usuarios a on CAST(m.Paciente_DNI AS Nvarchar(MAX))= a.Username
   WHERE m.Turno_Fecha is NULL AND m.Bono_Consulta_Numero is not null  
 GO
 PRINT 'Ingresando los Bonos Farmacia'
 INSERT INTO [SHARPS].Bonos_Farmacia(Numero,Fecha_Impresion,Afiliado_Compro,Plan_Medico)
 SELECT distinct m.Bono_Farmacia_Numero , m.Bono_Farmacia_Fecha_Impresion, a.UsuarioID, m.Plan_Med_Codigo  
   FROM gd_esquema.Maestra m
-  INNER JOIN [SHARPS].Usuarios a on CAST(m.Paciente_DNI AS Nvarchar(MAX))= a.UsuarioID
+  INNER JOIN [SHARPS].Usuarios a on CAST(m.Paciente_DNI AS Nvarchar(MAX))= a.Username
   WHERE m.Turno_Fecha is NULL AND m.Bono_Farmacia_Numero is not null   
 GO
 
@@ -686,7 +696,7 @@ PRINT 'Rellenando Agendas...'
 INSERT INTO [SHARPS].Agendas(Profesional,Horario)
 SELECT distinct x.UsuarioID , m.Turno_Fecha
 FROM gd_esquema.Maestra m
-INNER JOIN [SHARPS].Usuarios x on x.UsuarioID =CAST(m.Medico_DNI AS Nvarchar(MAX))
+INNER JOIN [SHARPS].Usuarios x on x.Username =CAST(m.Medico_DNI AS Nvarchar(MAX))
 WHERE m.Turno_Fecha is not null
 order by 1
 
@@ -706,19 +716,12 @@ ORDER by 1
 --Rellenando Consultas
 PRINT 'Rellenando Consultas...'
 INSERT INTO [SHARPS].Consultas(Turno,Bono_Consulta,Sintomas,Enfermedad,Numero_Consulta)
-SELECT  distinct m.Turno_Numero , m.Bono_Consulta_Numero,m.Consulta_Sintomas,m.Consulta_Enfermedades, af.CantConsultas
-FROM gd_esquema.Maestra m, [SHARPS].Afiliados af
+SELECT  distinct m.Turno_Numero , m.Bono_Consulta_Numero,m.Consulta_Sintomas,m.Consulta_Enfermedades,0
+FROM gd_esquema.Maestra m
 INNER JOIN [SHARPS].Turnos t ON t.Numero = m.Turno_Numero
 INNER JOIN [SHARPS].Bonos_Consulta b ON m.Bono_Consulta_Numero = b.Numero 
 GO  
 
---Ingresando Planes
-PRINT 'Ingresando los Planes...'
-GO
-INSERT INTO [SHARPS].Planes_Medicos (Codigo,Descripcion,Precio_Bono_Consulta,Precio_Bono_Farmacia)
-SELECT distinct m.Plan_Med_Codigo, m.Plan_Med_Descripcion, m.Plan_Med_Precio_Bono_Consulta , m.Plan_Med_Precio_Bono_Farmacia
-FROM gd_esquema.Maestra m
-GO
 
 
 --Ingresando Profesionales Esp
@@ -753,10 +756,12 @@ GO
 --Ingresando Recetas
 PRINT 'Ingresando las Recetas...'
 GO
-INSERT INTO [SHARPS].Recetas (Bono_Consulta, Bono_Farmacia)
+INSERT INTO [SHARPS].Recetas (Bono_Farmacia, Bono_Consulta)
 SELECT  m.Bono_Farmacia_Numero , m.Bono_Consulta_Numero
 FROM gd_esquema.Maestra m
+
 WHERE ( m.Bono_Farmacia_Numero is not null AND m.Bono_Consulta_Numero is not null )
+
 GO
 
 --INGRESANDO MEDICAMENTOS
