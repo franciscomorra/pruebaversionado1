@@ -393,7 +393,7 @@ CREATE PROCEDURE InsertMiembroGrupoFamiliar
 @EstadoCivil int,
 @CantHijos int,
 @RolAfiliado nvarchar(MAX),
-@nroAfiliado int   -------------sera grupo familiar
+@nroAfiliado int   
 AS
 BEGIN TRANSACTION
 
@@ -421,7 +421,7 @@ BEGIN TRANSACTION
 INSERT INTO Profesionales (Matricula , Activo , UsuarioID)
 VALUES (@Matricula , 1 , @ID)
 
-INSERT INTO [SHARPS].Usuarios_Roles (Usuario, Rol) --CREA UN NUEVO PROFESIONAL PERO YA ME DA EL NROL QUE VA A TENER?
+INSERT INTO [SHARPS].Usuarios_Roles (Usuario, Rol) 
 VALUES (@ID , @Rol)
 
 UPDATE [SHARPS].Roles SET  Descripcion = 'Profesional' , Activo = 1, Perfil = 2
@@ -522,7 +522,7 @@ GO
 
 
 
-CREATE PROCEDURE [SHARPS].ComprarBonoReceta --<-- TERMINAR DE REVISAR
+CREATE PROCEDURE [SHARPS].ComprarBonoReceta 
 @Precio INT,
 @AfiliadoCompro INT,
 @Fecha DATE
@@ -539,7 +539,7 @@ GO
 
 
 
-CREATE PROCEDURE [SHARPS].GetTurnos
+CREATE PROCEDURE [SHARPS].GetAllAfiliadoTurnos
 @userId INT
 
 
@@ -557,7 +557,7 @@ GO
 
 
 
-CREATE PROCEDURE [SHARPS].GetTurnos
+CREATE PROCEDURE [SHARPS].GetTurnosByProfesional
 @profesionalID INT,
 @fecha DATE
 
@@ -597,3 +597,37 @@ END
 GO 
 
 
+CREATE PROCEDURE [SHARPS].RegistrarLlegada
+@Profesional_ID INT,
+@HoraLlegada DATE, 
+@Afiliado_ID INT
+
+AS
+BEGIN
+
+INSERT INTO Consultas ( Turno , Bono , Sintomas , Enfermedad , Numero_Consulta)
+VALUES( , , , ,  )
+
+END
+GO
+
+
+CREATE PROCEDURE  [SHARPS].InsertConsulta
+@Turno INT,
+@Sintomas NVARCHAR(MAX),
+@Enfermedad NVARCHAR(MAX)
+AS
+BEGIN
+
+DECLARE @NCONSULTA INT
+DECLARE @BONO INT
+SELECT @NCONSULTA = MAX(A.cantConsultas) + 1 FROM [SHARPS].Afiliados A INNER JOIN SHARPS.Turnos T ON T.Numero = @Turno AND A.UsuarioID = T.Afiliado 
+UPDATE Afiliados  SET cantConsultas = @NCONSULTA
+FROM [SHARPS].Afiliados A INNER JOIN SHARPS.Turnos T ON T.Numero = @Turno AND A.UsuarioID = T.Afiliado
+
+
+INSERT INTO Consultas (Turno, Sintomas , Numero_Consulta , Enfermedad , Bono)
+VALUES (@Turno , @Sintomas ,@NCONSULTA ,@Enfermedad, ) ---<----- ACA NO CONVIENE PASARME EL NUMERO DE  BONO YA QUE UN AFILIADO PUEDE CONPRARLO PERO NO USARLO
+
+END
+GO
