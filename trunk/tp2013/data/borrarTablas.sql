@@ -1,8 +1,8 @@
 DROP TABLE [GD2C2013].[SHARPS].[Afiliados]; 
 DROP TABLE [GD2C2013].[SHARPS].[Agendas]; 
-DROP TABLE [GD2C2013].[SHARPS].[BonosConsulta]; 
+DROP TABLE [GD2C2013].[SHARPS].[Bonos_Consulta]; 
 
-DROP TABLE [GD2C2013].[SHARPS].[BonosFarmacia] ;
+DROP TABLE [GD2C2013].[SHARPS].[Bonos_Farmacia] ;
 DROP TABLE [GD2C2013].[SHARPS].[Cambios_Afiliado]; 
 DROP TABLE [GD2C2013].[SHARPS].[ConsultaS]; 
 DROP TABLE [GD2C2013].[SHARPS].[Detalles_Persona]; 
