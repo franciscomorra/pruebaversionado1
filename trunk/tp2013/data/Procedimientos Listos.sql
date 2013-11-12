@@ -470,8 +470,6 @@ CREATE PROCEDURE [SHARPS].CancelarDiaProfesional
 AS
 BEGIN
 
-
-
 UPDATE [SHARPS].Turnos
 SET Estado = 2  
 FROM [SHARPS].Turnos T
@@ -489,14 +487,14 @@ CREATE PROCEDURE [SHARPS].GetBonos
 AS
 BEGIN
 
-SELECT BC.Fecha_Impresion AS Fecha , BC.NumeroDeBono AS Numero , P.Precio_Bono_Consulta AS Precio
-FROM [SHARPS].BonosConsulta BC
-INNER JOIN Planes_Medicos P ON P.Codigo = BC.PlanMedico
+SELECT BC.Fecha_Impresion AS Fecha , BC.Numero AS Numero , P.Precio_Bono_Consulta AS Precio
+FROM [SHARPS].Bonos_Consulta BC
+INNER JOIN Planes_Medicos P ON P.Codigo = BC.Plan_Medico
 WHERE BC.Afiliado_Compro = @userId
 UNION
-SELECT BF.Fecha_Impresion AS Fecha, BF.NumeroDeBono AS Numero ,P.Precio_Bono_Farmacia AS Precio
-FROM [SHARPS].BonosFarmacia BF
-INNER JOIN Planes_Medicos P ON P.Codigo = BF.PlanMedico
+SELECT BF.Fecha_Impresion AS Fecha, BF.Numero AS Numero ,P.Precio_Bono_Farmacia AS Precio
+FROM [SHARPS].Bonos_Farmacia BF
+INNER JOIN Planes_Medicos P ON P.Codigo = BF.Plan_Medico
 WHERE BF.Afiliado_Compro = @userId
 
 
@@ -514,9 +512,9 @@ AS
 BEGIN
 DECLARE @NUMEROBONO INT
 DECLARE @PLAN INT
-SELECT @PLAN = A.PlanMedico FROM Afiliados A WHERE A.UsuarioID = @AfiliadoCompro
-SELECT @NUMEROBONO = MAX(NumeroDeBono) + 1 FROM [SHARPS].Bonos_Consulta 
-INSERT INTO [SHARPS].Bonos_Consulta (NumeroDeBono,PlanMedico,Fecha_Impresion,Afiliado_Compro)
+SELECT @PLAN = A.Plan_Medico FROM Afiliados A WHERE A.UsuarioID = @AfiliadoCompro --<<<<< hay que cambiar LO DEL PALN POR EL PRECIO DE BONO DEL MOMENTO
+SELECT @NUMEROBONO = MAX(Numero) + 1 FROM [SHARPS].Bonos_Consulta 
+INSERT INTO [SHARPS].Bonos_Consulta (Numero,Plan_Medico,Fecha_Impresion,Afiliado_Compro)
 VALUES (@NUMEROBONO , @PLAN , @Fecha , @AfiliadoCompro)
 END
 GO
@@ -531,9 +529,9 @@ AS
 BEGIN
 DECLARE @NUMEROBONO INT
 DECLARE @PLAN INT
-SELECT @PLAN = A.PlanMedico FROM Afiliados A WHERE A.UsuarioID = @AfiliadoCompro
-SELECT @NUMEROBONO = MAX(NumeroDeBono) + 1 FROM [SHARPS].Bonos_Farmacia
-INSERT INTO [SHARPS].Bonos_Farmacia(NumeroDeBono,PlanMedico,Fecha_Impresion,Afiliado_Compro)
+SELECT @PLAN = A.Plan_Medico FROM Afiliados A WHERE A.UsuarioID = @AfiliadoCompro --<<<<PERCIO DEL BONO
+SELECT @NUMEROBONO = MAX(Numero) + 1 FROM [SHARPS].Bonos_Farmacia
+INSERT INTO [SHARPS].Bonos_Farmacia(Numero,Plan_Medico,Fecha_Impresion,Afiliado_Compro)
 VALUES (@NUMEROBONO , @PLAN , @Fecha , @AfiliadoCompro)
 END
 GO
@@ -583,17 +581,14 @@ AS
 BEGIN
 
 DECLARE @IDAGENDA INT
-DECLARE @ESTADO INT
+
 DECLARE @NUMERO INT
 SELECT @NUMERO = MAX(Numero) + 1 FROM [SHARPS].Turnos
 SELECT @IDAGENDA = AgendaID FROM [SHARPS].Agendas A WHERE A.Profesional = @Profesional_ID
 INSERT INTO [SHARPS].Estados_Turno (Descripcion, MotivoCancelacion)
 VALUES (NULL,NULL)
-SELECT @ESTADO = MAX(Estado)FROM [SHARPS].Estados_Turno
-
-
 INSERT INTO [SHARPS].Turnos (Numero , Afiliado , Estado , FechaHoraLlegada , Agenda )
-VALUES (@NUMERO , @Afiliado_ID, @ESTADO, @Fecha,@IDAGENDA)
+VALUES (@NUMERO , @Afiliado_ID, 3 , @Fecha,@IDAGENDA)
 END
 GO 
 
@@ -606,8 +601,7 @@ CREATE PROCEDURE [SHARPS].RegistrarLlegada
 AS
 BEGIN
 
-INSERT INTO Consultas ( Turno , Bono , Sintomas , Enfermedad , Numero_Consulta)
-VALUES( , , , ,  )
+UPDATE SHARPS.Estados_Turno SET 
 
 END
 GO
