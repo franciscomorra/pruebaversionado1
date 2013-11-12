@@ -79,14 +79,14 @@ namespace ClinicaFrba.Negocio
                     .And("@Afiliado_ID", turno.Afiliado.UserID)
             .Arguments);
         }
-        public void RegistrarLlegada(Turno turno)
+        public void RegistrarLlegada(Turno turno,Bono bono)
         {
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].RegistrarLlegada", SqlDataAccessArgs
                 .CreateWith(
                     "@HoraLlegada", Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]))
-                    .And("@Profesional_ID", turno.Profesional.UserID)
-                    .And("@Afiliado_ID", turno.Afiliado.UserID)
+                    .And("@Turno", turno.Numero)
+                    .And("@Bono_Consulta", bono.Numero)
             .Arguments);
         }
         public void CancelarTurno(Turno turno)
