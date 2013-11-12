@@ -150,7 +150,7 @@ namespace ClinicaFrba.Negocio
                         .And("@EstadoCivil", afiliado.EstadoCivil)
                         .And("@CantHijos", afiliado.CantHijos)
                         .And("@RolAfiliado", afiliado.RoleID)
-                        .And("@nroAfiliado", afiliado.NroAfiliado)//Hay que sumarle uno
+                        .And("@GrupoFamiliar", afiliado.NroAfiliado)//Hay que sumarle uno
                         .Arguments);
                     }
                     SessionData.Remove("Transaction");

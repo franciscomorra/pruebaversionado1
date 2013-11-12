@@ -96,7 +96,7 @@ namespace ClinicaFrba.AbmTurno
             {
                 throw new Exception("El usuario debia registrarse 15 minutos antes!");
             }
-            _turnosManager.RegistrarLlegada(_turno);
+            _turnosManager.RegistrarLlegada(_turno,_bono);
 
         }
     }

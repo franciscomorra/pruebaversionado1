@@ -137,7 +137,7 @@ namespace ClinicaFrba.Negocio
 
         public void Delete(Profesional profesional)
         {
-            _usersManager.DeleteAccount(profesional as User);
+            _usersManager.DeleteAccount(profesional as User); //TODO!!!!!!
         }
 
         public void InsertarEspecialidades(Profesional profesional) {
@@ -145,7 +145,7 @@ namespace ClinicaFrba.Negocio
                 SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
                     "[SHARPS].InsertSpeciality", SqlDataAccessArgs
                     .CreateWith("@MedicoID", profesional.UserID)
-                    .And("@Especialidad", especialidad)
+                    .And("@Especialidad", especialidad.ID)
                 .Arguments);
             }
         }
