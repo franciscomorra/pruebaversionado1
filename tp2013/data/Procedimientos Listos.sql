@@ -361,7 +361,7 @@ DECLARE @NroAfiliado int
 DECLARE @codCivil int
 SELECT @codCivil = Codigo from [SHARPS].Estados_Civiles where Descripcion = @EstadoCivil
 SELECT @NroAfiliado = MAX(GrupoFamiliar) + 101 FROM [SHARPS].Afiliados
-INSERT INTO [SHARPS].Afiliados (GrupoFamiliar , planMedico , cantHijos , estadoCivil , UsuarioID)
+INSERT INTO [SHARPS].Afiliados (GrupoFamiliar , Plan_Medico , cantHijos , Estado_Civil , UsuarioID)
 VALUES (@NroAfiliado , @PlanMedico , @CantHijos ,@codCivil  , @ID) 
 COMMIT TRANSACTION 
 
@@ -378,11 +378,12 @@ AS
 BEGIN
 DECLARE @nroAfiliado int
 SELECT @nroAfiliado = a.GrupoFamiliar from SHARPS.Afiliados a WHERE a.UsuarioID = @ID
-UPDATE [SHARPS].Afiliados set planMedico = @PlanMedico , estadoCivil = @EstadoCivil , cantHijos = @CantHijos 
+UPDATE [SHARPS].Afiliados set Plan_Medico = @PlanMedico , Estado_Civil = @EstadoCivil , cantHijos = @CantHijos 
 WHERE usuarioId = @ID
 INSERT INTO [SHARPS].Cambios_Afiliado(Motivo_Cambio , Fecha , Afiliado)
 VALUES (@Motivo , GETDATE() ,@nroAfiliado )
-
+DELETE SHARPS.Usuarios_Roles WHERE Usuario = @ID AND Rol = @RolAfiliado
+INSERT INTO SHARPS.Usuarios_Roles (Usuario , Rol) VALUES (@ID , @RolAfiliado)
 END
 GO
 
@@ -400,6 +401,7 @@ BEGIN TRANSACTION
 INSERT INTO [SHARPS].Afiliados (GrupoFamiliar , UsuarioID , TipoAfiliado , CantHijos , Activo , PlanMedico )
 VALUES (@nroAfiliado +1 , @ID , NULL , @CantHijos ,1 , @PlanMedico)----VER LO DEL +1 YA QUE HAY CAMPO TIPO DE AFILIADO
 
+DELETE SHARPS.Usuarios_Roles WHERE Usuario = @ID AND Rol = @RolAfiliado
 INSERT INTO [SHARPS].Usuarios_Roles (Usuario, Rol) 
 VALUES (@ID , @RolAfiliado)
 
@@ -421,6 +423,7 @@ BEGIN TRANSACTION
 INSERT INTO Profesionales (Matricula , Activo , UsuarioID)
 VALUES (@Matricula , 1 , @ID)
 
+DELETE SHARPS.Usuarios_Roles WHERE Usuario = @ID AND Rol = @Rol
 INSERT INTO [SHARPS].Usuarios_Roles (Usuario, Rol) 
 VALUES (@ID , @Rol)
 
@@ -469,12 +472,10 @@ BEGIN
 
 
 
-UPDATE [SHARPS].Estados_Turno
-SET MotivoCancelacion = 'cancelacion medico'  ---<---  REVISAR
-,Descripcion ='cancelado'
-FROM [SHARPS].Estados_Turno ET
+UPDATE [SHARPS].Turnos
+SET Estado = 2  
+FROM [SHARPS].Turnos T
 INNER JOIN Agendas A  ON A.AgendaID = @MedicoID
-INNER JOIN  [SHARPS].Turnos T ON T.Estado = ET.Estado
 WHERE T.Agenda = A.AgendaID AND CONVERT(CHAR(10), T.FechaHoraLlegada ,112) = @Fecha
 
 END
