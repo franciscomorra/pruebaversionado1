@@ -57,9 +57,8 @@ namespace ClinicaFrba.Login
                     user.RoleID = rol.ID;
                     user.Perfil = rol.Perfil;
                     svc.SetUserFunctionalities(user);
-                    user.DetallePersona = detallesManager.getDetalles(user.UserID);
-                    Session.StartSession(user);
-                    ViewsManager.LimpiarVistas();
+                    user.DetallesPersona = detallesManager.getDetalles(user.UserID);
+                    iniciar_sesion();
                 }
             }
             catch (System.Exception excep)
@@ -69,40 +68,40 @@ namespace ClinicaFrba.Login
             }
         }
 
-        private void comboRoles_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Rol rolSelected = (Rol)comboRoles.SelectedItem;
-            user.RoleID = rolSelected.ID;
+        private void iniciar_sesion() {
             try
             {
-                user.Perfil = rolSelected.Perfil;
                 svc.SetUserFunctionalities(user);
                 Session.StartSession(user);
 
+                ViewsManager.LimpiarVistas();
                 if (user.Perfil.Nombre == "Afiliado")
                 {
+                    
                     var manager = new AfiliadoManager();
-                    var usuario = manager.getInfo(user.UserID);
+                    Afiliado afiliado = manager.getInfo(user.UserID);
+                    Session.Afiliado = afiliado;
+                    if (afiliado.FaltanDatos)
+                    {
+                        MessageBox.Show("Por favor, verifique sus datos a continuacion");
+                        var registroForm = new RegistroForm();
+                        afiliado.MotivoCambio = "Update Nuevo Sistema";
+                        registroForm.rellenarAfiliado(afiliado);
+                        ViewsManager.LoadModal(registroForm);
+                    }
                 }
                 else if (user.Perfil.Nombre == "Profesional")
                 {
                     var manager = new ProfesionalManager();
-                    var usuario = manager.getInfo(user.UserID);
-                }
-
-
-                if (user.FaltanDatos)
-                { //Aca va lo de actualizacion de datos incompletos
-                    MessageBox.Show("Faltan Datos!");
-                    //Rehacer con un formulario a parte solo para los datos faltantes
-                    //Afiliado: Sexo, Tipo de Documento, Cantidad de Hijos, Estado Civil
-                    //Profesional: Matricula
-                    var registroForm = new RegistroForm();
-                    //registroForm.SetUser(usuario);
-                }
-                else
-                {
-                    ViewsManager.LimpiarVistas();
+                    Profesional profesional = manager.getInfo(user.UserID);
+                    Session.Profesional = profesional;
+                    if (profesional.FaltanDatos)
+                    {
+                        MessageBox.Show("Por favor, verifique sus datos a continuacion");
+                        var registroForm = new RegistroForm();
+                        registroForm.rellenarProfesional(profesional);
+                        ViewsManager.LoadModal(registroForm);
+                    }
                 }
             }
             catch (System.Exception excep)
@@ -110,6 +109,17 @@ namespace ClinicaFrba.Login
                 MessageBox.Show(excep.Message);
 
             }
+
+
+        
+        }
+
+        private void comboRoles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Rol rolSelected = (Rol)comboRoles.SelectedItem;
+            user.RoleID = rolSelected.ID;
+            user.Perfil = rolSelected.Perfil;
+            iniciar_sesion();
         }
 
     }

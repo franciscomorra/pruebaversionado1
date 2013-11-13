@@ -19,15 +19,15 @@ namespace ClinicaFrba.Negocio
                 return SqlDataAccess.ExecuteScalarQuery<int>(
                     "[SHARPS].InsertDetallePersona", SqlDataAccessArgs
                     .CreateWith(
-                        "@Telefono", user.DetallePersona.Telefono)
-                    .And("@Email", user.DetallePersona.Email)
-                    .And("@Nombre", user.DetallePersona.Nombre)
-                    .And("@Apellido", user.DetallePersona.Apellido)
-                    .And("@DNI", user.DetallePersona.DNI)
-                    .And("@TipoDNI", user.DetallePersona.TipoDNI)
-                    .And("@Sexo", user.DetallePersona.Sexo)
-                    .And("@FechaNacimiento", user.DetallePersona.FechaNacimiento)
-                    .And("@Direccion", user.DetallePersona.Direccion)
+                        "@Telefono", user.DetallesPersona.Telefono)
+                    .And("@Email", user.DetallesPersona.Email)
+                    .And("@Nombre", user.DetallesPersona.Nombre)
+                    .And("@Apellido", user.DetallesPersona.Apellido)
+                    .And("@DNI", user.DetallesPersona.DNI)
+                    .And("@TipoDNI", user.DetallesPersona.TipoDNI)
+                    .And("@Sexo", user.DetallesPersona.Sexo)
+                    .And("@FechaNacimiento", user.DetallesPersona.FechaNacimiento)
+                    .And("@Direccion", user.DetallesPersona.Direccion)
                     .And("@ID_Usuario", user.UserID)
                     .Arguments,
                     transaction); //Con transaccion (de C#)
@@ -35,34 +35,34 @@ namespace ClinicaFrba.Negocio
             return SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].InsertDetallePersona", SqlDataAccessArgs
                 .CreateWith(
-                        "@Telefono", user.DetallePersona.Telefono)
-                    .And("@Email", user.DetallePersona.Email)
-                    .And("@Nombre", user.DetallePersona.Nombre)
-                    .And("@Apellido", user.DetallePersona.Apellido)
-                    .And("@DNI", user.DetallePersona.DNI)
-                    .And("@TipoDNI", user.DetallePersona.TipoDNI)
-                    .And("@Sexo", user.DetallePersona.Sexo)
-                    .And("@FechaNacimiento", user.DetallePersona.FechaNacimiento)
-                    .And("@Direccion", user.DetallePersona.Direccion)
+                        "@Telefono", user.DetallesPersona.Telefono)
+                    .And("@Email", user.DetallesPersona.Email)
+                    .And("@Nombre", user.DetallesPersona.Nombre)
+                    .And("@Apellido", user.DetallesPersona.Apellido)
+                    .And("@DNI", user.DetallesPersona.DNI)
+                    .And("@TipoDNI", user.DetallesPersona.TipoDNI)
+                    .And("@Sexo", user.DetallesPersona.Sexo)
+                    .And("@FechaNacimiento", user.DetallesPersona.FechaNacimiento)
+                    .And("@Direccion", user.DetallesPersona.Direccion)
                     .And("@ID_Usuario", user.UserID)
             .Arguments); //Sin transaccion (de C#)
         }
 
-        internal void UpdateDetallePersona(User user)
+        internal void UpdateDetallePersona(DetallesPersona detallePersona, int userID)
         {
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].UpdateDetallePersona", SqlDataAccessArgs
                 .CreateWith(
-                    "@Telefono", user.DetallePersona.Telefono)
-                    .And("@Email", user.DetallePersona.Email)
-                    .And("@Nombre", user.DetallePersona.Nombre)
-                    .And("@Apellido", user.DetallePersona.Apellido)
-                    .And("@DNI", user.DetallePersona.DNI)
-                    .And("@TipoDNI", user.DetallePersona.TipoDNI)
-                    .And("@Sexo", user.DetallePersona.Sexo)
-                    .And("@FechaNacimiento", user.DetallePersona.FechaNacimiento)
-                    .And("@Direccion", user.DetallePersona.Direccion)
-                    .And("@ID_Usuario", user.UserID) 
+                    "@Telefono", detallePersona.Telefono)
+                    .And("@Email", detallePersona.Email)
+                    .And("@Nombre", detallePersona.Nombre)
+                    .And("@Apellido", detallePersona.Apellido)
+                    .And("@DNI", detallePersona.DNI)
+                    .And("@TipoDNI", detallePersona.TipoDNI)
+                    .And("@Sexo", detallePersona.Sexo)
+                    .And("@FechaNacimiento", detallePersona.FechaNacimiento)
+                    .And("@Direccion", detallePersona.Direccion)
+                    .And("@ID_Usuario", userID) 
             .Arguments);
         }
 

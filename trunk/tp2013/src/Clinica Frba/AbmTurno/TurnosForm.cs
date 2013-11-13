@@ -62,7 +62,7 @@ namespace ClinicaFrba.AbmTurno
             {
                 _afiliado = new Afiliado();
                 _afiliado.UserID = Session.User.UserID;
-                _afiliado.DetallePersona = Session.User.DetallePersona;
+                _afiliado.DetallesPersona = Session.User.DetallesPersona;
                 btnBuscarAfiliado.Visible = false;
                 txtAfiliado.Text = Session.User.ToString();
                 panelAcciones.Visible = true;

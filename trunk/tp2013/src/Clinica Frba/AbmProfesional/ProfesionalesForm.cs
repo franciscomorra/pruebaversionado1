@@ -91,7 +91,7 @@ namespace ClinicaFrba.AbmProfesional
             if (profesionalesGrid.SelectedRows == null || profesionalesGrid.SelectedRows.Count == 0) return;
             var row = profesionalesGrid.SelectedRows[0];
             var profesional = row.DataBoundItem as Profesional;
-            if (MessageBox.Show(string.Format("Confirma que desea eliminar al profesional {0}?", profesional.DetallePersona.Apellido.Trim())
+            if (MessageBox.Show(string.Format("Confirma que desea eliminar al profesional {0}?", profesional.DetallesPersona.Apellido.Trim())
                 , "Eliminar profesional", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 try
@@ -100,7 +100,7 @@ namespace ClinicaFrba.AbmProfesional
                     var dataSource = profesionalesGrid.DataSource as BindingList<Profesional>;
                     dataSource.Remove(profesional);
                     profesionalesGrid.Refresh();
-                    MessageBox.Show(string.Format("Profesional {0} eliminado", profesional.DetallePersona.Apellido.Trim()));
+                    MessageBox.Show(string.Format("Profesional {0} eliminado", profesional.DetallesPersona.Apellido.Trim()));
                 }
                 catch (System.Exception excep)
                 {
@@ -117,8 +117,7 @@ namespace ClinicaFrba.AbmProfesional
             var profesional = row.DataBoundItem as Profesional;
             var regForm = new RegistroForm();
             regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
-            regForm.SetUser(profesional);
-
+            regForm.rellenarProfesional(profesional);
             ViewsManager.LoadModal(regForm);
         }
 
@@ -128,7 +127,7 @@ namespace ClinicaFrba.AbmProfesional
             var profesional = e.User as Profesional;
             if (dataSource.Contains(profesional)) dataSource.Remove(profesional);
             dataSource.Add(profesional);
-            profesionalesGrid.DataSource = new BindingList<Profesional>(dataSource.OrderBy(x => x.DetallePersona.Apellido + x.DetallePersona.Nombre).ToList());
+            profesionalesGrid.DataSource = new BindingList<Profesional>(dataSource.OrderBy(x => x.DetallesPersona.Apellido + x.DetallesPersona.Nombre).ToList());
             profesionalesGrid.Refresh();
             MessageBox.Show("Se han guardado los datos del profesional " + e.Username);
         }
@@ -157,11 +156,11 @@ namespace ClinicaFrba.AbmProfesional
             var profesionales = _ProfesionalManager.GetAll();
             if (!string.IsNullOrEmpty(txtApellido.Text))
             {
-                profesionales = new BindingList<Profesional>(profesionales.Where(x => x.DetallePersona.Apellido.ToLowerInvariant().Contains(txtApellido.Text.ToLowerInvariant())).ToList());
+                profesionales = new BindingList<Profesional>(profesionales.Where(x => x.DetallesPersona.Apellido.ToLowerInvariant().Contains(txtApellido.Text.ToLowerInvariant())).ToList());
             }
             if (!string.IsNullOrEmpty(txtNombre.Text))
             {
-                profesionales = new BindingList<Profesional>(profesionales.Where(x => x.DetallePersona.Nombre.ToLowerInvariant().Contains(txtNombre.Text.ToLowerInvariant())).ToList());
+                profesionales = new BindingList<Profesional>(profesionales.Where(x => x.DetallesPersona.Nombre.ToLowerInvariant().Contains(txtNombre.Text.ToLowerInvariant())).ToList());
             }
 
 

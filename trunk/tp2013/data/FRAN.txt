@@ -22,3 +22,34 @@ EN EL SQL
 	-En turnos, me habia faltado cancelar turno del afiliado
 	-Tambien en turnos, cambie los nombres de los procedimientos, y puse detalles
 	-Agregue delete afiliado y profesional, tenes que desactivarlos nomas
+Cambiate el procedimiento  UpdateAfiliado y el insert afiliado, yo te paso le nombre del estado civil, y faltan_datos va a ir en 0, al igual que en update profesionals, a parte, el ID es lo que se guarda en cambios afiliado
+Hay algo tambien que esta mal cuando lo guarda, cuando hago get info no me lo devuelve.
+
+
+USE [GD2C2013]
+GO
+/****** Object:  StoredProcedure [SHARPS].[UpdateAfiliado]    Script Date: 11/13/2013 18:43:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [SHARPS].[UpdateAfiliado]
+@PlanMedico numeric(18,0),
+@ID numeric (18,0),
+@EstadoCivil nchar(10),
+@CantHijos int,
+@RolAfiliado numeric(10,2), 
+@Motivo char(10)
+AS 
+BEGIN
+DECLARE @Afiliado int
+DECLARE @idEstadoCivil int
+SELECT @idEstadoCivil = ec.Codigo FROM Estados_Civiles ec WHERE ec.Descripcion = @EstadoCivil
+SELECT @Afiliado = a.GrupoFamiliar from SHARPS.Afiliados a WHERE a.UsuarioID = @ID
+UPDATE [SHARPS].Afiliados set Plan_Medico = @PlanMedico , Estado_Civil = @idEstadoCivil , cantHijos = @CantHijos , Faltan_Datos = 0
+WHERE usuarioId = @ID
+INSERT INTO [SHARPS].Cambios_Afiliado(Motivo_Cambio , Fecha , Afiliado)
+VALUES (@Motivo , GETDATE() ,@ID )
+DELETE SHARPS.Usuarios_Roles WHERE Usuario = @ID AND Rol = @RolAfiliado
+INSERT INTO SHARPS.Usuarios_Roles (Usuario , Rol) VALUES (@ID , @RolAfiliado)
+END

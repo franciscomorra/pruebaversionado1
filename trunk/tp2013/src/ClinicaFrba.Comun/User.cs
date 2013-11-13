@@ -19,17 +19,17 @@ namespace ClinicaFrba.Comun
         public BindingList<Rol> Roles { get; set; } 
         public string UserName { get; set; }
         public bool FaltanDatos { get; set; }
-        public DetallesPersona DetallePersona { get; set; }
+        public DetallesPersona DetallesPersona { get; set; }
 
         public User()
         {
             Permissions = new List<Functionalities>();
-            DetallePersona = new DetallesPersona();
+            DetallesPersona = new DetallesPersona();
         }
 
         public override string ToString()
         {
-            return DetallePersona.Apellido+", "+DetallePersona.Nombre;
+            return DetallesPersona.Apellido+", "+DetallesPersona.Nombre;
         }
 
         public override bool Equals(object obj)

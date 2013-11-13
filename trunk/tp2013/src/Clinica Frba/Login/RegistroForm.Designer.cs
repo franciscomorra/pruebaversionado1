@@ -53,8 +53,8 @@ namespace ClinicaFrba
             this.label10 = new System.Windows.Forms.Label();
             this.lblPerfil = new System.Windows.Forms.Label();
             this.cbxPerfiles = new System.Windows.Forms.ComboBox();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.cbxRoles = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnSave
@@ -101,15 +101,15 @@ namespace ClinicaFrba
             this.userPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.userPanel.Location = new System.Drawing.Point(1, 289);
+            this.userPanel.Location = new System.Drawing.Point(1, 300);
             this.userPanel.Name = "userPanel";
-            this.userPanel.Size = new System.Drawing.Size(437, 271);
+            this.userPanel.Size = new System.Drawing.Size(437, 260);
             this.userPanel.TabIndex = 10;
             // 
             // cbxTipoDNI
             // 
             this.cbxTipoDNI.FormattingEnabled = true;
-            this.cbxTipoDNI.Location = new System.Drawing.Point(227, 120);
+            this.cbxTipoDNI.Location = new System.Drawing.Point(227, 100);
             this.cbxTipoDNI.Name = "cbxTipoDNI";
             this.cbxTipoDNI.Size = new System.Drawing.Size(93, 21);
             this.cbxTipoDNI.TabIndex = 49;
@@ -118,14 +118,14 @@ namespace ClinicaFrba
             // 
             this.cbxSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxSexo.FormattingEnabled = true;
-            this.cbxSexo.Location = new System.Drawing.Point(120, 144);
+            this.cbxSexo.Location = new System.Drawing.Point(120, 124);
             this.cbxSexo.Name = "cbxSexo";
             this.cbxSexo.Size = new System.Drawing.Size(200, 21);
             this.cbxSexo.TabIndex = 48;
             // 
             // txtTelefono
             // 
-            this.txtTelefono.Location = new System.Drawing.Point(120, 214);
+            this.txtTelefono.Location = new System.Drawing.Point(120, 194);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(200, 20);
             this.txtTelefono.TabIndex = 47;
@@ -133,7 +133,7 @@ namespace ClinicaFrba
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(64, 217);
+            this.label9.Location = new System.Drawing.Point(64, 197);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(49, 13);
             this.label9.TabIndex = 46;
@@ -142,7 +142,7 @@ namespace ClinicaFrba
             // dtFechaNacimiento
             // 
             this.dtFechaNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtFechaNacimiento.Location = new System.Drawing.Point(120, 237);
+            this.dtFechaNacimiento.Location = new System.Drawing.Point(120, 217);
             this.dtFechaNacimiento.Name = "dtFechaNacimiento";
             this.dtFechaNacimiento.Size = new System.Drawing.Size(200, 20);
             this.dtFechaNacimiento.TabIndex = 45;
@@ -150,7 +150,7 @@ namespace ClinicaFrba
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(20, 241);
+            this.label7.Location = new System.Drawing.Point(20, 221);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(93, 13);
             this.label7.TabIndex = 44;
@@ -158,7 +158,7 @@ namespace ClinicaFrba
             // 
             // txtDireccion
             // 
-            this.txtDireccion.Location = new System.Drawing.Point(120, 191);
+            this.txtDireccion.Location = new System.Drawing.Point(120, 171);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(200, 20);
             this.txtDireccion.TabIndex = 43;
@@ -166,7 +166,7 @@ namespace ClinicaFrba
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(61, 194);
+            this.label5.Location = new System.Drawing.Point(61, 174);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(52, 13);
             this.label5.TabIndex = 42;
@@ -174,7 +174,7 @@ namespace ClinicaFrba
             // 
             // txtMail
             // 
-            this.txtMail.Location = new System.Drawing.Point(120, 168);
+            this.txtMail.Location = new System.Drawing.Point(120, 148);
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(200, 20);
             this.txtMail.TabIndex = 41;
@@ -182,7 +182,7 @@ namespace ClinicaFrba
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(87, 171);
+            this.label4.Location = new System.Drawing.Point(87, 151);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(26, 13);
             this.label4.TabIndex = 40;
@@ -190,7 +190,7 @@ namespace ClinicaFrba
             // 
             // txtDNI
             // 
-            this.txtDNI.Location = new System.Drawing.Point(120, 121);
+            this.txtDNI.Location = new System.Drawing.Point(120, 101);
             this.txtDNI.Name = "txtDNI";
             this.txtDNI.Size = new System.Drawing.Size(104, 20);
             this.txtDNI.TabIndex = 39;
@@ -198,7 +198,7 @@ namespace ClinicaFrba
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(82, 147);
+            this.label11.Location = new System.Drawing.Point(82, 127);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(31, 13);
             this.label11.TabIndex = 37;
@@ -207,7 +207,7 @@ namespace ClinicaFrba
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(87, 124);
+            this.label6.Location = new System.Drawing.Point(87, 104);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(26, 13);
             this.label6.TabIndex = 38;
@@ -215,7 +215,7 @@ namespace ClinicaFrba
             // 
             // txtApellido
             // 
-            this.txtApellido.Location = new System.Drawing.Point(120, 98);
+            this.txtApellido.Location = new System.Drawing.Point(120, 78);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(200, 20);
             this.txtApellido.TabIndex = 36;
@@ -223,7 +223,7 @@ namespace ClinicaFrba
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(69, 101);
+            this.label8.Location = new System.Drawing.Point(69, 81);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(44, 13);
             this.label8.TabIndex = 35;
@@ -231,7 +231,7 @@ namespace ClinicaFrba
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(120, 75);
+            this.txtNombre.Location = new System.Drawing.Point(120, 55);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(200, 20);
             this.txtNombre.TabIndex = 34;
@@ -239,7 +239,7 @@ namespace ClinicaFrba
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(69, 78);
+            this.label10.Location = new System.Drawing.Point(69, 58);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(44, 13);
             this.label10.TabIndex = 33;
@@ -248,7 +248,7 @@ namespace ClinicaFrba
             // lblPerfil
             // 
             this.lblPerfil.AutoSize = true;
-            this.lblPerfil.Location = new System.Drawing.Point(83, 263);
+            this.lblPerfil.Location = new System.Drawing.Point(83, 243);
             this.lblPerfil.Name = "lblPerfil";
             this.lblPerfil.Size = new System.Drawing.Size(30, 13);
             this.lblPerfil.TabIndex = 51;
@@ -257,28 +257,29 @@ namespace ClinicaFrba
             // cbxPerfiles
             // 
             this.cbxPerfiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxPerfiles.Location = new System.Drawing.Point(120, 260);
+            this.cbxPerfiles.Location = new System.Drawing.Point(120, 240);
             this.cbxPerfiles.Name = "cbxPerfiles";
             this.cbxPerfiles.Size = new System.Drawing.Size(200, 21);
             this.cbxPerfiles.Sorted = true;
             this.cbxPerfiles.TabIndex = 50;
             this.cbxPerfiles.SelectedIndexChanged += new System.EventHandler(this.cbxPerfiles_SelectedIndexChanged);
             // 
-            // txtPassword
+            // label13
             // 
-            this.txtPassword.Location = new System.Drawing.Point(120, 52);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(200, 20);
-            this.txtPassword.TabIndex = 3;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(90, 270);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(23, 13);
+            this.label13.TabIndex = 31;
+            this.label13.Text = "Rol";
             // 
-            // label2
+            // cbxRoles
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(52, 55);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Contraseña";
+            this.cbxRoles.FormattingEnabled = true;
+            this.cbxRoles.Location = new System.Drawing.Point(120, 267);
+            this.cbxRoles.Name = "cbxRoles";
+            this.cbxRoles.Size = new System.Drawing.Size(200, 21);
+            this.cbxRoles.TabIndex = 30;
             // 
             // RegistroForm
             // 
@@ -287,7 +288,9 @@ namespace ClinicaFrba
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(444, 617);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.lblPerfil);
+            this.Controls.Add(this.cbxRoles);
             this.Controls.Add(this.cbxPerfiles);
             this.Controls.Add(this.cbxTipoDNI);
             this.Controls.Add(this.cbxSexo);
@@ -307,9 +310,7 @@ namespace ClinicaFrba
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.userPanel);
-            this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUsername);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -347,7 +348,7 @@ namespace ClinicaFrba
         private Label label10;
         private Label lblPerfil;
         private ComboBox cbxPerfiles;
-        private TextBox txtPassword;
-        private Label label2;
+        private Label label13;
+        private ComboBox cbxRoles;
     }
 }

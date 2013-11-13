@@ -31,7 +31,7 @@ namespace ClinicaFrba.Negocio
                 profesional.FaltanDatos = bool.Parse(row["FaltanDatos"].ToString());
                 profesional.Matricula = row["matricula"].ToString();
                 profesional.Especialidades = espMan.GetAllForUser(userID);
-                profesional.DetallePersona = new DetallesPersona()
+                profesional.DetallesPersona = new DetallesPersona()
                 {
                     Apellido = row["Apellido"].ToString(),
                     Nombre = row["Nombre"].ToString(),
@@ -72,18 +72,18 @@ namespace ClinicaFrba.Negocio
                     if (!DBNull.Value.Equals(row["Matricula"]))
                         profesional.Matricula = row["Matricula"].ToString();
 
-                    profesional.DetallePersona = new DetallesPersona();
-                    profesional.DetallePersona.Apellido = row["Apellido"].ToString();
-                    profesional.DetallePersona.Nombre = row["Nombre"].ToString();
-                    profesional.DetallePersona.FechaNacimiento = Convert.ToDateTime(row["FechaNacimiento"]);
-                    profesional.DetallePersona.DNI = long.Parse(row["DNI"].ToString());
-                    profesional.DetallePersona.Email = row["Email"].ToString();
-                    profesional.DetallePersona.Direccion = row["Direccion"].ToString();
-                    profesional.DetallePersona.Telefono = long.Parse(row["Telefono"].ToString());
+                    profesional.DetallesPersona = new DetallesPersona();
+                    profesional.DetallesPersona.Apellido = row["Apellido"].ToString();
+                    profesional.DetallesPersona.Nombre = row["Nombre"].ToString();
+                    profesional.DetallesPersona.FechaNacimiento = Convert.ToDateTime(row["FechaNacimiento"]);
+                    profesional.DetallesPersona.DNI = long.Parse(row["DNI"].ToString());
+                    profesional.DetallesPersona.Email = row["Email"].ToString();
+                    profesional.DetallesPersona.Direccion = row["Direccion"].ToString();
+                    profesional.DetallesPersona.Telefono = long.Parse(row["Telefono"].ToString());
                     if (!DBNull.Value.Equals(row["Sexo"]))
-                        profesional.DetallePersona.Sexo = (TipoSexo)Enum.Parse(typeof(TipoSexo), row["Sexo"].ToString());
+                        profesional.DetallesPersona.Sexo = (TipoSexo)Enum.Parse(typeof(TipoSexo), row["Sexo"].ToString());
                     if (!DBNull.Value.Equals(row["TipoDoc"])) 
-                        profesional.DetallePersona.TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString());
+                        profesional.DetallesPersona.TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString());
                     profesional.Especialidades = espMan.GetAllForUser(profesional.UserID);
                     profesionales.Add(profesional);
 
@@ -92,7 +92,7 @@ namespace ClinicaFrba.Negocio
             SessionData.Set("Profesionales", profesionales);
             return profesionales;
         }
-        public void GuardarProfesional(Profesional profesional, string password)
+        public void GuardarProfesional(Profesional profesional)
         {
             var usersManager = new UsersManager();
             var entityDetailManager = new DetallePersonaManager();
@@ -103,7 +103,7 @@ namespace ClinicaFrba.Negocio
                 {
                     SessionData.Set("Transaction", transaction);
 
-                    profesional.UserID = usersManager.CreateAccount(profesional as User,password);
+                    profesional.UserID = usersManager.insertarUsuario(profesional as User);
 
                     var detalleID = entityDetailManager.AddDetallePersona(profesional as User);
 
@@ -127,7 +127,7 @@ namespace ClinicaFrba.Negocio
             }
             else //Editando un profesional
             {
-                entityDetailManager.UpdateDetallePersona(profesional as User);
+                entityDetailManager.UpdateDetallePersona(profesional.DetallesPersona, profesional.UserID);
                 SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                     "[SHARPS].UpdateProfesional", SqlDataAccessArgs
                     .CreateWith("@Matricula", profesional.Matricula)

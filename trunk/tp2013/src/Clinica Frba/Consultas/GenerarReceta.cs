@@ -44,7 +44,7 @@ namespace ClinicaFrba.Consultas
             {
                 _profesional = new Profesional();
                 _profesional.UserID = Session.User.UserID;
-                _profesional.DetallePersona = Session.User.DetallePersona;
+                _profesional.DetallesPersona = Session.User.DetallesPersona;
                 txtProfesional.Text = _profesional.ToString();
                 btnBuscarProfesional.Hide();
             }
@@ -109,7 +109,7 @@ namespace ClinicaFrba.Consultas
         void _afiliadosForm_OnAfiliadoSelected(object sender, AfiliadoSelectedEventArgs e)
         {
             _afiliado = e.Afiliado;
-            txtAfiliado.Text = _afiliado.DetallePersona.Apellido + ", " + _afiliado.DetallePersona.Nombre;
+            txtAfiliado.Text = _afiliado.DetallesPersona.Apellido + ", " + _afiliado.DetallesPersona.Nombre;
             _afiliadosForm.Hide();
             panelTurno.Show();
         }

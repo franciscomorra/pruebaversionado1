@@ -34,8 +34,6 @@
             this.clbEspecialidades = new System.Windows.Forms.CheckedListBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.cbxRoles = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,37 +91,16 @@
             this.label6.TabIndex = 30;
             this.label6.Text = "Medicas";
             // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(36, 159);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(78, 13);
-            this.label13.TabIndex = 33;
-            this.label13.Text = "Rol Profesional";
-            // 
-            // cbxRoles
-            // 
-            this.cbxRoles.FormattingEnabled = true;
-            this.cbxRoles.Location = new System.Drawing.Point(122, 156);
-            this.cbxRoles.Name = "cbxRoles";
-            this.cbxRoles.Size = new System.Drawing.Size(200, 21);
-            this.cbxRoles.TabIndex = 32;
-            // 
             // ProfesionalUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.cbxRoles);
             this.Controls.Add(this.panel1);
             this.Name = "ProfesionalUserControl";
-            this.Size = new System.Drawing.Size(437, 271);
-            
+            this.Size = new System.Drawing.Size(437, 183);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -134,8 +111,6 @@
         private System.Windows.Forms.Label Especialidades;
         private System.Windows.Forms.CheckedListBox clbEspecialidades;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ComboBox cbxRoles;
         private System.Windows.Forms.Label label6;
     }
 }

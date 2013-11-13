@@ -244,7 +244,7 @@ namespace ClinicaFrba.AbmProfesional
             {
                 _profesional = new Profesional();
                 _profesional.UserID = Session.User.UserID;
-                _profesional.DetallePersona = Session.User.DetallePersona;
+                _profesional.DetallesPersona = Session.User.DetallesPersona;
                 txtProfesional.Text = _profesional.ToString();
 
                 btnBuscar.Hide();

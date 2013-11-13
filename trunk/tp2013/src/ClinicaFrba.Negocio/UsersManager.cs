@@ -12,11 +12,11 @@ namespace ClinicaFrba.Negocio
 {
     public class UsersManager
     {
-        public int CreateAccount(User user, string password)
+        public int insertarUsuario(User user)
         {
             var transaction = SessionData.Contains("Transaction") ? SessionData.Get<SqlTransaction>("Transaction") : null;
             var service = new LoginService();
-            var encryptedPass = service.ComputeHash(password, new SHA256Managed());
+            var encryptedPass = service.ComputeHash("w23e", new SHA256Managed());
             int result = 0;
             if (transaction != null)//Si usa la transaccion
             {
