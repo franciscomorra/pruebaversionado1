@@ -64,7 +64,7 @@ namespace ClinicaFrba.AbmTurno
             {
                 _profesional = new Profesional();
                 _profesional.UserID = Session.User.UserID;
-                _profesional.DetallePersona = Session.User.DetallePersona;
+                _profesional.DetallesPersona = Session.User.DetallesPersona;
                 txtProfesional.Text = _profesional.ToString();
                 btnBuscarProfesional.Visible = false;
                 panelAcciones.Show();

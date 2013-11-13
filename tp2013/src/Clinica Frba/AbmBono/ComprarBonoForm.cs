@@ -84,11 +84,8 @@ namespace ClinicaFrba.AbmBono
                 }
                 else
                 {
-
-
-                    _afiliado = new Afiliado();
-                    _afiliado.UserID = Session.User.UserID;
-                    _afiliado.DetallePersona = Session.User.DetallePersona;
+                    AfiliadoManager manager = new AfiliadoManager();
+                    _afiliado = Session.Afiliado;
                     txtAfiliado.Text = _afiliado.ToString();
                     //_afiliado = Session.User as Afiliado;
                     btnBuscar.Visible = false;

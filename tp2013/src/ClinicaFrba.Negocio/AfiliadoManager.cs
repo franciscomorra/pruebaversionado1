@@ -41,17 +41,17 @@ namespace ClinicaFrba.Negocio
 
                 if (!DBNull.Value.Equals(row["CantHijos"]))
                     afiliado.CantHijos = int.Parse(row["CantHijos"].ToString());
-                afiliado.DetallePersona = new DetallesPersona();
-                afiliado.DetallePersona.Apellido = row["Apellido"].ToString();
-                afiliado.DetallePersona.Nombre = row["Nombre"].ToString();
-                afiliado.DetallePersona.FechaNacimiento = Convert.ToDateTime(row["FechaNacimiento"]);
-                afiliado.DetallePersona.DNI = long.Parse(row["DNI"].ToString());
-                afiliado.DetallePersona.Email = row["Email"].ToString();
-                afiliado.DetallePersona.Direccion = row["Direccion"].ToString();
-                afiliado.DetallePersona.Telefono = long.Parse(row["Telefono"].ToString());
+                afiliado.DetallesPersona = new DetallesPersona();
+                afiliado.DetallesPersona.Apellido = row["Apellido"].ToString();
+                afiliado.DetallesPersona.Nombre = row["Nombre"].ToString();
+                afiliado.DetallesPersona.FechaNacimiento = Convert.ToDateTime(row["FechaNacimiento"]);
+                afiliado.DetallesPersona.DNI = long.Parse(row["DNI"].ToString());
+                afiliado.DetallesPersona.Email = row["Email"].ToString();
+                afiliado.DetallesPersona.Direccion = row["Direccion"].ToString();
+                afiliado.DetallesPersona.Telefono = long.Parse(row["Telefono"].ToString());
                 if (!DBNull.Value.Equals(row["Sexo"]))
-                    afiliado.DetallePersona.Sexo = (TipoSexo)Enum.Parse(typeof(TipoSexo), row["Sexo"].ToString());
-                afiliado.DetallePersona.TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString());
+                    afiliado.DetallesPersona.Sexo = (TipoSexo)Enum.Parse(typeof(TipoSexo), row["Sexo"].ToString());
+                afiliado.DetallesPersona.TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString());
                 afiliado.grupoFamiliar = long.Parse(row["GrupoFamiliar"].ToString());
                 afiliado.tipoAfiliado = long.Parse(row["TipoAfiliado"].ToString());
                 afiliado.NroAfiliado = ((afiliado.grupoFamiliar * 100) + afiliado.tipoAfiliado);
@@ -98,17 +98,17 @@ namespace ClinicaFrba.Negocio
                         afiliado.EstadoCivil = (EstadoCivil)Enum.Parse(typeof(EstadoCivil), row["EstadoCivil"].ToString());
                     if (!DBNull.Value.Equals(row["CantHijos"])) 
                         afiliado.CantHijos = int.Parse(row["CantHijos"].ToString());
-                    afiliado.DetallePersona = new DetallesPersona();
-                    afiliado.DetallePersona.Apellido = row["Apellido"].ToString();
-                    afiliado.DetallePersona.Nombre = row["Nombre"].ToString();
-                    afiliado.DetallePersona.FechaNacimiento = Convert.ToDateTime(row["FechaNacimiento"]);
-                    afiliado.DetallePersona.DNI = long.Parse(row["DNI"].ToString());
-                    afiliado.DetallePersona.Email = row["Email"].ToString();
-                    afiliado.DetallePersona.Direccion = row["Direccion"].ToString();
-                    afiliado.DetallePersona.Telefono = long.Parse(row["Telefono"].ToString());
+                    afiliado.DetallesPersona = new DetallesPersona();
+                    afiliado.DetallesPersona.Apellido = row["Apellido"].ToString();
+                    afiliado.DetallesPersona.Nombre = row["Nombre"].ToString();
+                    afiliado.DetallesPersona.FechaNacimiento = Convert.ToDateTime(row["FechaNacimiento"]);
+                    afiliado.DetallesPersona.DNI = long.Parse(row["DNI"].ToString());
+                    afiliado.DetallesPersona.Email = row["Email"].ToString();
+                    afiliado.DetallesPersona.Direccion = row["Direccion"].ToString();
+                    afiliado.DetallesPersona.Telefono = long.Parse(row["Telefono"].ToString());
                     if (!DBNull.Value.Equals(row["Sexo"])) 
-                        afiliado.DetallePersona.Sexo = (TipoSexo)Enum.Parse(typeof(TipoSexo), row["Sexo"].ToString());
-                    afiliado.DetallePersona.TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString());
+                        afiliado.DetallesPersona.Sexo = (TipoSexo)Enum.Parse(typeof(TipoSexo), row["Sexo"].ToString());
+                    afiliado.DetallesPersona.TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString());
                     afiliado.grupoFamiliar = long.Parse(row["GrupoFamiliar"].ToString());
                     afiliado.tipoAfiliado = long.Parse(row["TipoAfiliado"].ToString());
                     afiliado.NroAfiliado = ((afiliado.grupoFamiliar * 100) + afiliado.tipoAfiliado);
@@ -122,22 +122,22 @@ namespace ClinicaFrba.Negocio
         /// <summary>
         /// Guarda un afiliado en la base de datos
         /// </summary>
-        public long GuardarAfiliado(Afiliado afiliado, string password)
+        public long GuardarAfiliado(Afiliado afiliado)
         {
             var usersManager = new UsersManager();
-            var entityDetailManager = new DetallePersonaManager();
+            var _detallesManager = new DetallePersonaManager();
             if (afiliado.UserID == 0)//NUEVO USUARIO
             {
                var transaction = SqlDataAccess.OpenTransaction(ConfigurationManager.ConnectionStrings["StringConexion"].ToString());
                try
                 {
-                    afiliado.UserID = usersManager.CreateAccount(afiliado as User, password);
-                    var detalleID = entityDetailManager.AddDetallePersona(afiliado as User);
+                    afiliado.UserID = usersManager.insertarUsuario(afiliado as User);
+                    var detalleID = _detallesManager.AddDetallePersona(afiliado as User);
                     if (afiliado.NroAfiliado == 0)//Primero del grupo familiar
                     {
                         afiliado.NroAfiliado = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                            "InsertAfiliado", SqlDataAccessArgs
-                            .CreateWith("@PlanMedico", afiliado.PlanMedico)
+                            "[SHARPS].InsertAfiliado", SqlDataAccessArgs
+                            .CreateWith("@PlanMedico", afiliado.PlanMedico.ID)
                             .And("@ID", afiliado.UserID)
                             .And("@EstadoCivil", afiliado.EstadoCivil)
                             .And("@CantHijos", afiliado.CantHijos)
@@ -148,8 +148,8 @@ namespace ClinicaFrba.Negocio
                     else
                     {
                         afiliado.NroAfiliado = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                        "InsertMiembroGrupoFamiliar", SqlDataAccessArgs
-                        .CreateWith("@PlanMedico", afiliado.PlanMedico)
+                        "[SHARPS].InsertMiembroGrupoFamiliar", SqlDataAccessArgs
+                        .CreateWith("@PlanMedico", afiliado.PlanMedico.ID)
                         .And("@EstadoCivil", afiliado.EstadoCivil)
                         .And("@CantHijos", afiliado.CantHijos)
                         .And("@RolAfiliado", afiliado.RoleID)
@@ -169,10 +169,10 @@ namespace ClinicaFrba.Negocio
             }
             else
             {
-                entityDetailManager.UpdateDetallePersona(afiliado as User);
+                _detallesManager.UpdateDetallePersona(afiliado.DetallesPersona, afiliado.UserID);
                 SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                    "UpdateAfiliado", SqlDataAccessArgs
-                    .CreateWith("@PlanMedico", afiliado.PlanMedico)
+                    "[SHARPS].UpdateAfiliado", SqlDataAccessArgs
+                    .CreateWith("@PlanMedico", afiliado.PlanMedico.ID)
                     .And("@ID", afiliado.UserID)
                     .And("@EstadoCivil", afiliado.EstadoCivil)
                     .And("@RolAfiliado", afiliado.RoleID)
@@ -186,7 +186,7 @@ namespace ClinicaFrba.Negocio
         public void Delete(Afiliado afiliado)
         {
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "DeleteAfiliado", SqlDataAccessArgs
+                "[SHARPS].DeleteAfiliado", SqlDataAccessArgs
                 .CreateWith("@ID", afiliado.UserID)
                 .Arguments);
         }

@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
-            this.cbxRoles = new System.Windows.Forms.ComboBox();
             this.panelMotivo = new System.Windows.Forms.Panel();
             this.txtMotivo = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -42,51 +39,22 @@
             this.cbxPlanMedico = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.panelConyuge = new System.Windows.Forms.Panel();
-            this.btnBuscarConyuge = new System.Windows.Forms.Button();
             this.lblAfiliado = new System.Windows.Forms.Label();
             this.txtConyuge = new System.Windows.Forms.TextBox();
             this.panelPadre = new System.Windows.Forms.Panel();
-            this.btnBuscarPadre = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtPadre = new System.Windows.Forms.TextBox();
-            this.panel1.SuspendLayout();
             this.panelMotivo.SuspendLayout();
             this.panelFamiliar.SuspendLayout();
             this.panelConyuge.SuspendLayout();
             this.panelPadre.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.label13);
-            this.panel1.Controls.Add(this.cbxRoles);
-            this.panel1.Location = new System.Drawing.Point(22, 96);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(387, 35);
-            this.panel1.TabIndex = 43;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(3, 9);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(75, 13);
-            this.label13.TabIndex = 31;
-            this.label13.Text = "Rol de Afiliado";
-            // 
-            // cbxRoles
-            // 
-            this.cbxRoles.FormattingEnabled = true;
-            this.cbxRoles.Location = new System.Drawing.Point(102, 6);
-            this.cbxRoles.Name = "cbxRoles";
-            this.cbxRoles.Size = new System.Drawing.Size(200, 21);
-            this.cbxRoles.TabIndex = 30;
-            // 
             // panelMotivo
             // 
             this.panelMotivo.Controls.Add(this.txtMotivo);
             this.panelMotivo.Controls.Add(this.label12);
-            this.panelMotivo.Location = new System.Drawing.Point(22, 136);
+            this.panelMotivo.Location = new System.Drawing.Point(22, 96);
             this.panelMotivo.Name = "panelMotivo";
             this.panelMotivo.Size = new System.Drawing.Size(387, 26);
             this.panelMotivo.TabIndex = 42;
@@ -174,23 +142,14 @@
             // 
             // panelConyuge
             // 
-            this.panelConyuge.Controls.Add(this.btnBuscarConyuge);
+            this.panelConyuge.Controls.Add(this.panelPadre);
             this.panelConyuge.Controls.Add(this.lblAfiliado);
             this.panelConyuge.Controls.Add(this.txtConyuge);
-            this.panelConyuge.Location = new System.Drawing.Point(22, 168);
+            this.panelConyuge.Location = new System.Drawing.Point(22, 128);
             this.panelConyuge.Name = "panelConyuge";
             this.panelConyuge.Size = new System.Drawing.Size(387, 43);
             this.panelConyuge.TabIndex = 44;
-            // 
-            // btnBuscarConyuge
-            // 
-            this.btnBuscarConyuge.Location = new System.Drawing.Point(309, 9);
-            this.btnBuscarConyuge.Name = "btnBuscarConyuge";
-            this.btnBuscarConyuge.Size = new System.Drawing.Size(75, 23);
-            this.btnBuscarConyuge.TabIndex = 34;
-            this.btnBuscarConyuge.Text = "Buscar";
-            this.btnBuscarConyuge.UseVisualStyleBackColor = true;
-            this.btnBuscarConyuge.Click += new System.EventHandler(this.btnBuscarConyuge_Click);
+            this.panelConyuge.Visible = false;
             // 
             // lblAfiliado
             // 
@@ -211,23 +170,13 @@
             // 
             // panelPadre
             // 
-            this.panelPadre.Controls.Add(this.btnBuscarPadre);
             this.panelPadre.Controls.Add(this.label1);
             this.panelPadre.Controls.Add(this.txtPadre);
-            this.panelPadre.Location = new System.Drawing.Point(22, 217);
+            this.panelPadre.Location = new System.Drawing.Point(0, 0);
             this.panelPadre.Name = "panelPadre";
             this.panelPadre.Size = new System.Drawing.Size(387, 43);
             this.panelPadre.TabIndex = 44;
-            // 
-            // btnBuscarPadre
-            // 
-            this.btnBuscarPadre.Location = new System.Drawing.Point(309, 9);
-            this.btnBuscarPadre.Name = "btnBuscarPadre";
-            this.btnBuscarPadre.Size = new System.Drawing.Size(75, 23);
-            this.btnBuscarPadre.TabIndex = 34;
-            this.btnBuscarPadre.Text = "Buscar";
-            this.btnBuscarPadre.UseVisualStyleBackColor = true;
-            this.btnBuscarPadre.Click += new System.EventHandler(this.btnBuscarPadre_Click);
+            this.panelPadre.Visible = false;
             // 
             // label1
             // 
@@ -250,17 +199,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.panelPadre);
             this.Controls.Add(this.panelConyuge);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelMotivo);
             this.Controls.Add(this.panelFamiliar);
             this.Controls.Add(this.cbxPlanMedico);
             this.Controls.Add(this.label10);
             this.Name = "AfiliadoUserControl";
             this.Size = new System.Drawing.Size(437, 271);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panelMotivo.ResumeLayout(false);
             this.panelMotivo.PerformLayout();
             this.panelFamiliar.ResumeLayout(false);
@@ -276,9 +221,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ComboBox cbxRoles;
         private System.Windows.Forms.Panel panelMotivo;
         private System.Windows.Forms.TextBox txtMotivo;
         private System.Windows.Forms.Label label12;
@@ -290,11 +232,9 @@
         private System.Windows.Forms.ComboBox cbxPlanMedico;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panelConyuge;
-        private System.Windows.Forms.Button btnBuscarConyuge;
         private System.Windows.Forms.Label lblAfiliado;
         private System.Windows.Forms.TextBox txtConyuge;
         private System.Windows.Forms.Panel panelPadre;
-        private System.Windows.Forms.Button btnBuscarPadre;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtPadre;
 

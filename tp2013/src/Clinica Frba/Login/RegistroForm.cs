@@ -56,7 +56,7 @@ namespace ClinicaFrba
         private PerfilManager _perfilesManager = new PerfilManager();
         public bool elegirPerfil = true;
         public Perfil perfil;
-
+        User user = new User();
         public RegistroForm()
         {
             bool puedeModificarAfiliados = Session.User.Permissions.Contains(Functionalities.AdministrarAfiliados);
@@ -79,48 +79,55 @@ namespace ClinicaFrba
                 MessageBox.Show(excep.Message);
             }
         }
-
-        public void SetUser(User user)
-        {
-            txtUsername.Text = user.UserName;
-            txtApellido.Text = user.DetallePersona.Apellido.Trim();
-            txtNombre.Text = user.DetallePersona.Nombre.Trim();
-            txtDNI.Text = user.DetallePersona.DNI.ToString();
-            cbxSexo.SelectedItem = user.DetallePersona.Sexo;
-            dtFechaNacimiento.Value = user.DetallePersona.FechaNacimiento;
-            txtDireccion.Text = user.DetallePersona.Direccion.Trim();
-            txtTelefono.Text = user.DetallePersona.Telefono.ToString();
-            txtMail.Text = user.DetallePersona.Email.Trim();
-           // cbxPerfiles.Enabled = false;
-            Perfil perfil = new Perfil();
-            if (user is Afiliado)
-            {
-                _afiliado = user as Afiliado;
-                perfil = _perfilesManager.getInfo("Afiliado");
-                cbxPerfiles.SelectedItem = perfil;
-            }
-            else if (user is Profesional)
-            {
-                _profesional = user as Profesional;
-                perfil = _perfilesManager.getInfo("Profesional");
-                cbxPerfiles.SelectedItem = perfil;
-            }
-        }
-
         private void RegistroForm_Load(object sender, EventArgs e)
         {
             if (!elegirPerfil)
                 cbxPerfiles.Enabled = false;
         }
 
+        public void rellenarAfiliado(Afiliado afiliado)//Modificacion de afiliado existente
+        {
+            _afiliado = afiliado;
+            rellenarCamposUsuario(afiliado.DetallesPersona, afiliado.UserName);
+            cbxPerfiles.SelectedItem = _perfilesManager.getInfo("Afiliado");
+            afiliadoUserControl.rellenarCampos(_afiliado);
+            userPanel.Controls.Add(afiliadoUserControl);
+        }
+        public void rellenarProfesional(Profesional profesional)//Modificacion de profesional
+        {
+            _profesional = profesional;
+            rellenarCamposUsuario(profesional.DetallesPersona, profesional.UserName);
+            cbxPerfiles.SelectedItem = _perfilesManager.getInfo("Profesional");
+            profesionalUserControl.SetUser(_profesional);
+            userPanel.Controls.Add(profesionalUserControl);
+        }
+
+
+        private void rellenarCamposUsuario(DetallesPersona detalles, string username){
+            txtUsername.Text = username;
+            txtApellido.Text = detalles.Apellido.Trim();
+            txtNombre.Text = detalles.Nombre.Trim();
+            txtDNI.Text = detalles.DNI.ToString();
+            cbxSexo.SelectedItem = detalles.Sexo;
+            dtFechaNacimiento.Value = detalles.FechaNacimiento;
+            txtDireccion.Text = detalles.Direccion.Trim();
+            txtTelefono.Text = detalles.Telefono.ToString();
+            txtMail.Text = detalles.Email.Trim();
+        }
         private void cbxPerfiles_SelectedIndexChanged(object sender, EventArgs e)
         {
             try{
                 userPanel.Controls.Clear();
                 perfil = cbxPerfiles.SelectedItem as Perfil;
+                RolesManager rman = new RolesManager();
+                var roles = rman.GetRolesByPerfil(perfil);
+                cbxRoles.Items.Clear();
+                cbxRoles.DataSource = roles;
+                cbxRoles.DisplayMember = "Nombre";
+                cbxRoles.SelectedIndex = 0;
                 if (perfil.Nombre == "Afiliado")
                 {
-                    afiliadoUserControl.SetUser(_afiliado);
+                    afiliadoUserControl.rellenarCampos(_afiliado);
                     userPanel.Controls.Add(afiliadoUserControl);
                 }
                 else if (perfil.Nombre == "Profesional")
@@ -130,6 +137,7 @@ namespace ClinicaFrba
                 }
                 else
                    throw new Exception("Error de Perfiles");
+
             }
             catch (System.Exception excep)
             {
@@ -141,7 +149,6 @@ namespace ClinicaFrba
         {
            try
            {
-                User user = new User();
                 long telefono;
                 long dni;
                 if (string.IsNullOrEmpty(txtUsername.Text))
@@ -154,44 +161,44 @@ namespace ClinicaFrba
                     throw new Exception("El Nombre es obligatorio!");
                 if (string.IsNullOrEmpty(txtApellido.Text.Trim()))
                     throw new Exception("El Apellido es obligatorio!");
-
                 if (string.IsNullOrEmpty(txtMail.Text.Trim()))
                     throw new Exception("El Email es obligatorio!");
-
-                user.DetallePersona.Apellido = txtApellido.Text.Trim();
-                user.DetallePersona.Nombre = txtNombre.Text.Trim();
-                user.DetallePersona.DNI = dni;
-                user.DetallePersona.FechaNacimiento = dtFechaNacimiento.Value;
-                user.DetallePersona.Direccion = txtDireccion.Text.Trim();
-                user.DetallePersona.Telefono = telefono;
-                user.DetallePersona.Email = txtMail.Text.Trim();
-
+                user.DetallesPersona.Apellido = txtApellido.Text.Trim();
+                user.DetallesPersona.Nombre = txtNombre.Text.Trim();
+                user.DetallesPersona.DNI = dni;
+                user.DetallesPersona.FechaNacimiento = dtFechaNacimiento.Value;
+                user.DetallesPersona.Direccion = txtDireccion.Text.Trim();
+                user.DetallesPersona.Telefono = telefono;
+                user.DetallesPersona.Email = txtMail.Text.Trim();
+                Rol rolSeleccionado = (Rol)cbxRoles.SelectedItem;
                 
                 if (perfil.Nombre == "Afiliado")
                 {
-                    _afiliado = ((AfiliadoUserControl)afiliadoUserControl).GetAfiliado();
+                    _afiliado = ((AfiliadoUserControl)afiliadoUserControl).devolverCampos();
                     _afiliado.UserName = txtUsername.Text;
                     var manager = new AfiliadoManager();
-                    _afiliado.DetallePersona = user.DetallePersona;
-                    manager.GuardarAfiliado(_afiliado, txtPassword.Text);
-
+                    _afiliado.DetallesPersona = user.DetallesPersona;
+                    _afiliado.RoleID = rolSeleccionado.ID;
+                    manager.GuardarAfiliado(_afiliado);
+                    user = _afiliado;
                 }
                 else if (perfil.Nombre == "Profesional")
                 {
                     _profesional = ((ProfesionalUserControl)profesionalUserControl).GetProfesional();
-                    _profesional.DetallePersona = user.DetallePersona;
+                    _profesional.DetallesPersona = user.DetallesPersona;
                     _profesional.UserName = txtUsername.Text;
                     var manager = new ProfesionalManager();
-                    manager.GuardarProfesional(_profesional, txtPassword.Text);
+                    _profesional.RoleID = rolSeleccionado.ID;
+                    manager.GuardarProfesional(_profesional);
                     user = _profesional;
                 }
-                else 
-                    throw new Exception("Error en Perfiles"); 
-                if (OnUserSaved != null)
+                else
                 {
-                    OnUserSaved(this, new UserSavedEventArgs() { Username = this.txtUsername.Text, Password = this.txtPassword.Text, User = user });
-                    this.Close();
+                    throw new Exception("Error en Perfiles");
                 }
+              // OnUserSaved(this, new UserSavedEventArgs() { Username = this.txtUsername.Text, User = user });
+               this.Close();
+                
             }
             catch (System.Exception excep)
             {

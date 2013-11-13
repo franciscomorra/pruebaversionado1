@@ -77,7 +77,7 @@ namespace ClinicaFrba.AbmAfiliado
             if (dgvAfiliados.SelectedRows == null || dgvAfiliados.SelectedRows.Count == 0) return;
             var row = dgvAfiliados.SelectedRows[0];
             var afiliado = row.DataBoundItem as Afiliado;
-            if (MessageBox.Show(string.Format("Confirma que desea eliminar al afiliado {0} {1}?", afiliado.DetallePersona.Nombre.Trim(), afiliado.DetallePersona.Apellido.Trim())
+            if (MessageBox.Show(string.Format("Confirma que desea eliminar al afiliado {0} {1}?", afiliado.DetallesPersona.Nombre.Trim(), afiliado.DetallesPersona.Apellido.Trim())
                 , "Eliminar afiliado", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 try
@@ -86,7 +86,7 @@ namespace ClinicaFrba.AbmAfiliado
                     var dataSource = dgvAfiliados.DataSource as BindingList<Afiliado>;
                     dataSource.Remove(afiliado);
                     dgvAfiliados.Refresh();
-                    MessageBox.Show(string.Format("Afiliado {0} {1} eliminado", afiliado.DetallePersona.Nombre.Trim(), afiliado.DetallePersona.Apellido.Trim()));
+                    MessageBox.Show(string.Format("Afiliado {0} {1} eliminado", afiliado.DetallesPersona.Nombre.Trim(), afiliado.DetallesPersona.Apellido.Trim()));
                     
                 }
                 catch (System.Exception excep)
@@ -104,8 +104,7 @@ namespace ClinicaFrba.AbmAfiliado
                var afiliado = row.DataBoundItem as Afiliado;
                var regForm = new RegistroForm();
                regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
-               regForm.SetUser(afiliado);
-
+               regForm.rellenarAfiliado(afiliado);
                ViewsManager.LoadModal(regForm);
             }
             catch (System.Exception excep)
@@ -120,7 +119,7 @@ namespace ClinicaFrba.AbmAfiliado
             var afiliado = e.User as Afiliado;
             if (dataSource.Contains(afiliado)) dataSource.Remove(afiliado);
             dataSource.Add(afiliado);
-            dgvAfiliados.DataSource = new BindingList<Afiliado>(dataSource.OrderBy(x => x.DetallePersona.Apellido + x.DetallePersona.Nombre).ToList());
+            dgvAfiliados.DataSource = new BindingList<Afiliado>(dataSource.OrderBy(x => x.DetallesPersona.Apellido + x.DetallesPersona.Nombre).ToList());
             dgvAfiliados.Refresh();
             MessageBox.Show("Se han guardado los datos del Afiliado " + e.Username);
 
@@ -187,22 +186,22 @@ namespace ClinicaFrba.AbmAfiliado
             var afiliados = _afiliadoManager.GetAll();
             if (!string.IsNullOrEmpty(txtApellido.Text))
             {
-                afiliados = new BindingList<Afiliado>(afiliados.Where(x => x.DetallePersona.Apellido.ToLowerInvariant().Contains(txtApellido.Text.ToLowerInvariant())).ToList());
+                afiliados = new BindingList<Afiliado>(afiliados.Where(x => x.DetallesPersona.Apellido.ToLowerInvariant().Contains(txtApellido.Text.ToLowerInvariant())).ToList());
             }
             if (!string.IsNullOrEmpty(txtNombre.Text))
             {
-                afiliados = new BindingList<Afiliado>(afiliados.Where(x => x.DetallePersona.Nombre.ToLowerInvariant().Contains(txtNombre.Text.ToLowerInvariant())).ToList());
+                afiliados = new BindingList<Afiliado>(afiliados.Where(x => x.DetallesPersona.Nombre.ToLowerInvariant().Contains(txtNombre.Text.ToLowerInvariant())).ToList());
             }
             if (!string.IsNullOrEmpty(txtEmail.Text))
             {
-                afiliados = new BindingList<Afiliado>(afiliados.Where(x => x.DetallePersona.Email.ToLowerInvariant().Contains(txtEmail.Text.ToLowerInvariant())).ToList());
+                afiliados = new BindingList<Afiliado>(afiliados.Where(x => x.DetallesPersona.Email.ToLowerInvariant().Contains(txtEmail.Text.ToLowerInvariant())).ToList());
             }
             if (!string.IsNullOrEmpty(txtAfiliadoNro.Text))
             {
                 afiliados = new BindingList<Afiliado>(afiliados.Where(x => x.NroAfiliado == nroAfiliado).ToList());
             }
             afiliados.Remove(new Afiliado() { UserID = Session.User.UserID });
-            dgvAfiliados.DataSource = new BindingList<Afiliado>(afiliados.OrderBy(x => x.DetallePersona.Apellido + x.DetallePersona.Nombre).ToList());
+            dgvAfiliados.DataSource = new BindingList<Afiliado>(afiliados.OrderBy(x => x.DetallesPersona.Apellido + x.DetallesPersona.Nombre).ToList());
             dgvAfiliados.Refresh();
         }
     }

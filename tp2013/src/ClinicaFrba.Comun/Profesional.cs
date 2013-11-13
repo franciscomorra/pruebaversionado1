@@ -13,7 +13,7 @@ namespace ClinicaFrba.Comun
 
         public override string ToString()
         {
-            return "Dr. "+DetallePersona.Apellido + ", " + DetallePersona.Nombre;
+            return "Dr. "+DetallesPersona.Apellido + ", " + DetallesPersona.Nombre;
         }
         
     }
