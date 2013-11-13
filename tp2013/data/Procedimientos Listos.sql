@@ -1,23 +1,4 @@
-CREATE PROCEDURE [SHARPS].UpdateUserPassword
-	@ID_Usuario int,
-	@OldPassword nvarchar(255),
-	@NewPassword nvarchar(255)
-AS
-BEGIN
-	SET NOCOUNT ON;
 
-    SELECT 1 FROM Usuarios
-	WHERE idUser = @ID_Usuario AND password = @OldPassword
-
-	IF @@ROWCOUNT = 1
-	BEGIN
-		UPDATE Usuarios 
-		SET password = @NewPassword
-		WHERE idUser = @ID_Usuario
-	END
-
-END
-GO
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -140,21 +121,7 @@ end
 go
 
 
-create function [GetProfesionalInfo]
-( @userId numeric(18,0)
-)
 
-
-returns table
-as 
-return
-
-select distinct u.username UserName , a.matricula matricula,  dp.apellido Apellido, dp.nombre Nombre, dp.sexo Sexo
-, dp.mail Email,dp.fechaNac FechaNacimiento, dp.tipo TipoDoc, dp.telefono Telefono, dp.direccion Direccion, dp.dni DNI
-from Usuarios u
-inner join Medicos a on a.userId = @userId
-inner join Detalles_Persona dp on dp.userId = @userId
-where u.idUser = @userId
 
 
 
@@ -298,6 +265,8 @@ go
 
 
 --------------------------------------------------------------
+
+
 
 CREATE PROCEDURE [UpdateDetallePersona]
 
@@ -581,7 +550,6 @@ AS
 BEGIN
 
 DECLARE @IDAGENDA INT
-
 DECLARE @NUMERO INT
 SELECT @NUMERO = MAX(Numero) + 1 FROM [SHARPS].Turnos
 SELECT @IDAGENDA = AgendaID FROM [SHARPS].Agendas A WHERE A.Profesional = @Profesional_ID
@@ -601,8 +569,10 @@ CREATE PROCEDURE [SHARPS].RegistrarLlegada
 AS
 BEGIN
 
-UPDATE SHARPS.Estados_Turno SET 
-
+UPDATE SHARPS.Turnos SET Estado = 1
+FROM SHARPS.Turnos T 
+INNER JOIN Agendas A ON A.Profesional = @Profesional_ID AND A.Activo = 1
+WHERE T.Afiliado = @Afiliado_ID AND T.Agenda = A.AgendaID 
 END
 GO
 
@@ -626,3 +596,113 @@ VALUES (@Turno , @Sintomas ,@NCONSULTA ,@Enfermedad, ) ---<----- ACA NO CONVIENE
 
 END
 GO
+
+
+CREATE PROCEDURE [SHARPS].DeleteUser
+@User_ID INT
+AS
+BEGIN
+
+UPDATE SHARPS.Usuarios SET
+Activo = 0
+WHERE UsuarioID = @User_ID
+
+UPDATE SHARPS.Afiliados SET Activo = 0
+WHERE UsuarioID = @User_ID
+
+UPDATE SHARPS.Profesionales SET Activo = 0
+WHERE UsuarioID = @User_ID
+UPDATE SHARPS.Agendas SET Activo = 0
+WHERE Profesional = @User_ID
+UPDATE SHARPS.Turnos SET Estado = 2
+FROM SHARPS.Turnos T
+INNER JOIN SHARPS.Agendas A ON A.AgendaID = T.Agenda
+WHERE A.Profesional = @User_ID OR T.Afiliado = @User_ID
+END
+GO
+
+
+CREATE PROCEDURE [SHARPS].InsertReceta
+@BonoFarmacia INT
+AS
+BEGIN
+
+INSERT INTO Recetas (Bono_Farmacia) VALUES (@BonoFarmacia)
+
+END
+GO 
+
+CREATE PROCEDURE [SHARPS].AgregarMedicamentos
+@BonoFarmacia INT,
+@Medicamento  INT  ------------<--------REVISAR DESPUES DE LA CORRECCION
+AS
+BEGIN
+   
+INSERT INTO SHARPS.Recetas_Medicamentos ( Receta, Medicamento)
+VALUES (@BonoFarmacia , @Medicamento)
+
+END
+GO
+
+CREATE PROCEDURE [GetProfesionalInfo]
+@userId INT
+as 
+BEGIN
+
+select distinct u.username UserName , a.matricula matricula,  dp.apellido Apellido, dp.nombre Nombre, dp.sexo Sexo
+,dp.mail Email,dp.fechaNac FechaNacimiento, dp.TipoDNI, dp.telefono Telefono, dp.direccion Direccion, dp.dni DNI
+from SHARPS.Usuarios u
+inner join SHARPS.Profesionales a on a.UsuarioID = @userId
+inner join SHARPS.Detalles_Persona dp on dp.UsuarioID = @userId
+where u.UsuarioID = @userId
+
+END
+GO  
+
+CREATE PROCEDURE [SHARPS].GetMedicamentos
+
+AS
+BEGIN
+
+SELECT Codigo AS Numero , Descripcion AS Nombre
+FROM SHARPS.Medicamentos
+
+END
+GO
+
+
+CREATE PROCEDURE [SHARPS].UpdateUserPassword
+	@ID_Usuario int,
+	@OldPassword nvarchar(255),
+	@NewPassword nvarchar(255)
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+    SELECT 1 FROM Usuarios
+	WHERE UsuarioID = @ID_Usuario AND password = @OldPassword
+
+	IF @@ROWCOUNT = 1
+	BEGIN
+		UPDATE Usuarios 
+		SET password = @NewPassword
+		WHERE UsuarioID = @ID_Usuario
+	END
+
+END
+GO
+
+
+CREATE PROCEDURE [SHARPS].GetDetallesPersona 
+@userId INT
+AS
+BEGIN
+
+SELECT DP.Apellido AS Apellido ,DP.Nombre AS Nombre,DP.FechaNac AS FechaNacimiento, DP.DNI AS DNI,DP.Mail AS Email ,DP.Direccion AS Direccion ,DP.Telefono AS  Telefono ,DP.Sexo AS Sexo , DP.TipoDNI AS TipoDoc
+FROM SHARPS.Detalles_Persona DP
+WHERE DP.UsuarioID = @userId
+
+END
+GO
+
+
