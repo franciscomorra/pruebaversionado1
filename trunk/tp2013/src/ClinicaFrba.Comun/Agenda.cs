@@ -21,6 +21,7 @@ namespace ClinicaFrba.Comun
         public DateTime ViernesOUT { get; set; }
         public DateTime SabadoIN { get; set; }
         public DateTime SabadoOUT { get; set; }
+        public Profesional profesional { get; set; }
 
 
     }

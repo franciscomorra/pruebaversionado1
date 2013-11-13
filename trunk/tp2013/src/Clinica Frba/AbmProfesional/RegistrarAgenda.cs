@@ -30,7 +30,7 @@ namespace ClinicaFrba.AbmProfesional
         {
             try
             {
-                if (dtDesde.Value < dtHasta.Value)      
+                if (dtDesde.Value > dtHasta.Value)      
                     throw new Exception("La fecha hasta ser mayor a desde!");
                 TimeSpan diferencia  = dtHasta.Value - dtDesde.Value;
                 if (diferencia.TotalDays > 120 || diferencia.TotalDays < 1)
@@ -69,7 +69,10 @@ namespace ClinicaFrba.AbmProfesional
                     _agenda.SabadoIN = Convert.ToDateTime(cbxSabIN.SelectedItem);
                     _agenda.SabadoOUT = Convert.ToDateTime(cbxSabOUT.SelectedItem);
                 }
+
+                _agenda.profesional = _profesional;
                 mgr.GuardarAgenda(_agenda);
+                MessageBox.Show("Se ha guardado la agenda");
             }
             catch (System.Exception excep)
             {
@@ -100,24 +103,34 @@ namespace ClinicaFrba.AbmProfesional
         private void rellenarCombos()
         {
             DateTime time = DateTime.Today;
+            cbxLunesIN.Items.Clear();
             cbxLunesIN.Items.Add("--");
             cbxLunesIN.SelectedIndex = 0;
+            cbxLunesOUT.Items.Clear();
             cbxLunesOUT.Items.Add("--");
             cbxLunesOUT.SelectedIndex = 0;
+            cbxMartesIN.Items.Clear();
             cbxMartesIN.Items.Add("--");
             cbxMartesIN.SelectedIndex = 0;
+            cbxMartesOUT.Items.Clear();
             cbxMartesOUT.Items.Add("--");
             cbxMartesOUT.SelectedIndex = 0;
+            cbxMiercIN.Items.Clear();
             cbxMiercIN.Items.Add("--");
             cbxMiercIN.SelectedIndex = 0;
+            cbxMiercOUT.Items.Clear();
             cbxMiercOUT.Items.Add("--");
             cbxMiercOUT.SelectedIndex = 0;
+            cbxJueIN.Items.Clear();
             cbxJueIN.Items.Add("--");
             cbxJueIN.SelectedIndex = 0;
+            cbxJueOUT.Items.Clear();
             cbxJueOUT.Items.Add("--");
             cbxJueOUT.SelectedIndex = 0;
+            cbxViesIN.Items.Clear();
             cbxViesIN.Items.Add("--");
             cbxViesIN.SelectedIndex = 0;
+            cbxVieOUT.Items.Clear();
             cbxVieOUT.Items.Add("--");
             cbxVieOUT.SelectedIndex = 0;
             for (DateTime _time = time.AddHours(7); _time < time.AddHours(20); _time = _time.AddMinutes(30)) 
@@ -134,8 +147,10 @@ namespace ClinicaFrba.AbmProfesional
                 cbxVieOUT.Items.Add(_time.AddMinutes(30).ToShortTimeString());
             }
             time = DateTime.Today;
+            cbxSabIN.Items.Clear();
             cbxSabIN.Items.Add("--");
             cbxSabIN.SelectedIndex = 0;
+            cbxSabOUT.Items.Clear();
             cbxSabOUT.Items.Add("--");
             cbxSabOUT.SelectedIndex = 0;
             for (DateTime _time = time.AddHours(10); _time < time.AddHours(15); _time = _time.AddMinutes(30))

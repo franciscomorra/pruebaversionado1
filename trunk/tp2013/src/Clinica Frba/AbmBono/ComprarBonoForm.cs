@@ -148,11 +148,11 @@ namespace ClinicaFrba.AbmBono
                     mensaje = mensaje +" " +bono.Numero.ToString()+ " \n";
                 }
                 MessageBox.Show(mensaje);
-                /*
+                
                 if (OnBonosUpdated != null)
                     OnBonosUpdated(this, new BonoUpdatedEventArgs() { Bonos = bonos});
                 
-                 * */
+                
                 this.Close();
             }
             catch (System.Exception excep)
