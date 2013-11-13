@@ -123,8 +123,12 @@ namespace ClinicaFrba.AbmAfiliado
             dgvAfiliados.Refresh();
             MessageBox.Show("Se han guardado los datos del Afiliado " + e.Username);
 
+
+
             if (tieneGenteACargo(afiliado))
             {
+                var grupoFamiliar = _afiliadoManager.GetAllFromGrupoFamiliar(afiliado.grupoFamiliar);
+
                 if (!todosLosIntegrantesCargados(afiliado))
                 { 
                 

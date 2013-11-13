@@ -73,9 +73,29 @@ namespace ClinicaFrba.Negocio
         /// Obtiene el listado de afiliados del sistema
         /// </summary>
         /// <returns>Listado de afiliados</returns>
-        
-        
-        
+
+        public BindingList<Afiliado> GetAllFromGrupoFamiliar(long grupoFamiliar)
+        {
+            var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "[SHARPS].GetAfiliadosFromGrupoFamiliar", SqlDataAccessArgs
+                .CreateWith("@GrupoFamiliar", grupoFamiliar)
+                .Arguments);
+            var afiliados = new BindingList<Afiliado>();
+            //Devuelve los ID de los usuarios que pertenecen a ese grupo y estan activos
+            if (result != null && result.Rows != null)
+            {
+                int id;
+                Afiliado afiliado;
+                foreach (DataRow row in result.Rows)
+                {
+                    id = int.Parse(row["UsuarioID"].ToString());
+                    afiliado = getInfo(id);
+                    afiliados.Add(afiliado);
+                }
+            }
+            return afiliados;
+        }
+
         public BindingList<Afiliado> GetAll()
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
