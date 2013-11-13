@@ -44,14 +44,12 @@ namespace ClinicaFrba.AbmTurno
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            DateTime fecha = dateTimePicker1.Value;
-            var sysDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
-            if (fecha < sysDate)
-            {
-                throw new Exception("La fecha debe ser mayor a la actual!");
-            }
             try
             {
+                DateTime fecha = dateTimePicker1.Value;
+                var sysDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
+                if (fecha < sysDate)
+                    throw new Exception("La fecha debe ser mayor a la actual!");
                 _profesionalManager.CancelarTurnos(_profesional.UserID,fecha);
             }
             catch (System.Exception excep)

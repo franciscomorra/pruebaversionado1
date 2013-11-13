@@ -24,12 +24,14 @@ namespace ClinicaFrba.Negocio
                 "[SHARPS].GetAfiliadoInfo", SqlDataAccessArgs
                 .CreateWith("@userId", userID)
                 .Arguments);
+            //Dado un id de usuario, busca toda su informacion, tambien los detalles de persona
+
+
             if (row != null && row != null)
             {
-                //afiliado.UserID = int.Parse(row["ID"].ToString());
                 afiliado.UserName = row["UserName"].ToString();
                 afiliado.UserID = userID;
-                //afiliado.FaltanDatos = bool.Parse(row["FaltanDatos"].ToString());
+                afiliado.FaltanDatos = bool.Parse(row["FaltanDatos"].ToString());
                 afiliado.PlanMedico = new PlanMedico();
                 afiliado.PlanMedico.ID = int.Parse(row["Plan_ID"].ToString());
                 afiliado.PlanMedico.PrecioConsulta = int.Parse(row["PrecioConsulta"].ToString());
@@ -50,9 +52,9 @@ namespace ClinicaFrba.Negocio
                 if (!DBNull.Value.Equals(row["Sexo"]))
                     afiliado.DetallePersona.Sexo = (TipoSexo)Enum.Parse(typeof(TipoSexo), row["Sexo"].ToString());
                 afiliado.DetallePersona.TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString());
-                long grupoFamiliar = long.Parse(row["GrupoFamiliar"].ToString());
-                long tipoAfiliado = long.Parse(row["TipoAfiliado"].ToString());
-                afiliado.NroAfiliado = ((grupoFamiliar * 100) + tipoAfiliado);
+                afiliado.grupoFamiliar = long.Parse(row["GrupoFamiliar"].ToString());
+                afiliado.tipoAfiliado = long.Parse(row["TipoAfiliado"].ToString());
+                afiliado.NroAfiliado = ((afiliado.grupoFamiliar * 100) + afiliado.tipoAfiliado);
                 //afiliado.NroAfiliado = int.Parse(row["nroAfiliado"].ToString());
                 afiliado.PlanMedico = new PlanMedico()
                 {
@@ -79,6 +81,7 @@ namespace ClinicaFrba.Negocio
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].GetAfiliados");
             var afiliados = new BindingList<Afiliado>();
+            //Busca todos los afiliados que estan activos
             if (result != null && result.Rows != null)
             {
                 foreach (DataRow row in result.Rows)
@@ -86,14 +89,13 @@ namespace ClinicaFrba.Negocio
                     Afiliado afiliado = new Afiliado();
                     afiliado.UserID = int.Parse(row["ID"].ToString());
                     afiliado.UserName = row["UserName"].ToString();
-                    //afiliado.FaltanDatos = bool.Parse(row["FaltanDatos"].ToString());
+                    afiliado.FaltanDatos = bool.Parse(row["FaltanDatos"].ToString());
                     afiliado.PlanMedico = new PlanMedico();
                     afiliado.PlanMedico.ID = int.Parse(row["Plan_ID"].ToString());
                     afiliado.PlanMedico.PrecioConsulta = int.Parse(row["PrecioConsulta"].ToString());
                     afiliado.PlanMedico.PrecioFarmacia = int.Parse(row["PrecioFarmacia"].ToString());
                     if (!DBNull.Value.Equals(row["EstadoCivil"]))
                         afiliado.EstadoCivil = (EstadoCivil)Enum.Parse(typeof(EstadoCivil), row["EstadoCivil"].ToString());
-
                     if (!DBNull.Value.Equals(row["CantHijos"])) 
                         afiliado.CantHijos = int.Parse(row["CantHijos"].ToString());
                     afiliado.DetallePersona = new DetallesPersona();
@@ -107,9 +109,9 @@ namespace ClinicaFrba.Negocio
                     if (!DBNull.Value.Equals(row["Sexo"])) 
                         afiliado.DetallePersona.Sexo = (TipoSexo)Enum.Parse(typeof(TipoSexo), row["Sexo"].ToString());
                     afiliado.DetallePersona.TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString());
-                    long grupoFamiliar = long.Parse(row["GrupoFamiliar"].ToString());
-                    long tipoAfiliado = long.Parse(row["TipoAfiliado"].ToString());
-                    afiliado.NroAfiliado = ((grupoFamiliar*100) + tipoAfiliado);
+                    afiliado.grupoFamiliar = long.Parse(row["GrupoFamiliar"].ToString());
+                    afiliado.tipoAfiliado = long.Parse(row["TipoAfiliado"].ToString());
+                    afiliado.NroAfiliado = ((afiliado.grupoFamiliar * 100) + afiliado.tipoAfiliado);
                     afiliados.Add(afiliado);
                        
                 }
@@ -140,18 +142,21 @@ namespace ClinicaFrba.Negocio
                             .And("@EstadoCivil", afiliado.EstadoCivil)
                             .And("@CantHijos", afiliado.CantHijos)
                             .Arguments);
+                        //Inserta, y devuelve el grupo familiar que se le creo
+
                     }
                     else
                     {
                         afiliado.NroAfiliado = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                         "InsertMiembroGrupoFamiliar", SqlDataAccessArgs
                         .CreateWith("@PlanMedico", afiliado.PlanMedico)
-                        .And("@ID", afiliado.UserID)
                         .And("@EstadoCivil", afiliado.EstadoCivil)
                         .And("@CantHijos", afiliado.CantHijos)
                         .And("@RolAfiliado", afiliado.RoleID)
-                        .And("@GrupoFamiliar", afiliado.NroAfiliado)//Hay que sumarle uno
+                        .And("@GrupoFamiliar", afiliado.NroAfiliado)
+                        .And("@TipoAfiliado", afiliado.tipoAfiliado)
                         .Arguments);
+                        //Inserta el usuario, y le paso el tipo de afiliado
                     }
                     SessionData.Remove("Transaction");
                     SqlDataAccess.Commit(transaction);
@@ -174,12 +179,16 @@ namespace ClinicaFrba.Negocio
                     .And("@CantHijos", afiliado.CantHijos)
                     .And("@Motivo", afiliado.MotivoCambio)
                 .Arguments);
+                //Guarda la informacion del usuario
                 return 0;
             }
         }
         public void Delete(Afiliado afiliado)
         {
-            _usersManager.DeleteAccount(afiliado as User);
+            SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "DeleteAfiliado", SqlDataAccessArgs
+                .CreateWith("@ID", afiliado.UserID)
+                .Arguments);
         }
     }
 }

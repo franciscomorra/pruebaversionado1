@@ -30,7 +30,7 @@ namespace ClinicaFrba.Negocio
                     .And("@Direccion", user.DetallePersona.Direccion)
                     .And("@ID_Usuario", user.UserID)
                     .Arguments,
-                    transaction);
+                    transaction); //Con transaccion (de C#)
             }
             return SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].InsertDetallePersona", SqlDataAccessArgs
@@ -45,7 +45,7 @@ namespace ClinicaFrba.Negocio
                     .And("@FechaNacimiento", user.DetallePersona.FechaNacimiento)
                     .And("@Direccion", user.DetallePersona.Direccion)
                     .And("@ID_Usuario", user.UserID)
-            .Arguments);
+            .Arguments); //Sin transaccion (de C#)
         }
 
         internal void UpdateDetallePersona(User user)
@@ -62,7 +62,7 @@ namespace ClinicaFrba.Negocio
                     .And("@Sexo", user.DetallePersona.Sexo)
                     .And("@FechaNacimiento", user.DetallePersona.FechaNacimiento)
                     .And("@Direccion", user.DetallePersona.Direccion)
-                    .And("@ID_Usuario", user.UserID)
+                    .And("@ID_Usuario", user.UserID) 
             .Arguments);
         }
 

@@ -23,7 +23,7 @@ namespace ClinicaFrba.Negocio
                 "[SHARPS].GetProfesionalInfo", SqlDataAccessArgs
                 .CreateWith("@userId", userID)
                 .Arguments);
-
+            //Devuelve la informacion del profesional
             if (row != null && row != null)
             {
                 profesional.UserName = row["UserName"].ToString();
@@ -57,6 +57,7 @@ namespace ClinicaFrba.Negocio
             }
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].GetProfesionales");
+            //Todos los profesionales activos
             var profesionales = new BindingList<Profesional>();
             EspecialidadesManager espMan = new EspecialidadesManager();
             if (result != null && result.Rows != null)
@@ -67,6 +68,7 @@ namespace ClinicaFrba.Negocio
                     profesional.UserID = int.Parse(row["ID"].ToString());
                     profesional.UserName = row["UserName"].ToString();
 
+                    profesional.FaltanDatos = bool.Parse(row["FaltanDatos"].ToString());
                     if (!DBNull.Value.Equals(row["Matricula"]))
                         profesional.Matricula = row["Matricula"].ToString();
 
@@ -137,13 +139,17 @@ namespace ClinicaFrba.Negocio
 
         public void Delete(Profesional profesional)
         {
-            _usersManager.DeleteAccount(profesional as User); //TODO!!!!!!
+            SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+            "[SHARPS].DeleteProfesional", SqlDataAccessArgs
+            .CreateWith("@ID", profesional.UserID)
+            .Arguments);
         }
 
         public void InsertarEspecialidades(Profesional profesional) {
             foreach (var especialidad in profesional.Especialidades){
                 SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
                     "[SHARPS].InsertSpeciality", SqlDataAccessArgs
+                    //Inserta una especialidad
                     .CreateWith("@MedicoID", profesional.UserID)
                     .And("@Especialidad", especialidad.ID)
                 .Arguments);
@@ -153,6 +159,7 @@ namespace ClinicaFrba.Negocio
         public void CancelarTurnos(int usuarioID, DateTime fecha) {
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["GrouponConnectionString"].ToString(),
                 "[SHARPS].CancelarDiaProfesional", SqlDataAccessArgs
+                //Busca todos los turnos del dia, y los pone como cancelado por profesional.
                 .CreateWith("@MedicoID", usuarioID)
                 .And("@Fecha", fecha)
                 .Arguments);

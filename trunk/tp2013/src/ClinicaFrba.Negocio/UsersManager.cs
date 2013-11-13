@@ -12,21 +12,13 @@ namespace ClinicaFrba.Negocio
 {
     public class UsersManager
     {
-        public void DeleteAccount(User user)
-        {
-            SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "[SHARPS].DeleteUser", SqlDataAccessArgs
-                .CreateWith("@User_ID", user.UserID)
-            .Arguments);
-        }
-
         public int CreateAccount(User user, string password)
         {
             var transaction = SessionData.Contains("Transaction") ? SessionData.Get<SqlTransaction>("Transaction") : null;
             var service = new LoginService();
             var encryptedPass = service.ComputeHash(password, new SHA256Managed());
             int result = 0;
-            if (transaction != null)
+            if (transaction != null)//Si usa la transaccion
             {
                  result = SqlDataAccess.ExecuteScalarQuery<int>(
                      "[SHARPS].InsertUser", SqlDataAccessArgs
@@ -35,7 +27,7 @@ namespace ClinicaFrba.Negocio
                 .Arguments, transaction);
                 return result;
             }
-            else
+            else//Sin transaccion
             {
                  result = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                     "[SHARPS].InsertUser", SqlDataAccessArgs

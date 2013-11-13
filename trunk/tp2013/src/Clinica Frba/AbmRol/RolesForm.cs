@@ -101,17 +101,23 @@ namespace ClinicaFrba.AbmRol
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            
-            if (rolesDataGridView.SelectedRows == null || rolesDataGridView.SelectedRows.Count == 0) return;
-            var row = rolesDataGridView.SelectedRows[0];
-            var rol = row.DataBoundItem as Rol;
-            //Que no se puedan borrar los roles por defecto!
-            if(rol.Nombre == "Administrador" || rol.Nombre == "Afiliado" || rol.Nombre == "Profesional" || rol.Nombre == "Administrativo")
-                throw new Exception("No se puede editar el rol "+rol.ToString()+" debido a una regla de negocio");
-            var addEditForm = new AddEditRoleForm();
-            addEditForm.Set(rol);
-            addEditForm.OnRoleUpdated += new EventHandler<RoleUpdatedEventArgs>(addEditForm_OnRoleUpdated);
-            ViewsManager.LoadModal(addEditForm);
+            try
+            {
+                if (rolesDataGridView.SelectedRows == null || rolesDataGridView.SelectedRows.Count == 0) return;
+                var row = rolesDataGridView.SelectedRows[0];
+                var rol = row.DataBoundItem as Rol;
+                //Que no se puedan borrar los roles por defecto!
+                if(rol.Nombre == "Administrador" || rol.Nombre == "Afiliado" || rol.Nombre == "Profesional" || rol.Nombre == "Administrativo")
+                    throw new Exception("No se puede editar el rol "+rol.ToString()+" debido a una regla de negocio");
+                var addEditForm = new AddEditRoleForm();
+                addEditForm.Set(rol);
+                addEditForm.OnRoleUpdated += new EventHandler<RoleUpdatedEventArgs>(addEditForm_OnRoleUpdated);
+                ViewsManager.LoadModal(addEditForm);
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+            }
         }
     }
 }

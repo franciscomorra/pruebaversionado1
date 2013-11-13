@@ -10,4 +10,15 @@ EN EL CODIGO C#
 	Corregido, uno queria decir codigo 
 - CASI TODAS LAS FUNCIONES DE PERFIL APARECEN EN C# COMO PERFIL Y EN PROCS FRAN COMO PROFILE
 	Mismo que lo anterior
-- 
+
+	
+EN EL SQL
+	- Cambia los nombres de los procedures, como a vos te guste mas, yo voy a ponerte un detalle al lado para que tengas en cuenta que tienen que hacer, si estan en castellano mejor XD
+	-Cuando te pido los bonos de consulta, que no esten vencidos, y que pertenezcan al grupo familiar, no al usuario nomas
+	-En InsertMiembroGrupoFamiliar, agregue tipo de afiliado, te lo voy a pasar, vos lo agregas nomas
+		El usuario id que te estoy pasando lo saco, era para que vieras quien es el jefe de familia
+	-En compra de bonos, yo te paso el precio que se esta pagando, vos guardalo nomas en el campo precio pagado
+		NO ME ESTA DEVOLVIENDO EL NUMERO DE BONO
+	-En turnos, me habia faltado cancelar turno del afiliado
+	-Tambien en turnos, cambie los nombres de los procedimientos, y puse detalles
+	-Agregue delete afiliado y profesional, tenes que desactivarlos nomas

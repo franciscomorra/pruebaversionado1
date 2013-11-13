@@ -21,6 +21,7 @@ namespace ClinicaFrba.Negocio
                     .And("@Sintomas", consulta.Sintomas)
                     .And("@Enfermedad", consulta.Enfermedad)
             .Arguments);
+            //Guarda la consulta de un turno (Obs. Un turno fue atendido si solo si tiene una consulta asociada a el)
         }
     }
 }

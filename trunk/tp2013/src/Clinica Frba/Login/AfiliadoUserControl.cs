@@ -13,21 +13,27 @@ namespace ClinicaFrba.Login
 {
     public partial class AfiliadoUserControl : UserControl
     {
-        private Afiliado _afiliado;
+        private Afiliado _afiliado = new Afiliado();
 
         public Afiliado GetAfiliado()
         {
-            _afiliado = new Afiliado();
-            int cantHijos;
-            if (!int.TryParse(txtHijos.Text, out cantHijos))
-                throw new Exception("La cantidad de hijos debe ser numérica!");
-           
-            if (string.IsNullOrEmpty(txtMotivo.Text.Trim()))
-                throw new Exception("El Motivo es obligatorio!"); 
-            _afiliado.EstadoCivil = (EstadoCivil)Enum.Parse(typeof(EstadoCivil),cbxEstadoCivil.SelectedItem.ToString());
-            _afiliado.PlanMedico = (PlanMedico)cbxPlanMedico.SelectedItem;
-            _afiliado.CantHijos = cantHijos;
-            _afiliado.MotivoCambio = txtMotivo.Text.Trim();
+            try
+            {
+                int cantHijos;
+                if (!int.TryParse(txtHijos.Text, out cantHijos))
+                    throw new Exception("La cantidad de hijos debe ser numérica!");
+               
+                if (string.IsNullOrEmpty(txtMotivo.Text.Trim()))
+                    throw new Exception("El Motivo es obligatorio!"); 
+                _afiliado.EstadoCivil = (EstadoCivil)Enum.Parse(typeof(EstadoCivil),cbxEstadoCivil.SelectedItem.ToString());
+                _afiliado.PlanMedico = (PlanMedico)cbxPlanMedico.SelectedItem;
+                _afiliado.CantHijos = cantHijos;
+                _afiliado.MotivoCambio = txtMotivo.Text.Trim();
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+            }
             return _afiliado;
         }
 

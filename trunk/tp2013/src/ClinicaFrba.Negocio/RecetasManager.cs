@@ -20,13 +20,14 @@ namespace ClinicaFrba.Negocio
                 .CreateWith(
                     "@BonoFarmacia", receta.BonoFarmacia.Numero)
             .Arguments);
-
+            //Crea una nueva receta, validaciones no son necesarias, se que el bono es bueno, y que el afiliado tambien
             foreach (var medicamento in receta.Medicamentos)
             {
 
                 SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                     "[SHARPS].AgregarMedicamentos", SqlDataAccessArgs
                     .CreateWith(
+                    //Crea nuevas filas en recetas_medicamentos
                         "@BonoFarmacia", receta.BonoFarmacia.Numero)
                         .And("@Medicamento", medicamento.Codigo)
                 .Arguments);
