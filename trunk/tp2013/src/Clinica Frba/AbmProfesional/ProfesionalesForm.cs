@@ -76,7 +76,7 @@ namespace ClinicaFrba.AbmProfesional
             if (profesionalesGrid.SelectedRows == null || profesionalesGrid.SelectedRows.Count == 0) return;
             var row = profesionalesGrid.SelectedRows[0];
             var profesional = row.DataBoundItem as Profesional;
-
+            
             if (OnProfesionalSelected != null)
             {
                 OnProfesionalSelected(this, new ProfesionalSelectedEventArgs()

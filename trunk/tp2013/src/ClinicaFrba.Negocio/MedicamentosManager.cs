@@ -23,7 +23,7 @@ namespace ClinicaFrba.Negocio
                 {
                     ret.Add(new Medicamento()
                     {
-                        Codigo = int.Parse(row["Numero"].ToString()),
+                        Codigo = int.Parse(row["Codigo"].ToString()),
                         Nombre = row["Numero"].ToString()
 
                     });
