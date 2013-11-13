@@ -1,0 +1,5 @@
+C:\Users\Julián\Desktop\TerceraEntrega\src\Data\bin\Debug\Data.dll
+C:\Users\Julián\Desktop\TerceraEntrega\src\Data\bin\Debug\Data.pdb
+C:\Users\Julián\Desktop\TerceraEntrega\src\Data\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Julián\Desktop\TerceraEntrega\src\Data\obj\Debug\Data.dll
+C:\Users\Julián\Desktop\TerceraEntrega\src\Data\obj\Debug\Data.pdb
