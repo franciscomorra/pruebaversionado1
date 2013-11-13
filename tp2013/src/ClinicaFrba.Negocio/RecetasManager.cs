@@ -28,7 +28,6 @@ namespace ClinicaFrba.Negocio
                     "[SHARPS].AgregarMedicamentos", SqlDataAccessArgs
                     .CreateWith(
                         "@BonoFarmacia", receta.BonoFarmacia.Numero)
-                        .And("@BonoFarmacia",receta.BonoFarmacia)
                         .And("@Medicamento", medicamento.Codigo)
                 .Arguments);
             
