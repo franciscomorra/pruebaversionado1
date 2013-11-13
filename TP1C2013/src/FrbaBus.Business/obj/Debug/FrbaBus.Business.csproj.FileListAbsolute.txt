@@ -1,0 +1,9 @@
+C:\Users\Julián\Desktop\TerceraEntrega\src\FrbaBus.Business\bin\Debug\FrbaBus.Business.dll
+C:\Users\Julián\Desktop\TerceraEntrega\src\FrbaBus.Business\bin\Debug\FrbaBus.Business.pdb
+C:\Users\Julián\Desktop\TerceraEntrega\src\FrbaBus.Business\bin\Debug\Data.dll
+C:\Users\Julián\Desktop\TerceraEntrega\src\FrbaBus.Business\bin\Debug\FrbaBus.Common.dll
+C:\Users\Julián\Desktop\TerceraEntrega\src\FrbaBus.Business\bin\Debug\FrbaBus.Common.pdb
+C:\Users\Julián\Desktop\TerceraEntrega\src\FrbaBus.Business\bin\Debug\Data.pdb
+C:\Users\Julián\Desktop\TerceraEntrega\src\FrbaBus.Business\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Julián\Desktop\TerceraEntrega\src\FrbaBus.Business\obj\Debug\FrbaBus.Business.dll
+C:\Users\Julián\Desktop\TerceraEntrega\src\FrbaBus.Business\obj\Debug\FrbaBus.Business.pdb

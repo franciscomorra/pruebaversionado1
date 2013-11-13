@@ -1,0 +1,5 @@
+C:\Users\Julián\Desktop\TerceraEntrega\src\FrbaBus.Common\bin\Debug\FrbaBus.Common.dll
+C:\Users\Julián\Desktop\TerceraEntrega\src\FrbaBus.Common\bin\Debug\FrbaBus.Common.pdb
+C:\Users\Julián\Desktop\TerceraEntrega\src\FrbaBus.Common\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Julián\Desktop\TerceraEntrega\src\FrbaBus.Common\obj\Debug\FrbaBus.Common.dll
+C:\Users\Julián\Desktop\TerceraEntrega\src\FrbaBus.Common\obj\Debug\FrbaBus.Common.pdb

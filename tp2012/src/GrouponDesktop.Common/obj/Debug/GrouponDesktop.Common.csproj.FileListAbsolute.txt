@@ -7,3 +7,8 @@ C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K307
 C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop.Common\bin\Debug\GrouponDesktop.Common.pdb
 C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop.Common\obj\Debug\GrouponDesktop.Common.dll
 C:\Users\Mauser\Desktop\Gestion de Datos\TP2C2012 K3072 GRUPO_N 35\TP2C2012 K3072 GRUPO_N 35\src\GrouponDesktop.Common\obj\Debug\GrouponDesktop.Common.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop.Common\bin\Debug\GrouponDesktop.Common.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop.Common\bin\Debug\GrouponDesktop.Common.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop.Common\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop.Common\obj\Debug\GrouponDesktop.Common.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop.Common\obj\Debug\GrouponDesktop.Common.pdb
