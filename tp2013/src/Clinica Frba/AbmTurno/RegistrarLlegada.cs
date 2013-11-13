@@ -92,12 +92,16 @@ namespace ClinicaFrba.AbmTurno
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            if (_turno.Fecha > Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddMinutes(15))
-            {
-                throw new Exception("El usuario debia registrarse 15 minutos antes!");
+           try
+           {
+                if (_turno.Fecha > Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddMinutes(15))
+                    throw new Exception("El usuario debia registrarse 15 minutos antes!");
+                _turnosManager.RegistrarLlegada(_turno,_bono);
             }
-            _turnosManager.RegistrarLlegada(_turno,_bono);
-
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+            }
         }
     }
 }

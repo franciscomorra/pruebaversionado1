@@ -13,16 +13,22 @@ namespace ClinicaFrba.Login
 {
     public partial class ProfesionalUserControl : UserControl
     {
-        private Profesional _profesional;
+        private Profesional _profesional = new Profesional();
         public Profesional GetProfesional()
         {
-            var especialidades = clbEspecialidades.CheckedItems.Cast<Especialidad>().ToList();
-            if (especialidades.Count == 0)
-                throw new Exception("Debe seleccionar al menos una ciudad!");
-            if (string.IsNullOrEmpty(txtMatricula.Text.Trim()))
-                throw new Exception("La Matricula es obligatoria!");
-            _profesional.Matricula = txtMatricula.Text.Trim();
-            _profesional.Especialidades = especialidades;
+            try{
+                var especialidades = clbEspecialidades.CheckedItems.Cast<Especialidad>().ToList();
+                if (especialidades.Count == 0)
+                    throw new Exception("Debe seleccionar al menos una ciudad!");
+                if (string.IsNullOrEmpty(txtMatricula.Text.Trim()))
+                    throw new Exception("La Matricula es obligatoria!");
+                _profesional.Matricula = txtMatricula.Text.Trim();
+                _profesional.Especialidades = especialidades;
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+            }
             return _profesional;
         }
 

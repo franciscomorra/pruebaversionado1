@@ -25,7 +25,7 @@ namespace ClinicaFrba.Negocio
                 .CreateWith("@Nombre", userName)
                 .And("@Password", encryptedPassword)
                 .Arguments);
-
+            //Debe validar que el user esta activo, y que la contraseña funciona
             if (result == null)
                 throw new Exception("Usuario o contraseña inválidos");
             var user = new User()
@@ -66,7 +66,7 @@ namespace ClinicaFrba.Negocio
                 "[SHARPS].GetUserLoginAttempts", SqlDataAccessArgs
                 .CreateWith("@Nombre", userName)
             .Arguments);
-
+            //Si es mayor que 3, esta bloqueado
             if (result == null)
                 throw new Exception("Usuario o contraseña inválidos");
 

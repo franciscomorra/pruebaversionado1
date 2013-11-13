@@ -19,6 +19,9 @@ namespace ClinicaFrba.Negocio
                 "[SHARPS].GetBonos", SqlDataAccessArgs
                 .CreateWith("@userId", afiliado.UserID)
                 .Arguments);
+            //Devuelve los bonos que no fueron usados
+            //Los que son farmacia, debe devolver los que no estan vencidos
+            //Para ambos, que devuelva todos los bonos del grupo familiar, no solo del usuario
             if (result != null)
             {
                 foreach (DataRow row in result.Rows)
@@ -47,6 +50,7 @@ namespace ClinicaFrba.Negocio
                    .And("@Fecha", bono.Fecha)
                    .And("@AfiliadoCompro", bono.AfiliadoCompro.UserID)
                .Arguments);
+                //Guarda un bono, pasa la fecha de impresion, y el precio abonado (sale del plan, se guarda porque el plan puede variar sus precios)
                 return result;
             }
             else{

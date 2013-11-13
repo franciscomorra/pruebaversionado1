@@ -13,11 +13,12 @@ namespace ClinicaFrba.Negocio
 {
     public class PerfilManager
     {
-        public List<Perfil> GetAllPerfils()
+        public List<Perfil> GetAllPerfiles()
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(
                 ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].GetPerfiles"
+                //Devuelve todos los perfiles
             );
             var perfiles = new List<Perfil>();
             var functionalitiesManager = new FunctionalitiesManager();
@@ -27,8 +28,6 @@ namespace ClinicaFrba.Negocio
                 {
                     ID = int.Parse(row["ID"].ToString()),
                     Nombre = row["Descripcion"].ToString(),
-                    //Functionalities = functionalitiesManager.GetPerfilFunctionalities(int.Parse(row["ID"].ToString()))
-
                 };
                 perfiles.Add(profile);
             }
@@ -36,11 +35,13 @@ namespace ClinicaFrba.Negocio
             return perfiles;
         }
 
-        public List<Perfil> GetAllPerfilsForRegistration()
+        public List<Perfil> GetAllPerfilesForRegistration()
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(
                 ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].GetPerfiles"
+
+                //Devuelve todos los perfiles
             );
             var perfiles = new List<Perfil>();
             var functionalitiesManager = new FunctionalitiesManager();
@@ -50,10 +51,9 @@ namespace ClinicaFrba.Negocio
                 {
                     ID = int.Parse(row["ID"].ToString()),
                     Nombre = row["Descripcion"].ToString(),
-                    //Functionalities = functionalitiesManager.GetPerfilFunctionalities(int.Parse(row["ID"].ToString()))
-
                 };
                 if(profile.Nombre == "Afiliado" || profile.Nombre == "Profesional")
+                    //Filtro los que se pueden registrar (hoy son estos dos nomas)
                     perfiles.Add(profile);
             }
 
@@ -67,7 +67,8 @@ namespace ClinicaFrba.Negocio
                 "[SHARPS].GetPerfilInfo", SqlDataAccessArgs
                 .CreateWith("@NombrePerfil", NombrePerfil)
                 .Arguments);
-
+                
+            //Dado un nombre de perfil, dame el ID
             if (row != null)
             {
                 perfil.Nombre = NombrePerfil;

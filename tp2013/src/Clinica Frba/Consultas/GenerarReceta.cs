@@ -193,17 +193,22 @@ namespace ClinicaFrba.Consultas
         private void btnGuardar_Click(object sender, EventArgs e)
         {
 
-            
-            _receta = new Receta() { 
-                BonoFarmacia = _bonoFarmacia,
-                Fecha = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]),
-                Medicamentos = getMedicamentos()
-            };
-            _recetaManager.Save(_receta);
-            if (OnRecetaUpdated != null)
-                OnRecetaUpdated(this, new RecetaUpdatedEventArgs() { Receta = _receta });
-            this.Close();
-
+            try
+            {
+                _receta = new Receta() { 
+                    BonoFarmacia = _bonoFarmacia,
+                    Fecha = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]),
+                    Medicamentos = getMedicamentos()
+                };
+                _recetaManager.Save(_receta);
+                if (OnRecetaUpdated != null)
+                    OnRecetaUpdated(this, new RecetaUpdatedEventArgs() { Receta = _receta });
+                this.Close();
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+            }
         }
 
     }

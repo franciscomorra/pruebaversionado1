@@ -17,6 +17,7 @@ namespace ClinicaFrba.Negocio
             var ret = new List<Medicamento>();
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].GetMedicamentos");
+            //Devuelve la tabla medicamentos entera
             if (result != null)
             {
                 foreach (DataRow row in result.Rows)

@@ -39,23 +39,33 @@ namespace ClinicaFrba.Login
 
         private void Login(string userName, string pass)
         {
-            user = svc.Login(userName, pass);
-            var roles = rolManager.GetUserRoles(user.UserID);
-            if (roles.Count > 1)
+            try
             {
-                comboRoles.DataSource = roles;
-                comboRoles.DisplayMember = "Nombre";
-                panelRoles.Show();
+                user = svc.Login(userName, pass);
+                var roles = rolManager.GetUserRoles(user.UserID);
+                if (roles.Count > 1)
+                {
+                    comboRoles.DataSource = roles;
+                    comboRoles.DisplayMember = "Nombre";
+                    panelRoles.Show();
+                }
+                else
+                {
+                    if (roles.Count < 1)
+                        throw new Exception("El usuario no tiene roles asignados, contacte a un administrativo!");
+                    Rol rol = (Rol)roles.ElementAt(0);
+                    user.RoleID = rol.ID;
+                    user.Perfil = rol.Perfil;
+                    svc.SetUserFunctionalities(user);
+                    user.DetallePersona = detallesManager.getDetalles(user.UserID);
+                    Session.StartSession(user);
+                    ViewsManager.LimpiarVistas();
+                }
             }
-            else
+            catch (System.Exception excep)
             {
-                Rol rol = (Rol)roles.ElementAt(0);
-                user.RoleID = rol.ID;
-                user.Perfil = rol.Perfil;
-                svc.SetUserFunctionalities(user);
-                user.DetallePersona = detallesManager.getDetalles(user.UserID);
-                Session.StartSession(user);
-                ViewsManager.LimpiarVistas();
+                MessageBox.Show(excep.Message);
+
             }
         }
 

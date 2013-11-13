@@ -23,11 +23,14 @@ namespace ClinicaFrba.Negocio
                     .CreateWith("@profesionalID", afiliado.UserID)
                     .And("@fecha", Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]))
                     .Arguments);
+                //Devuelve los turnos de la fecha de hoy
             else
                  resultado = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                     "[SHARPS].GetAllAfiliadoTurnos", SqlDataAccessArgs
                     .CreateWith("@userId", afiliado.UserID)
+                    .And("@fecha", Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]))
                     .Arguments);
+                //Todos los turnos del afiliado, desde la fecha de hoy
 
             if (resultado != null)
             {
@@ -57,6 +60,7 @@ namespace ClinicaFrba.Negocio
                 .CreateWith("@profesionalID", profesional.UserID)
                 .And("@fecha",fecha)
                 .Arguments);
+            //Debe devolver las horas que tiene libre el profesional ese dia
             if (result != null)
             {
                 foreach (DataRow row in result.Rows)
@@ -78,6 +82,7 @@ namespace ClinicaFrba.Negocio
                     .And("@Profesional_ID", turno.Profesional.UserID)
                     .And("@Afiliado_ID", turno.Afiliado.UserID)
             .Arguments);
+            //Turno nuevo
         }
         public void RegistrarLlegada(Turno turno,Bono bono)
         {
@@ -87,18 +92,18 @@ namespace ClinicaFrba.Negocio
                     "@HoraLlegada", Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]))
                     .And("@Turno", turno.Numero)
                     .And("@Bono_Consulta", bono.Numero)
-            .Arguments);
+                    .Arguments);
+            //Ingresa la hora de llegada (guarda toda la fecha por si los horarios de la clinica cambian algun dia)
         }
         public void CancelarTurno(Turno turno)
         {
             
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "[SHARPS].RegistrarLlegada", SqlDataAccessArgs
+                "[SHARPS].CancelarTurnoAfiliado", SqlDataAccessArgs
                 .CreateWith(
-                    "@HoraLlegada", Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]))
-                    .And("@Profesional_ID", turno.Profesional.UserID)
-                    .And("@Afiliado_ID", turno.Afiliado.UserID)
-            .Arguments);
+                    "@turno", turno.Numero)
+                    .Arguments);
+            //Cancela un turno por parte del afiliado, motivo es cancelado por afiliado
         }
     }
 }

@@ -19,6 +19,7 @@ namespace ClinicaFrba.Negocio
                 "[SHARPS].GetEspecialidadesForUser", SqlDataAccessArgs
                 .CreateWith("@userId", userID)
                 .Arguments);
+            //Dado un profesional, debe devolver las especialidades que tiene
             if (result != null)
             {
                 foreach (DataRow row in result.Rows)

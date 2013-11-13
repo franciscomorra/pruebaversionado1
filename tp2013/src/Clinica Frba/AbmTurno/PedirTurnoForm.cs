@@ -72,11 +72,18 @@ namespace ClinicaFrba.AbmTurno
 
         private void PedirTurnoForm_Load(object sender, EventArgs e)
         {
-            if(_afiliado == null)
-                throw new Exception("No se cargo el afiliado");
+            try
+            {
+                if(_afiliado == null)
+                    throw new Exception("No se cargo el afiliado");
 
-            panelFecha.Visible = false;
-            panelHorario.Visible = false;
+                panelFecha.Visible = false;
+                panelHorario.Visible = false;
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+            }
         }
 
 

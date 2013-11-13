@@ -19,7 +19,7 @@ namespace ClinicaFrba.Negocio
                 "[SHARPS].GetRolesByPerfil", SqlDataAccessArgs
                 .CreateWith("@Perfil", perfil.Nombre)
             .Arguments);
-
+            //Dado un nombre de perfil, devolve los roles que cumplan que tienen su id
             var roles = new BindingList<Rol>();
             var functionalitiesManager = new FunctionalitiesManager();
             foreach (DataRow row in result.Rows)
@@ -36,11 +36,12 @@ namespace ClinicaFrba.Negocio
         }
         
         
-        public BindingList<Rol> GetRoles()
+        public BindingList<Rol> GetRoles() //Para el abm roles en particular
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(
                 ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].GetRoles"
+                //Todos los roles
             );
             var roles = new BindingList<Rol>();
             var functionalitiesManager = new FunctionalitiesManager();
@@ -67,7 +68,8 @@ namespace ClinicaFrba.Negocio
         {
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].DeleteRole", SqlDataAccessArgs
-                .CreateWith("@Rol_ID", rol.ID)
+                .CreateWith("@Rol_ID", rol.ID) 
+                //Inhabilita el rol, no hace falta tocar a los usuarios, cuando se loguean, si no tienen rol asignado salta error
             .Arguments);
         }
 
@@ -83,6 +85,7 @@ namespace ClinicaFrba.Negocio
                 "[SHARPS].InsertRole", SqlDataAccessArgs
                 .CreateWith("@Description", rol.Nombre).And("@PerfilID",rol.Perfil.ID)
             .Arguments);
+            //Inserta un rol
             rol.ID = roleId;
             UpdateRoleFunctionalities(rol);
         }
@@ -94,7 +97,7 @@ namespace ClinicaFrba.Negocio
                 .CreateWith("@Description", rol.Nombre)
                 .And("@ID", rol.ID)
             .Arguments);
-
+            //Cambia la descripcion de un rol
             UpdateRoleFunctionalities(rol);
         }
 
@@ -114,7 +117,7 @@ namespace ClinicaFrba.Negocio
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].GetUserRoles", SqlDataAccessArgs
                 .CreateWith("@userID", userID).Arguments);
-
+            //Devuelve todos los roles que estan activos
             var roles = new BindingList<Rol>();
 
             if (result != null && result.Rows != null)

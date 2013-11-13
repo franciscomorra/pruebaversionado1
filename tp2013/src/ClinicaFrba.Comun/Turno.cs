@@ -11,5 +11,10 @@ namespace ClinicaFrba.Comun
         public Profesional Profesional { get; set; }
         public Afiliado Afiliado { get; set; }
         public DateTime Fecha { get; set; }
+
+        public override string ToString()
+        {
+            return Fecha+" ("+Numero+")";
+        }
     }
 }

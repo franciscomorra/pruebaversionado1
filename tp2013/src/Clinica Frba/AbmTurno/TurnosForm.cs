@@ -129,7 +129,7 @@ namespace ClinicaFrba.AbmTurno
             var row = dgvTurnos.SelectedRows[0];
             var turno = row.DataBoundItem as Turno;
             _turnosManager.CancelarTurno(turno);
-            MessageBox.Show(string.Format("Turno {0} cancelado correctamente", turno.Fecha.ToString()));
+            MessageBox.Show(string.Format("Turno {0} cancelado correctamente", turno.ToString()));
         }
 
 

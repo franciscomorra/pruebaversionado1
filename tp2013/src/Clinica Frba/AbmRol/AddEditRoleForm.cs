@@ -27,7 +27,7 @@ namespace ClinicaFrba
         public AddEditRoleForm()
         {
             InitializeComponent();
-            var perfiles = profileMan.GetAllPerfils();
+            var perfiles = profileMan.GetAllPerfiles();
             if (perfiles.Count > 1)
             {
                 cbxPerfiles.DataSource = perfiles;

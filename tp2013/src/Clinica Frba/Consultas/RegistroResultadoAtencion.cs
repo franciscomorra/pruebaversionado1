@@ -110,24 +110,29 @@ namespace ClinicaFrba.Consultas
 
         private void btnGenerarReceta_Click(object sender, EventArgs e)
         {
-
-            if (_contadorRecetas <= 5)
+            try
             {
-                if (!_consultaAlmacenada)
+                if (_contadorRecetas <= 5)
                 {
-                    _consulta = rellenarConsulta();
-                    _consultasManager.Save(_consulta);
+                    if (!_consultaAlmacenada)
+                    {
+                        _consulta = rellenarConsulta();
+                        _consultasManager.Save(_consulta);
+                    }
                 }
+                else { 
+                    throw new Exception("No se pueden agregar mas de cinco recetas");
+                }
+                _recetaForm = new GenerarRecetaForm();
+                _recetaForm._afiliado = _afiliado;
+                _recetaForm._profesional = _profesional;
+                _recetaForm._turno = _turno;
+                _recetaForm.OnRecetaUpdated += new EventHandler<RecetaUpdatedEventArgs>(_recetaForm_OnRecetaUpdated);
             }
-            else { 
-                throw new Exception("No se pueden agregar mas de cinco recetas");
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
             }
-            _recetaForm = new GenerarRecetaForm();
-            _recetaForm._afiliado = _afiliado;
-            _recetaForm._profesional = _profesional;
-            _recetaForm._turno = _turno;
-            _recetaForm.OnRecetaUpdated += new EventHandler<RecetaUpdatedEventArgs>(_recetaForm_OnRecetaUpdated);
-
         }
 
         void _recetaForm_OnRecetaUpdated(object sender, RecetaUpdatedEventArgs e)
