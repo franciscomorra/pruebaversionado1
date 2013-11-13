@@ -1,8 +1,13 @@
-EN "REGISTRARLLEGADA" ME PASAS LA HORADELLEGADA PERO ESE DATO DONDE LO REGISTRO?
+EN "REGISTRARLLEGADA" ME PASAS LA HORADELLEGADA PERO ESE DATO DONDE LO REGISTRO? 
+	Va en el campo hora de llegada de turnos, la hora del turno la tiene agenda
 
 EN EL CODIGO C#
 - PUSISTE EN aGREGARMEDICAMENTOS 2 VECES @BONO  FARMACIA
+	Corregido, errar es humano, herrar es equino
 - EN POCEDIMIENTOS FRAN APARECE [SHARPS].GetPROFILEInfo PERO EN C# [SHARPS].GetPerfilInfo
+	Me canse de que dijera cosas en ingles en mi codigo, no soy un cipallo vendepatria
 - [SHARPS].GetMedicamentos TE DEVUELVO 2 COLUMNAS CON EL MISMO NOMBRE DE VARIBLE "NUMERO"
+	Corregido, uno queria decir codigo 
 - CASI TODAS LAS FUNCIONES DE PERFIL APARECEN EN C# COMO PERFIL Y EN PROCS FRAN COMO PROFILE
+	Mismo que lo anterior
 - 
