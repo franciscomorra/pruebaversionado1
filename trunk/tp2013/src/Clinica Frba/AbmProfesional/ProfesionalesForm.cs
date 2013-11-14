@@ -50,12 +50,12 @@ namespace ClinicaFrba.AbmProfesional
                 var dataSource = _ProfesionalManager.GetAll();
                 if (_isSearchMode)
                 {
-                    dataSource.Remove(new Profesional() { UserID = Session.User.UserID });
+                    dataSource.Remove(Session.Profesional);
                 }
 
                 profesionalesGrid.AutoGenerateColumns = false;
                 profesionalesGrid.DataSourceChanged += new EventHandler(profesionalesGrid_DataSourceChanged);
-                dataSource.Remove(new Profesional() { UserID = Session.User.UserID });
+                dataSource.Remove(Session.Profesional);
                 profesionalesGrid.DataSource = dataSource;
                 profesionalesGrid.DoubleClick += new EventHandler(profesionalesGrid_DoubleClick);
             }
@@ -174,7 +174,7 @@ namespace ClinicaFrba.AbmProfesional
             {
                 profesionales = new BindingList<Profesional>(profesionales.Where(x => x.Matricula.ToLowerInvariant().Equals(txtMatricula.Text.ToLowerInvariant())).ToList());
             }
-            profesionales.Remove(new Profesional() { UserID = Session.User.UserID });
+            profesionales.Remove(Session.Profesional);
             profesionalesGrid.DataSource = profesionales;
             profesionalesGrid.Refresh();
         }

@@ -37,6 +37,7 @@
             this.panelRoles = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.comboRoles = new System.Windows.Forms.ComboBox();
+            this.btnRol = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panelRoles.SuspendLayout();
             this.SuspendLayout();
@@ -100,11 +101,12 @@
             // panelRoles
             // 
             this.panelRoles.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panelRoles.Controls.Add(this.btnRol);
             this.panelRoles.Controls.Add(this.label3);
             this.panelRoles.Controls.Add(this.comboRoles);
             this.panelRoles.Location = new System.Drawing.Point(169, 231);
             this.panelRoles.Name = "panelRoles";
-            this.panelRoles.Size = new System.Drawing.Size(235, 61);
+            this.panelRoles.Size = new System.Drawing.Size(235, 91);
             this.panelRoles.TabIndex = 6;
             this.panelRoles.Visible = false;
             // 
@@ -124,7 +126,16 @@
             this.comboRoles.Name = "comboRoles";
             this.comboRoles.Size = new System.Drawing.Size(212, 21);
             this.comboRoles.TabIndex = 0;
-            this.comboRoles.SelectedIndexChanged += new System.EventHandler(this.comboRoles_SelectedIndexChanged);
+            // 
+            // btnRol
+            // 
+            this.btnRol.Location = new System.Drawing.Point(150, 53);
+            this.btnRol.Name = "btnRol";
+            this.btnRol.Size = new System.Drawing.Size(75, 23);
+            this.btnRol.TabIndex = 3;
+            this.btnRol.Text = "Comenzar!";
+            this.btnRol.UseVisualStyleBackColor = true;
+            this.btnRol.Click += new System.EventHandler(this.btnRol_Click);
             // 
             // LoginForm
             // 
@@ -155,5 +166,6 @@
         private System.Windows.Forms.Panel panelRoles;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboRoles;
+        private System.Windows.Forms.Button btnRol;
     }
 }

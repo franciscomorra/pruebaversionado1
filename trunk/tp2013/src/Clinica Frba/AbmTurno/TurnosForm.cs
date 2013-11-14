@@ -61,10 +61,9 @@ namespace ClinicaFrba.AbmTurno
             if (Session.User.Perfil.Nombre == "Afiliado")
             {
                 _afiliado = new Afiliado();
-                _afiliado.UserID = Session.User.UserID;
-                _afiliado.DetallesPersona = Session.User.DetallesPersona;
+                _afiliado = Session.Afiliado;
                 btnBuscarAfiliado.Visible = false;
-                txtAfiliado.Text = Session.User.ToString();
+                txtAfiliado.Text = _afiliado.ToString();
                 panelAcciones.Visible = true;
                 RefreshDataGrid();
             }
