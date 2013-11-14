@@ -133,10 +133,9 @@ GO
 CREATE TABLE [SHARPS].Estados_Turno ( 
 	EstadoID [int] IDENTITY(1,1) NOT NULL,
 	Descripcion nvarchar(50),
-	MotivoCancelacion nvarchar(50),
 CONSTRAINT [PK_Estados_Turno] PRIMARY KEY CLUSTERED 
 (
-	EstadoID ASC
+	[EstadoID] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -639,7 +638,8 @@ INSERT INTO [SHARPS].Estados_Civiles (Descripcion) VALUES ('Divorciado')
 
 PRINT 'Ingresando Estados de un Turno...'
 INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('Atendido'); 
-INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('Cancelado');
+INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('CanceladoAfiliado');
+INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('CanceladoAProfesional');
 INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('Activo');---todavia no es el dia del turno
 
 
