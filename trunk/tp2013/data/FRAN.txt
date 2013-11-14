@@ -14,14 +14,14 @@ EN EL CODIGO C#
 	
 EN EL SQL
 	- Cambia los nombres de los procedures, como a vos te guste mas, yo voy a ponerte un detalle al lado para que tengas en cuenta que tienen que hacer, si estan en castellano mejor XD
-	-Cuando te pido los bonos de consulta, que no esten vencidos, y que pertenezcan al grupo familiar, no al usuario nomas
+	X-Cuando te pido los bonos de consulta, que no esten vencidos, y que pertenezcan al grupo familiar, no al usuario nomas
 	-En InsertMiembroGrupoFamiliar, agregue tipo de afiliado, te lo voy a pasar, vos lo agregas nomas
-		El usuario id que te estoy pasando lo saco, era para que vieras quien es el jefe de familia
-	-En compra de bonos, yo te paso el precio que se esta pagando, vos guardalo nomas en el campo precio pagado
+		El usuario id que te estoy pasando lo saco, era para que vieras quien es el jefe de familia |||||||||||||||||| SI PERO SI ME SACAS EL id COMO BUSCO EL  GRUPO QUE PERTENECE EL MIEMBRO||||||||||||
+	X-En compra de bonos, yo te paso el precio que se esta pagando, vos guardalo nomas en el campo precio pagado
 		NO ME ESTA DEVOLVIENDO EL NUMERO DE BONO
-	-En turnos, me habia faltado cancelar turno del afiliado
-	-Tambien en turnos, cambie los nombres de los procedimientos, y puse detalles
-	-Agregue delete afiliado y profesional, tenes que desactivarlos nomas
+	X-En turnos, me habia faltado cancelar turno del afiliado
+	X-Tambien en turnos, cambie los nombres de los procedimientos, y puse detalles
+	X-Agregue delete afiliado y profesional, tenes que desactivarlos nomas
 Cambiate el procedimiento  UpdateAfiliado y el insert afiliado, yo te paso le nombre del estado civil, y faltan_datos va a ir en 0, al igual que en update profesionals, a parte, el ID es lo que se guarda en cambios afiliado
 Hay algo tambien que esta mal cuando lo guarda, cuando hago get info no me lo devuelve.
 
