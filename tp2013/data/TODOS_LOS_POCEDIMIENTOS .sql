@@ -684,8 +684,8 @@ DECLARE @NUMEROBONO INT
 DECLARE @PLAN INT
 SELECT @PLAN = A.Plan_Medico FROM Afiliados A WHERE A.UsuarioID = @AfiliadoCompro 
 SELECT @NUMEROBONO = MAX(Numero) + 1  FROM [SHARPS].Bonos_Consulta 
-INSERT INTO [SHARPS].Bonos_Consulta (Numero,Plan_Medico,Fecha_Impresion,Afiliado_Compro,Precio_Pagado)
-VALUES (@NUMEROBONO , @PLAN , @Fecha , @AfiliadoCompro,@Precio)
+INSERT INTO [SHARPS].Bonos_Consulta (Numero,Fecha_Impresion,Afiliado_Compro,Precio_Pagado)
+VALUES (@NUMEROBONO  , @Fecha , @AfiliadoCompro,@Precio)
 RETURN @NUMEROBONO 
 END
 GO
@@ -702,8 +702,8 @@ DECLARE @NUMEROBONO INT
 DECLARE @PLAN INT
 SELECT @PLAN = A.Plan_Medico FROM Afiliados A WHERE A.UsuarioID = @AfiliadoCompro 
 SELECT @NUMEROBONO = MAX(Numero) + 1 FROM [SHARPS].Bonos_Farmacia
-INSERT INTO [SHARPS].Bonos_Farmacia(Numero,Plan_Medico,Fecha_Impresion,Afiliado_Compro,Precio_Pagado)
-VALUES (@NUMEROBONO , @PLAN , @Fecha , @AfiliadoCompro,@Precio)
+INSERT INTO [SHARPS].Bonos_Farmacia(Numero,Fecha_Impresion,Afiliado_Compro,Precio_Pagado)
+VALUES (@NUMEROBONO  , @Fecha , @AfiliadoCompro,@Precio)
 RETURN @NUMEROBONO
 END
 GO
@@ -963,5 +963,20 @@ WHERE UsuarioID = @ID
 
 END
 GO
-
+USE [GD2C2013]
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [SHARPS].[InsertDiaProfesional]
+	@Fecha datetime,
+	@Profesional int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	DELETE FROM SHARPS.Agendas WHERE Profesional = @Profesional AND Horario > @Fecha 
+    --Si tiene un turno asignado en la fecha, deberiamos cancelarlo, de alguna manera
+	INSERT INTO SHARPS.Agendas(Horario,Profesional, Activo) VALUES (@Fecha,@Profesional,1)
+	--SELECT @@Identity AS ID
+END
 
