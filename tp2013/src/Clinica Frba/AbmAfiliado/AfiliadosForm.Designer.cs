@@ -47,7 +47,7 @@
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.dgvAfiliados = new System.Windows.Forms.DataGridView();
-            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Matricula = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonsPanel.SuspendLayout();
             this.searchPanel.SuspendLayout();
@@ -252,7 +252,7 @@
             this.dgvAfiliados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAfiliados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAfiliados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Email,
+            this.Nombre,
             this.Matricula});
             this.dgvAfiliados.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAfiliados.Location = new System.Drawing.Point(0, 156);
@@ -262,12 +262,12 @@
             this.dgvAfiliados.Size = new System.Drawing.Size(588, 314);
             this.dgvAfiliados.TabIndex = 7;
             // 
-            // Email
+            // Nombre
             // 
-            this.Email.DataPropertyName = "DetallePersona";
-            this.Email.HeaderText = "Nombre y Apellido";
-            this.Email.Name = "Email";
-            this.Email.ReadOnly = true;
+            this.Nombre.DataPropertyName = "DetallesPersona";
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
             // 
             // Matricula
             // 
@@ -318,7 +318,7 @@
         private System.Windows.Forms.Label lblResults;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridView dgvAfiliados;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Matricula;
     }
 }

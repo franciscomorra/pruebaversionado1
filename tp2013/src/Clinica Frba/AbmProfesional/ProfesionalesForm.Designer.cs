@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.profesionalesGrid = new System.Windows.Forms.DataGridView();
-            this.Matricula = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.buttonsPanel = new System.Windows.Forms.Panel();
@@ -41,6 +39,7 @@
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.groupBox = new System.Windows.Forms.GroupBox();
+            this.cbxEspecialidad = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -48,7 +47,8 @@
             this.txtMatricula = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
-            this.cbxEspecialidad = new System.Windows.Forms.ComboBox();
+            this.Matricula = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.profesionalesGrid)).BeginInit();
             this.buttonsPanel.SuspendLayout();
             this.searchPanel.SuspendLayout();
@@ -64,7 +64,7 @@
             this.profesionalesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.profesionalesGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Matricula,
-            this.Email});
+            this.Nombre});
             this.profesionalesGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.profesionalesGrid.Location = new System.Drawing.Point(0, 156);
             this.profesionalesGrid.MultiSelect = false;
@@ -72,22 +72,6 @@
             this.profesionalesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.profesionalesGrid.Size = new System.Drawing.Size(952, 396);
             this.profesionalesGrid.TabIndex = 6;
-            // 
-            // Matricula
-            // 
-            this.Matricula.DataPropertyName = "Matricula";
-            this.Matricula.FillWeight = 27.52253F;
-            this.Matricula.HeaderText = "Matricula";
-            this.Matricula.Name = "Matricula";
-            this.Matricula.ReadOnly = true;
-            // 
-            // Email
-            // 
-            this.Email.DataPropertyName = "DetallePersona";
-            this.Email.FillWeight = 153.2087F;
-            this.Email.HeaderText = "Nombre";
-            this.Email.Name = "Email";
-            this.Email.ReadOnly = true;
             // 
             // btnEliminar
             // 
@@ -208,6 +192,15 @@
             this.groupBox.TabStop = false;
             this.groupBox.Text = "Filtro";
             // 
+            // cbxEspecialidad
+            // 
+            this.cbxEspecialidad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxEspecialidad.FormattingEnabled = true;
+            this.cbxEspecialidad.Location = new System.Drawing.Point(725, 18);
+            this.cbxEspecialidad.Name = "cbxEspecialidad";
+            this.cbxEspecialidad.Size = new System.Drawing.Size(203, 21);
+            this.cbxEspecialidad.TabIndex = 8;
+            // 
             // label4
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -270,14 +263,21 @@
             this.txtApellido.Size = new System.Drawing.Size(197, 20);
             this.txtApellido.TabIndex = 0;
             // 
-            // cbxEspecialidad
+            // Matricula
             // 
-            this.cbxEspecialidad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbxEspecialidad.FormattingEnabled = true;
-            this.cbxEspecialidad.Location = new System.Drawing.Point(725, 18);
-            this.cbxEspecialidad.Name = "cbxEspecialidad";
-            this.cbxEspecialidad.Size = new System.Drawing.Size(203, 21);
-            this.cbxEspecialidad.TabIndex = 8;
+            this.Matricula.DataPropertyName = "Matricula";
+            this.Matricula.FillWeight = 27.52253F;
+            this.Matricula.HeaderText = "Matricula";
+            this.Matricula.Name = "Matricula";
+            this.Matricula.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            this.Nombre.DataPropertyName = "DetallesPersona";
+            this.Nombre.FillWeight = 153.2087F;
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
             // 
             // ProfesionalesForm
             // 
@@ -320,8 +320,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Matricula;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
         private System.Windows.Forms.ComboBox cbxEspecialidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Matricula;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
     }
 }
