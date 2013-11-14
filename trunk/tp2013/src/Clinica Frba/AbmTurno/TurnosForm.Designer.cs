@@ -32,12 +32,12 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.dgvTurnos = new System.Windows.Forms.DataGridView();
-            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelAfiliado = new System.Windows.Forms.Panel();
             this.btnBuscarAfiliado = new System.Windows.Forms.Button();
             this.lblAfiliado = new System.Windows.Forms.Label();
             this.txtAfiliado = new System.Windows.Forms.TextBox();
             this.panelAcciones = new System.Windows.Forms.Panel();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTurnos)).BeginInit();
             this.panelAfiliado.SuspendLayout();
@@ -46,6 +46,8 @@
             // 
             // buttonsPanel
             // 
+            this.buttonsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonsPanel.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonsPanel.Controls.Add(this.btnCancelar);
             this.buttonsPanel.Controls.Add(this.btnAgregar);
@@ -90,15 +92,8 @@
             this.dgvTurnos.Name = "dgvTurnos";
             this.dgvTurnos.ReadOnly = true;
             this.dgvTurnos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvTurnos.Size = new System.Drawing.Size(828, 208);
+            this.dgvTurnos.Size = new System.Drawing.Size(839, 208);
             this.dgvTurnos.TabIndex = 5;
-            // 
-            // Fecha
-            // 
-            this.Fecha.DataPropertyName = "Fecha";
-            this.Fecha.HeaderText = "Fecha";
-            this.Fecha.Name = "Fecha";
-            this.Fecha.ReadOnly = true;
             // 
             // panelAfiliado
             // 
@@ -146,6 +141,13 @@
             this.panelAcciones.Size = new System.Drawing.Size(842, 262);
             this.panelAcciones.TabIndex = 24;
             // 
+            // Fecha
+            // 
+            this.Fecha.DataPropertyName = "Turno";
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.Name = "Fecha";
+            this.Fecha.ReadOnly = true;
+            // 
             // TurnosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -175,7 +177,7 @@
         private System.Windows.Forms.Label lblAfiliado;
         private System.Windows.Forms.TextBox txtAfiliado;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
         private System.Windows.Forms.Panel panelAcciones;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
     }
 }

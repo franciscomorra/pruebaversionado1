@@ -118,12 +118,14 @@
             // 
             // Numero
             // 
+            this.Numero.DataPropertyName = "Bono";
             this.Numero.HeaderText = "Numero de Bono";
             this.Numero.Name = "Numero";
             this.Numero.ReadOnly = true;
             // 
             // AfiliadoCompro
             // 
+            this.AfiliadoCompro.DataPropertyName = "Bono";
             this.AfiliadoCompro.HeaderText = "Comprado Por";
             this.AfiliadoCompro.Name = "AfiliadoCompro";
             this.AfiliadoCompro.ReadOnly = true;
