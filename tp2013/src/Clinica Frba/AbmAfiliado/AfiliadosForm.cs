@@ -38,11 +38,11 @@ namespace ClinicaFrba.AbmAfiliado
                 var dataSource = _afiliadoManager.GetAll();
                 if (_isSearchMode)
                 {
-                    dataSource.Remove(new Afiliado() { UserID = Session.User.UserID });
+                    dataSource.Remove(Session.Afiliado);
                 }
                 dgvAfiliados.AutoGenerateColumns = false;
                 dgvAfiliados.DataSourceChanged += new EventHandler(dgvAfiliados_DataSourceChanged);
-                dataSource.Remove(new Afiliado() { UserID = Session.User.UserID});
+                dataSource.Remove(Session.Afiliado);
                 dgvAfiliados.DataSource = dataSource;
                 dgvAfiliados.DoubleClick += new EventHandler(dgvAfiliados_DoubleClick);
             }
@@ -232,7 +232,7 @@ namespace ClinicaFrba.AbmAfiliado
             {
                 afiliados = new BindingList<Afiliado>(afiliados.Where(x => x.NroAfiliado == nroAfiliado).ToList());
             }
-            afiliados.Remove(new Afiliado() { UserID = Session.User.UserID });
+            afiliados.Remove(Session.Afiliado);
             dgvAfiliados.DataSource = new BindingList<Afiliado>(afiliados.OrderBy(x => x.DetallesPersona.Apellido + x.DetallesPersona.Nombre).ToList());
             dgvAfiliados.Refresh();
         }

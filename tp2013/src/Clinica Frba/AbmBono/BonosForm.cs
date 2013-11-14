@@ -61,7 +61,7 @@ namespace ClinicaFrba.AbmBono
             {
                 if (_afiliado == null)
                 {
-                    _afiliado = Session.User as Afiliado;
+                    _afiliado = Session.Afiliado;
                     txtAfiliado.Text = _afiliado.ToString();
                     btnBuscarAfiliado.Visible = false;
                 }

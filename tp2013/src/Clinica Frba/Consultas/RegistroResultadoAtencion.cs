@@ -159,8 +159,7 @@ namespace ClinicaFrba.Consultas
             panelTurno.Visible = false;
             if (Session.User.Perfil.Nombre == "Profesional") {
                 _profesional = new Profesional();
-                _profesional.UserID = Session.User.UserID;
-                _profesional.DetallesPersona = Session.User.DetallesPersona;
+                _profesional = Session.Profesional;
                 txtProfesional.Text = _profesional.ToString();
                 btnBuscarProfesional.Visible = false;
                 panelAfiliado.Visible = true;

@@ -47,6 +47,7 @@ namespace ClinicaFrba.Login
                 {
                     comboRoles.DataSource = roles;
                     comboRoles.DisplayMember = "Nombre";
+                    comboRoles.SelectedIndex = 0;
                     panelRoles.Show();
                 }
                 else
@@ -109,12 +110,8 @@ namespace ClinicaFrba.Login
                 MessageBox.Show(excep.Message);
 
             }
-
-
-        
         }
-
-        private void comboRoles_SelectedIndexChanged(object sender, EventArgs e)
+        private void btnRol_Click(object sender, EventArgs e)
         {
             Rol rolSelected = (Rol)comboRoles.SelectedItem;
             user.RoleID = rolSelected.ID;
