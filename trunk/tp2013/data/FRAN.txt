@@ -17,6 +17,7 @@ EN EL SQL
 	X-Cuando te pido los bonos de consulta, que no esten vencidos, y que pertenezcan al grupo familiar, no al usuario nomas
 	-En InsertMiembroGrupoFamiliar, agregue tipo de afiliado, te lo voy a pasar, vos lo agregas nomas
 		El usuario id que te estoy pasando lo saco, era para que vieras quien es el jefe de familia |||||||||||||||||| SI PERO SI ME SACAS EL id COMO BUSCO EL  GRUPO QUE PERTENECE EL MIEMBRO||||||||||||
+		TE PASO EL GRUPO FAMILIAR Y EL NUMERO DE MIEMBRO!
 	X-En compra de bonos, yo te paso el precio que se esta pagando, vos guardalo nomas en el campo precio pagado
 		NO ME ESTA DEVOLVIENDO EL NUMERO DE BONO
 	X-En turnos, me habia faltado cancelar turno del afiliado
@@ -53,3 +54,6 @@ VALUES (@Motivo , GETDATE() ,@ID )
 DELETE SHARPS.Usuarios_Roles WHERE Usuario = @ID AND Rol = @RolAfiliado
 INSERT INTO SHARPS.Usuarios_Roles (Usuario , Rol) VALUES (@ID , @RolAfiliado)
 END
+
+
+Faltan algunos procedimientos, proba la aplicacion en turnos particularmente

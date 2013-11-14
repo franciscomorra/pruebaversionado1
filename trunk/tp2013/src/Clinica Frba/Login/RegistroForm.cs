@@ -56,7 +56,10 @@ namespace ClinicaFrba
         private PerfilManager _perfilesManager = new PerfilManager();
         public bool elegirPerfil = true;
         public Perfil perfil;
+        public Afiliado _conyuge = new Afiliado();
+        public Afiliado _padre = new Afiliado();
         User user = new User();
+        public int _nroAfiliado;
         public RegistroForm()
         {
             bool puedeModificarAfiliados = Session.User.Permissions.Contains(Functionalities.AdministrarAfiliados);
@@ -91,7 +94,11 @@ namespace ClinicaFrba
             rellenarCamposUsuario(afiliado.DetallesPersona, afiliado.UserName);
             cbxPerfiles.SelectedItem = _perfilesManager.getInfo("Afiliado");
             afiliadoUserControl.rellenarCampos(_afiliado);
+            afiliadoUserControl._conyuge = _conyuge;
+            afiliadoUserControl._padre = _padre;
+            afiliadoUserControl._nroAfiliado = _nroAfiliado;
             userPanel.Controls.Add(afiliadoUserControl);
+
         }
         public void rellenarProfesional(Profesional profesional)//Modificacion de profesional
         {

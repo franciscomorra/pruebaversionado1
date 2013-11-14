@@ -122,24 +122,53 @@ namespace ClinicaFrba.AbmAfiliado
             dgvAfiliados.DataSource = new BindingList<Afiliado>(dataSource.OrderBy(x => x.DetallesPersona.Apellido + x.DetallesPersona.Nombre).ToList());
             dgvAfiliados.Refresh();
             MessageBox.Show("Se han guardado los datos del Afiliado " + e.Username);
-
-
-
-            if (tieneGenteACargo(afiliado))
-            {
-                var grupoFamiliar = _afiliadoManager.GetAllFromGrupoFamiliar(afiliado.grupoFamiliar);
-
-                if (!todosLosIntegrantesCargados(afiliado))
-                { 
-                
-                }
+            var familia = _afiliadoManager.GetAllFromGrupoFamiliar(afiliado.grupoFamiliar);
+            Afiliado conyugeCargado = new BindingList<Afiliado>(familia.Where(x => (x.grupoFamiliar == afiliado.grupoFamiliar && x.tipoAfiliado == 2)).ToList()).First();
             
+            if (conyugeCargado == null && (afiliado.EstadoCivil == EstadoCivil.Casado || afiliado.EstadoCivil == EstadoCivil.Concubinato))
+            {
+                if (MessageBox.Show(string.Format("Desea agregar a su conyuge?"), "Agregar Conyuge", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    var regForm = new RegistroForm();
+                    regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
+                    Afiliado conyuge = new Afiliado();
+                    conyuge.CantHijos = afiliado.CantHijos;
+                    conyuge.EstadoCivil = afiliado.EstadoCivil;
+                    conyuge.grupoFamiliar = afiliado.grupoFamiliar;
+                    conyuge.tipoAfiliado = 2;
+                    conyuge.UserName = (afiliado.grupoFamiliar + 2).ToString();
+                    conyuge.DetallesPersona = afiliado.DetallesPersona;
+                    conyuge.DetallesPersona.Nombre = "";
+                    conyuge.DetallesPersona.DNI = 0;
+                    regForm._conyuge = afiliado;
+                    regForm.rellenarAfiliado(afiliado);
+                    ViewsManager.LoadModal(regForm);
+                }  
+            }
+            BindingList<Afiliado> hijos = new BindingList<Afiliado>(familia.Where(x => (x.grupoFamiliar == afiliado.grupoFamiliar && x.tipoAfiliado>2)).ToList());
+            if ((hijos.Count < afiliado.CantHijos))
+            {
+                if (MessageBox.Show(string.Format("No todos sus hijos parecen estar cargados, desea cargarlos?"), "Agregar Hijos", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    var regForm = new RegistroForm();
+                    regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
+                    Afiliado hijo = new Afiliado();
+                    hijo.CantHijos = afiliado.CantHijos;
+                    hijo.EstadoCivil = EstadoCivil.Soltero;
+                    hijo.grupoFamiliar = afiliado.grupoFamiliar;
+                    hijo.tipoAfiliado = 2;
+                    hijo.UserName = (afiliado.grupoFamiliar + 2).ToString();
+                    hijo.DetallesPersona = afiliado.DetallesPersona;
+                    hijo.DetallesPersona.Nombre = "";
+                    hijo.DetallesPersona.DNI = 0;
+                    regForm._padre = afiliado;
+                    regForm.rellenarAfiliado(afiliado);
+                    regForm._nroAfiliado = afiliado.CantHijos + 1;
+                    ViewsManager.LoadModal(regForm);
+                }  
             }
         }
-        private bool todosLosIntegrantesCargados(Afiliado afiliado)
-        {
-            return true;
-        }
+
         private bool tieneGenteACargo(Afiliado afiliado)
         {
             var integrantes_grupoFamiliar = _afiliadoManager.GetAll();
@@ -147,11 +176,10 @@ namespace ClinicaFrba.AbmAfiliado
             //Filtro los que tengan el mismo grupo familiar que el que guardo
             if (integrantes_grupoFamiliar.Count > 0) { 
             //Hay mas gente en el grupo familiar
+
                 if (afiliado.EstadoCivil == EstadoCivil.Casado || afiliado.EstadoCivil == EstadoCivil.Concubinato)
                     //Pregunto por los estados civiles que significan pareja a cargo
                     return true;
-
-            
             }
             return false;
         }

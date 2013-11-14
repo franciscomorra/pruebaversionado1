@@ -16,10 +16,7 @@ namespace ClinicaFrba.Login
         private Afiliado _afiliado = new Afiliado();
         public Afiliado _conyuge = new Afiliado();
         public Afiliado _padre = new Afiliado();
-        public bool esHijo = false;
-        public bool esPadre = false;
-        public bool esConyuge = false;
-
+        public int _nroAfiliado;
         public Afiliado devolverCampos()
         {
             try
@@ -53,20 +50,31 @@ namespace ClinicaFrba.Login
                 txtMotivo.Enabled = false;
             }
             panelMotivo.Visible = (afiliado.NroAfiliado != 0);
-            if (esConyuge) {
+            if (_conyuge!=null) { //Cargando marido/esposa del afiliado principal
                 txtConyuge.Text = _conyuge.ToString();
                 panelFamiliar.Visible = false;
+                txtHijos.Text = _afiliado.CantHijos.ToString();
+                txtHijos.Enabled = false;
+                cbxEstadoCivil.SelectedItem = _afiliado.EstadoCivil;
+                cbxEstadoCivil.Enabled = false;
                 _afiliado.grupoFamiliar = _conyuge.grupoFamiliar;
                 _afiliado.tipoAfiliado = 2;
             }
-            else if (esHijo) {
+            else if (_padre != null)//Carga de hijos
+            {
                 txtPadre.Text = _padre.ToString();
                 panelPadre.Visible = false;
-                _afiliado.grupoFamiliar = _padre.grupoFamiliar;            
+                _afiliado.grupoFamiliar = _padre.grupoFamiliar;
+                txtHijos.Text = "0";
+                txtHijos.Enabled = false;
+                cbxEstadoCivil.SelectedItem = EstadoCivil.Soltero;
+                cbxEstadoCivil.Enabled = false;
+                _afiliado.NroAfiliado = _nroAfiliado;
             }
-            else if (esPadre) {
+            else {//Es padre
                 panelPadre.Visible = false;
                 panelConyuge.Visible = false;
+                _afiliado.NroAfiliado = 1;
             }
         }
 
