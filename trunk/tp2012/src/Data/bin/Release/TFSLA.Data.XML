@@ -1,0 +1,310 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Data</name>
+    </assembly>
+    <members>
+        <member name="T:Data.SqlDataAccess">
+            <summary>
+            Represents a provider data access class only for SQL database type.
+            <seealso cref="T:Data.SqlDataAccessArgs"/>
+            </summary>
+        </member>
+        <member name="M:Data.SqlDataAccess.OpenTransaction(System.String)">
+            <summary>
+            Opens a connection and instantiates a transaction for the specified connection string
+            </summary>
+            <param name="connectionString">Connection string.</param>
+            <returns>The transaction oppened.</returns>
+        </member>
+        <member name="M:Data.SqlDataAccess.Commit(System.Data.SqlClient.SqlTransaction)">
+            <summary>
+            Executes the commit for a specified transaction and closes Session's connection
+            </summary>
+            <param name="transaction">The transaction to be commited.</param>
+        </member>
+        <member name="M:Data.SqlDataAccess.Rollback(System.Data.SqlClient.SqlTransaction)">
+            <summary>
+            Rollback a specified transaction and closes Session's connection
+            </summary>
+            <param name="transaction">The transaction to be rolled back.</param>
+        </member>
+        <member name="M:Data.SqlDataAccess.ExecuteNonQuery(System.String,System.String)">
+            <summary>
+            Executes a Transact-SQL statement against the connection and returns the number of rows affected.
+            </summary>
+            <example>This sample shows how to call the ExecuteNonQuery method.
+            <code escaped="true" lang="C#">
+              class MyClass 
+              {
+                 public static int Main() 
+                 {
+                    SqlDataAccess.ExecuteNonQuery("connectionstring_db1", "RunCleanUp");
+                 }
+              }
+            </code>
+            </example>        
+            <param name="connectionString">Connection string.</param>
+            <param name="text">The store procedure name to be executed.</param>
+            <returns>The number of rows affected.</returns>
+        </member>
+        <member name="M:Data.SqlDataAccess.ExecuteNonQuery(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Executes a Transact-SQL statement against the connection and returns the number of rows affected.
+            </summary>
+            <example>This sample shows how to call the ExecuteNonQuery method.
+            <code escaped="true" lang="C#">
+              class MyClass 
+              {
+                 public static int Main() 
+                 {
+                    SqlDataAccess.ExecuteNonQuery("connectionstring_db1", "UpdatePerson",
+                        SqlDataAccessArgs.CreateWith("@FirstName", "Pablo")
+                            .And("@LastName", "Kerestezachi").Arguments);
+                 }
+              }
+            </code>
+            </example>
+            <param name="connectionString">Connection string.</param>
+            <param name="text">The store procedure name to be executed.</param>
+            <param name="args">The arguments passed to execute the sentence.</param>
+            <returns>The number of rows affected.</returns>
+        </member>
+        <member name="M:Data.SqlDataAccess.ExecuteNonQuery(System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.Data.SqlClient.SqlTransaction)">
+            <summary>
+            Executes a Transact-SQL statement against the connection and returns the number of rows affected.
+            </summary>
+            <example>This sample shows how to call the ExecuteNonQuery method.
+            <code escaped="true" lang="C#">
+              class MyClass 
+              {
+                 public static int Main() 
+                 {
+                    SqlDataAccess.ExecuteNonQuery("connectionstring_db1", "UpdatePerson",
+                        SqlDataAccessArgs.CreateWith("@FirstName", "Pablo")
+                            .And("@LastName", "Kerestezachi").Arguments);
+                 }
+              }
+            </code>
+            </example>
+            <param name="text">The store procedure name to be executed.</param>
+            <param name="args">The arguments passed to execute the sentence.</param>
+            <param name="transaction">The transaction which holds the statement to be executed.</param>
+            <returns>The number of rows affected.</returns>
+        </member>
+        <!-- El comentario XML con formato incorrecto se omite para el miembro "M:Data.SqlDataAccess.ExecuteScalarQuery``1(System.String,System.String)" -->
+        <!-- El comentario XML con formato incorrecto se omite para el miembro "M:Data.SqlDataAccess.ExecuteScalarQuery``1(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})" -->
+        <!-- El comentario XML con formato incorrecto se omite para el miembro "M:Data.SqlDataAccess.ExecuteScalarQuery``1(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String)" -->
+        <member name="M:Data.SqlDataAccess.ExecuteScalarQuery(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
+            <summary>
+            Executes the query, and returns the column name passed in the last parameter of the first row in the result set returned by the query. Additional columns or rows are ignored.
+            </summary>
+            <param name="connectionString">Connection string.</param>
+            <param name="text">The store procedure name to be executed.</param>
+            <param name="args">The arguments passed to execute the sentence.</param>
+            <param name="field">The field name of the specified column retrieval.</param>
+            <returns>The column name passed in the last parameter of the first row in the result set, or a null reference (Nothing in Visual Basic) if the result set is empty.</returns>
+        </member>
+        <member name="M:Data.SqlDataAccess.ExecuteDataTableQuery(System.String,System.String)">
+            <summary>
+            Executes a Transact-SQL statement against the connection and returns a <see href="http://msdn2.microsoft.com/en-us/library/system.data.datatable.aspx">DataTable</see> object.
+            </summary>
+            <example>This sample shows how to call the ExecuteDataTableQuery method.
+            <code escaped="true" lang="C#">
+              class MyClass 
+              {
+                 public static int Main() 
+                 {
+                    DataTable dataTable = SqlDataAccess.ExecuteDataTableQuery("connectionstring_db1", "RetreivePersons");
+                 }
+              }
+            </code>
+            </example>
+            <param name="connectionString">Connection string.</param>
+            <param name="text">The store procedure name to be executed.</param>
+            <returns>An instance of a <see href="http://msdn2.microsoft.com/en-us/library/system.data.datatable.aspx">DataTable</see> class.</returns>
+        </member>
+        <member name="M:Data.SqlDataAccess.ExecuteDataTableQuery(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Executes a Transact-SQL statement against the connection and returns a <see href="http://msdn2.microsoft.com/en-us/library/system.data.datatable.aspx">DataTable</see> object.
+            </summary>
+            <example>This sample shows how to call the ExecuteDataTableQuery method.
+            <code escaped="true" lang="C#">
+              class MyClass 
+              {
+                 public static int Main() 
+                 {
+                    DataTable dataTable = SqlDataAccess.ExecuteDataTableQuery("connectionstring_db1", "RetreivePersonsByStatus",
+                        SqlDataAccessArgs.CreateWith("@Enabled", True).Arguments);
+                 }
+              }
+            </code>
+            </example>
+            <param name="connectionString">Connection string.</param>
+            <param name="text">The store procedure name to be executed.</param>
+            <param name="args">The arguments passed to execute the sentence.</param>
+            <returns>An instance of a <see href="http://msdn2.microsoft.com/en-us/library/system.data.datatable.aspx">DataTable</see> class.</returns>
+        </member>
+        <member name="M:Data.SqlDataAccess.ExecuteDataRowQuery(System.String,System.String)">
+            <summary>
+            Executes a Transact-SQL statement against the connection and returns a <see href="http://msdn2.microsoft.com/en-us/library/system.data.datarow.aspx">DataRow</see> object.
+            </summary>
+            <example>This sample shows how to call the ExecuteDataRowQuery method.
+            <code escaped="true" lang="C#">
+              class MyClass 
+              {
+                 public static int Main() 
+                 {
+                    DataRow dataRow = SqlDataAccess.ExecuteDataRowQuery("connectionstring_db1", "RetreiveCacheConfig");
+                 }
+              }
+            </code>
+            </example>
+            <param name="connectionString">Connection string.</param>
+            <param name="text">The store procedure name to be executed.</param>
+            <returns>An instance of a <see href="http://msdn2.microsoft.com/en-us/library/system.data.datarow.aspx">DataRow</see> class.</returns>
+        </member>
+        <member name="M:Data.SqlDataAccess.ExecuteDataRowQuery(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Executes a Transact-SQL statement against the connection and returns a <see href="http://msdn2.microsoft.com/en-us/library/system.data.datarow.aspx">DataRow</see> object.
+            </summary>
+            <example>This sample shows how to call the ExecuteDataRowQuery method.
+            <code escaped="true" lang="C#">
+              class MyClass 
+              {
+                 public static int Main() 
+                 {
+                    DataRow dataRow = SqlDataAccess.ExecuteDataRowQuery("connectionstring_db1", "RetreiveConfig",
+                        SqlDataAccessArgs.CreateWith("@ConfigName", "Cache").Arguments);
+                 }
+              }
+            </code>
+            </example>
+            <param name="connectionString">Connection string.</param>
+            <param name="text">The store procedure name to be executed.</param>
+            <param name="args">The arguments passed to execute the sentence.</param>
+            <returns>An instance of a <see href="http://msdn2.microsoft.com/en-us/library/system.data.datarow.aspx">DataRow</see> class.</returns>
+        </member>
+        <member name="M:Data.SqlDataAccess.ExecuteDataRowText(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Executes a Transact-SQL statement against the connection and returns a <see href="http://msdn2.microsoft.com/en-us/library/system.data.datarow.aspx">DataRow</see> object.
+            </summary>
+            <example>This sample shows how to call the ExecuteDataRowQuery method.
+            <code escaped="true" lang="C#">
+              class MyClass 
+              {
+                 public static int Main() 
+                 {
+                    DataRow dataRow = SqlDataAccess.ExecuteDataRowQuery("connectionstring_db1", "RetreiveConfig",
+                        SqlDataAccessArgs.CreateWith("@ConfigName", "Cache").Arguments);
+                 }
+              }
+            </code>
+            </example>
+            <param name="connectionString">Connection string.</param>
+            <param name="text">The store procedure name to be executed.</param>
+            <param name="args">The arguments passed to execute the sentence.</param>
+            <returns>An instance of a <see href="http://msdn2.microsoft.com/en-us/library/system.data.datarow.aspx">DataRow</see> class.</returns>
+        </member>
+        <member name="M:Data.SqlDataAccess.ExecuteXmlQuery(System.String,System.String)">
+            <summary>
+            Executes a Transact-SQL statement against the connection and returns a <see href="http://msdn2.microsoft.com/en-us/library/system.xml.xmldocument.aspx">XmlDocument</see> object.
+            </summary>
+            <example>This sample shows how to call the ExecuteXmlQuery method.
+            <code escaped="true" lang="C#">
+              class MyClass 
+              {
+                 public static int Main() 
+                 {
+                    XmlDocument doc = SqlDataAccess.ExecuteXmlQuery("connectionstring_db1", "RetreiveCacheConfig");
+                 }
+              }
+            </code>
+            </example>
+            <param name="connectionString">Connection string.</param>
+            <param name="text">The store procedure name to be executed.</param>
+            <returns>An instance of a <see href="http://msdn2.microsoft.com/en-us/library/system.xml.xmldocument.aspx">XmlDocument</see> class.</returns>
+        </member>
+        <member name="M:Data.SqlDataAccess.ExecuteXmlQuery(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Executes a Transact-SQL statement against the connection and returns a <see href="http://msdn2.microsoft.com/en-us/library/system.xml.xmldocument.aspx">XmlDocument</see> object.
+            </summary>
+            <example>This sample shows how to call the ExecuteXmlQuery method.
+            <code escaped="true" lang="C#">
+              class MyClass 
+              {
+                 public static int Main() 
+                 {
+                    XmlDocument doc = SqlDataAccess.ExecuteXmlQuery("connectionstring_db1", "RetreiveConfig",
+                        SqlDataAccessArgs.CreateWith("@ConfigName", "Cache").Arguments);
+                 }
+              }
+            </code>
+            </example>
+            <param name="connectionString">Connection string.</param>
+            <param name="text">The store procedure name to be executed.</param>
+            <param name="args">The arguments passed to execute the sentence.</param>
+            <returns>An instance of a <see href="http://msdn2.microsoft.com/en-us/library/system.xml.xmldocument.aspx">XmlDocument</see> class.</returns>
+        </member>
+        <member name="T:Data.SqlDataAccessArgs">
+            <summary>
+            Represents the set of arguments passed to execute the sentence
+            </summary>
+        </member>
+        <member name="M:Data.SqlDataAccessArgs.CreateWith(System.String,System.Object)">
+            <summary>
+            Creates a new instance of <see cref="T:Data.SqlDataAccessArgs"></see>.
+            <seealso cref="T:Data.SqlDataAccess"/>
+            </summary>
+            <example>This sample shows how to call the CreateWith method.
+            <code escaped="true" lang="C#">
+              class MyClass 
+              {
+                 public static int Main() 
+                 {
+                    SqlDataAccess.ExecuteNonQuery("connectionstring_db1", "AddPerson",
+                        SqlDataAccessArgs.CreateWith("@FirstName", "Pablo").Arguments);
+                 }
+              }
+            </code>
+            </example>
+            <param name="name">The argument name.</param>
+            <param name="value">The argument value.</param>
+            <returns>A <see cref="T:Data.SqlDataAccessArgs"/> instance.</returns>
+        </member>
+        <member name="M:Data.SqlDataAccessArgs.And(System.String,System.Object)">
+            <summary>
+            Add an argument to their collection.
+            </summary>
+            <example>This sample shows how to call the And method.
+            <code escaped="true" lang="C#">
+              class MyClass 
+              {
+                 public static int Main() 
+                 {
+                    SqlDataAccess.ExecuteNonQuery("connectionstring_db1", "AddPerson",
+                        SqlDataAccessArgs.CreateWith("@FirstName", "Pablo")
+                            .And("@LastName", "Kerestezachi").Arguments);
+                 }
+              }
+            </code>
+            </example>
+            <param name="name">The argument name.</param>
+            <param name="value">The argument value.</param>
+            <returns>A <see cref="T:Data.SqlDataAccessArgs"/> instance.</returns>
+        </member>
+        <member name="M:Data.SqlDataAccessArgs.#ctor(System.String,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Data.SqlDataAccessArgs"/> class.
+            </summary>
+            <param name="name">The argument name.</param>
+            <param name="value">The argument value.</param>
+        </member>
+        <member name="P:Data.SqlDataAccessArgs.Arguments">
+            <summary>
+            Gets a collection of arguments.
+            </summary>
+            <value>Get an <see href="http://msdn2.microsoft.com/en-us/library/s4ys34ea.aspx">IDictionary(TKey, TValue) Generic Interface</see> that represent the argument collection.</value>
+        </member>
+    </members>
+</doc>

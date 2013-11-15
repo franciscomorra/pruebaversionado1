@@ -1,0 +1,81 @@
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\Clinica Frba\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\Clinica Frba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\Clinica Frba\obj\Debug\ClinicaFrba.Properties.Resources.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\Clinica Frba\bin\Debug\ClinicaFrba.exe
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\Clinica Frba\bin\Debug\ClinicaFrba.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\Clinica Frba\bin\Debug\ClinicaFrba.Comun.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\Clinica Frba\bin\Debug\ClinicaFrba.Negocio.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\Clinica Frba\bin\Debug\Data.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\Clinica Frba\bin\Debug\ClinicaFrba.Negocio.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\Clinica Frba\bin\Debug\ClinicaFrba.Comun.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\Clinica Frba\bin\Debug\Data.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\Clinica Frba\bin\Debug\Data.xml
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\Clinica Frba\obj\Debug\ClinicaFrba.exe
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\Clinica Frba\obj\Debug\ClinicaFrba.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\tpgestion\src\Clinica Frba\obj\Debug\ClinicaFrba.exe
+C:\Documents and Settings\UsuarioAdmin\Escritorio\tpgestion\src\Clinica Frba\obj\Debug\ClinicaFrba.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\tpgestion\src\Clinica Frba\bin\Debug\ClinicaFrba.exe
+C:\Documents and Settings\UsuarioAdmin\Escritorio\tpgestion\src\Clinica Frba\bin\Debug\ClinicaFrba.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\tpgestion\src\Clinica Frba\bin\Debug\ClinicaFrba.Comun.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\tpgestion\src\Clinica Frba\bin\Debug\ClinicaFrba.Negocio.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\tpgestion\src\Clinica Frba\bin\Debug\Data.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\tpgestion\src\Clinica Frba\bin\Debug\ClinicaFrba.Negocio.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\tpgestion\src\Clinica Frba\bin\Debug\ClinicaFrba.Comun.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\tpgestion\src\Clinica Frba\bin\Debug\Data.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\tpgestion\src\Clinica Frba\bin\Debug\Data.xml
+C:\Documents and Settings\UsuarioAdmin\Escritorio\tpgestion\src\Clinica Frba\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\tpgestion\src\Clinica Frba\obj\Debug\ClinicaFrba.Properties.Resources.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\tpgestion\src\Clinica Frba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.exe
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\bin\Debug\ClinicaFrba.exe
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\bin\Debug\ClinicaFrba.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\bin\Debug\ClinicaFrba.Comun.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\bin\Debug\ClinicaFrba.Negocio.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\bin\Debug\Data.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\bin\Debug\ClinicaFrba.Negocio.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\bin\Debug\ClinicaFrba.Comun.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\bin\Debug\Data.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\bin\Debug\Data.xml
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.Properties.Resources.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.MainView.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.Login.LoginForm.resources
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.exe
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.pdb
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\bin\Debug\ClinicaFrba.exe
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\bin\Debug\ClinicaFrba.pdb
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\bin\Debug\ClinicaFrba.Comun.dll
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\bin\Debug\ClinicaFrba.Negocio.dll
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\bin\Debug\Data.dll
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\bin\Debug\ClinicaFrba.Negocio.pdb
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\bin\Debug\ClinicaFrba.Comun.pdb
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\bin\Debug\Data.pdb
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\bin\Debug\Data.xml
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.Login.LoginForm.resources
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.MainView.resources
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.Properties.Resources.resources
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.AddEditRoleForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.AbmRol.RolesForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.RegistroUsuario.RegistroUsuario.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.AbmEspecialidadesMedicas.AbmEspecialidadesMedicas.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.AbmPlanes.AbmPlanes.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.RegistroForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.Login.AfiliadoUserControl.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.Login.ProfesionalUserControl.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.AbmAfiliado.AfiliadosForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.AbmProfesional.ProfesionalesForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\bin\Debug\ClinicaFrba.exe.config
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.AbmTurno.TurnosForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.AbmBono.BonosForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.AbmTurno.PedirTurnoForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.AbmBono.ComprarBonoForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.AbmTurno.CancelarDia.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.ReportesForm.ReportesForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.AbmTurno.RegistrarLlegada.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.AbmProfesional.RegistrarAgenda.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.Consultas.GenerarRecetaForm.resources
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Debug\ClinicaFrba.Consultas.RegistroResultadoAtencion.resources

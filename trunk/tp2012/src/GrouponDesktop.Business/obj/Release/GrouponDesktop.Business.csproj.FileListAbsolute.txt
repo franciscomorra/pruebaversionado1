@@ -1,0 +1,9 @@
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop.Business\bin\Release\GrouponDesktop.Business.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop.Business\bin\Release\GrouponDesktop.Business.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop.Business\bin\Release\Data.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop.Business\bin\Release\GrouponDesktop.Common.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop.Business\bin\Release\GrouponDesktop.Common.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop.Business\bin\Release\Data.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop.Business\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop.Business\obj\Release\GrouponDesktop.Business.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop.Business\obj\Release\GrouponDesktop.Business.pdb

@@ -1,0 +1,5 @@
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop.Common\bin\Release\GrouponDesktop.Common.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop.Common\bin\Release\GrouponDesktop.Common.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop.Common\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop.Common\obj\Release\GrouponDesktop.Common.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2012\src\GrouponDesktop.Common\obj\Release\GrouponDesktop.Common.pdb

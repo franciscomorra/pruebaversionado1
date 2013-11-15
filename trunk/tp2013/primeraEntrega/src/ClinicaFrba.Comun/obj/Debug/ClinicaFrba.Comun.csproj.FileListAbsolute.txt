@@ -1,0 +1,15 @@
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\ClinicaFrba.Comun\bin\Debug\ClinicaFrba.Comun.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\ClinicaFrba.Comun\bin\Debug\ClinicaFrba.Comun.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\ClinicaFrba.Comun\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\ClinicaFrba.Comun\obj\Debug\ClinicaFrba.Comun.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\clinica2013\src\ClinicaFrba.Comun\obj\Debug\ClinicaFrba.Comun.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\ClinicaFrba.Comun\bin\Debug\ClinicaFrba.Comun.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\ClinicaFrba.Comun\bin\Debug\ClinicaFrba.Comun.pdb
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\ClinicaFrba.Comun\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\ClinicaFrba.Comun\obj\Debug\ClinicaFrba.Comun.dll
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\ClinicaFrba.Comun\obj\Debug\ClinicaFrba.Comun.pdb
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\ClinicaFrba.Comun\bin\Debug\ClinicaFrba.Comun.dll
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\ClinicaFrba.Comun\bin\Debug\ClinicaFrba.Comun.pdb
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\ClinicaFrba.Comun\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\ClinicaFrba.Comun\obj\Debug\ClinicaFrba.Comun.dll
+C:\Documents and Settings\UsuarioAdmin\Mis documentos\GData\tp2013\src\ClinicaFrba.Comun\obj\Debug\ClinicaFrba.Comun.pdb
