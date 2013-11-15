@@ -129,12 +129,12 @@ BEGIN
 	WHERE RF.Rol = @Rol_ID
 END
 GO
-/****** Object:  StoredProcedure [SHARPS].[GetProfileInfo]    Script Date: 11/10/2013 02:23:30 ******/
+/****** Object:  StoredProcedure [SHARPS].[GetPerfilInfo]    Script Date: 11/10/2013 02:23:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [SHARPS].[GetProfileInfo]
+CREATE PROCEDURE [SHARPS].[GetPerfilInfo]
 @NombrePerfil varchar(MAX)
 AS
 BEGIN
@@ -144,12 +144,12 @@ BEGIN
 	WHERE p.Descripcion = @NombrePerfil
 END
 GO
-/****** Object:  StoredProcedure [SHARPS].[GetProfileFunctionalities]    Script Date: 11/10/2013 02:23:30 ******/
+/****** Object:  StoredProcedure [SHARPS].[GetPerfilFunctionalities]    Script Date: 11/10/2013 02:23:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [SHARPS].[GetProfileFunctionalities]
+CREATE PROCEDURE [SHARPS].[GetPerfilFunctionalities]
 	@Perfil_ID int
 AS
 BEGIN
@@ -181,10 +181,12 @@ BEGIN
 		dp.TipoDNI TipoDoc, 
 		dp.telefono Telefono, 
 		dp.direccion Direccion, 
-		dp.dni DNI
+		dp.dni DNI, 
+		p.Faltan_Datos FaltanDatos
 	FROM  [SHARPS].USUARIOS u
 	INNER JOIN [SHARPS].PROFESIONALES P on p.usuarioID = u.usuarioID
 	INNER JOIN [SHARPS].DETALLES_PERSONA dp on dp.usuarioID = u.usuarioID
+	WHERE P.Activo = 1
 	ORDER BY U.UsuarioID
 
 END
@@ -204,6 +206,7 @@ BEGIN
 		pm.Precio_Bono_Consulta,
 		pm.Precio_Bono_Farmacia
 	FROM  [SHARPS].Planes_Medicos pm
+	WHERE pm.Activo = 1
 END
 GO
 /****** Object:  StoredProcedure [SHARPS].[GetPerfiles]    Script Date: 11/10/2013 02:23:30 ******/
@@ -255,7 +258,7 @@ BEGIN
 		e.Descripcion
 	FROM  [SHARPS].Especialidades e
 	INNER JOIN [SHARPS].Profesionales_Especialidades pe ON pe.Especialidad = e.Codigo
-	WHERE pe.Profesional= @userId
+	WHERE pe.Profesional= @userId AND E.Activo = 1
 END
 GO
 /****** Object:  StoredProcedure [SHARPS].[GetDetallesPersona]    Script Date: 11/10/2013 02:23:30 ******/
@@ -278,7 +281,7 @@ BEGIN
 		dp.direccion Direccion, 
 		dp.dni DNI
 	FROM  [SHARPS].DETALLES_PERSONA dp
-	WHERE dp.UsuarioID = @userId
+	WHERE dp.UsuarioID = @userId 
 END
 GO
 /****** Object:  StoredProcedure [SHARPS].[GetBonos]    Script Date: 11/10/2013 02:23:30 ******/
@@ -325,13 +328,14 @@ BEGIN
 		dp.TipoDNI TipoDoc, 
 		dp.telefono Telefono, 
 		dp.direccion Direccion, 
-		dp.dni DNI
+		dp.dni DNI,
+		a.Faltan_Datos FaltanDatos
 	FROM  [SHARPS].USUARIOS u
 	INNER JOIN [SHARPS].AFILIADOS a on a.usuarioID = u.usuarioID
 	INNER JOIN [SHARPS].PLANES_MEDICOS pm on pm.codigo = a.Plan_Medico
 	INNER JOIN [SHARPS].DETALLES_PERSONA dp on dp.usuarioID = u.usuarioID
 	INNER JOIN [SHARPS].Estados_Civiles ec on ec.Codigo = a.Estado_Civil
-
+    WHERE a.Activo = 1
 	ORDER BY U.UsuarioID
 
 END
@@ -528,8 +532,8 @@ DECLARE @codCivil int
 SELECT @codCivil = Codigo from [SHARPS].Estados_Civiles where Descripcion = @EstadoCivil
 SELECT @NroAfiliado = MAX(GrupoFamiliar) + 101 FROM [SHARPS].Afiliados
 INSERT INTO [SHARPS].Afiliados (GrupoFamiliar , Plan_Medico , cantHijos , Estado_Civil , UsuarioID,Faltan_Datos)
-VALUES (@NroAfiliado , @PlanMedico , @CantHijos ,@codCivil  , @ID,0) 
-
+VALUES (@NroAfiliado , @PlanMedico , @CantHijos ,@codCivil  , @ID,1) 
+RETURN @NroAfiliado
 END
 GO 
 
@@ -556,20 +560,22 @@ GO
 
 CREATE PROCEDURE [SHARPS].[InsertMiembroGrupoFamiliar]
 @PlanMedico int,
-@ID int,
 @EstadoCivil int,
 @CantHijos int,
 @RolAfiliado nvarchar(MAX),
-@nroAfiliado int   
+@GrupoFamiliar int,
+@TipoAfiliado int,
+@UserID int   
 AS
 BEGIN 
 
-INSERT INTO [SHARPS].Afiliados (GrupoFamiliar , UsuarioID , TipoAfiliado , CantHijos , Activo , Plan_Medico )
-VALUES (@nroAfiliado +1 , @ID , NULL , @CantHijos ,1 , @PlanMedico)----VER LO DEL +1 YA QUE HAY CAMPO TIPO DE AFILIADO
 
-DELETE SHARPS.Usuarios_Roles WHERE Usuario = @ID AND Rol = @RolAfiliado
+INSERT INTO [SHARPS].Afiliados (GrupoFamiliar , UsuarioID , TipoAfiliado , CantHijos , Activo , Plan_Medico ,Faltan_Datos)
+VALUES (@GrupoFamiliar , @UserID , NULL , @CantHijos ,1 , @PlanMedico,1)
+
+DELETE SHARPS.Usuarios_Roles WHERE Usuario = @UserID AND Rol = @RolAfiliado
 INSERT INTO [SHARPS].Usuarios_Roles (Usuario, Rol) 
-VALUES (@ID , @RolAfiliado)
+VALUES (@UserID , @RolAfiliado)
 
 UPDATE [SHARPS].Roles SET  Descripcion = 'Afiliado' , Activo = 1, Perfil = 1
 WHERE RolID = @RolAfiliado
@@ -588,7 +594,7 @@ CREATE PROCEDURE [SHARPS].[InsertProfesional]
 AS
 BEGIN 
 INSERT INTO Profesionales (Matricula , Activo , UsuarioID,Faltan_Datos)
-VALUES (@Matricula , 1 , @ID,0)
+VALUES (@Matricula , 1 , @ID,1)
 
 DELETE SHARPS.Usuarios_Roles WHERE Usuario = @ID AND Rol = @Rol
 INSERT INTO [SHARPS].Usuarios_Roles (Usuario, Rol) 
@@ -636,11 +642,13 @@ AS
 BEGIN
 
 UPDATE [SHARPS].Turnos
-SET Estado = 2  
+SET Estado = 3  
 FROM [SHARPS].Turnos T
-INNER JOIN Agendas A  ON A.AgendaID = @MedicoID
-WHERE T.Agenda = A.AgendaID AND CONVERT(CHAR(10), T.FechaHoraLlegada ,112) = @Fecha
+INNER JOIN Agendas A  ON A.Profesional = @MedicoID
+WHERE T.Agenda = A.AgendaID AND CONVERT(CHAR(10), A.Horario ,112) = @Fecha
 
+UPDATE Agendas SET Activo = 0
+WHERE Profesional = @MedicoID AND CONVERT(CHAR(10), Horario ,112) = @Fecha 
 END
 GO
 
@@ -657,14 +665,16 @@ SELECT @GRUPO = GrupoFamiliar FROM Afiliados WHERE UsuarioID =@userId
 SELECT BC.Fecha_Impresion AS Fecha , BC.Numero AS Numero , BC.Precio_Pagado AS Precio ,'Consulta' AS TipoBono
 FROM [SHARPS].Bonos_Consulta BC
 INNER JOIN Afiliados A ON A.GrupoFamiliar = @GRUPO 
+INNER JOIN Consultas C ON C.Bono_Consulta <> BC.Numero
 WHERE BC.Afiliado_Compro = @userId OR BC.Afiliado_Compro = A.UsuarioID
-AND DATEADD(day, 60, BC.Fecha_Impresion) >= GETDATE() 
+ 
 
 UNION
 
 SELECT BF.Fecha_Impresion AS Fecha, BF.Numero AS Numero ,BF.Precio_Pagado AS Precio , 'Farmacia' AS TipoBono
 FROM [SHARPS].Bonos_Farmacia BF
 INNER JOIN Afiliados A ON A.GrupoFamiliar = @GRUPO 
+INNER JOIN Recetas R ON R.Bono_Farmacia <> BF.Numero
 WHERE BF.Afiliado_Compro = @userId OR BF.Afiliado_Compro = A.UsuarioID
 AND DATEADD(day, 60, BF.Fecha_Impresion) >= GETDATE()
 order by 4
@@ -729,20 +739,20 @@ GO
 
 
 
-/*CREATE PROCEDURE [SHARPS].[GetTurnosByProfesional]
+CREATE PROCEDURE [SHARPS].[GetTurnosByProfesional]
 @profesionalID INT,
 @fecha DATE
 
 AS
 BEGIN
 
-SELECT Hora , Minuto, CONVERT(CHAR(10), T.FechaHoraLlegada ,112) AS Fecha ------<<--------terminar
-FROM Turnos T
-INNER JOIN Agendas A ON A.Profesional = @profesionalID
-WHERE A.AgendaID = T.Agenda
+SELECT CONVERT(VARCHAR,A.Horario,108) Hora , CONVERT(CHAR(10), A.Horario ,112) AS Fecha 
+FROM Agendas A
+WHERE A.Profesional = @profesionalID
+AND A.Horario = @fecha AND A.Activo = 0
 
 END
-GO */
+GO 
 
 
 CREATE PROCEDURE [SHARPS].[InsertTurno]
@@ -757,10 +767,11 @@ DECLARE @IDAGENDA INT
 DECLARE @NUMERO INT
 SELECT @NUMERO = MAX(Numero) + 1 FROM [SHARPS].Turnos
 SELECT @IDAGENDA = AgendaID FROM [SHARPS].Agendas A WHERE A.Profesional = @Profesional_ID
-INSERT INTO [SHARPS].Estados_Turno (Descripcion, MotivoCancelacion)
-VALUES (NULL,NULL)
 INSERT INTO [SHARPS].Turnos (Numero , Afiliado , Estado , FechaHoraLlegada , Agenda )
-VALUES (@NUMERO , @Afiliado_ID, 3 , @Fecha,@IDAGENDA)
+VALUES (@NUMERO , @Afiliado_ID, 3 , NULL,@IDAGENDA)
+UPDATE Agendas SET Activo = 1 
+WHERE Horario = @Fecha AND Profesional = @Profesional_ID
+
 END
 GO 
 
@@ -809,6 +820,7 @@ VALUES (@Turno , @Sintomas ,@NCONSULTA ,@Enfermedad, ) ---<----- ACA NO CONVIENE
 END
 GO
 */
+
 CREATE PROCEDURE [SHARPS].[InsertConsulta]
 @Turno INT,
 @Sintomas NVARCHAR(MAX),
@@ -836,7 +848,7 @@ UPDATE SHARPS.Profesionales SET Activo = 0
 WHERE UsuarioID = @User_ID
 UPDATE SHARPS.Agendas SET Activo = 0
 WHERE Profesional = @User_ID
-UPDATE SHARPS.Turnos SET Estado = 2
+UPDATE SHARPS.Turnos SET Estado = 5
 FROM SHARPS.Turnos T
 INNER JOIN SHARPS.Agendas A ON A.AgendaID = T.Agenda
 WHERE A.Profesional = @User_ID OR T.Afiliado = @User_ID
@@ -856,7 +868,7 @@ GO
 
 CREATE PROCEDURE [SHARPS].[AgregarMedicamentos]
 @BonoFarmacia INT,
-@Medicamento  INT  ------------<--------REVISAR DESPUES DE LA CORRECCION
+@Medicamento  INT  
 AS
 BEGIN
    
@@ -872,7 +884,7 @@ as
 BEGIN
 
 select distinct u.username UserName , a.matricula matricula,  dp.apellido Apellido, dp.nombre Nombre, dp.sexo Sexo
-,dp.mail Email,dp.fechaNac FechaNacimiento, dp.TipoDNI, dp.telefono Telefono, dp.direccion Direccion, dp.dni DNI
+,dp.mail Email,dp.fechaNac FechaNacimiento, dp.TipoDNI, dp.telefono Telefono, dp.direccion Direccion, dp.dni DNI , A.Faltan_Datos FaltanDatos
 from SHARPS.Usuarios u
 inner join SHARPS.Profesionales a on a.UsuarioID = @userId
 inner join SHARPS.Detalles_Persona dp on dp.UsuarioID = @userId
@@ -924,7 +936,7 @@ BEGIN
 
 SELECT T.Numero , T.Afiliado , A.Horario
 FROM Agendas A
-INNER JOIN Turnos T ON T.Agenda = A.AgendaID AND T.Estado <> 2 ---REVISAR SI ERA CANCELADO
+INNER JOIN Turnos T ON T.Agenda = A.AgendaID AND A.Activo = 1
 WHERE CONVERT(CHAR(10), A.Horario ,112) = @fecha AND A.Profesional = @profesionalID
 END
 GO
@@ -936,7 +948,9 @@ AS
 BEGIN
 
 UPDATE SHARPS.Turnos SET Estado = 2
-WHERE Numero = @turno
+FROM Turnos T
+INNER JOIN Agendas A ON A.AgendaID = T.Agenda
+WHERE T.Numero = @turno  AND A.Activo = 1
 
 END
 GO
@@ -980,3 +994,12 @@ BEGIN
 	--SELECT @@Identity AS ID
 END
 
+CREATE PROCEDURE [SHARPS].GetAfiliadosFromGrupoFamiliar
+@GrupoFamiliar INT
+AS
+BEGIN
+
+SELECT UsuarioID FROM Afiliados WHERE GrupoFamiliar = @GrupoFamiliar
+
+END
+GO
