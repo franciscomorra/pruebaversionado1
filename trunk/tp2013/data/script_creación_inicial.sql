@@ -641,6 +641,7 @@ INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('Atendido');
 INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('CanceladoAfiliado');
 INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('CanceladoAProfesional');
 INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('Activo');---todavia no es el dia del turno
+INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('Desactivo')
 
 
 --Ingresando Planes
