@@ -1,0 +1,12 @@
+-Los TOPS
+-Crear triggers:
+	Cuando se borra un campo en alguna tabla, que en cambio lo ponga activo = 0
+	
+-Constraints:
+	Unique en usuarios, en username. Ahora se guarda username que es unico, esta mal...
+	
+Registrar agenda:
+	-Tarda mucho, porque son miles de consultas de a una, hay que pensar otra manera
+	-Falla cuando hay un turno asociado!
+Cancelar turnos del dia
+	Error de instancia en el procedimiento CancelarTurnos de profesionalManager (creo que es cuando no hay registros en la agenda, o si falla una fk de algun turno asociado)
