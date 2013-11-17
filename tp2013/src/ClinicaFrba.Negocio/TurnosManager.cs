@@ -12,23 +12,15 @@ namespace ClinicaFrba.Negocio
 {
     public class TurnosManager
     {
-        public List<Turno> GetAll(Afiliado afiliado,bool soloTurnosHoy)
+        public List<Turno> GetAll(Afiliado afiliado,bool soloTurnosHoy, Profesional profesional)
         {
             var ret = new List<Turno>();
             DataTable resultado;
-
-            if(soloTurnosHoy)
-                 resultado = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                    "[SHARPS].GetTurnosAfiliadoDate", SqlDataAccessArgs
-                    .CreateWith("@userId", afiliado.UserID)
-                    .And("@fecha", Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]))
-                    .Arguments);
-                //Devuelve los turnos de la fecha de hoy
-            else
-                 resultado = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+            DateTime fechaActual = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
+            resultado = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                     "[SHARPS].GetAllAfiliadoTurnos", SqlDataAccessArgs
                     .CreateWith("@userId", afiliado.UserID)
-                    .And("@fecha", Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]))
+                    .And("@fecha", fechaActual)
                     .Arguments);
                 //Todos los turnos del afiliado, desde la fecha de hoy
 
@@ -37,23 +29,26 @@ namespace ClinicaFrba.Negocio
                 ProfesionalManager profMan = new ProfesionalManager();
                 foreach (DataRow row in resultado.Rows)
                 {
+                    
                     Turno turno = new Turno();
                     turno.Fecha = Convert.ToDateTime(row["Fecha"]);
                     turno.Numero = int.Parse(row["Numero"].ToString());
                     turno.Profesional = profMan.getInfo(int.Parse(row["UserProfesional"].ToString()));
                      turno.Afiliado = afiliado;
-                    ret.Add(turno);
+                    if(!soloTurnosHoy || (soloTurnosHoy && turno.Fecha.Date == fechaActual.Date))
+                        if(profesional == null || (profesional.UserID == turno.Profesional.UserID))
+                            ret.Add(turno);
                 }
             }
             return ret;
         }
 
-        public List<Turno> GetTurnosForFecha(Profesional profesional, DateTime fecha)
+        public List<Turno> GetDiasHorariosLibres(Profesional profesional, DateTime fecha)
         {
 
             List<Turno> ret = new List<Turno>();
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                "[SHARPS].GetTurnosByProfesional", SqlDataAccessArgs
+                "[SHARPS].GetAgendaByProfesional", SqlDataAccessArgs
                 .CreateWith("@profesionalID", profesional.UserID)
                 .And("@fecha",fecha)
                 .Arguments);

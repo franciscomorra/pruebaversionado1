@@ -47,18 +47,20 @@ namespace ClinicaFrba.AbmTurno
             _profesional = e.Profesional;
             txtProfesional.Text = _profesional.ToString();
             _profesionalesForm.Hide();
-            dtTurno.MinDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(1);
-            dtTurno.Value = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(120);
+
             panelFecha.Visible = true;
             panelHorario.Visible = false;
 
         }
         private void dtTurno_ValueChanged(object sender, EventArgs e)
         {
-            List<Turno> turnos = _turnosManager.GetTurnosForFecha(_profesional, dtTurno.Value);
-            cbxHorarios.DataSource = turnos;
-            
-            panelHorario.Visible = true;
+            if (_profesional != null)
+            {
+                List<Turno> turnos = _turnosManager.GetDiasHorariosLibres(_profesional, dtTurno.Value);
+                cbxHorarios.DataSource = turnos;
+
+                panelHorario.Visible = true;
+            }
         }
 
         private void btnConfirmar_Click(object sender, EventArgs e)
@@ -76,6 +78,9 @@ namespace ClinicaFrba.AbmTurno
                 throw new Exception("No se cargo el afiliado");
 
             panelFecha.Visible = false;
+            dtTurno.Value = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(1);
+            dtTurno.MinDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(1);
+            dtTurno.MaxDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(30);
             panelHorario.Visible = false;
 
         }

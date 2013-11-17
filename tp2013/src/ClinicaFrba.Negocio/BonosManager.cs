@@ -18,6 +18,7 @@ namespace ClinicaFrba.Negocio
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].GetBonos", SqlDataAccessArgs
                 .CreateWith("@userId", afiliado.UserID)
+                .And("@Fecha", Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]))
                 .Arguments);
             //Devuelve los bonos que no fueron usados
             //Los que son farmacia, debe devolver los que no estan vencidos

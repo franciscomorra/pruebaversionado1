@@ -11,44 +11,25 @@ namespace ClinicaFrba.Negocio
 {
     public class DetallePersonaManager
     {
-        public int AddDetallePersona(User user)
+        public void AgregarDetalles(DetallesPersona detalles, int userID)
         {
-            var transaction = SessionData.Contains("Transaction") ? SessionData.Get<SqlTransaction>("Transaction") : null;
-            if (transaction != null)
-            {
-                return SqlDataAccess.ExecuteScalarQuery<int>(
-                    "[SHARPS].InsertDetallePersona", SqlDataAccessArgs
-                    .CreateWith(
-                        "@Telefono", user.DetallesPersona.Telefono)
-                    .And("@Email", user.DetallesPersona.Email)
-                    .And("@Nombre", user.DetallesPersona.Nombre)
-                    .And("@Apellido", user.DetallesPersona.Apellido)
-                    .And("@DNI", user.DetallesPersona.DNI)
-                    .And("@TipoDNI", user.DetallesPersona.TipoDNI)
-                    .And("@Sexo", user.DetallesPersona.Sexo)
-                    .And("@FechaNacimiento", user.DetallesPersona.FechaNacimiento)
-                    .And("@Direccion", user.DetallesPersona.Direccion)
-                    .And("@ID_Usuario", user.UserID)
-                    .Arguments,
-                    transaction); //Con transaccion (de C#)
-            }
-            return SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+            SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].InsertDetallePersona", SqlDataAccessArgs
                 .CreateWith(
-                        "@Telefono", user.DetallesPersona.Telefono)
-                    .And("@Email", user.DetallesPersona.Email)
-                    .And("@Nombre", user.DetallesPersona.Nombre)
-                    .And("@Apellido", user.DetallesPersona.Apellido)
-                    .And("@DNI", user.DetallesPersona.DNI)
-                    .And("@TipoDNI", user.DetallesPersona.TipoDNI)
-                    .And("@Sexo", user.DetallesPersona.Sexo)
-                    .And("@FechaNacimiento", user.DetallesPersona.FechaNacimiento)
-                    .And("@Direccion", user.DetallesPersona.Direccion)
-                    .And("@ID_Usuario", user.UserID)
-            .Arguments); //Sin transaccion (de C#)
+                        "@Telefono", detalles.Telefono)
+                    .And("@Email", detalles.Email)
+                    .And("@Nombre", detalles.Nombre)
+                    .And("@Apellido", detalles.Apellido)
+                    .And("@DNI", detalles.DNI)
+                    .And("@TipoDNI", detalles.TipoDNI)
+                    .And("@Sexo", detalles.Sexo)
+                    .And("@FechaNacimiento", detalles.FechaNacimiento)
+                    .And("@Direccion", detalles.Direccion)
+                    .And("@ID_Usuario", userID)
+            .Arguments);
         }
 
-        internal void UpdateDetallePersona(DetallesPersona detallePersona, int userID)
+        internal void ModificarDetalles(DetallesPersona detallePersona, int userID)
         {
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].UpdateDetallePersona", SqlDataAccessArgs
@@ -67,7 +48,7 @@ namespace ClinicaFrba.Negocio
         }
 
 
-        public DetallesPersona getDetalles(int userID)
+        public DetallesPersona BuscarDetalles(int userID)
         {
             DetallesPersona detalles = new DetallesPersona();
 
@@ -90,7 +71,23 @@ namespace ClinicaFrba.Negocio
                     if (!DBNull.Value.Equals(row["TipoDoc"]))
                         detalles.TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString());
             };
+            return detalles;
+        }
 
+        public DetallesPersona BuscarDetallesEnRow(System.Data.DataRow row)
+        {
+            DetallesPersona detalles = new DetallesPersona();
+                detalles.Apellido = row["Apellido"].ToString();
+                detalles.Nombre = row["Nombre"].ToString();
+                detalles.FechaNacimiento = Convert.ToDateTime(row["FechaNacimiento"]);
+                detalles.DNI = long.Parse(row["DNI"].ToString());
+                detalles.Email = row["Email"].ToString();
+                detalles.Direccion = row["Direccion"].ToString();
+                detalles.Telefono = long.Parse(row["Telefono"].ToString());
+                if (!DBNull.Value.Equals(row["Sexo"]))
+                    detalles.Sexo = (TipoSexo)Enum.Parse(typeof(TipoSexo), row["Sexo"].ToString());
+                if (!DBNull.Value.Equals(row["TipoDoc"]))
+                    detalles.TipoDNI = (TipoDoc)Enum.Parse(typeof(TipoDoc), row["TipoDoc"].ToString());
             return detalles;
         }
     }

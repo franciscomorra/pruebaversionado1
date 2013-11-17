@@ -66,7 +66,7 @@ namespace ClinicaFrba.Login
                     user.RoleID = rol.ID;
                     user.Perfil = rol.Perfil;
                     svc.SetUserFunctionalities(user);
-                    user.DetallesPersona = detallesManager.getDetalles(user.UserID);
+                    user.DetallesPersona = detallesManager.BuscarDetalles(user.UserID);
                     iniciar_sesion();
                 }
         }
@@ -82,7 +82,7 @@ namespace ClinicaFrba.Login
                 {
                     
                     var manager = new AfiliadoManager();
-                    Afiliado afiliado = manager.getInfo(user.UserID);
+                    Afiliado afiliado = manager.actualizarInformacion(user.UserID);
                     Session.Afiliado = afiliado;
                     if (afiliado.FaltanDatos)
                     {

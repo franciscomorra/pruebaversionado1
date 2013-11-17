@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.profesionalesGrid = new System.Windows.Forms.DataGridView();
+            this.Matricula = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.buttonsPanel = new System.Windows.Forms.Panel();
-            this.lblResults = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.searchPanel = new System.Windows.Forms.Panel();
             this.btnLimpiar = new System.Windows.Forms.Button();
@@ -47,8 +47,6 @@
             this.txtMatricula = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
-            this.Matricula = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.profesionalesGrid)).BeginInit();
             this.buttonsPanel.SuspendLayout();
             this.searchPanel.SuspendLayout();
@@ -73,6 +71,22 @@
             this.profesionalesGrid.Size = new System.Drawing.Size(952, 396);
             this.profesionalesGrid.TabIndex = 6;
             // 
+            // Matricula
+            // 
+            this.Matricula.DataPropertyName = "Matricula";
+            this.Matricula.FillWeight = 27.52253F;
+            this.Matricula.HeaderText = "Matricula";
+            this.Matricula.Name = "Matricula";
+            this.Matricula.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            this.Nombre.DataPropertyName = "DetallesPersona";
+            this.Nombre.FillWeight = 153.2087F;
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            // 
             // btnEliminar
             // 
             this.btnEliminar.Location = new System.Drawing.Point(174, 10);
@@ -96,9 +110,7 @@
             // buttonsPanel
             // 
             this.buttonsPanel.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.buttonsPanel.Controls.Add(this.lblResults);
             this.buttonsPanel.Controls.Add(this.btnEliminar);
-            this.buttonsPanel.Controls.Add(this.label5);
             this.buttonsPanel.Controls.Add(this.btnModificar);
             this.buttonsPanel.Controls.Add(this.btnAgregar);
             this.buttonsPanel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -106,30 +118,6 @@
             this.buttonsPanel.Name = "buttonsPanel";
             this.buttonsPanel.Size = new System.Drawing.Size(952, 39);
             this.buttonsPanel.TabIndex = 5;
-            // 
-            // lblResults
-            // 
-            this.lblResults.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblResults.AutoSize = true;
-            this.lblResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResults.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblResults.Location = new System.Drawing.Point(855, 16);
-            this.lblResults.Name = "lblResults";
-            this.lblResults.Size = new System.Drawing.Size(14, 13);
-            this.lblResults.TabIndex = 9;
-            this.lblResults.Text = "0";
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label5.Location = new System.Drawing.Point(875, 16);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 13);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "resultados";
             // 
             // btnAgregar
             // 
@@ -263,22 +251,6 @@
             this.txtApellido.Size = new System.Drawing.Size(197, 20);
             this.txtApellido.TabIndex = 0;
             // 
-            // Matricula
-            // 
-            this.Matricula.DataPropertyName = "Matricula";
-            this.Matricula.FillWeight = 27.52253F;
-            this.Matricula.HeaderText = "Matricula";
-            this.Matricula.Name = "Matricula";
-            this.Matricula.ReadOnly = true;
-            // 
-            // Nombre
-            // 
-            this.Nombre.DataPropertyName = "DetallesPersona";
-            this.Nombre.FillWeight = 153.2087F;
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            // 
             // ProfesionalesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -292,7 +264,6 @@
             this.Load += new System.EventHandler(this.ProfesionalesForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.profesionalesGrid)).EndInit();
             this.buttonsPanel.ResumeLayout(false);
-            this.buttonsPanel.PerformLayout();
             this.searchPanel.ResumeLayout(false);
             this.groupBox.ResumeLayout(false);
             this.groupBox.PerformLayout();
@@ -316,8 +287,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtMatricula;
         private System.Windows.Forms.TextBox txtApellido;
-        private System.Windows.Forms.Label lblResults;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.ComboBox cbxEspecialidad;

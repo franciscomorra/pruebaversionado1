@@ -5,8 +5,34 @@
 -Constraints:
 	Unique en usuarios, en username. Ahora se guarda username que es unico, esta mal...
 	
-Registrar agenda:
-	-Tarda mucho, porque son miles de consultas de a una, hay que pensar otra manera
-	-Falla cuando hay un turno asociado!
+
 Cancelar turnos del dia
 	Error de instancia en el procedimiento CancelarTurnos de profesionalManager (creo que es cuando no hay registros en la agenda, o si falla una fk de algun turno asociado)
+
+	
+Visual
+Registrar Agenda Profesional.
+	falta procedimiento de guardado que funcione rapidamente (esperar a correccion igual)
+	-Falla cuando hay un turno asociado! en el dia! hacer un trigger?
+
+2. Login y Seguridad
+	Actualizar los datos si faltan de migracion	
+4. ABM de Afiliados
+	nuevo y modificar, corregir.
+5. ABM de Profesional
+	nuevo y modificar, corregir
+
+9. Compra de Bonos.
+	Tarda mucho cuando carga bonos
+
+10. Pedido de turno
+	En la migracion, como se ponen los turnos? atendido, activo?
+11. Registro de llegada para atención médica
+		Validar 15 minutos y mismo dia
+		SQL de registrar llegada
+12. Registro de resultado para atención médica
+		Ver errores
+		SQL
+13. Cancelar atención médica		
+		SQL (errores)
+14. Receta médica

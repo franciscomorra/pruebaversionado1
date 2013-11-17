@@ -68,7 +68,6 @@ namespace ClinicaFrba.AbmProfesional
         void profesionalesGrid_DataSourceChanged(object sender, EventArgs e)
         {
             var dataSource = profesionalesGrid.DataSource as BindingList<Profesional>;
-            lblResults.Text = dataSource.Count.ToString();
         }
 
         void profesionalesGrid_DoubleClick(object sender, EventArgs e)
@@ -116,8 +115,10 @@ namespace ClinicaFrba.AbmProfesional
             var row = profesionalesGrid.SelectedRows[0];
             var profesional = row.DataBoundItem as Profesional;
             var regForm = new RegistroForm();
+            regForm.esNuevoUsuario = false;
             regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
             regForm.rellenarProfesional(profesional);
+            
             ViewsManager.LoadModal(regForm);
         }
 
@@ -135,10 +136,11 @@ namespace ClinicaFrba.AbmProfesional
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             var regForm = new RegistroForm();
+            regForm.esNuevoUsuario = true;
             regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
-            Perfil _perfil = new Perfil() { Nombre = "Profesional" };
-            regForm.perfil = _perfil;
+            regForm.perfil = new Perfil() { Nombre = "Profesional" };
             ViewsManager.LoadModal(regForm);
+
         }
         
         private void btnLimpiar_Click(object sender, EventArgs e)

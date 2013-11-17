@@ -60,6 +60,8 @@ namespace ClinicaFrba
         public Afiliado _padre = new Afiliado();
         User user = new User();
         public int _nroAfiliado;
+        public bool esNuevoUsuario = true;
+
         public RegistroForm()
         {
             bool puedeModificarAfiliados = Session.User.Permissions.Contains(Functionalities.AdministrarAfiliados);
@@ -86,13 +88,15 @@ namespace ClinicaFrba
         {
             if (!elegirPerfil)
                 cbxPerfiles.Enabled = false;
+
         }
 
         public void rellenarAfiliado(Afiliado afiliado)//Modificacion de afiliado existente
         {
             _afiliado = afiliado;
-            rellenarCamposUsuario(afiliado.DetallesPersona, afiliado.UserName);
+            rellenarCamposUsuario(afiliado.DetallesPersona);
             cbxPerfiles.SelectedItem = _perfilesManager.getInfo("Afiliado");
+            afiliadoUserControl.esNuevoUsuario = esNuevoUsuario;
             afiliadoUserControl.rellenarCampos(_afiliado);
             afiliadoUserControl._conyuge = _conyuge;
             afiliadoUserControl._padre = _padre;
@@ -103,19 +107,20 @@ namespace ClinicaFrba
         public void rellenarProfesional(Profesional profesional)//Modificacion de profesional
         {
             _profesional = profesional;
-            rellenarCamposUsuario(profesional.DetallesPersona, profesional.UserName);
+            rellenarCamposUsuario(profesional.DetallesPersona);
             cbxPerfiles.SelectedItem = _perfilesManager.getInfo("Profesional");
             profesionalUserControl.SetUser(_profesional);
             userPanel.Controls.Add(profesionalUserControl);
         }
 
 
-        private void rellenarCamposUsuario(DetallesPersona detalles, string username){
+        private void rellenarCamposUsuario(DetallesPersona detalles){
             
             txtApellido.Text = detalles.Apellido.Trim();
             txtNombre.Text = detalles.Nombre.Trim();
             txtDNI.Text = detalles.DNI.ToString();
             cbxSexo.SelectedItem = detalles.Sexo;
+            cbxTipoDNI.SelectedIndex = cbxTipoDNI.Items.IndexOf(detalles.TipoDNI);
             dtFechaNacimiento.Value = detalles.FechaNacimiento;
             txtDireccion.Text = detalles.Direccion.Trim();
             txtTelefono.Text = detalles.Telefono.ToString();
@@ -130,13 +135,13 @@ namespace ClinicaFrba
                 var roles = rman.GetRolesByPerfil(perfil);
                 cbxRoles.Items.Clear();
                 foreach (Rol rol in roles)
-                {
                     cbxRoles.Items.Add(rol);
-                }
+                
                 cbxRoles.DisplayMember = "Nombre";
                 cbxRoles.SelectedIndex = 0;
                 if (perfil.Nombre == "Afiliado")
                 {
+                    afiliadoUserControl.esNuevoUsuario = esNuevoUsuario;
                     afiliadoUserControl.rellenarCampos(_afiliado);
                     userPanel.Controls.Add(afiliadoUserControl);
                 }
@@ -165,6 +170,8 @@ namespace ClinicaFrba
                     throw new Exception(" El teléfono debe ser numérico!");
                 if (!long.TryParse(txtDNI.Text, out dni))
                     throw new Exception(" El DNI debe ser numérico!");
+                if(dni > 99999999)
+                    throw new Exception(" El DNI no es valido!");
                 if (string.IsNullOrEmpty(txtNombre.Text.Trim()))
                     throw new Exception(" El Nombre es obligatorio!");
                 if (string.IsNullOrEmpty(txtApellido.Text.Trim()))
@@ -178,6 +185,8 @@ namespace ClinicaFrba
                 user.DetallesPersona.Direccion = txtDireccion.Text.Trim();
                 user.DetallesPersona.Telefono = telefono;
                 user.DetallesPersona.Email = txtMail.Text.Trim();
+                user.DetallesPersona.TipoDNI = (TipoDoc)cbxTipoDNI.SelectedItem;
+                user.DetallesPersona.Sexo = (TipoSexo)cbxSexo.SelectedItem;
                 Rol rolSeleccionado = (Rol)cbxRoles.SelectedItem;
                 if (Session.Errores != null)
                     MessageBox.Show(Session.Errores);
@@ -192,7 +201,6 @@ namespace ClinicaFrba
                         _afiliado.RoleID = rolSeleccionado.ID;
                         try
                         {
-
                             manager.GuardarAfiliado(_afiliado);
                             user = _afiliado;
                             this.Close();
@@ -226,7 +234,7 @@ namespace ClinicaFrba
                         throw new Exception("Error en Perfiles");
                     }
                 }
-              // OnUserSaved(this, new UserSavedEventArgs() { Username = this.txtUsername.Text, User = user });
+               OnUserSaved(this, new UserSavedEventArgs() { User = user });
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

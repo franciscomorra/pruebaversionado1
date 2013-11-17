@@ -17,9 +17,10 @@ namespace ClinicaFrba.Login
         public Afiliado _conyuge = new Afiliado();
         public Afiliado _padre = new Afiliado();
         public int _nroAfiliado;
+        public bool esNuevoUsuario = false;
+
         public Afiliado devolverCampos()
         {
-
             int cantHijos;
             if (!int.TryParse(txtHijos.Text, out cantHijos))
                 throw new Exception("La cantidad de hijos debe ser numérica!");
@@ -29,7 +30,6 @@ namespace ClinicaFrba.Login
             _afiliado.PlanMedico = (PlanMedico)cbxPlanMedico.SelectedItem;
             _afiliado.CantHijos = cantHijos;
             _afiliado.MotivoCambio = txtMotivo.Text.Trim();
-
             return _afiliado;
         }
 
@@ -39,13 +39,7 @@ namespace ClinicaFrba.Login
             cbxPlanMedico.SelectedItem = afiliado.PlanMedico;
             cbxEstadoCivil.SelectedItem = afiliado.EstadoCivil;
             txtHijos.Text = afiliado.CantHijos.ToString();
-            if (afiliado.MotivoCambio != null)
-            {
-                txtMotivo.Text = afiliado.MotivoCambio;
-                txtMotivo.Enabled = false;
-            }
-            panelMotivo.Visible = (afiliado.NroAfiliado != 0);
-            if (_conyuge!=null) { //Cargando marido/esposa del afiliado principal
+            if (_conyuge.UserID!=0) { //Cargando marido/esposa del afiliado principal
                 txtConyuge.Text = _conyuge.ToString();
                 panelFamiliar.Visible = false;
                 txtHijos.Text = _afiliado.CantHijos.ToString();
@@ -55,7 +49,7 @@ namespace ClinicaFrba.Login
                 _afiliado.grupoFamiliar = _conyuge.grupoFamiliar;
                 _afiliado.tipoAfiliado = 2;
             }
-            else if (_padre != null)//Carga de hijos
+            else if (_padre.UserID != 0)//Carga de hijos
             {
                 txtPadre.Text = _padre.ToString();
                 panelPadre.Visible = false;
@@ -69,14 +63,18 @@ namespace ClinicaFrba.Login
             else {//Es padre
                 panelPadre.Visible = false;
                 panelConyuge.Visible = false;
-                _afiliado.NroAfiliado = 1;
+            }
+            if (esNuevoUsuario)
+            {
+                txtMotivo.Text = "Alta";
+                txtMotivo.Enabled = false;
             }
         }
 
         public AfiliadoUserControl()
         {
             InitializeComponent();
-            _afiliado = new Afiliado();
+            //_afiliado = new Afiliado();
             var manager = new PlanesMedicosManager();
             var planesMedicos = manager.GetAll();
             cbxPlanMedico.DisplayMember = "Name";
@@ -86,6 +84,7 @@ namespace ClinicaFrba.Login
             items.ForEach(x => cbxEstadoCivil.Items.Add(x));
             cbxEstadoCivil.DisplayMember = "Name";
             cbxPlanMedico.SelectedIndex = 0;
+
         }
 
     }

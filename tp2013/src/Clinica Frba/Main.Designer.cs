@@ -61,6 +61,7 @@
             this.lblFecha.Size = new System.Drawing.Size(39, 14);
             this.lblFecha.TabIndex = 2;
             this.lblFecha.Text = "label1";
+            this.lblFecha.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // MainView
             // 
@@ -69,8 +70,8 @@
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(865, 487);
-            this.Controls.Add(this.lblFecha);
             this.Controls.Add(this.mainMenu);
+            this.Controls.Add(this.lblFecha);
             this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.IsMdiContainer = true;

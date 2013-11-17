@@ -36,6 +36,8 @@ namespace ClinicaFrba.Login
             {
                 clbEspecialidades.SetItemChecked(clbEspecialidades.Items.IndexOf(especialidad), true);
             }
+            if(profesional.Matricula != null)
+                txtMatricula.Text = profesional.Matricula.ToString();
         }
 
         public ProfesionalUserControl()
