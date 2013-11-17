@@ -38,6 +38,7 @@
             this.txtAfiliado = new System.Windows.Forms.TextBox();
             this.panelAcciones = new System.Windows.Forms.Panel();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Profesional = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTurnos)).BeginInit();
@@ -88,6 +89,7 @@
             this.dgvTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTurnos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Fecha,
+            this.Profesional,
             this.Numero});
             this.dgvTurnos.Location = new System.Drawing.Point(3, 48);
             this.dgvTurnos.MultiSelect = false;
@@ -142,6 +144,7 @@
             this.panelAcciones.Name = "panelAcciones";
             this.panelAcciones.Size = new System.Drawing.Size(842, 262);
             this.panelAcciones.TabIndex = 24;
+            this.panelAcciones.Visible = false;
             // 
             // Fecha
             // 
@@ -149,6 +152,13 @@
             this.Fecha.HeaderText = "Fecha";
             this.Fecha.Name = "Fecha";
             this.Fecha.ReadOnly = true;
+            // 
+            // Profesional
+            // 
+            this.Profesional.DataPropertyName = "Profesional";
+            this.Profesional.HeaderText = "Profesional";
+            this.Profesional.Name = "Profesional";
+            this.Profesional.ReadOnly = true;
             // 
             // Numero
             // 
@@ -188,6 +198,7 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Panel panelAcciones;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Profesional;
         private System.Windows.Forms.DataGridViewTextBoxColumn Numero;
     }
 }

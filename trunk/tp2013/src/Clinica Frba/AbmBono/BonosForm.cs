@@ -17,7 +17,8 @@ using System.Configuration;
 
 namespace ClinicaFrba.AbmBono
 {
-    [NonNavigable]
+    
+    [PermissionRequired(Functionalities.ComprarBonos)]
     public partial class BonosForm : Form
     {
         private bool _isSearchMode = false;
@@ -107,7 +108,7 @@ namespace ClinicaFrba.AbmBono
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             var addBonoForm = new ComprarBonoForm();
-            addBonoForm.afiliado = _afiliado;
+            addBonoForm._afiliado = _afiliado;
             addBonoForm.OnBonosUpdated += new EventHandler<BonoUpdatedEventArgs>(pedirBonoOnBonoUpdated);
             ViewsManager.LoadModal(addBonoForm);
         }

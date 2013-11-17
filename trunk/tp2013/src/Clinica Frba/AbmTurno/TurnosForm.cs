@@ -48,7 +48,8 @@ namespace ClinicaFrba.AbmTurno
         }
         public void RefreshDataGrid()
         {
-            var dataSource = _turnosManager.GetAll(_afiliado,_soloTurnosdeHoy);
+            var dataSource = _turnosManager.GetAll(_afiliado,_soloTurnosdeHoy,null);
+            
             dgvTurnos.AutoGenerateColumns = false; 
             dgvTurnos.DataSource = dataSource;
 

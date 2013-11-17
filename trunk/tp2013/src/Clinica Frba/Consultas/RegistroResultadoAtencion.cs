@@ -71,7 +71,19 @@ namespace ClinicaFrba.Consultas
             _afiliado = e.Afiliado;
             txtAfiliado.Text = _afiliado.DetallesPersona.Apellido + ", " + _afiliado.DetallesPersona.Nombre;
             _afiliadosForm.Hide();
-            panelTurno.Visible = true;
+            
+            TurnosManager tmanager = new TurnosManager();
+            List<Turno> turnosDeHoy = tmanager.GetAll(_afiliado, true, _profesional);
+            if (turnosDeHoy.Count < 1){
+                throw new Exception("No hay turnos para hoy de ese afiliado!");
+            }else {
+                panelTurno.Visible = true;
+                if (turnosDeHoy.Count == 1){
+                    _turno = turnosDeHoy.ElementAt(0);
+                    btnBuscarTurno.Visible = false;
+                    txtTurno.Text = _turno.ToString();
+                }
+            }
         }
 
         private void btnBuscarTurno_Click(object sender, EventArgs e)

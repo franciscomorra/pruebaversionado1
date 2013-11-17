@@ -66,7 +66,6 @@
             this.dgvBonos.AllowUserToOrderColumns = true;
             this.dgvBonos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvBonos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvBonos.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvBonos.Location = new System.Drawing.Point(0, 96);
             this.dgvBonos.MultiSelect = false;
             this.dgvBonos.Name = "dgvBonos";

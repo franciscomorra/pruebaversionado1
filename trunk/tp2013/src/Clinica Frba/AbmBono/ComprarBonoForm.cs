@@ -14,14 +14,14 @@ using System.Configuration;
 
 namespace ClinicaFrba.AbmBono
 {
-    [PermissionRequired(Functionalities.ComprarBonos)]
+    [NonNavigable]
     public partial class ComprarBonoForm : Form
     {
 
         private AfiliadosForm _afiliadosForm;
-        private Afiliado _afiliado;
+
         private AfiliadoManager _afiliadoMan = new AfiliadoManager();
-        public Afiliado afiliado;
+        public Afiliado _afiliado;
         private BonosManager _bonoManager = new BonosManager();
 
         public event EventHandler<BonoUpdatedEventArgs> OnBonosUpdated;
@@ -53,14 +53,14 @@ namespace ClinicaFrba.AbmBono
         { 
             try
             {
-                afiliado = _afiliadoMan.getInfo(_afiliado.UserID);
+                _afiliado = _afiliadoMan.actualizarInformacion(_afiliado.UserID);
             }
             catch (System.Exception excep)
             {
                 MessageBox.Show(excep.Message);
             }
-            lblprecioConsulta.Text = afiliado.PlanMedico.PrecioConsulta.ToString();
-            lblprecioFarmacia.Text = afiliado.PlanMedico.PrecioFarmacia.ToString();
+            lblprecioConsulta.Text = _afiliado.PlanMedico.PrecioConsulta.ToString();
+            lblprecioFarmacia.Text = _afiliado.PlanMedico.PrecioFarmacia.ToString();
             lblTotal.Text = "0";
             cbxCantConsulta.Items.Clear();
             cbxCantFarmacia.Items.Clear();
@@ -78,7 +78,7 @@ namespace ClinicaFrba.AbmBono
         {
             try
             {
-                if (Session.User.Perfil.Nombre != "Afiliado")
+                if (Session.User.Perfil.Nombre != "Afiliado" && _afiliado == null)
                 {
                     panelCompra.Hide();
                     panelAfiliado.Show();
@@ -86,7 +86,8 @@ namespace ClinicaFrba.AbmBono
                 else
                 {
                     AfiliadoManager manager = new AfiliadoManager();
-                    _afiliado = Session.Afiliado;
+                    if(_afiliado == null)
+                        _afiliado = Session.Afiliado;
                     txtAfiliado.Text = _afiliado.ToString();
                     btnBuscar.Visible = false;
                     rellenarPrecios();
@@ -101,8 +102,8 @@ namespace ClinicaFrba.AbmBono
 
         private void cbxCantConsulta_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int totalConsulta = cbxCantConsulta.SelectedIndex * afiliado.PlanMedico.PrecioConsulta;
-            int totalFarmacia = cbxCantFarmacia.SelectedIndex * afiliado.PlanMedico.PrecioFarmacia;
+            int totalConsulta = cbxCantConsulta.SelectedIndex * _afiliado.PlanMedico.PrecioConsulta;
+            int totalFarmacia = cbxCantFarmacia.SelectedIndex * _afiliado.PlanMedico.PrecioFarmacia;
             int total = totalConsulta + totalFarmacia;
             lblTotal.Text = total.ToString();
         }
@@ -119,8 +120,8 @@ namespace ClinicaFrba.AbmBono
                     {
                         Bono bono = new Bono();
                         bono.Fecha = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
-                        bono.AfiliadoCompro = afiliado;
-                        bono.Precio = afiliado.PlanMedico.PrecioConsulta;
+                        bono.AfiliadoCompro = _afiliado;
+                        bono.Precio = _afiliado.PlanMedico.PrecioConsulta;
                         bono.TipodeBono = TipoBono.Consulta;
                         int numeroBono = _bonoManager.Comprar(bono);
                         bonos.Add(bono);
@@ -132,8 +133,8 @@ namespace ClinicaFrba.AbmBono
                     {
                         Bono bono = new Bono();
                         bono.Fecha = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
-                        bono.AfiliadoCompro = afiliado;
-                        bono.Precio = afiliado.PlanMedico.PrecioFarmacia;
+                        bono.AfiliadoCompro = _afiliado;
+                        bono.Precio = _afiliado.PlanMedico.PrecioFarmacia;
                         bono.TipodeBono = TipoBono.Farmacia;
                         int numeroBono = _bonoManager.Comprar(bono);
                         bonos.Add(bono);

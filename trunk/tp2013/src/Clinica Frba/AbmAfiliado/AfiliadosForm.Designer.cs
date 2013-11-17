@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.buttonsPanel = new System.Windows.Forms.Panel();
-            this.lblResults = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
@@ -47,8 +45,8 @@
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.dgvAfiliados = new System.Windows.Forms.DataGridView();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Matricula = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonsPanel.SuspendLayout();
             this.searchPanel.SuspendLayout();
             this.groupBox.SuspendLayout();
@@ -58,8 +56,6 @@
             // buttonsPanel
             // 
             this.buttonsPanel.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.buttonsPanel.Controls.Add(this.lblResults);
-            this.buttonsPanel.Controls.Add(this.label5);
             this.buttonsPanel.Controls.Add(this.btnEliminar);
             this.buttonsPanel.Controls.Add(this.btnModificar);
             this.buttonsPanel.Controls.Add(this.btnAgregar);
@@ -68,32 +64,6 @@
             this.buttonsPanel.Name = "buttonsPanel";
             this.buttonsPanel.Size = new System.Drawing.Size(588, 39);
             this.buttonsPanel.TabIndex = 3;
-            // 
-            // lblResults
-            // 
-            this.lblResults.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblResults.AutoSize = true;
-            this.lblResults.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.lblResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResults.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblResults.Location = new System.Drawing.Point(500, 20);
-            this.lblResults.Name = "lblResults";
-            this.lblResults.Size = new System.Drawing.Size(14, 13);
-            this.lblResults.TabIndex = 4;
-            this.lblResults.Text = "0";
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label5.Location = new System.Drawing.Point(520, 20);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 13);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "resultados";
             // 
             // btnEliminar
             // 
@@ -252,8 +222,8 @@
             this.dgvAfiliados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAfiliados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAfiliados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Nombre,
-            this.Matricula});
+            this.Matricula,
+            this.Nombre});
             this.dgvAfiliados.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAfiliados.Location = new System.Drawing.Point(0, 156);
             this.dgvAfiliados.MultiSelect = false;
@@ -262,19 +232,19 @@
             this.dgvAfiliados.Size = new System.Drawing.Size(588, 314);
             this.dgvAfiliados.TabIndex = 7;
             // 
-            // Nombre
-            // 
-            this.Nombre.DataPropertyName = "DetallesPersona";
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            // 
             // Matricula
             // 
             this.Matricula.DataPropertyName = "NroAfiliado";
             this.Matricula.HeaderText = "Numero de Afiliado";
             this.Matricula.Name = "Matricula";
             this.Matricula.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            this.Nombre.DataPropertyName = "DetallesPersona";
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
             // 
             // AfiliadosForm
             // 
@@ -288,7 +258,6 @@
             this.Text = "Administrar Afiliados";
             this.Load += new System.EventHandler(this.AfiliadosForm_Load);
             this.buttonsPanel.ResumeLayout(false);
-            this.buttonsPanel.PerformLayout();
             this.searchPanel.ResumeLayout(false);
             this.groupBox.ResumeLayout(false);
             this.groupBox.PerformLayout();
@@ -315,10 +284,8 @@
         private System.Windows.Forms.TextBox txtAfiliadoNro;
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.Label lblResults;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridView dgvAfiliados;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Matricula;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
     }
 }
