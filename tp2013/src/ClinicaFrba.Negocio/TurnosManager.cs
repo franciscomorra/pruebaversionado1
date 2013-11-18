@@ -57,6 +57,11 @@ namespace ClinicaFrba.Negocio
             {
                 foreach (DataRow row in result.Rows)
                 {
+                    Turno turno = new Turno();
+                    turno.Fecha = Convert.ToDateTime(row["Fecha"]);
+                    //turno.Numero = int.Parse(row["Numero"].ToString());
+                    turno.Profesional = profesional;
+                    ret.Add(turno);
                     /*
                     fecha1.= int.Parse(row["Hora"].ToString());
                     fecha.Minute = int.Parse(row["Minuto"].ToString());

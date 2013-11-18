@@ -24,9 +24,10 @@ Registrar Agenda Profesional.
 
 9. Compra de Bonos.
 	Tarda mucho cuando carga bonos
+	No tiene que mostrar los que fueron usados!
 
 10. Pedido de turno
-	En la migracion, como se ponen los turnos? atendido, activo?
+
 11. Registro de llegada para atención médica
 		Validar 15 minutos y mismo dia
 		SQL de registrar llegada

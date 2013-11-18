@@ -639,7 +639,7 @@ INSERT INTO [SHARPS].Estados_Civiles (Descripcion) VALUES ('Divorciado')
 PRINT 'Ingresando Estados de un Turno...'
 INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('Atendido'); 
 INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('CanceladoAfiliado');
-INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('CanceladoAProfesional');
+INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('CanceladoProfesional');
 INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('Activo');---todavia no es el dia del turno
 INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('Desactivo')
 
@@ -712,8 +712,8 @@ GO
 
 --Rellenando Agendas
 PRINT 'Rellenando Agendas...'
-INSERT INTO [SHARPS].Agendas(Profesional,Horario)
-SELECT distinct x.UsuarioID , m.Turno_Fecha
+INSERT INTO [SHARPS].Agendas(Profesional,Horario,Activo)
+SELECT distinct x.UsuarioID , m.Turno_Fecha,0
 FROM gd_esquema.Maestra m
 INNER JOIN [SHARPS].Usuarios x on x.Username =CAST(m.Medico_DNI AS Nvarchar(MAX))
 WHERE m.Turno_Fecha is not null
@@ -723,8 +723,8 @@ order by 1
 --Ingresando Turnos
 PRINT 'Ingresando los Turnos...'
 GO
-INSERT INTO [SHARPS].Turnos (Numero , Afiliado , Agenda)
-SELECT distinct m.Turno_Numero , U.UsuarioID , a.AgendaID 
+INSERT INTO [SHARPS].Turnos (Numero , Afiliado , Agenda, Estado)
+SELECT distinct m.Turno_Numero , U.UsuarioID , a.AgendaID ,1
 FROM gd_esquema.Maestra m
 INNER JOIN [SHARPS].Agendas a ON a.Horario = m.Turno_Fecha
 INNER JOIN [SHARPS].Usuarios x ON x.UsuarioID = a.Profesional
@@ -1485,26 +1485,25 @@ END
 GO
 
 
-CREATE PROCEDURE [SHARPS].[CancelarDiaProfesional]
-@MedicoID int,
+CREATE  PROCEDURE [SHARPS].[CancelarDiaProfesional]
+@Profesional int,
 @Fecha date
 
 AS
 BEGIN
 
-UPDATE [SHARPS].Turnos
-SET Estado = 3  
-FROM [SHARPS].Turnos T
-INNER JOIN Agendas A  ON A.Profesional = @MedicoID
-WHERE T.Agenda = A.AgendaID AND CONVERT(CHAR(10), A.Horario ,112) = @Fecha
+DECLARE @idEstadoCanceladoProfesional INT
+SELECT @idEstadoCanceladoProfesional = et.EstadoID  FROM Estados_Turno et WHERE et.Descripcion = 'CanceladoProfesional'
+UPDATE SHARPS.Agendas SET Activo = 0 WHERE Horario = @Fecha AND Profesional = @Profesional
 
-UPDATE Agendas SET Activo = 0
-WHERE Profesional = @MedicoID AND CONVERT(CHAR(10), Horario ,112) = @Fecha 
+--UPDATE SHARPS.Turnos SET Estado = @idEstadoCanceladoProfesional WHERE Agenda = 
+--Falta esto, como se hace???
+
 END
+
 GO
 
-
-CREATE PROCEDURE [SHARPS].[GetBonos]
+CREATE PROCEDURE [SHARPS].[GetBonos] --Agregar que no fueron usados!!!!
 
 @userId int,
 @fecha DATETIME
@@ -1593,20 +1592,19 @@ GO
 
 CREATE PROCEDURE [SHARPS].[GetAgendaByProfesional]
 @profesionalID INT,
-@fecha DATE
+@fecha DATETIME
 
 AS
 BEGIN
 
-SELECT CONVERT(VARCHAR,A.Horario,108) Hora , CONVERT(CHAR(10), A.Horario ,112) AS Fecha 
+SELECT a.Horario  Fecha
 FROM Agendas A
 WHERE A.Profesional = @profesionalID
-AND A.Horario = @fecha AND A.Activo = 0
+AND YEAR(A.Horario) = YEAR(@fecha) AND MONTH(a.Horario) = MONTH(@fecha) AND DAY(a.Horario) = DAY(@fecha) AND A.Activo = 1
 
 END
-GO 
 
-
+GO
 CREATE PROCEDURE [SHARPS].[InsertTurno]
 @Fecha DATE,
 @Profesional_ID INT,
@@ -1621,8 +1619,7 @@ SELECT @NUMERO = MAX(Numero) + 1 FROM [SHARPS].Turnos
 SELECT @IDAGENDA = AgendaID FROM [SHARPS].Agendas A WHERE A.Profesional = @Profesional_ID
 INSERT INTO [SHARPS].Turnos (Numero , Afiliado , Estado , FechaHoraLlegada , Agenda )
 VALUES (@NUMERO , @Afiliado_ID, 3 , NULL,@IDAGENDA)
-UPDATE Agendas SET Activo = 1 
-WHERE Horario = @Fecha AND Profesional = @Profesional_ID
+UPDATE Agendas SET Activo = 0 WHERE Horario = @Fecha AND Profesional = @Profesional_ID
 
 END
 GO 
@@ -1678,7 +1675,7 @@ INNER JOIN SHARPS.Agendas A ON A.AgendaID = T.Agenda
 WHERE T.Afiliado = @ID
 END
 
-
+GO
 
 /*
 CREATE PROCEDURE [SHARPS].[DeleteUser]
@@ -1769,12 +1766,12 @@ CREATE PROCEDURE  [SHARPS].CancelarTurnoAfiliado
 @turno INT
 AS
 BEGIN
-
-UPDATE SHARPS.Turnos SET Estado = 2
-FROM Turnos T
-INNER JOIN Agendas A ON A.AgendaID = T.Agenda
-WHERE T.Numero = @turno  AND A.Activo = 1
-
+DECLARE @idEstadoCanceladoAfiliado INT
+DECLARE @IDAGENDA INT
+SELECT @idEstadoCanceladoAfiliado = et.EstadoID  FROM Estados_Turno et WHERE et.Descripcion = 'CanceladoAfiliado'
+SELECT @IDAGENDA = T.Agenda FROM TURNOS T WHERE T.Numero = @turno
+UPDATE SHARPS.Turnos SET Estado = @idEstadoCanceladoAfiliado WHERE Numero = @turno
+UPDATE SHARPS.Agendas SET Activo = 1 WHERE AgendaID = @IDAGENDA AND Activo = 0
 END
 GO
 

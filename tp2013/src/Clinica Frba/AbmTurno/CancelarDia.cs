@@ -52,7 +52,12 @@ namespace ClinicaFrba.AbmTurno
                 else
                     try
                     {
-                        _profesionalManager.CancelarTurnos(_profesional.UserID,fecha);
+                        if (MessageBox.Show(string.Format("Confirma que desea cancelar el dia?")
+                        , "Cancelar Dia", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                        {
+                            _profesionalManager.CancelarTurnos(_profesional.UserID,fecha);
+                            MessageBox.Show("Dia Cancelado");
+                        }
                     }
                     catch (System.Exception excep)
                     {
