@@ -80,7 +80,7 @@ namespace ClinicaFrba.AbmTurno
             panelFecha.Visible = false;
             dtTurno.Value = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(1);
             dtTurno.MinDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(1);
-            dtTurno.MaxDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(30);
+            dtTurno.MaxDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(120);
             panelHorario.Visible = false;
 
         }
