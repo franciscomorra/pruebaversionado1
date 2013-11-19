@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ClinicaFrba.Login;
 using ClinicaFrba.Core;
 using ClinicaFrba.Negocio;
 using ClinicaFrba.Comun;
@@ -89,6 +90,7 @@ namespace ClinicaFrba.Login
                         MessageBox.Show("Por favor, verifique sus datos a continuacion");
                         var registroForm = new RegistroForm();
                         afiliado.MotivoCambio = "Update Nuevo Sistema";
+                        registroForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
                         registroForm.rellenarAfiliado(afiliado);
                         ViewsManager.LoadModal(registroForm);
                     }
@@ -102,6 +104,7 @@ namespace ClinicaFrba.Login
                     {
                         MessageBox.Show("Por favor, verifique sus datos a continuacion");
                         var registroForm = new RegistroForm();
+                        registroForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
                         registroForm.rellenarProfesional(profesional);
                         ViewsManager.LoadModal(registroForm);
                     }
@@ -119,6 +122,11 @@ namespace ClinicaFrba.Login
             user.RoleID = rolSelected.ID;
             user.Perfil = rolSelected.Perfil;
             iniciar_sesion();
+        }
+
+        void regForm_OnUserSaved(object sender, UserSavedEventArgs e)
+        {
+            MessageBox.Show("Datos Guardados correctamente para " + e.User.ToString());
         }
 
     }

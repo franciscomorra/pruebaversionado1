@@ -75,7 +75,7 @@ namespace ClinicaFrba.Negocio
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].InsertTurno", SqlDataAccessArgs
                 .CreateWith(
-                    "@Fecha", turno.Fecha.ToString())
+                    "@Fecha", turno.Fecha)
                     .And("@Profesional_ID", turno.Profesional.UserID)
                     .And("@Afiliado_ID", turno.Afiliado.UserID)
             .Arguments);

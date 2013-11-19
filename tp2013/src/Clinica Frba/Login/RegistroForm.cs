@@ -163,80 +163,79 @@ namespace ClinicaFrba
         private void btnSave_Click(object sender, EventArgs e)
         {
 
-                long telefono;
-                long dni;
-                Session.Errores = null;
-                if (!long.TryParse(txtTelefono.Text.Trim().Replace("-", ""), out telefono))
-                    throw new Exception(" El teléfono debe ser numérico!");
-                if (!long.TryParse(txtDNI.Text, out dni))
-                    throw new Exception(" El DNI debe ser numérico!");
-                if(dni > 99999999)
-                    throw new Exception(" El DNI no es valido!");
-                if (string.IsNullOrEmpty(txtNombre.Text.Trim()))
-                    throw new Exception(" El Nombre es obligatorio!");
-                if (string.IsNullOrEmpty(txtApellido.Text.Trim()))
-                    throw new Exception(" El Apellido es obligatorio!");
-                if (string.IsNullOrEmpty(txtMail.Text.Trim()))
-                    throw new Exception(" El Email es obligatorio!");
-                user.DetallesPersona.Apellido = txtApellido.Text.Trim();
-                user.DetallesPersona.Nombre = txtNombre.Text.Trim();
-                user.DetallesPersona.DNI = dni;
-                user.DetallesPersona.FechaNacimiento = dtFechaNacimiento.Value;
-                user.DetallesPersona.Direccion = txtDireccion.Text.Trim();
-                user.DetallesPersona.Telefono = telefono;
-                user.DetallesPersona.Email = txtMail.Text.Trim();
-                user.DetallesPersona.TipoDNI = (TipoDoc)cbxTipoDNI.SelectedItem;
-                user.DetallesPersona.Sexo = (TipoSexo)cbxSexo.SelectedItem;
-                Rol rolSeleccionado = (Rol)cbxRoles.SelectedItem;
-                if (Session.Errores != null)
-                    MessageBox.Show(Session.Errores);
-                else
+            user = new User();    
+            long telefono;
+            long dni;
+            Session.Errores = null;
+            if (!long.TryParse(txtTelefono.Text.Trim().Replace("-", ""), out telefono))
+                throw new Exception(" El teléfono debe ser numérico!");
+            if (!long.TryParse(txtDNI.Text, out dni))
+                throw new Exception(" El DNI debe ser numérico!");
+            if(dni > 99999999)
+                throw new Exception(" El DNI no es valido!");
+            if (string.IsNullOrEmpty(txtNombre.Text.Trim()))
+                throw new Exception(" El Nombre es obligatorio!");
+            if (string.IsNullOrEmpty(txtApellido.Text.Trim()))
+                throw new Exception(" El Apellido es obligatorio!");
+            if (string.IsNullOrEmpty(txtMail.Text.Trim()))
+                throw new Exception(" El Email es obligatorio!");
+            user.DetallesPersona.Apellido = txtApellido.Text.Trim();
+            user.DetallesPersona.Nombre = txtNombre.Text.Trim();
+            user.DetallesPersona.DNI = dni;
+            user.DetallesPersona.FechaNacimiento = dtFechaNacimiento.Value;
+            user.DetallesPersona.Direccion = txtDireccion.Text.Trim();
+            user.DetallesPersona.Telefono = telefono;
+            user.DetallesPersona.Email = txtMail.Text.Trim();
+            user.DetallesPersona.TipoDNI = (TipoDoc)cbxTipoDNI.SelectedItem;
+            user.DetallesPersona.Sexo = (TipoSexo)cbxSexo.SelectedItem;
+            Rol rolSeleccionado = (Rol)cbxRoles.SelectedItem;
+
+            if (perfil.Nombre == "Afiliado")
+            {
+                _afiliado = ((AfiliadoUserControl)afiliadoUserControl).devolverCampos();
+                _afiliado.UserName = user.DetallesPersona.DNI.ToString();
+                var manager = new AfiliadoManager();
+                _afiliado.DetallesPersona = user.DetallesPersona;
+                _afiliado.RoleID = rolSeleccionado.ID;
+                try
                 {
-                    if (perfil.Nombre == "Afiliado")
-                    {
-                        _afiliado = ((AfiliadoUserControl)afiliadoUserControl).devolverCampos();
-                        _afiliado.UserName = user.DetallesPersona.DNI.ToString();
-                        var manager = new AfiliadoManager();
-                        _afiliado.DetallesPersona = user.DetallesPersona;
-                        _afiliado.RoleID = rolSeleccionado.ID;
-                        try
-                        {
-                            manager.GuardarAfiliado(_afiliado);
-                            user = _afiliado;
-                            this.Close();
-                        }
-                        catch (System.Exception excep)
-                        {
-                            MessageBox.Show(excep.Message);
-                        }
-                    }
-                    else if (perfil.Nombre == "Profesional")
-                    {
-                        _profesional = ((ProfesionalUserControl)profesionalUserControl).GetProfesional();
-                        _profesional.DetallesPersona = user.DetallesPersona;
-                        _profesional.UserName = user.DetallesPersona.DNI.ToString();
-                        var manager = new ProfesionalManager();
-                        _profesional.RoleID = rolSeleccionado.ID;
-
-                        try
-                        {
-                            manager.GuardarProfesional(_profesional);
-                            user = _profesional;
-                            this.Close();
-                        }
-                        catch (System.Exception excep)
-                        {
-                            MessageBox.Show(excep.Message);
-                        }
-                    }
-                    else
-                    {
-                        throw new Exception("Error en Perfiles");
-                    }
+                    manager.GuardarAfiliado(_afiliado);
+                    user = _afiliado as User;
+                    OnUserSaved(this, new UserSavedEventArgs() { User = user });
+                    this.Close();
                 }
-               OnUserSaved(this, new UserSavedEventArgs() { User = user });
-        }
+                catch (System.Exception excep)
+                {
+                    MessageBox.Show(excep.Message);
+                }
+            }
+            else if (perfil.Nombre == "Profesional")
+            {
+                _profesional = ((ProfesionalUserControl)profesionalUserControl).GetProfesional();
+                _profesional.DetallesPersona = user.DetallesPersona;
+                _profesional.UserName = user.DetallesPersona.DNI.ToString();
+                var manager = new ProfesionalManager();
+                _profesional.RoleID = rolSeleccionado.ID;
 
+                try
+                {
+                    manager.GuardarProfesional(_profesional);
+                    user = _profesional as User;
+                    OnUserSaved(this, new UserSavedEventArgs() { User = user });
+                    this.Close();
+                }
+                catch (System.Exception excep)
+                {
+                    MessageBox.Show(excep.Message);
+                }
+
+            }
+            else
+            {
+                throw new Exception("Error en Perfiles");
+            }
+            
+        }
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
