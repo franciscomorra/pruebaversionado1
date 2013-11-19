@@ -1391,11 +1391,11 @@ SELECT @rolActual = r.RolID FROM Roles r
 INNER JOIN [SHARPS].Perfiles P ON r.Perfil = p.PerfilID
 WHERE p.Descripcion = 'Afiliado'
 
-DELETE FROM SHARPS.Usuarios_Roles WHERE Rol = @rolActual
+DELETE FROM SHARPS.Usuarios_Roles WHERE Rol = @rolActual AND Usuario = @ID
 INSERT INTO SHARPS.Usuarios_Roles (Usuario , Rol) VALUES (@ID , @RolAfiliado)
 END
 
-GO
+
 
 CREATE PROCEDURE [SHARPS].[InsertMiembroGrupoFamiliar]
 @PlanMedico int,
@@ -1449,16 +1449,27 @@ GO
 
 CREATE PROCEDURE [SHARPS].[UpdateProfesional]
 @Matricula int,
-@ID int
+@ID int,
+@RolProfesional INT
+
 
 AS
 BEGIN
 
+DECLARE @rolActual INT
+
 UPDATE [SHARPS].Profesionales SET Matricula = @Matricula , Faltan_Datos = 0
 WHERE UsuarioID = @ID 
 
+SELECT @rolActual = r.RolID FROM Roles r 
+INNER JOIN [SHARPS].Perfiles P ON r.Perfil = p.PerfilID
+WHERE p.Descripcion = 'Profesional'
+
+DELETE FROM SHARPS.Usuarios_Roles WHERE Rol = @rolActual AND Usuario = @ID
+INSERT INTO SHARPS.Usuarios_Roles (Usuario , Rol) VALUES (@ID , @RolProfesional)
+
 END
-GO
+
 
 
 

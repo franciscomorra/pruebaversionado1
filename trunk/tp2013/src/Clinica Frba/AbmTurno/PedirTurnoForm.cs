@@ -65,6 +65,9 @@ namespace ClinicaFrba.AbmTurno
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
+            _turno = (Turno)cbxHorarios.SelectedItem;
+            _turno.Afiliado = _afiliado;
+            
             _turnosManager.SaveTurno(_turno);
             if (OnTurnoUpdated != null)
                 OnTurnoUpdated(this, new TurnoUpdatedEventArgs() { Turno = _turno });

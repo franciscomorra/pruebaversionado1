@@ -94,6 +94,7 @@ namespace ClinicaFrba.Negocio
                     "[SHARPS].UpdateProfesional", SqlDataAccessArgs
                     .CreateWith("@Matricula", profesional.Matricula)
                     .And("@ID", profesional.UserID)
+                    .And("@RolProfesional", profesional.RoleID)
                     .Arguments);
             }
             InsertarEspecialidades(profesional);
