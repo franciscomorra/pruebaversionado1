@@ -626,7 +626,7 @@ SELECT PF.Perfil AS ROL, PF.Funcionalidad AS FUNCIONALIDAD FROM [SHARPS].Perfile
 
 PRINT 'Generando Usuario Administrador...'
 INSERT INTO [SHARPS].Usuarios (Activo,Intentos,Username,Password)
-values (1,0,'Administrador','E6-B8-70-50-BF-CB-81-43-FC-B8-DB-01-70-A4-DC-9E-D0-0D-90-4D-DD-3E-2A-4A-D1-B1-E8-DC-0F-DC-9B-E7')
+values (1,0,'Admin','E6-B8-70-50-BF-CB-81-43-FC-B8-DB-01-70-A4-DC-9E-D0-0D-90-4D-DD-3E-2A-4A-D1-B1-E8-DC-0F-DC-9B-E7')
 
 
 PRINT 'Ingresando Estados Civiles...'
