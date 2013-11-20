@@ -53,7 +53,6 @@ namespace ClinicaFrba.Login
             {
                 txtPadre.Text = _padre.ToString();
                 panelPadre.Visible = false;
-                _afiliado.grupoFamiliar = _padre.grupoFamiliar;
                 txtHijos.Text = "0";
                 txtHijos.Enabled = false;
                 cbxEstadoCivil.SelectedItem = EstadoCivil.Soltero;
