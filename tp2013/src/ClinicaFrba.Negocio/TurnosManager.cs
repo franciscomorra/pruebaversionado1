@@ -45,31 +45,48 @@ namespace ClinicaFrba.Negocio
 
         public List<Turno> GetDiasHorariosLibres(Profesional profesional, DateTime fecha)
         {
-
             List<Turno> ret = new List<Turno>();
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].GetAgendaByProfesional", SqlDataAccessArgs
                 .CreateWith("@profesionalID", profesional.UserID)
                 .And("@fecha",fecha)
-                .Arguments);
-            //Debe devolver las horas que tiene libre el profesional ese dia
+                .Arguments);//Debe devolver las horas que tiene libre el profesional ese dia
             if (result != null)
             {
                 foreach (DataRow row in result.Rows)
                 {
                     Turno turno = new Turno();
                     turno.Fecha = Convert.ToDateTime(row["Fecha"]);
-                    //turno.Numero = int.Parse(row["Numero"].ToString());
                     turno.Profesional = profesional;
                     ret.Add(turno);
-                    /*
-                    fecha1.= int.Parse(row["Hora"].ToString());
-                    fecha.Minute = int.Parse(row["Minuto"].ToString());
-                    ret.Add(fecha);
-                    */
                 }
             }
             return ret;
+        }
+
+
+        public List<Turno> GetTurnosEnFechaProfesional(Profesional profesional, DateTime fecha)
+        {
+            List<Turno> ret = new List<Turno>();
+            var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "[SHARPS].GetTurnosByProfesional", SqlDataAccessArgs
+                .CreateWith("@profesionalID", profesional.UserID)
+                .And("@fecha", fecha)
+                .Arguments);
+            //Devuelve los turnos que tiene un profesional asignados en una fecha
+
+            if (result != null)
+            {
+                foreach (DataRow row in result.Rows)
+                {
+                    Turno turno = new Turno();
+                    turno.Fecha = Convert.ToDateTime(row["Fecha"]);
+                    turno.Profesional = profesional;
+                    ret.Add(turno);
+                }
+            }
+            return ret;
+
         }
         public void SaveTurno(Turno turno) {
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),

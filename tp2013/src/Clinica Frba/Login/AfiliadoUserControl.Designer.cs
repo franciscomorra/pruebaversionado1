@@ -39,11 +39,11 @@
             this.cbxPlanMedico = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.panelConyuge = new System.Windows.Forms.Panel();
-            this.panelPadre = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtPadre = new System.Windows.Forms.TextBox();
             this.lblAfiliado = new System.Windows.Forms.Label();
             this.txtConyuge = new System.Windows.Forms.TextBox();
+            this.txtPadre = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panelPadre = new System.Windows.Forms.Panel();
             this.panelMotivo.SuspendLayout();
             this.panelFamiliar.SuspendLayout();
             this.panelConyuge.SuspendLayout();
@@ -150,33 +150,6 @@
             this.panelConyuge.TabIndex = 44;
             this.panelConyuge.Visible = false;
             // 
-            // panelPadre
-            // 
-            this.panelPadre.Controls.Add(this.label1);
-            this.panelPadre.Controls.Add(this.txtPadre);
-            this.panelPadre.Location = new System.Drawing.Point(0, 0);
-            this.panelPadre.Name = "panelPadre";
-            this.panelPadre.Size = new System.Drawing.Size(387, 43);
-            this.panelPadre.TabIndex = 44;
-            this.panelPadre.Visible = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 13);
-            this.label1.TabIndex = 32;
-            this.label1.Text = "Padre/Madre";
-            // 
-            // txtPadre
-            // 
-            this.txtPadre.Location = new System.Drawing.Point(90, 9);
-            this.txtPadre.Name = "txtPadre";
-            this.txtPadre.ReadOnly = true;
-            this.txtPadre.Size = new System.Drawing.Size(211, 20);
-            this.txtPadre.TabIndex = 33;
-            // 
             // lblAfiliado
             // 
             this.lblAfiliado.AutoSize = true;
@@ -193,6 +166,33 @@
             this.txtConyuge.ReadOnly = true;
             this.txtConyuge.Size = new System.Drawing.Size(214, 20);
             this.txtConyuge.TabIndex = 33;
+            // 
+            // txtPadre
+            // 
+            this.txtPadre.Location = new System.Drawing.Point(90, 9);
+            this.txtPadre.Name = "txtPadre";
+            this.txtPadre.ReadOnly = true;
+            this.txtPadre.Size = new System.Drawing.Size(211, 20);
+            this.txtPadre.TabIndex = 33;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(70, 13);
+            this.label1.TabIndex = 32;
+            this.label1.Text = "Padre/Madre";
+            // 
+            // panelPadre
+            // 
+            this.panelPadre.Controls.Add(this.label1);
+            this.panelPadre.Controls.Add(this.txtPadre);
+            this.panelPadre.Location = new System.Drawing.Point(0, 0);
+            this.panelPadre.Name = "panelPadre";
+            this.panelPadre.Size = new System.Drawing.Size(387, 43);
+            this.panelPadre.TabIndex = 44;
+            this.panelPadre.Visible = false;
             // 
             // AfiliadoUserControl
             // 

@@ -21,6 +21,7 @@ namespace ClinicaFrba.AbmTurno
         private Profesional _profesional;
         private ProfesionalesForm _profesionalesForm;
         private ProfesionalManager _profesionalManager = new ProfesionalManager();
+        private TurnosManager _turnoManager = new TurnosManager();
         public CancelarDia()
         {
             InitializeComponent();
@@ -52,7 +53,9 @@ namespace ClinicaFrba.AbmTurno
                 else
                     try
                     {
-                        if (MessageBox.Show(string.Format("Confirma que desea cancelar el dia?")
+                       List<Turno> turnosDeLaFecha =  _turnoManager.GetTurnosEnFechaProfesional(_profesional, fecha);
+
+                       if (MessageBox.Show(string.Format("Usted tiene {0} turnos en la fecha\n Seguro que desea cancelar el dia?", turnosDeLaFecha.Count)
                         , "Cancelar Dia", MessageBoxButtons.OKCancel) == DialogResult.OK)
                         {
                             _profesionalManager.CancelarTurnos(_profesional.UserID,fecha);

@@ -820,7 +820,7 @@ INSERT INTO [SHARPS].Usuarios_Roles (Rol,Usuario)
 SELECT R.RolID, U.UsuarioID
 FROM [SHARPS].Roles R, [SHARPS].Usuarios U
 WHERE R.Descripcion = 'Administrador'
-AND U.Username = 'Administrador'
+AND U.Username = 'Admin'
 
 PRINT 'Migracion finalizada'
 GO
@@ -1396,7 +1396,7 @@ INSERT INTO SHARPS.Usuarios_Roles (Usuario , Rol) VALUES (@ID , @RolAfiliado)
 END
 
 
-
+GO
 CREATE PROCEDURE [SHARPS].[InsertMiembroGrupoFamiliar]
 @PlanMedico int,
 @EstadoCivil int,
@@ -1469,7 +1469,7 @@ DELETE FROM SHARPS.Usuarios_Roles WHERE Rol = @rolActual AND Usuario = @ID
 INSERT INTO SHARPS.Usuarios_Roles (Usuario , Rol) VALUES (@ID , @RolProfesional)
 
 END
-
+GO
 
 
 
@@ -1604,18 +1604,35 @@ GO
 CREATE PROCEDURE [SHARPS].[GetAgendaByProfesional]
 @profesionalID INT,
 @fecha DATETIME
-
 AS
 BEGIN
-
 SELECT a.Horario  Fecha
 FROM Agendas A
 WHERE A.Profesional = @profesionalID
-AND YEAR(A.Horario) = YEAR(@fecha) AND MONTH(a.Horario) = MONTH(@fecha) AND DAY(a.Horario) = DAY(@fecha) AND A.Activo = 1
-
+AND YEAR(A.Horario) = YEAR(@fecha) 
+AND MONTH(a.Horario) = MONTH(@fecha) 
+AND DAY(a.Horario) = DAY(@fecha) 
+AND A.Activo = 1
 END
-
 GO
+
+CREATE PROCEDURE [SHARPS].[GetTurnosByProfesional]
+@profesionalID INT,
+@fecha DATETIME
+AS
+BEGIN
+
+SELECT t.Estado, a.Horario  Fecha, t.Afiliado
+FROM [SHARPS].[Agendas] A
+INNER JOIN [SHARPS].[Turnos] T ON t.Agenda = A.AgendaID 
+WHERE A.Profesional = @profesionalID
+AND YEAR(A.Horario) = YEAR(@fecha) 
+AND MONTH(a.Horario) = MONTH(@fecha) 
+AND DAY(a.Horario) = DAY(@fecha) 
+AND A.Activo = 0
+END
+GO
+
 CREATE PROCEDURE [SHARPS].[InsertTurno]
 @Fecha DATE,
 @Profesional_ID INT,

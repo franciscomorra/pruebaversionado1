@@ -128,61 +128,82 @@ namespace ClinicaFrba.AbmAfiliado
             dgvAfiliados.Refresh();
             MessageBox.Show("Se han guardado los datos del Afiliado " + e.User.ToString());
             
-            var familia = _afiliadoManager.GetAllFromGrupoFamiliar(afiliado.grupoFamiliar);
-
-            int miembrosSegunRegistro = 1; //El afiliado
-            miembrosSegunRegistro = miembrosSegunRegistro+afiliado.CantHijos;
-            if (correspondeConyuge(afiliado)) {
-                miembrosSegunRegistro++;
-            }
-
-            if (familia.Count < miembrosSegunRegistro)
+            if (afiliado.tipoAfiliado == 1)
             {
-                if (!conyugeFueCargado(familia))
-                {
-                    if (MessageBox.Show(string.Format("Desea agregar a su conyuge?"), "Agregar Conyuge", MessageBoxButtons.OKCancel) == DialogResult.OK)
-                    {
-                        var regForm = new RegistroForm();
-                        regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
-                        Afiliado conyuge = new Afiliado();
-                        conyuge.CantHijos = afiliado.CantHijos;
-                        conyuge.EstadoCivil = afiliado.EstadoCivil;
-                        conyuge.grupoFamiliar = afiliado.grupoFamiliar;
-                        conyuge.tipoAfiliado = 2;
-                        conyuge.UserName = (afiliado.grupoFamiliar + 2).ToString();
-                        conyuge.DetallesPersona = afiliado.DetallesPersona;
-                        conyuge.DetallesPersona.Nombre = "";
-                        conyuge.DetallesPersona.DNI = 0;
-                        regForm._conyuge = afiliado;
-                        regForm.rellenarAfiliado(afiliado);
-                        ViewsManager.LoadModal(regForm);
-                    }
+                var familia = _afiliadoManager.GetAllFromGrupoFamiliar(afiliado.grupoFamiliar);
+                int miembrosSegunRegistro = 1; //El afiliado
+                miembrosSegunRegistro = miembrosSegunRegistro + afiliado.CantHijos; //Sumo cantidad de hijos
+                if (correspondeConyuge(afiliado))
+                {//Sumo Conyuge
+                    miembrosSegunRegistro++;
                 }
 
-                BindingList<Afiliado> hijos = new BindingList<Afiliado>(familia.Where(x => (x.grupoFamiliar == afiliado.grupoFamiliar && x.tipoAfiliado > 2)).ToList());
-                if ((hijos.Count < afiliado.CantHijos))
+                if (familia.Count < miembrosSegunRegistro)
                 {
-                    if (MessageBox.Show(string.Format("No todos sus hijos parecen estar cargados, desea cargarlos?"), "Agregar Hijos", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    if (correspondeConyuge(afiliado) && !conyugeFueCargado(familia))
                     {
-                        var regForm = new RegistroForm();
-                        regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
-                        Afiliado hijo = new Afiliado();
-                        hijo.CantHijos = afiliado.CantHijos;
-                        hijo.EstadoCivil = EstadoCivil.Soltero;
-                        hijo.grupoFamiliar = afiliado.grupoFamiliar;
-                        hijo.tipoAfiliado = 2;
-                        hijo.UserName = (afiliado.grupoFamiliar + 2).ToString();
-                        hijo.DetallesPersona = afiliado.DetallesPersona;
-                        hijo.DetallesPersona.Nombre = "";
-                        hijo.DetallesPersona.DNI = 0;
-                        regForm._padre = afiliado;
-                        regForm.rellenarAfiliado(afiliado);
-                        regForm._nroAfiliado = afiliado.CantHijos + 1;
-                        ViewsManager.LoadModal(regForm);
+                        if (MessageBox.Show(string.Format("Desea agregar a su conyuge?"), "Agregar Conyuge", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                        {
+                            var regForm = new RegistroForm();
+                            regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnConyugeSaved);
+                            Afiliado conyuge = RellenarDatosConyuge(afiliado);
+                            regForm._conyuge = afiliado;
+                            regForm.rellenarAfiliado(conyuge);
+                            ViewsManager.LoadModal(regForm);
+                        }
+                    }
+
+                    BindingList<Afiliado> hijos = new BindingList<Afiliado>(familia.Where(x => (x.grupoFamiliar == afiliado.grupoFamiliar && x.tipoAfiliado > 2)).ToList());
+                    int cantidadHijosFaltantes = afiliado.CantHijos - hijos.Count;
+                    for (int i = hijos.Count; i < cantidadHijosFaltantes + hijos.Count; i++)//Verificar el for
+                    {
+                       if (MessageBox.Show(string.Format(("Se registro que tiene {1} hijos, pero en el sistema hay {0} hijos cargados, desea cargarlos?"), i, afiliado.CantHijos), "Agregar Hijos", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                        {
+                            var regForm = new RegistroForm();
+                            regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnHijoSaved);
+                            Afiliado hijo = RellenarDatosHijo(afiliado);
+                            regForm._padre = afiliado;
+                            regForm.rellenarAfiliado(hijo);
+                            regForm._nroAfiliado = i;
+                            ViewsManager.LoadModal(regForm);
+                        }
                     }
                 }
             }
         }
+        void regForm_OnConyugeSaved(object sender, UserSavedEventArgs e)
+        { }
+        void regForm_OnHijoSaved(object sender, UserSavedEventArgs e)
+        { }
+        private Afiliado RellenarDatosConyuge(Afiliado afiliado){
+            Afiliado conyuge = new Afiliado();
+            conyuge.CantHijos = afiliado.CantHijos;
+            conyuge.EstadoCivil = afiliado.EstadoCivil;
+            conyuge.grupoFamiliar = afiliado.grupoFamiliar;
+            conyuge.PlanMedico = afiliado.PlanMedico;
+            conyuge.tipoAfiliado = 2;
+            conyuge.UserName = (afiliado.grupoFamiliar + 2).ToString();
+            conyuge.DetallesPersona = afiliado.DetallesPersona;
+            conyuge.DetallesPersona.Nombre = "";
+            conyuge.DetallesPersona.DNI = 0;
+            return conyuge;        
+        }
+        private Afiliado RellenarDatosHijo(Afiliado afiliado) {
+            Afiliado hijo = new Afiliado();
+            hijo.CantHijos = 0;
+            hijo.EstadoCivil = EstadoCivil.Soltero;
+            hijo.PlanMedico = afiliado.PlanMedico;
+            hijo.Perfil = afiliado.Perfil;
+            
+            hijo.grupoFamiliar = afiliado.grupoFamiliar;
+            hijo.tipoAfiliado = 2;
+            hijo.UserName = (afiliado.grupoFamiliar + 2).ToString();
+            hijo.DetallesPersona = afiliado.DetallesPersona;
+            hijo.DetallesPersona.Nombre = "";
+            hijo.DetallesPersona.DNI = 0;
+            return hijo;
+        }
+
         private bool correspondeConyuge(Afiliado afiliado) {
             return (afiliado.EstadoCivil == EstadoCivil.Casado || afiliado.EstadoCivil == EstadoCivil.Concubinato);
         }
@@ -216,7 +237,8 @@ namespace ClinicaFrba.AbmAfiliado
             txtNombre.Text = string.Empty;
             txtEmail.Text = string.Empty;
             txtAfiliadoNro.Text = string.Empty;
-            dgvAfiliados.DataSource = _afiliadoManager.buscarTodos();
+            var dataSource = _afiliadoManager.buscarTodos();
+            dgvAfiliados.DataSource = new BindingList<Afiliado>(dataSource.OrderBy(x => x.DetallesPersona.Apellido + x.DetallesPersona.Nombre).ToList());
             dgvAfiliados.Refresh();
         }
 
