@@ -1057,24 +1057,6 @@ BEGIN
 END
 GO
 
-
-CREATE FUNCTION [SHARPS].[GetFunctionalityByName] 
-(
-	@Func_Name nvarchar(255)
-)
-RETURNS int
-AS
-BEGIN
-	DECLARE @Func_ID int
-
-	SELECT @Func_ID = Codigo FROM SHARPS.Funcionalidades
-	WHERE Descripcion = @Func_Name
-
-	RETURN @Func_ID
-END
-GO
-
-
 CREATE PROCEDURE [SHARPS].[GetEspecialidadesForUser]
 @userId INT
 AS
@@ -1289,8 +1271,11 @@ create PROCEDURE [SHARPS].[InsertRoleFunctionality]
 	@Funcionalidad nvarchar(255)
 AS
 BEGIN
+	DECLARE @FuncionalidadID INT
+	SELECT @FuncionalidadID = Codigo FROM Funcionalidades WHERE Descripcion = @Funcionalidad
+	
 	INSERT INTO SHARPS.Roles_Funcionalidades (Rol, Funcionalidad)
-	VALUES (@Rol_ID, [SHARPS].[GetFunctionalityByName](@Funcionalidad))
+	VALUES (@Rol_ID, @FuncionalidadID)
 END
 GO
 
@@ -1705,30 +1690,6 @@ END
 
 GO
 
-/*
-CREATE PROCEDURE [SHARPS].[DeleteUser]
-@User_ID INT
-AS
-BEGIN
-
-UPDATE SHARPS.Usuarios SET
-Activo = 0
-WHERE UsuarioID = @User_ID
-
-UPDATE SHARPS.Afiliados SET Activo = 0
-WHERE UsuarioID = @User_ID
-
-UPDATE SHARPS.Profesionales SET Activo = 0
-WHERE UsuarioID = @User_ID
-UPDATE SHARPS.Agendas SET Activo = 0
-WHERE Profesional = @User_ID
-UPDATE SHARPS.Turnos SET Estado = 5
-FROM SHARPS.Turnos T
-INNER JOIN SHARPS.Agendas A ON A.AgendaID = T.Agenda
-WHERE A.Profesional = @User_ID OR T.Afiliado = @User_ID
-END
-GO
-*/
 
 CREATE PROCEDURE [SHARPS].[InsertReceta]
 @BonoFarmacia INT
@@ -1808,6 +1769,9 @@ CREATE PROCEDURE [SHARPS].[DeleteProfesional]
 @ID INT
 AS
 BEGIN
+DECLARE @estadoCanceladoBaja int
+SELECT @estadoCanceladoBaja =EstadoID FROM Estados_Turno WHERE Descripcion = 'Desactivo'
+
 
 UPDATE SHARPS.Profesionales SET Activo = 0
 WHERE UsuarioID = @ID
@@ -1815,7 +1779,7 @@ WHERE UsuarioID = @ID
 
 UPDATE SHARPS.Agendas SET Activo = 0
 WHERE Profesional = @ID
-UPDATE SHARPS.Turnos SET Estado = 5
+UPDATE SHARPS.Turnos SET Estado = @estadoCanceladoBaja
 FROM SHARPS.Turnos T
 INNER JOIN SHARPS.Agendas A ON A.AgendaID = T.Agenda
 WHERE A.Profesional = @ID
@@ -1828,16 +1792,16 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [SHARPS].[InsertDiaProfesional]
+CREATE PROCEDURE [SHARPS].[InsertAgendaProfesional]
 	@Fecha datetime,
 	@Profesional int
 AS
 BEGIN
 	SET NOCOUNT ON;
-	DELETE FROM SHARPS.Agendas WHERE Profesional = @Profesional AND Horario > @Fecha 
-    --Si tiene un turno asignado en la fecha, deberiamos cancelarlo, de alguna manera
-	INSERT INTO SHARPS.Agendas(Horario,Profesional, Activo) VALUES (@Fecha,@Profesional,1)
-	--SELECT @@Identity AS ID
+	IF (NOT EXISTS (SELECT * FROM Agendas WHERE Profesional = @Profesional AND Horario = @Fecha))
+		INSERT INTO SHARPS.Agendas(Horario,Profesional, Activo) VALUES (@Fecha,@Profesional,1)
+	ELSE
+		UPDATE SHARPS.Agendas SET Activo = 1 WHERE Profesional = @Profesional AND Horario = @Fecha
 END
 GO
 CREATE PROCEDURE [SHARPS].[GetAfiliadosFromGrupoFamiliar]
