@@ -6,7 +6,7 @@ DROP TABLE [GD2C2013].[SHARPS].[Bonos_Farmacia] ;
 DROP TABLE [GD2C2013].[SHARPS].[Cambios_Afiliado]; 
 DROP TABLE [GD2C2013].[SHARPS].[ConsultaS]; 
 DROP TABLE [GD2C2013].[SHARPS].[Detalles_Persona]; 
-
+DROP TABLE [GD2C2013].[SHARPS].[Compras]; 
 DROP TABLE [GD2C2013].[SHARPS].[Especialidades]; 
 DROP TABLE [GD2C2013].[SHARPS].[Estados_Civiles];
 DROP TABLE [GD2C2013].[SHARPS].[Estados_turno]; 
