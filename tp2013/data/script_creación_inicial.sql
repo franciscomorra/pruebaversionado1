@@ -42,6 +42,22 @@ CONSTRAINT [PK_Agendas] PRIMARY KEY CLUSTERED
 GO
 ;
 
+CREATE TABLE [SHARPS].Compras (
+
+   CompraID int IDENTITY ( 1 , 1 ) not null,
+   Precio_BonoConsulta int , 
+   Precio_BonoFarmacia int,
+   Afiliado int,
+   fecha_Compra date,
+   CONSTRAINT [PK_Compras] PRIMARY KEY CLUSTERED 
+(
+	[CompraID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+;
+
+
 CREATE TABLE [SHARPS].Bonos_Farmacia ( 
 	Numero numeric(18,0)  NOT NULL,
 	Fecha_Impresion datetime,
@@ -69,20 +85,7 @@ CONSTRAINT [PK_Bonos_Consulta] PRIMARY KEY CLUSTERED
 GO
 ;
 
-CREATE TABLE [SHARPS].Compras (
 
-   CompraID int IDENTITY not null,
-   Precio_BonoConsulta int , 
-   Precio_BonoFarmacia int,
-   Afiliado int,
-   fecha_Compra date,
-   CONSTRAINT [PK_Compras] PRIMARY KEY CLUSTERED 
-(
-	[CompraID] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-;
 
 
 
@@ -332,7 +335,7 @@ BEGIN
 		FROM INSERTED
 	END
 END
-
+GO
 
 ALTER TABLE [SHARPS].[Afiliados] ADD  CONSTRAINT [DF_Afiliados_Activo]  DEFAULT ((1)) FOR [Activo]
 GO
@@ -745,8 +748,7 @@ FROM gd_esquema.Maestra m
 INNER JOIN [SHARPS].Usuarios u ON u.Username= CAST(m.Medico_DNI AS Nvarchar(MAX))
 
 
-PRINT 'Ingresando los Bonos Consulta'
-GO
+
 /*INSERT INTO [SHARPS].Bonos_Consulta(Numero,Fecha_Impresion,Compra,PlanMedico)
 SELECT distinct m.Bono_Consulta_Numero , m.Bono_Consulta_Fecha_Impresion, [SHARPS].UltimoCompra(), m.Plan_Med_Codigo
   FROM gd_esquema.Maestra m
@@ -781,15 +783,15 @@ GO
 
 
 -- PARA BONOS DE FARMACIA
-INSERT INTO [SHARPS].Compras (Precio_BonoConsulta , Precio_BonoFarmacia , Afiliado , fecha_Compra)
+/*INSERT INTO [SHARPS].Compras (Precio_BonoConsulta , Precio_BonoFarmacia , Afiliado , fecha_Compra)
 SELECT DISTINCT m.Plan_Med_Precio_Bono_Consulta , m.Plan_Med_Precio_Bono_Farmacia , U.UsuarioID , m.Compra_Bono_Fecha
 FROM gd_esquema.Maestra m
 INNER JOIN SHARPS.Usuarios U ON U.Username =  CAST(m.Paciente_DNI AS Nvarchar(MAX))
-WHERE m.Turno_Fecha is NULL AND m.Bono_Farmacia_Numero is not null
+WHERE m.Turno_Fecha is NULL AND m.Bono_Farmacia_Numero is not null AND m.Paciente_Dni IS NOT NULL
 order by m.Compra_Bono_Fecha , U.UsuarioID
 
 INSERT INTO [SHARPS].Bonos_Farmacia (Numero, Fecha_Impresion, Compra ,PlanMedico)
-SELECT DISTINCT m.Bono_Farmacia_Numero , m.Bono_Farmacia_Fecha_Impresion , c.CompraID , m.Plan_Med_Codigo
+SELECT DISTINCT m.Bono_Farmacia_Numero , m.Bono_Farmacia_Fecha_Impresion , C.CompraID , m.Plan_Med_Codigo
 FROM gd_esquema.Maestra m
 INNER JOIN SHARPS.Usuarios U ON U.Username =  CAST(m.Paciente_DNI AS Nvarchar(MAX))
 INNER JOIN SHARPS.Compras C ON U.UsuarioID = C.Afiliado 
@@ -801,15 +803,71 @@ INSERT INTO [SHARPS].Compras (Precio_BonoConsulta , Precio_BonoFarmacia , Afilia
 SELECT DISTINCT m.Plan_Med_Precio_Bono_Consulta , m.Plan_Med_Precio_Bono_Farmacia , U.UsuarioID , m.Compra_Bono_Fecha
 FROM gd_esquema.Maestra m
 INNER JOIN SHARPS.Usuarios U ON U.Username =  CAST(m.Paciente_DNI AS Nvarchar(MAX))
-WHERE m.Turno_Fecha is NULL AND m.Bono_Consulta_Numero is not null
+WHERE m.Turno_Fecha is NULL AND m.Bono_Consulta_Numero IS NOT NULL AND m.Paciente_Dni IS NOT NULL
 order by m.Compra_Bono_Fecha , U.UsuarioID
 
-INSERT INTO [SHARPS].Bonos_Farmacia (Numero, Fecha_Impresion, Compra ,PlanMedico)
-SELECT  DISTINCT m.Bono_Consulta_Numero , m.Bono_Consulta_Fecha_Impresion , c.CompraID , m.Plan_Med_Codigo
+INSERT INTO [SHARPS].Bonos_Consulta(Numero, Fecha_Impresion, Compra ,PlanMedico)
+SELECT  DISTINCT m.Bono_Consulta_Numero , m.Bono_Consulta_Fecha_Impresion , C.CompraID , m.Plan_Med_Codigo
 FROM gd_esquema.Maestra m
 INNER JOIN SHARPS.Usuarios U ON U.Username =  CAST(m.Paciente_DNI AS Nvarchar(MAX))
 INNER JOIN SHARPS.Compras C ON U.UsuarioID = C.Afiliado 
-WHERE  m.Bono_Consulta_Numero is not null
+WHERE  m.Bono_Consulta_Numero is not null*/
+
+CREATE TABLE #compras(
+CodID int identity (1,1) ,
+Precio_Consulta int ,
+Precio_Farmacia int,
+usuario int,
+Fecha_Compra date,
+numero_Bono int,
+plan_Medico int,
+tipo_Bono nvarchar (50),
+Fecha_Impresion date
+)
+
+
+INSERT INTO  #compras (Precio_Consulta, Precio_Farmacia , usuario, Fecha_Compra, numero_Bono, plan_Medico, tipo_Bono, Fecha_Impresion)
+SELECT  m.Plan_Med_Precio_Bono_Consulta , m.Plan_Med_Precio_Bono_Farmacia , U.UsuarioID , m.Compra_Bono_Fecha , m.Bono_Farmacia_Numero  , M.Plan_Med_Codigo ,'farmacia', m.Bono_Farmacia_Fecha_Impresion
+FROM gd_esquema.Maestra m
+INNER JOIN SHARPS.Usuarios U ON U.Username =  CAST(m.Paciente_DNI AS Nvarchar(255))
+WHERE m.Turno_Fecha is NULL AND m.Bono_Farmacia_Numero is not null  
+
+
+
+INSERT INTO  #compras (Precio_Consulta, Precio_Farmacia , usuario, Fecha_Compra, numero_Bono, plan_Medico, tipo_Bono, Fecha_Impresion)
+SELECT  m.Plan_Med_Precio_Bono_Consulta , m.Plan_Med_Precio_Bono_Farmacia , U.UsuarioID , m.Compra_Bono_Fecha , m.Bono_Consulta_Numero  , M.Plan_Med_Codigo ,'consultas', m.Bono_Consulta_Fecha_Impresion
+FROM gd_esquema.Maestra m
+INNER JOIN SHARPS.Usuarios U ON U.Username =  CAST(m.Paciente_DNI AS Nvarchar(255))
+WHERE m.Turno_Fecha is NULL AND m.Bono_Consulta_Numero is not null  
+
+
+PRINT 'Ingresando Compras'
+GO
+
+INSERT INTO [SHARPS].Compras (Precio_BonoConsulta , Precio_BonoFarmacia , Afiliado , fecha_Compra)
+SELECT  C.Precio_Consulta , C.Precio_Farmacia, C.usuario, C.Fecha_Compra
+FROM #compras C
+
+
+
+PRINT 'Ingresando los Bonos Farmacia'
+GO
+
+INSERT INTO SHARPS.Bonos_Farmacia(Numero , Fecha_Impresion , PlanMedico , Compra)
+select  C.numero_Bono , C.Fecha_Impresion , C.plan_Medico , C.CodID
+from #compras C
+INNER JOIN SHARPS.Compras CO ON CO.CompraID = C.CodID
+where C.tipo_Bono = 'farmacia'
+
+PRINT 'Ingresando los Bonos Consulta'
+GO
+
+INSERT INTO SHARPS.Bonos_Consulta(Numero , Fecha_Impresion , PlanMedico , Compra)
+select  C.numero_Bono , C.Fecha_Impresion , C.plan_Medico , C.CodID
+from #compras C
+INNER JOIN SHARPS.Compras CO ON CO.CompraID = C.CodID
+where C.tipo_Bono = 'consultas'
+
 
 
 
