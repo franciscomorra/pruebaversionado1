@@ -1670,7 +1670,7 @@ UPDATE SHARPS.Agendas SET Activo = 0 WHERE Horario = @Fecha AND Profesional = @P
 
 UPDATE SHARPS.Turnos SET Estado = @idEstadoCanceladoProfesional
 FROM Turnos T
-INNER JOIN Agendas A ON A.Profesional = @Profesional AND DAY(A.Horario) = @Fecha
+INNER JOIN Agendas A ON A.Profesional = @Profesional AND A.Horario = @Fecha
 WHERE T.Agenda = A.AgendaID
 --UPDATE SHARPS.Turnos SET Estado = @idEstadoCanceladoProfesional WHERE Agenda =  /////////REVISADO
 --Falta esto, como se hace???
