@@ -183,37 +183,44 @@ namespace ClinicaFrba.Consultas
         private List<Medicamento> getMedicamentos() { 
             List<Medicamento> listado = new List<Medicamento>();
             int i=0;
+            try
+            {
+                if (cbxMed1.SelectedIndex > 0)
+                    for (i = 0; i <= (int)cbxCant1.SelectedItem; i++)
+                        listado.Add((Medicamento)cbxMed1.SelectedItem);
 
-            if (cbxMed1.SelectedIndex > 0)
-                for (i = 0; i <= (int)cbxCant1.SelectedItem; i++)
-                    listado.Add((Medicamento)cbxMed1.SelectedItem);
-
-            if (cbxMed2.SelectedIndex > 0)
-                if (listado.Contains((Medicamento)cbxMed2.SelectedItem) && cbxCant2.SelectedIndex>0)
-                    throw new Exception("No puede agregar mas medicamentos de ese tipo");
+                if (cbxMed2.SelectedIndex > 0)
+                    if (listado.Contains((Medicamento)cbxMed2.SelectedItem) && cbxCant2.SelectedIndex > 0)
+                        throw new Exception("No puede agregar mas medicamentos de ese tipo");
                 for (i = 0; i <= (int)cbxCant2.SelectedItem; i++)
                     listado.Add((Medicamento)cbxMed2.SelectedItem);
 
-            if (cbxMed3.SelectedIndex > 0)
-                if (listado.Contains((Medicamento)cbxMed3.SelectedItem) && cbxCant3.SelectedIndex > 0)
-                    throw new Exception("No puede agregar mas medicamentos de ese tipo");
+                if (cbxMed3.SelectedIndex > 0)
+                    if (listado.Contains((Medicamento)cbxMed3.SelectedItem) && cbxCant3.SelectedIndex > 0)
+                        throw new Exception("No puede agregar mas medicamentos de ese tipo");
                 for (i = 0; i <= (int)cbxCant3.SelectedItem; i++)
                     listado.Add((Medicamento)cbxMed3.SelectedItem);
 
-            if (cbxMed4.SelectedIndex > 0)
-                if (listado.Contains((Medicamento)cbxMed4.SelectedItem) && cbxCant4.SelectedIndex > 0)
-                    throw new Exception("No puede agregar mas medicamentos de ese tipo");
+                if (cbxMed4.SelectedIndex > 0)
+                    if (listado.Contains((Medicamento)cbxMed4.SelectedItem) && cbxCant4.SelectedIndex > 0)
+                        throw new Exception("No puede agregar mas medicamentos de ese tipo");
                 for (i = 0; i <= (int)cbxCant4.SelectedItem; i++)
                     listado.Add((Medicamento)cbxMed4.SelectedItem);
 
-            if (cbxMed5.SelectedIndex > 0)
-                if (listado.Contains((Medicamento)cbxMed5.SelectedItem) && cbxCant5.SelectedIndex > 0)
-                    throw new Exception("No puede agregar mas medicamentos de ese tipo");
+                if (cbxMed5.SelectedIndex > 0)
+                    if (listado.Contains((Medicamento)cbxMed5.SelectedItem) && cbxCant5.SelectedIndex > 0)
+                        throw new Exception("No puede agregar mas medicamentos de ese tipo");
                 for (i = 0; i <= (int)cbxCant5.SelectedItem; i++)
                     listado.Add((Medicamento)cbxMed5.SelectedItem);
-            return listado;
-        }
+                return listado;
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+                return null;
+            }
 
+        }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try

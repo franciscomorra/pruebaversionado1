@@ -40,19 +40,14 @@ namespace ClinicaFrba.Login
 
         private void Login(string userName, string pass)
         {
-            BindingList<Rol> roles = new BindingList<Rol>();    
+            BindingList<Rol> roles = new BindingList<Rol>();
             try
             {
                 user = svc.Login(userName, pass);
                 roles = rolManager.GetUserRoles(user.UserID);
-            }
-            catch (System.Exception excep)
-            {
-                MessageBox.Show(excep.Message);
 
-            }
 
-            if (roles.Count > 1)
+                if (roles.Count > 1)
                 {
                     comboRoles.DataSource = roles;
                     comboRoles.DisplayMember = "Nombre";
@@ -70,6 +65,12 @@ namespace ClinicaFrba.Login
                     user.DetallesPersona = detallesManager.BuscarDetalles(user.UserID);
                     iniciar_sesion();
                 }
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+                return;
+            }
         }
 
         private void iniciar_sesion() {

@@ -16,14 +16,22 @@ namespace ClinicaFrba.Login
         private Profesional _profesional = new Profesional();
         public Profesional GetProfesional()
         {
-            var especialidades = clbEspecialidades.CheckedItems.Cast<Especialidad>().ToList();
-            if (especialidades.Count == 0)
-               throw new Exception("Debe seleccionar al menos una especialidad!");
-            if (string.IsNullOrEmpty(txtMatricula.Text.Trim()))
-                throw new Exception("La Matricula es obligatoria!");
-            _profesional.Matricula = txtMatricula.Text.Trim();
-            _profesional.Especialidades = especialidades;
-            return _profesional;
+            try
+            {
+                var especialidades = clbEspecialidades.CheckedItems.Cast<Especialidad>().ToList();
+                if (especialidades.Count == 0)
+                    throw new Exception("Debe seleccionar al menos una especialidad!");
+                if (string.IsNullOrEmpty(txtMatricula.Text.Trim()))
+                    throw new Exception("La Matricula es obligatoria!");
+                _profesional.Matricula = txtMatricula.Text.Trim();
+                _profesional.Especialidades = especialidades;
+                return _profesional;
+            }            
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+                return null;
+            }
         }
 
         public void SetUser(Profesional profesional)

@@ -76,10 +76,16 @@ namespace ClinicaFrba.AbmTurno
 
         private void PedirTurnoForm_Load(object sender, EventArgs e)
         {
-
-            if(_afiliado == null)
-                throw new Exception("No se cargo el afiliado");
-
+            try
+            {
+                if (_afiliado == null)
+                    throw new Exception("No se cargo el afiliado");
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+                return;
+            }
             panelFecha.Visible = false;
             dtTurno.Value = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(1);
             dtTurno.MinDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(1);

@@ -17,8 +17,7 @@ namespace ClinicaFrba.Negocio
     {
        public User Login(string userName, string password)//Desafia con user y password a db, si correcto, devuelve usuario
         {
-            this.ValidateLockedUser(userName);
-
+            ValidateLockedUser(userName);
             var encryptedPassword = ComputeHash(password, new SHA256Managed());
             DataRow result = SqlDataAccess.ExecuteDataRowQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].Login", SqlDataAccessArgs

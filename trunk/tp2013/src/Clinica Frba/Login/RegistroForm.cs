@@ -157,84 +157,74 @@ namespace ClinicaFrba
             catch (System.Exception excep)
             {
                 MessageBox.Show(excep.Message);
+                return;
             }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
-            user = new User();    
-            long telefono;
-            long dni;
-            Session.Errores = null;
-            if (!long.TryParse(txtTelefono.Text.Trim().Replace("-", ""), out telefono))
-                throw new Exception(" El teléfono debe ser numérico!");
-            if (!long.TryParse(txtDNI.Text, out dni))
-                throw new Exception(" El DNI debe ser numérico!");
-            if(dni > 99999999)
-                throw new Exception(" El DNI no es valido!");
-            if (string.IsNullOrEmpty(txtNombre.Text.Trim()))
-                throw new Exception(" El Nombre es obligatorio!");
-            if (string.IsNullOrEmpty(txtApellido.Text.Trim()))
-                throw new Exception(" El Apellido es obligatorio!");
-            if (string.IsNullOrEmpty(txtMail.Text.Trim()))
-                throw new Exception(" El Email es obligatorio!");
-            user.DetallesPersona.Apellido = txtApellido.Text.Trim();
-            user.DetallesPersona.Nombre = txtNombre.Text.Trim();
-            user.DetallesPersona.DNI = dni;
-            user.DetallesPersona.FechaNacimiento = dtFechaNacimiento.Value;
-            user.DetallesPersona.Direccion = txtDireccion.Text.Trim();
-            user.DetallesPersona.Telefono = telefono;
-            user.DetallesPersona.Email = txtMail.Text.Trim();
-            user.DetallesPersona.TipoDNI = (TipoDoc)cbxTipoDNI.SelectedItem;
-            user.DetallesPersona.Sexo = (TipoSexo)cbxSexo.SelectedItem;
-            Rol rolSeleccionado = (Rol)cbxRoles.SelectedItem;
-
-            if (perfil.Nombre == "Afiliado")
+            try
             {
-                _afiliado = ((AfiliadoUserControl)afiliadoUserControl).devolverCampos();
-                _afiliado.UserName = user.DetallesPersona.DNI.ToString();
-                var manager = new AfiliadoManager();
-                _afiliado.DetallesPersona = user.DetallesPersona;
-                _afiliado.RoleID = rolSeleccionado.ID;
-                try
+                user = new User();
+                long telefono;
+                long dni;
+                if (!long.TryParse(txtTelefono.Text.Trim().Replace("-", ""), out telefono))
+                    throw new Exception(" El teléfono debe ser numérico!");
+                if (!long.TryParse(txtDNI.Text, out dni))
+                    throw new Exception(" El DNI debe ser numérico!");
+                if (dni > 99999999)
+                    throw new Exception(" El DNI no es valido!");
+                if (string.IsNullOrEmpty(txtNombre.Text.Trim()))
+                    throw new Exception(" El Nombre es obligatorio!");
+                if (string.IsNullOrEmpty(txtApellido.Text.Trim()))
+                    throw new Exception(" El Apellido es obligatorio!");
+                if (string.IsNullOrEmpty(txtMail.Text.Trim()))
+                    throw new Exception(" El Email es obligatorio!");
+                user.DetallesPersona.Apellido = txtApellido.Text.Trim();
+                user.DetallesPersona.Nombre = txtNombre.Text.Trim();
+                user.DetallesPersona.DNI = dni;
+                user.DetallesPersona.FechaNacimiento = dtFechaNacimiento.Value;
+                user.DetallesPersona.Direccion = txtDireccion.Text.Trim();
+                user.DetallesPersona.Telefono = telefono;
+                user.DetallesPersona.Email = txtMail.Text.Trim();
+                user.DetallesPersona.TipoDNI = (TipoDoc)cbxTipoDNI.SelectedItem;
+                user.DetallesPersona.Sexo = (TipoSexo)cbxSexo.SelectedItem;
+                Rol rolSeleccionado = (Rol)cbxRoles.SelectedItem;
+
+                if (perfil.Nombre == "Afiliado")
                 {
+                    _afiliado = ((AfiliadoUserControl)afiliadoUserControl).devolverCampos();
+                    _afiliado.UserName = user.DetallesPersona.DNI.ToString();
+                    var manager = new AfiliadoManager();
+                    _afiliado.DetallesPersona = user.DetallesPersona;
+                    _afiliado.RoleID = rolSeleccionado.ID;
                     manager.GuardarAfiliado(_afiliado);
                     user = _afiliado as User;
                     OnUserSaved(this, new UserSavedEventArgs() { User = user });
                     this.Close();
                 }
-                catch (System.Exception excep)
+                else if (perfil.Nombre == "Profesional")
                 {
-                    MessageBox.Show(excep.Message);
-                }
-            }
-            else if (perfil.Nombre == "Profesional")
-            {
-                _profesional = ((ProfesionalUserControl)profesionalUserControl).GetProfesional();
-                _profesional.DetallesPersona = user.DetallesPersona;
-                _profesional.UserName = user.DetallesPersona.DNI.ToString();
-                var manager = new ProfesionalManager();
-                _profesional.RoleID = rolSeleccionado.ID;
-
-                try
-                {
+                    _profesional = ((ProfesionalUserControl)profesionalUserControl).GetProfesional();
+                    _profesional.DetallesPersona = user.DetallesPersona;
+                    _profesional.UserName = user.DetallesPersona.DNI.ToString();
+                    var manager = new ProfesionalManager();
+                    _profesional.RoleID = rolSeleccionado.ID;
                     manager.GuardarProfesional(_profesional);
                     user = _profesional as User;
                     OnUserSaved(this, new UserSavedEventArgs() { User = user });
                     this.Close();
                 }
-                catch (System.Exception excep)
+                else
                 {
-                    MessageBox.Show(excep.Message);
+                    throw new Exception("Error en Perfiles");
                 }
-
             }
-            else
+            catch (System.Exception excep)
             {
-                throw new Exception("Error en Perfiles");
+                MessageBox.Show(excep.Message);
+                return;
             }
-            
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
