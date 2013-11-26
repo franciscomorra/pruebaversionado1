@@ -318,6 +318,7 @@ CREATE TABLE [SHARPS].Usuarios_Roles (
 	Usuario [int] NOT NULL,
 	Rol [int] NOT NULL
 )
+GO
 ;
 
 
