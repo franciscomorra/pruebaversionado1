@@ -117,6 +117,7 @@ namespace ClinicaFrba.AbmRol
             catch (System.Exception excep)
             {
                 MessageBox.Show(excep.Message);
+                return;
             }
         }
     }

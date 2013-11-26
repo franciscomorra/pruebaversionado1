@@ -74,15 +74,27 @@ namespace ClinicaFrba.Consultas
             
             TurnosManager tmanager = new TurnosManager();
             List<Turno> turnosDeHoy = tmanager.GetAll(_afiliado, true, _profesional);
-            if (turnosDeHoy.Count < 1){
-                throw new Exception("No hay turnos para hoy de ese afiliado!");
-            }else {
-                panelTurno.Visible = true;
-                if (turnosDeHoy.Count == 1){
-                    _turno = turnosDeHoy.ElementAt(0);
-                    btnBuscarTurno.Visible = false;
-                    txtTurno.Text = _turno.ToString();
+            try
+            {
+                if (turnosDeHoy.Count < 1)
+                {
+                    throw new Exception("No hay turnos para hoy de ese afiliado!");
                 }
+                else
+                {
+                    panelTurno.Visible = true;
+                    if (turnosDeHoy.Count == 1)
+                    {
+                        _turno = turnosDeHoy.ElementAt(0);
+                        btnBuscarTurno.Visible = false;
+                        txtTurno.Text = _turno.ToString();
+                    }
+                }
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+                return;
             }
         }
 
@@ -106,39 +118,46 @@ namespace ClinicaFrba.Consultas
         private Consulta rellenarConsulta() { 
             Consulta consulta = new Consulta();
             consulta.Turno = _turno;
-
-            if (string.IsNullOrEmpty(txtSintomas.Text.Trim()))
-                throw new Exception("Los sintomas son obligatorios");
-            if (string.IsNullOrEmpty(txtDiagnostico.Text.Trim()))
-                throw new Exception("El diagnostico es obligatorio!");
-            consulta.Enfermedad = txtDiagnostico.Text;
-            consulta.Sintomas = txtSintomas.Text;
-            return consulta;
-
+            try
+            {
+                if (string.IsNullOrEmpty(txtSintomas.Text.Trim()))
+                    throw new Exception("Los sintomas son obligatorios");
+                if (string.IsNullOrEmpty(txtDiagnostico.Text.Trim()))
+                    throw new Exception("El diagnostico es obligatorio!");
+                consulta.Enfermedad = txtDiagnostico.Text;
+                consulta.Sintomas = txtSintomas.Text;
+                return consulta;
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+                return null;
+            }
         }
 
         private void btnGenerarReceta_Click(object sender, EventArgs e)
         {
 
+            try
+            {
                 if (_contadorRecetas <= 5)
                 {
                     if (!_consultaAlmacenada)
                     {
-                        try
-                        {
                         _consulta = rellenarConsulta();
                         _consultasManager.Save(_consulta);
-                        }
-                        catch (System.Exception excep)
-                        {
-                            MessageBox.Show(excep.Message);
-                        }
                     }
                 }
-                else { 
+                else
+                {
                     throw new Exception("No se pueden agregar mas de cinco recetas");
                 }
-
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+                return;
+            }
                 _recetaForm = new GenerarRecetaForm();
                 _recetaForm._afiliado = _afiliado;
                 _recetaForm._profesional = _profesional;

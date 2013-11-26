@@ -74,10 +74,16 @@ namespace ClinicaFrba
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-
-            if (string.IsNullOrEmpty(txtNombreRol.Text.Trim()))
-                throw new Exception("El Nombre es obligatorio!");
-
+            try
+            {
+                if (string.IsNullOrEmpty(txtNombreRol.Text.Trim()))
+                    throw new Exception("El Nombre es obligatorio!");
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+                return;
+            }
 
             _rol.Functionalities = new List<Functionalities>();
             foreach (Functionalities item in lstFuncionalidades.CheckedItems)
