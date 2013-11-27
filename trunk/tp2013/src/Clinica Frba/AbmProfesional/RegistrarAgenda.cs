@@ -72,6 +72,7 @@ namespace ClinicaFrba.AbmProfesional
                 }
 
                 MessageBox.Show("Se guardara la agenda del profesional");
+                _agenda.profesional = _profesional;
                 GuardarAgenda(_agenda);
                 //mgr.GuardarAgenda(_agenda);
                 MessageBox.Show("Se ha guardado la agenda");
@@ -277,7 +278,7 @@ namespace ClinicaFrba.AbmProfesional
                 DateTime actual = agenda.FechaDesde.Date;
                 actual = actual.AddDays(i);
 
-                List<Turno> turnosDeLaFecha = _turnoManager.GetTurnosEnFechaProfesional(agenda.profesional, actual);
+                List<Turno> turnosDeLaFecha = _turnoManager.GetTurnosEnFechaProfesional(_profesional, actual);
                 DateTime horain = new DateTime();
                 DateTime horaout = new DateTime();
 
@@ -317,13 +318,13 @@ namespace ClinicaFrba.AbmProfesional
                     {
                         if (MessageBox.Show(string.Format("Se registro que en la fecha {0}, {1} turnos quedan fuera de rango, desea cancelarlos?", actual.Date.ToString(), turnosfueraDeRango.Count.ToString()), "Cancelar Turnos", MessageBoxButtons.OKCancel) == DialogResult.OK)
 
-                            _turnoManager.CancelarDiaProfesional(agenda.profesional.UserID, actual);
+                            _turnoManager.CancelarDiaProfesional(_profesional.UserID, actual);
                         else
                             return;
                     }
                     while (actual.TimeOfDay < horaout.TimeOfDay)
                     {
-                        _agendaManager.BorrarRegistrosFueraDeRango(agenda.profesional, actual, horain, horaout);
+                        _agendaManager.BorrarRegistrosFueraDeRango(_profesional, actual, horain, horaout);
                         _agendaManager.GuardarAgenda(agenda, actual);
                         actual = actual.AddMinutes(30);
                     }
