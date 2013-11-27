@@ -46,26 +46,26 @@ namespace ClinicaFrba.AbmTurno
         private void btnCancelar_Click(object sender, EventArgs e)
         {
 
-                DateTime fecha = dateTimePicker1.Value;
-                var sysDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
-                if (fecha < sysDate)
-                    MessageBox.Show(" La fecha debe ser mayor a la actual!");
-                else
-                    try
-                    {
-                       List<Turno> turnosDeLaFecha =  _turnoManager.GetTurnosEnFechaProfesional(_profesional, fecha);
+            DateTime fecha = dateTimePicker1.Value;
+            var sysDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
+            if (fecha < sysDate)
+                MessageBox.Show(" La fecha debe ser mayor a la actual!");
+            else
+                try
+                {
+                    List<Turno> turnosDeLaFecha = _turnoManager.GetTurnosEnFechaProfesional(_profesional, fecha);
 
-                       if (MessageBox.Show(string.Format("Usted tiene {0} turnos en la fecha\n Seguro que desea cancelar el dia?", turnosDeLaFecha.Count)
-                        , "Cancelar Dia", MessageBoxButtons.OKCancel) == DialogResult.OK)
-                        {
-                            _profesionalManager.CancelarTurnos(_profesional.UserID,fecha);
-                            MessageBox.Show("Dia Cancelado");
-                        }
-                    }
-                    catch (System.Exception excep)
+                    if (MessageBox.Show(string.Format("Usted tiene {0} turnos en la fecha\n Seguro que desea cancelar el dia?", turnosDeLaFecha.Count)
+                     , "Cancelar Dia", MessageBoxButtons.OKCancel) == DialogResult.OK)
                     {
-                        MessageBox.Show(excep.Message);
+                        _turnoManager.CancelarDiaProfesional(_profesional.UserID, fecha);
+                        MessageBox.Show("Dia Cancelado");
                     }
+                }
+                catch (System.Exception excep)
+                {
+                    MessageBox.Show(excep.Message);
+                }
         }
 
         private void CancelarDia_Load(object sender, EventArgs e)
@@ -78,7 +78,8 @@ namespace ClinicaFrba.AbmTurno
                 btnBuscarProfesional.Visible = false;
                 panelAcciones.Show();
             }
-            else {
+            else
+            {
                 btnBuscarProfesional.Visible = true;
             }
             dateTimePicker1.Value = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(1);

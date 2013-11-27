@@ -28,6 +28,7 @@ namespace ClinicaFrba.Login
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
+           
             try
             {
                 Login(txtUserName.Text, txtPassword.Text);
