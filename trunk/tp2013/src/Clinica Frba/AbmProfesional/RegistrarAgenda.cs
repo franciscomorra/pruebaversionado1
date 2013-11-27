@@ -20,7 +20,8 @@ namespace ClinicaFrba.AbmProfesional
         private Profesional _profesional;
         private ProfesionalesForm _profesionalesForm;
         private Agenda _agenda = new Agenda();
-        private AgendaManager mgr = new AgendaManager();
+        private AgendaManager _agendaManager = new AgendaManager();
+        private TurnosManager _turnoManager = new TurnosManager();
         public RegistrarAgenda()
         {
             InitializeComponent();
@@ -28,7 +29,6 @@ namespace ClinicaFrba.AbmProfesional
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-
             try
             {
                 if (dtDesde.Value > dtHasta.Value)
@@ -70,9 +70,10 @@ namespace ClinicaFrba.AbmProfesional
                     _agenda.SabadoIN = Convert.ToDateTime(cbxSabIN.SelectedItem);
                     _agenda.SabadoOUT = Convert.ToDateTime(cbxSabOUT.SelectedItem);
                 }
+
                 MessageBox.Show("Se guardara la agenda del profesional");
-                _agenda.profesional = _profesional;
-                mgr.GuardarAgenda(_agenda);
+                GuardarAgenda(_agenda);
+                //mgr.GuardarAgenda(_agenda);
                 MessageBox.Show("Se ha guardado la agenda");
             }
             catch (System.Exception excep)
@@ -81,7 +82,7 @@ namespace ClinicaFrba.AbmProfesional
                 return;
             }
         }
-        
+
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             if (_profesionalesForm == null)
@@ -135,7 +136,7 @@ namespace ClinicaFrba.AbmProfesional
             cbxVieOUT.Items.Clear();
             cbxVieOUT.Items.Add("--");
             cbxVieOUT.SelectedIndex = 0;
-            for (DateTime _time = time.AddHours(7); _time < time.AddHours(20); _time = _time.AddMinutes(30)) 
+            for (DateTime _time = time.AddHours(7); _time < time.AddHours(20); _time = _time.AddMinutes(30))
             {
                 cbxLunesIN.Items.Add(_time.ToShortTimeString());
                 cbxLunesOUT.Items.Add(_time.AddMinutes(30).ToShortTimeString());
@@ -238,7 +239,7 @@ namespace ClinicaFrba.AbmProfesional
                         contador = contador + diferencia;
                 }
                 return contador;
-            }            
+            }
             catch (System.Exception excep)
             {
                 MessageBox.Show(excep.Message);
@@ -268,5 +269,71 @@ namespace ClinicaFrba.AbmProfesional
             dtDesde.Value = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(1);
         }
 
+        private void GuardarAgenda(Agenda agenda)
+        {
+            TimeSpan diferenciaDias = agenda.FechaHasta - agenda.FechaDesde;
+            for (int i = 0; i < diferenciaDias.Days; i++)
+            {
+                DateTime actual = agenda.FechaDesde.Date;
+                actual = actual.AddDays(i);
+
+                List<Turno> turnosDeLaFecha = _turnoManager.GetTurnosEnFechaProfesional(agenda.profesional, actual);
+                DateTime horain = new DateTime();
+                DateTime horaout = new DateTime();
+
+                switch (actual.DayOfWeek)
+                {
+                    case DayOfWeek.Monday:
+                        horain = agenda.LunesIN;
+                        horaout = agenda.LunesOUT;
+                        break;
+                    case DayOfWeek.Tuesday:
+                        horain = agenda.MartesIN;
+                        horaout = agenda.MartesOUT;
+                        break;
+                    case DayOfWeek.Wednesday:
+                        horain = agenda.MiercolesIN;
+                        horaout = agenda.MiercolesOUT;
+                        break;
+                    case DayOfWeek.Thursday:
+                        horain = agenda.JuevesIN;
+                        horaout = agenda.JuevesOUT;
+                        break;
+                    case DayOfWeek.Friday:
+                        horain = agenda.ViernesIN;
+                        horaout = agenda.ViernesOUT;
+                        break;
+                    case DayOfWeek.Saturday:
+                        horain = agenda.SabadoIN;
+                        horaout = agenda.SabadoOUT;
+                        break;
+
+                }
+                actual = actual.AddHours(horain.Hour);
+                if (horaout.TimeOfDay != horain.TimeOfDay)
+                {
+                    List<Turno> turnosfueraDeRango = CalcularTurnosFueraDeRango(turnosDeLaFecha, horain, horaout);
+                    if (turnosfueraDeRango.Count > 0)
+                    {
+                        if (MessageBox.Show(string.Format("Se registro que en la fecha {0}, {1} turnos quedan fuera de rango, desea cancelarlos?", actual.Date.ToString(), turnosfueraDeRango.Count.ToString()), "Cancelar Turnos", MessageBoxButtons.OKCancel) == DialogResult.OK)
+
+                            _turnoManager.CancelarDiaProfesional(agenda.profesional.UserID, actual);
+                        else
+                            return;
+                    }
+                    while (actual.TimeOfDay < horaout.TimeOfDay)
+                    {
+                        _agendaManager.BorrarRegistrosFueraDeRango(agenda.profesional, actual, horain, horaout);
+                        _agendaManager.GuardarAgenda(agenda, actual);
+                        actual = actual.AddMinutes(30);
+                    }
+                }
+            }
+        }
+        private List<Turno> CalcularTurnosFueraDeRango(List<Turno> turnosDeLaFecha, DateTime horain, DateTime horaout)
+        {
+            List<Turno> turnosFueraDeRango = new List<Turno>(turnosDeLaFecha.Where(x => (x.Fecha.TimeOfDay > horaout.TimeOfDay || x.Fecha.TimeOfDay < horain.TimeOfDay)).ToList());
+            return turnosFueraDeRango;
+        }
     }
 }
