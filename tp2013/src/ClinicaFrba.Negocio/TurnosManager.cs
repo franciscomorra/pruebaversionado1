@@ -119,5 +119,16 @@ namespace ClinicaFrba.Negocio
                     .Arguments);
             //Cancela un turno por parte del afiliado, motivo es cancelado por afiliado
         }
+
+        public void CancelarDiaProfesional(int usuarioID, DateTime fecha)
+        {
+            SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "[SHARPS].CancelarDiaProfesional", SqlDataAccessArgs
+                //Busca todos los turnos del dia, y los pone como cancelado por profesional.
+                //Deshabilita la agenda para que no se puedan cargar nuevos turnos ese dia
+                .CreateWith("@Profesional", usuarioID)
+                .And("@Fecha", fecha)
+                .Arguments);
+        }
     }
 }
