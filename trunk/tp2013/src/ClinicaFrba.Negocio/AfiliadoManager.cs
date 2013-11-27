@@ -158,7 +158,7 @@ namespace ClinicaFrba.Negocio
                             "[SHARPS].InsertAfiliado", SqlDataAccessArgs
                             .CreateWith("@PlanMedico", afiliado.PlanMedico.ID)
                             .And("@ID", afiliado.UserID)
-                            .And("@EstadoCivil", afiliado.EstadoCivil)
+                            .And("@EstadoCivil", afiliado.EstadoCivil.ToString())
                             .And("@CantHijos", afiliado.CantHijos)
                             .And("@RolAfiliado", afiliado.RoleID)
                             .Arguments);
@@ -171,7 +171,7 @@ namespace ClinicaFrba.Negocio
                         afiliado.grupoFamiliar = SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                         "[SHARPS].InsertMiembroGrupoFamiliar", SqlDataAccessArgs
                         .CreateWith("@PlanMedico", afiliado.PlanMedico.ID)
-                        .And("@EstadoCivil", afiliado.EstadoCivil)
+                        .And("@EstadoCivil", afiliado.EstadoCivil.ToString())
                         .And("@CantHijos", afiliado.CantHijos)
                         .And("@RolAfiliado", afiliado.RoleID)
                         .And("@GrupoFamiliar", afiliado.NroAfiliado)
