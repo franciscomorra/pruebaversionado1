@@ -94,6 +94,7 @@ CREATE TABLE [SHARPS].Cambios_Afiliado (
 	Fecha datetime,
 	Motivo_Cambio varchar(30)
 )
+GO
 ;
 
 CREATE TABLE [SHARPS].Consultas ( --Numero_Consulta es la cantidad de veces que el paciente se atendio
@@ -201,6 +202,7 @@ CREATE TABLE [SHARPS].Profesionales_Especialidades (
 	Profesional [int],
 	Especialidad [int]
 )
+GO
 ;
 
 CREATE TABLE [SHARPS].Perfiles ( 
@@ -219,6 +221,7 @@ CREATE TABLE [SHARPS].Perfiles_Funcionalidades (
 	Perfil [int] ,
 	Funcionalidad [int]
 )
+GO
 ;
 
 CREATE TABLE [SHARPS].Planes_Medicos ( 
@@ -251,6 +254,7 @@ CREATE TABLE [SHARPS].Recetas_Medicamentos (
 	Receta numeric(18,0),
 	Medicamento [int]
 ) 
+GO
 ;
 
 CREATE TABLE [SHARPS].Roles ( 
@@ -270,6 +274,7 @@ CREATE TABLE [SHARPS].Roles_Funcionalidades (
 	Rol [int],
 	Funcionalidad [int] NOT NULL
 )
+GO
 ;
 
 
@@ -1612,22 +1617,20 @@ CREATE PROCEDURE [SHARPS].[UpdateProfesional]
 @Matricula int,
 @ID int,
 @RolProfesional INT
-
-
 AS
 BEGIN
 
-DECLARE @rolActual INT
+	DECLARE @rolActual INT
 
-UPDATE [SHARPS].Profesionales SET Matricula = @Matricula , Faltan_Datos = 0
-WHERE UsuarioID = @ID 
+	UPDATE [SHARPS].Profesionales SET Matricula = @Matricula , Faltan_Datos = 0
+	WHERE UsuarioID = @ID 
 
-SELECT @rolActual = r.RolID FROM Roles r 
-INNER JOIN [SHARPS].Perfiles P ON r.Perfil = p.PerfilID
-WHERE p.Descripcion = 'Profesional'
+	SELECT @rolActual = r.RolID FROM Roles r 
+	INNER JOIN [SHARPS].Perfiles P ON r.Perfil = p.PerfilID
+	WHERE p.Descripcion = 'Profesional'
 
-DELETE FROM SHARPS.Usuarios_Roles WHERE Rol = @rolActual AND Usuario = @ID
-INSERT INTO SHARPS.Usuarios_Roles (Usuario , Rol) VALUES (@ID , @RolProfesional)
+	DELETE FROM SHARPS.Usuarios_Roles WHERE Rol = @rolActual AND Usuario = @ID
+	INSERT INTO SHARPS.Usuarios_Roles (Usuario , Rol) VALUES (@ID , @RolProfesional)
 
 END
 GO
@@ -1639,8 +1642,7 @@ CREATE PROCEDURE [SHARPS].[LimpiarEspecialidadesDeProfesional]
 
 AS
 BEGIN
-
-DELETE FROM [SHARPS].Profesionales_Especialidades WHERE Profesional = @profesionalID
+	DELETE FROM [SHARPS].Profesionales_Especialidades WHERE Profesional = @profesionalID
 END
 GO
 
@@ -1651,8 +1653,8 @@ CREATE PROCEDURE [SHARPS].[InsertEspecialidad]
 
 AS
 BEGIN
-INSERT INTO [SHARPS].Profesionales_Especialidades (Profesional , Especialidad) 
-VALUES (@profesionalID , @Especialidad)
+	INSERT INTO [SHARPS].Profesionales_Especialidades (Profesional , Especialidad) 
+	VALUES (@profesionalID , @Especialidad)
 END
 GO
 
@@ -1663,18 +1665,23 @@ CREATE  PROCEDURE [SHARPS].[CancelarDiaProfesional]
 
 AS
 BEGIN
-
-DECLARE @idEstadoCanceladoProfesional INT
-SELECT @idEstadoCanceladoProfesional = et.EstadoID  FROM Estados_Turno et WHERE et.Descripcion = 'CanceladoProfesional'
-UPDATE SHARPS.Agendas SET Activo = 0 WHERE Horario = @Fecha AND Profesional = @Profesional
-
-UPDATE SHARPS.Turnos SET Estado = @idEstadoCanceladoProfesional
-FROM Turnos T
-INNER JOIN Agendas A ON A.Profesional = @Profesional AND A.Horario = @Fecha
-WHERE T.Agenda = A.AgendaID
---UPDATE SHARPS.Turnos SET Estado = @idEstadoCanceladoProfesional WHERE Agenda =  /////////REVISADO
---Falta esto, como se hace???
-
+	DECLARE @idEstadoCanceladoProfesional INT
+	SELECT @idEstadoCanceladoProfesional = et.EstadoID  FROM SHARPS.Estados_Turno et WHERE et.Descripcion = 'CanceladoProfesional'
+	UPDATE SHARPS.Agendas 
+	SET Activo = 0 
+	WHERE DAY(Horario) = DAY(@Fecha)
+	AND MONTH(Horario) = MONTH(@Fecha)
+	AND YEAR(Horario) = YEAR(@Fecha) 
+	AND Profesional = @Profesional
+	UPDATE SHARPS.Turnos SET Estado = @idEstadoCanceladoProfesional
+	FROM Turnos T
+	INNER JOIN Agendas A ON a.AgendaID = t.Agenda
+	WHERE 
+	a.Profesional = @Profesional
+	AND DAY(Horario) = DAY(@Fecha)
+	AND MONTH(Horario) = MONTH(@Fecha)
+	AND YEAR(Horario) = YEAR(@Fecha)
+	
 END
 
 GO
@@ -1809,15 +1816,14 @@ CREATE PROCEDURE [SHARPS].[GetTurnosByProfesional]
 @fecha DATETIME
 AS
 BEGIN
-
-SELECT t.Estado, a.Horario  Fecha, t.Afiliado
-FROM [SHARPS].[Agendas] A
-INNER JOIN [SHARPS].[Turnos] T ON t.Agenda = A.AgendaID 
-WHERE A.Profesional = @profesionalID
-AND YEAR(A.Horario) = YEAR(@fecha) 
-AND MONTH(a.Horario) = MONTH(@fecha) 
-AND DAY(a.Horario) = DAY(@fecha) 
-AND A.Activo = 0
+	SELECT t.Estado, a.Horario  Fecha, t.Afiliado
+	FROM [SHARPS].[Agendas] A
+	INNER JOIN [SHARPS].[Turnos] T ON t.Agenda = A.AgendaID 
+	WHERE A.Profesional = @profesionalID
+	AND YEAR(A.Horario) = YEAR(@fecha) 
+	AND MONTH(a.Horario) = MONTH(@fecha) 
+	AND DAY(a.Horario) = DAY(@fecha) 
+	AND A.Activo = 0 AND T.Estado < 2
 END
 GO
 
