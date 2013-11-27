@@ -42,60 +42,32 @@ namespace ClinicaFrba.Negocio
            //Por cada dia, guardar cada media hora una entrada de la agenda
        }
        */
-        public void GuardarAgenda(Agenda agenda)
+        public void GuardarAgenda(Agenda agenda, DateTime actual)
         {
-            TimeSpan diferenciaDias = agenda.FechaHasta - agenda.FechaDesde;
-            
-            for (int i = 0; i < diferenciaDias.Days; i++) {
-                DateTime actual = agenda.FechaDesde.Date;
-                actual = actual.AddDays(i);
-                DateTime horain = new DateTime();
-                DateTime horaout = new DateTime();
-
-                switch(actual.DayOfWeek)
-                {
-                    case DayOfWeek.Monday:
-                        horain = agenda.LunesIN;
-                        horaout = agenda.LunesOUT;
-                    break;
-                    case DayOfWeek.Tuesday:
-                        horain = agenda.MartesIN;
-                        horaout = agenda.MartesOUT;
-                        break;
-                    case DayOfWeek.Wednesday:
-                        horain = agenda.MiercolesIN;
-                        horaout = agenda.MiercolesOUT;
-                        break;
-                    case DayOfWeek.Thursday:
-                        horain = agenda.JuevesIN;
-                        horaout = agenda.JuevesOUT;
-                        break;
-                    case DayOfWeek.Friday:
-                        horain = agenda.ViernesIN;
-                        horaout = agenda.ViernesOUT;
-                        break;
-                    case DayOfWeek.Saturday:
-                        horain = agenda.SabadoIN;
-                        horaout = agenda.SabadoOUT;
-                        break;
-
-                }
-                actual = actual.AddHours(horain.Hour);
-                if (horaout.TimeOfDay != horain.TimeOfDay)
-                {
-                    while (actual.TimeOfDay < horaout.TimeOfDay)
-                    {
-                        SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                        "[SHARPS].InsertDiaProfesional", SqlDataAccessArgs
-                        .CreateWith(
-                            "@Fecha", actual)
-                            .And("@profesional", agenda.profesional.UserID)
-                        .Arguments);
-                        actual = actual.AddMinutes(30);
-                    }
-                }
-            }
+            SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+               "[SHARPS].InsertAgendaProfesional", SqlDataAccessArgs
+               .CreateWith(
+                   "@Fecha", actual)
+                   .And("@profesional", agenda.profesional.UserID)
+               .Arguments);
         }
 
+        public void BorrarRegistrosFueraDeRango(Profesional profesional, DateTime actual, DateTime horaIn, DateTime horaOut)
+        {
+            DateTime fecha = actual.Date;
+            /*
+            while (fecha.TimeOfDay < horaOut.TimeOfDay)
+            {
+                SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+              "[SHARPS].InsertAgendaProfesional", SqlDataAccessArgs
+              .CreateWith(
+                  "@Fecha", actual)
+                  .And("@profesional", profesional.UserID)
+              .Arguments);
+            
+            }
+            */
+
+        }
     }
 }
