@@ -70,8 +70,9 @@ namespace ClinicaFrba.AbmProfesional
                     _agenda.SabadoIN = Convert.ToDateTime(cbxSabIN.SelectedItem);
                     _agenda.SabadoOUT = Convert.ToDateTime(cbxSabOUT.SelectedItem);
                 }
-
-                MessageBox.Show("Se guardara la agenda del profesional");
+                
+                MessageBox.Show("Se guardara la agenda del profesional, un momento porfavor");
+                
                 _agenda.profesional = _profesional;
                 GuardarAgenda(_agenda);
                 //mgr.GuardarAgenda(_agenda);

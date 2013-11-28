@@ -349,262 +349,276 @@ GO
 
 
 
-/****** Object:  StoredProcedure [SHARPS].[InsertDetallePersona]    Script Date: 11/26/2013 23:47:31 ******/
+
+
+
+
+
+
+USE [GD2C2013]
+GO
+
+/****** Object:  StoredProcedure [SHARPS].[InsertDetallePersona]    Script Date: 11/28/2013 02:03:57 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[InsertDetallePersona]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[InsertDetallePersona]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[InsertConsulta]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[InsertConsulta]    Script Date: 11/28/2013 02:03:57 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[InsertConsulta]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[InsertConsulta]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[InsertAgendaProfesional]    Script Date: 11/26/2013 23:47:31 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[InsertAgendaProfesional]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [SHARPS].[InsertAgendaProfesional]
+/****** Object:  StoredProcedure [SHARPS].[InsertarCompra]    Script Date: 11/28/2013 02:03:57 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[InsertarCompra]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [SHARPS].[InsertarCompra]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[InsertProfesional]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[InsertProfesional]    Script Date: 11/28/2013 02:03:57 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[InsertProfesional]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[InsertProfesional]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[InsertMiembroGrupoFamiliar]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[InsertMiembroGrupoFamiliar]    Script Date: 11/28/2013 02:03:57 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[InsertMiembroGrupoFamiliar]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[InsertMiembroGrupoFamiliar]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[InsertEspecialidad]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[InsertEspecialidad]    Script Date: 11/28/2013 02:03:57 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[InsertEspecialidad]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[InsertEspecialidad]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[InsertAfiliado]    Script Date: 11/26/2013 23:47:31 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[InsertAfiliado]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [SHARPS].[InsertAfiliado]
+/****** Object:  StoredProcedure [SHARPS].[InsertAgendaProfesional]    Script Date: 11/28/2013 02:03:58 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[InsertAgendaProfesional]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [SHARPS].[InsertAgendaProfesional]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[GetRolesByPerfil]    Script Date: 11/26/2013 23:47:31 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetRolesByPerfil]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [SHARPS].[GetRolesByPerfil]
-GO
-
-/****** Object:  StoredProcedure [SHARPS].[GetRoles]    Script Date: 11/26/2013 23:47:31 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetRoles]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [SHARPS].[GetRoles]
-GO
-
-/****** Object:  StoredProcedure [SHARPS].[GetRoleFunctionalities]    Script Date: 11/26/2013 23:47:31 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetRoleFunctionalities]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [SHARPS].[GetRoleFunctionalities]
-GO
-
-/****** Object:  StoredProcedure [SHARPS].[GetUserRoles]    Script Date: 11/26/2013 23:47:31 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetUserRoles]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [SHARPS].[GetUserRoles]
-GO
-
-/****** Object:  StoredProcedure [SHARPS].[GetUserLoginAttempts]    Script Date: 11/26/2013 23:47:31 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetUserLoginAttempts]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [SHARPS].[GetUserLoginAttempts]
-GO
-
-/****** Object:  StoredProcedure [SHARPS].[GetTurnosByProfesional]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[GetTurnosByProfesional]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetTurnosByProfesional]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[GetTurnosByProfesional]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[UpdateAfiliado]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[GetRolesByPerfil]    Script Date: 11/28/2013 02:03:58 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetRolesByPerfil]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [SHARPS].[GetRolesByPerfil]
+GO
+
+/****** Object:  StoredProcedure [SHARPS].[GetRoles]    Script Date: 11/28/2013 02:03:58 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetRoles]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [SHARPS].[GetRoles]
+GO
+
+/****** Object:  StoredProcedure [SHARPS].[InsertAfiliado]    Script Date: 11/28/2013 02:03:58 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[InsertAfiliado]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [SHARPS].[InsertAfiliado]
+GO
+
+/****** Object:  StoredProcedure [SHARPS].[GetUserRoles]    Script Date: 11/28/2013 02:03:58 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetUserRoles]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [SHARPS].[GetUserRoles]
+GO
+
+/****** Object:  StoredProcedure [SHARPS].[GetUserLoginAttempts]    Script Date: 11/28/2013 02:03:58 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetUserLoginAttempts]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [SHARPS].[GetUserLoginAttempts]
+GO
+
+/****** Object:  StoredProcedure [SHARPS].[UpdateAfiliado]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[UpdateAfiliado]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[UpdateAfiliado]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[RegistrarLlegada]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[RegistrarLlegada]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[RegistrarLlegada]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[RegistrarLlegada]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[NuevoGrupoFamiliar]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[NuevoGrupoFamiliar]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[NuevoGrupoFamiliar]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[NuevoGrupoFamiliar]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[UpdateRole]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[UpdateRole]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[UpdateRole]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[UpdateRole]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[UpdateProfesional]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[UpdateProfesional]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[UpdateProfesional]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[UpdateProfesional]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[UpdateDetallePersona]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[UpdateDetallePersona]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[UpdateDetallePersona]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[UpdateDetallePersona]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[Login]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[Login]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[Login]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[Login]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[InsertRoleFunctionality]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[InsertRoleFunctionality]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[InsertRoleFunctionality]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[InsertRoleFunctionality]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[InsertRole]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[InsertRole]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[InsertRole]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[InsertRole]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[InsertReceta]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[InsertReceta]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[InsertReceta]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[InsertReceta]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[LimpiarEspecialidadesDeProfesional]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[LimpiarEspecialidadesDeProfesional]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[LimpiarEspecialidadesDeProfesional]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[LimpiarEspecialidadesDeProfesional]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[InsertUser]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[InsertUser]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[InsertUser]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[InsertUser]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[InsertTurno]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[InsertTurno]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[InsertTurno]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[InsertTurno]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[Get_TOPCancelaciones]    Script Date: 11/26/2013 23:47:31 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[Get_TOPCancelaciones]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [SHARPS].[Get_TOPCancelaciones]
+/****** Object:  StoredProcedure [SHARPS].[GetRoleFunctionalities]    Script Date: 11/28/2013 02:03:58 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetRoleFunctionalities]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [SHARPS].[GetRoleFunctionalities]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[DeleteRoleFunctionalities]    Script Date: 11/26/2013 23:47:31 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[DeleteRoleFunctionalities]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [SHARPS].[DeleteRoleFunctionalities]
-GO
-
-/****** Object:  StoredProcedure [SHARPS].[DeleteRole]    Script Date: 11/26/2013 23:47:31 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[DeleteRole]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [SHARPS].[DeleteRole]
-GO
-
-/****** Object:  StoredProcedure [SHARPS].[GetAfiliadosFromGrupoFamiliar]    Script Date: 11/26/2013 23:47:31 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetAfiliadosFromGrupoFamiliar]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [SHARPS].[GetAfiliadosFromGrupoFamiliar]
-GO
-
-/****** Object:  StoredProcedure [SHARPS].[GetAfiliados]    Script Date: 11/26/2013 23:47:31 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetAfiliados]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [SHARPS].[GetAfiliados]
-GO
-
-/****** Object:  StoredProcedure [SHARPS].[GetAfiliadoInfo]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[GetAfiliadoInfo]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetAfiliadoInfo]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[GetAfiliadoInfo]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[DeleteProfesional]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[DeleteRoleFunctionalities]    Script Date: 11/28/2013 02:03:58 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[DeleteRoleFunctionalities]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [SHARPS].[DeleteRoleFunctionalities]
+GO
+
+/****** Object:  StoredProcedure [SHARPS].[DeleteRole]    Script Date: 11/28/2013 02:03:58 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[DeleteRole]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [SHARPS].[DeleteRole]
+GO
+
+/****** Object:  StoredProcedure [SHARPS].[GetAfiliadoTurnosConsulta]    Script Date: 11/28/2013 02:03:58 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetAfiliadoTurnosConsulta]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [SHARPS].[GetAfiliadoTurnosConsulta]
+GO
+
+/****** Object:  StoredProcedure [SHARPS].[GetAfiliadosFromGrupoFamiliar]    Script Date: 11/28/2013 02:03:58 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetAfiliadosFromGrupoFamiliar]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [SHARPS].[GetAfiliadosFromGrupoFamiliar]
+GO
+
+/****** Object:  StoredProcedure [SHARPS].[GetAfiliados]    Script Date: 11/28/2013 02:03:58 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetAfiliados]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [SHARPS].[GetAfiliados]
+GO
+
+/****** Object:  StoredProcedure [SHARPS].[DeleteProfesional]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[DeleteProfesional]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[DeleteProfesional]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[CancelarTurnoAfiliado]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[CancelarTurnoAfiliado]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[CancelarTurnoAfiliado]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[CancelarTurnoAfiliado]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[CancelarDiaProfesional]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[CancelarDiaProfesional]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[CancelarDiaProfesional]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[CancelarDiaProfesional]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[AgregarMedicamentos]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[AgregarMedicamentos]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[AgregarMedicamentos]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[AgregarMedicamentos]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[DeleteAfiliado]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[DeleteAfiliado]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[DeleteAfiliado]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[DeleteAfiliado]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[ComprarBonoReceta]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[ComprarBonoReceta]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[ComprarBonoReceta]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[ComprarBonoReceta]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[ComprarBonoConsulta]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[ComprarBonoConsulta]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[ComprarBonoConsulta]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[ComprarBonoConsulta]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[GetPerfilInfo]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[GetPerfilInfo]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetPerfilInfo]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[GetPerfilInfo]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[GetPerfilFunctionalities]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[GetPerfilFunctionalities]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetPerfilFunctionalities]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[GetPerfilFunctionalities]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[GetPerfiles]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[GetPerfiles]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetPerfiles]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[GetPerfiles]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[GetProfesionalInfo]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[GetProfesionalInfo]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetProfesionalInfo]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[GetProfesionalInfo]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[GetProfesionales]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[GetProfesionales]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetProfesionales]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[GetProfesionales]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[GetPlanesMedicos]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[GetPlanesMedicos]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetPlanesMedicos]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[GetPlanesMedicos]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[GetMedicamentos]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[GetMedicamentos]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetMedicamentos]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[GetMedicamentos]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[GetAllEspecialidades]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[GetAllEspecialidades]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetAllEspecialidades]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[GetAllEspecialidades]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[GetAllAfiliadoTurnos]    Script Date: 11/26/2013 23:47:31 ******/
+/****** Object:  StoredProcedure [SHARPS].[GetAllAfiliadoTurnos]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetAllAfiliadoTurnos]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[GetAllAfiliadoTurnos]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[GetAgendaByProfesional]    Script Date: 11/26/2013 23:47:32 ******/
+/****** Object:  StoredProcedure [SHARPS].[GetAgendaByProfesional]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetAgendaByProfesional]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[GetAgendaByProfesional]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[GetEspecialidadesForUser]    Script Date: 11/26/2013 23:47:32 ******/
+/****** Object:  StoredProcedure [SHARPS].[GetEspecialidadesForUser]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetEspecialidadesForUser]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[GetEspecialidadesForUser]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[GetDetallesPersona]    Script Date: 11/26/2013 23:47:32 ******/
+/****** Object:  StoredProcedure [SHARPS].[GetDetallesPersona]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetDetallesPersona]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[GetDetallesPersona]
 GO
 
-/****** Object:  StoredProcedure [SHARPS].[GetBonos]    Script Date: 11/26/2013 23:47:32 ******/
+/****** Object:  StoredProcedure [SHARPS].[GetBonos]    Script Date: 11/28/2013 02:03:58 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SHARPS].[GetBonos]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [SHARPS].[GetBonos]
 GO

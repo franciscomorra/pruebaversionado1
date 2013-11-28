@@ -25,10 +25,12 @@ namespace ClinicaFrba.AbmTurno
         private BonosForm _bonosForm;
         private Bono _bono;
         private TurnosManager _turnosManager = new TurnosManager();
-
+        private bool _registrado = false;
         public RegistrarLlegada()
         {
+            _registrado = false;
             InitializeComponent();
+
         }
 
         private void btnBuscarAfiliado_Click(object sender, EventArgs e)
@@ -82,7 +84,7 @@ namespace ClinicaFrba.AbmTurno
         void _bonosForm_OnBonoSelected(object sender, BonoSelectedEventArgs e)
         {
             _bono = e.Bono;
-            txtBono.Text = _bono.Fecha.ToString();
+            txtBono.Text = _bono.Numero.ToString();
             _bonosForm.Hide();
             btnRegistrar.Show();
         }
@@ -96,7 +98,13 @@ namespace ClinicaFrba.AbmTurno
                 {
                     throw new Exception("El usuario debia registrarse 15 minutos antes!");
                 }
-                _turnosManager.RegistrarLlegada(_turno, _bono);
+                if (_registrado == false)
+                {
+                    _turnosManager.RegistrarLlegada(_turno, _bono);
+                    _registrado = true;
+                    MessageBox.Show("Registrado Correctamente!");
+                    this.Refresh();
+                }
             }
             catch (System.Exception excep)
             {

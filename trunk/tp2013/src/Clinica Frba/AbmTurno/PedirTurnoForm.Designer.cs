@@ -39,6 +39,7 @@
             this.btnConfirmar = new System.Windows.Forms.Button();
             this.cbxHorarios = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.panelProfesional.SuspendLayout();
             this.panelFecha.SuspendLayout();
             this.panelHorario.SuspendLayout();
@@ -101,6 +102,7 @@
             // 
             // panelFecha
             // 
+            this.panelFecha.Controls.Add(this.button1);
             this.panelFecha.Controls.Add(this.dtTurno);
             this.panelFecha.Controls.Add(this.label2);
             this.panelFecha.Controls.Add(this.panelHorario);
@@ -146,6 +148,16 @@
             this.label1.TabIndex = 20;
             this.label1.Text = "Seleccione Horario";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(327, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 21;
+            this.button1.Text = "Filtrar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // PedirTurnoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -179,5 +191,6 @@
         private System.Windows.Forms.ComboBox cbxHorarios;
         private System.Windows.Forms.Button btnConfirmar;
         private System.Windows.Forms.Panel panelHorario;
+        private System.Windows.Forms.Button button1;
     }
 }

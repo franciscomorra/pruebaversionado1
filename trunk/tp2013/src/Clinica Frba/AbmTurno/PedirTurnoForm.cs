@@ -54,13 +54,7 @@ namespace ClinicaFrba.AbmTurno
         }
         private void dtTurno_ValueChanged(object sender, EventArgs e)
         {
-            if (_profesional != null)
-            {
-                List<Turno> turnos = _turnosManager.GetDiasHorariosLibres(_profesional, dtTurno.Value);
-                cbxHorarios.DataSource = turnos;
 
-                panelHorario.Visible = true;
-            }
         }
 
         private void btnConfirmar_Click(object sender, EventArgs e)
@@ -92,6 +86,20 @@ namespace ClinicaFrba.AbmTurno
             dtTurno.MaxDate = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddDays(120);
             panelHorario.Visible = false;
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            cbxHorarios.DataSource = null;
+            if (_profesional != null)
+            {
+                List<Turno> turnos = _turnosManager.GetDiasHorariosLibres(_profesional, dtTurno.Value);
+                cbxHorarios.DataSource = turnos;
+                if (turnos.Count > 0)
+                    panelHorario.Visible = true;
+                else
+                    MessageBox.Show("No hay horarios disponibles en la fecha!");
+            }
         }
     }
 }

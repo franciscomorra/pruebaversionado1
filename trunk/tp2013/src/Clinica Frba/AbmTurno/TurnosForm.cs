@@ -22,7 +22,7 @@ namespace ClinicaFrba.AbmTurno
     {
         private bool _isSearchMode = false;
         private bool _soloTurnosdeHoy = false;
-
+        private bool _soloConConsulta = false;//Si el paciente registro la llegada
         public event EventHandler<TurnoSelectedEventArgs> OnTurnoselected;
         private Turno turno = new Turno();
         private TurnosManager _turnosManager = new TurnosManager();
@@ -46,9 +46,16 @@ namespace ClinicaFrba.AbmTurno
         {
             _soloTurnosdeHoy = true;
         }
+        public void SoloConConsulta(){
+            _soloConConsulta = true;
+        }
         public void RefreshDataGrid()
         {
-            var dataSource = _turnosManager.GetAll(_afiliado,_soloTurnosdeHoy,null);
+            List<Turno> dataSource;
+            if (!_soloConConsulta)
+                 dataSource = _turnosManager.GetAll(_afiliado,_soloTurnosdeHoy,null);
+            else
+                dataSource = _turnosManager.GetTurnosConConsulta(_afiliado, _soloTurnosdeHoy, null);
             dgvTurnos.AutoGenerateColumns = false; 
             dgvTurnos.DataSource = dataSource;
             dgvTurnos.DoubleClick += new EventHandler(dgvTurnos_CellContentDoubleClick);

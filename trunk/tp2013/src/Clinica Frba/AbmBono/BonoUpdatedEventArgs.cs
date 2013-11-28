@@ -8,6 +8,5 @@ namespace ClinicaFrba.AbmBono
 {
     public class BonoUpdatedEventArgs : EventArgs
     {
-        public List<Bono> Bonos { get; set; }
     }
 }
