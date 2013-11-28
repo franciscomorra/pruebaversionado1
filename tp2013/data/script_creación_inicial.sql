@@ -32,7 +32,7 @@ GO
 CREATE TABLE [SHARPS].Agendas ( 
 	AgendaID  [int] IDENTITY (1,1) NOT NULL,
 	Profesional [int],
-	Horario datetime,
+	Horario DATETIME,
 	Activo [bit],
 CONSTRAINT [PK_Agendas] PRIMARY KEY CLUSTERED 
 (
@@ -48,7 +48,7 @@ CREATE TABLE [SHARPS].Compras (
    Precio_BonoConsulta int , 
    Precio_BonoFarmacia int,
    Afiliado int,
-   fecha_Compra date,
+   fecha_Compra DATETIME,
    CONSTRAINT [PK_Compras] PRIMARY KEY CLUSTERED 
 (
 	[CompraID] ASC
@@ -60,7 +60,7 @@ GO
 
 CREATE TABLE [SHARPS].Bonos_Farmacia ( 
 	Numero numeric(18,0)  NOT NULL,
-	Fecha_Impresion datetime,
+	Fecha_Impresion DATETIME,
 	Compra int,
 	PlanMedico numeric(18,0),
 CONSTRAINT [PK_Bonos_Farmacia] PRIMARY KEY CLUSTERED 
@@ -74,7 +74,7 @@ GO
 
 CREATE TABLE [SHARPS].Bonos_Consulta ( 
 	Numero numeric(18,0) NOT NULL,
-	Fecha_Impresion datetime,
+	Fecha_Impresion DATETIME,
 	Compra int,
 	PlanMedico numeric(18,0),
 CONSTRAINT [PK_Bonos_Consulta] PRIMARY KEY CLUSTERED 
@@ -91,7 +91,7 @@ GO
 
 CREATE TABLE [SHARPS].Cambios_Afiliado ( 
 	Afiliado [int],
-	Fecha datetime,
+	Fecha DATETIME,
 	Motivo_Cambio varchar(30)
 )
 GO
@@ -121,7 +121,7 @@ CREATE TABLE [SHARPS].Detalles_Persona (
 	Mail nvarchar(50),
 	Apellido nvarchar(50),
 	Nombre nvarchar(50),
-	FechaNac datetime
+	FechaNac DATETIME
 CONSTRAINT [PK_Detalles_Persona] PRIMARY KEY CLUSTERED 
 (
 	UsuarioID
@@ -239,7 +239,6 @@ GO
 ;
 
 CREATE TABLE [SHARPS].Recetas ( 
-	Consulta numeric(18,0),
 	Bono_Farmacia numeric(18,0),
 	RecetaID [int] identity(1,1),
 CONSTRAINT [PK_Recetas] PRIMARY KEY CLUSTERED 
@@ -305,8 +304,8 @@ GO
 
 CREATE TABLE [SHARPS].Usuarios ( 
 	UsuarioID [int] identity(1,1)  NOT NULL,
-	Username nvarchar(MAX),
-	Password nvarchar(MAX) NOT NULL,
+	Username nvarchar(50) UNIQUE,
+	Password nvarchar(100) NOT NULL,
 	Intentos [int],
 	Activo bit,
 CONSTRAINT [PK_Usuarios] PRIMARY KEY CLUSTERED 
@@ -398,6 +397,7 @@ GO
 ALTER TABLE [SHARPS].[Usuarios] ADD  CONSTRAINT [DF_Usuarios_Activo]  DEFAULT ((1)) FOR [Activo]
 GO
 
+
 ALTER TABLE [SHARPS].[Bonos_Consulta]  WITH CHECK ADD  CONSTRAINT [FK_Bonos_Consulta_Planes_Medicos] FOREIGN KEY([planMedico])
 REFERENCES [SHARPS].[Planes_Medicos] ([Codigo])
 ALTER TABLE [SHARPS].[Bonos_Consulta] CHECK CONSTRAINT [FK_Bonos_Consulta_Planes_Medicos]
@@ -426,11 +426,6 @@ GO
 ALTER TABLE [SHARPS].[Consultas] CHECK CONSTRAINT [FK_Consultas_Turnos]
 GO
 
-ALTER TABLE [SHARPS].[Recetas]  WITH CHECK ADD  CONSTRAINT [FK_Recetas_Consultas] FOREIGN KEY([Consulta])
-REFERENCES [SHARPS].[Consultas] ([Bono_Consulta])
-GO
-ALTER TABLE [SHARPS].[Recetas] CHECK CONSTRAINT [FK_Recetas_Consultas]
-GO
 
 ALTER TABLE [SHARPS].[Turnos]  WITH CHECK ADD  CONSTRAINT [FK_Turnos_Estados_Turno] FOREIGN KEY([Estado])
 REFERENCES [SHARPS].[Estados_Turno] ([EstadoID])
@@ -698,10 +693,10 @@ INSERT INTO [SHARPS].Estados_Civiles (Descripcion) VALUES ('Concubinato');
 INSERT INTO [SHARPS].Estados_Civiles (Descripcion) VALUES ('Divorciado')
 
 PRINT 'Ingresando Estados de un Turno...'
-INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('Atendido'); 
+INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('Activo'); ---todavia no es el dia del turno
 INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('CanceladoAfiliado');
 INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('CanceladoProfesional');
-INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('Activo');---todavia no es el dia del turno
+INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('Atendido');
 INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('Desactivo')
 
 
@@ -819,12 +814,12 @@ INNER JOIN SHARPS.Usuarios U ON U.Username =  CAST(m.Paciente_DNI AS Nvarchar(MA
 INNER JOIN SHARPS.Compras C ON U.UsuarioID = C.Afiliado 
 WHERE  m.Bono_Consulta_Numero is not null*/
 
-CREATE TABLE #compras(
+CREATE TABLE SHARPS.#compras(
 CodID int identity (1,1) ,
 Precio_Consulta int ,
 Precio_Farmacia int,
 usuario int,
-Fecha_Compra date,
+Fecha_Compra DATETIME,
 numero_Bono int,
 plan_Medico int,
 tipo_Bono nvarchar (50),
@@ -832,7 +827,7 @@ Fecha_Impresion date
 )
 
 
-INSERT INTO  #compras (Precio_Consulta, Precio_Farmacia , usuario, Fecha_Compra, numero_Bono, plan_Medico, tipo_Bono, Fecha_Impresion)
+INSERT INTO  SHARPS.#compras (Precio_Consulta, Precio_Farmacia , usuario, Fecha_Compra, numero_Bono, plan_Medico, tipo_Bono, Fecha_Impresion)
 SELECT  m.Plan_Med_Precio_Bono_Consulta , m.Plan_Med_Precio_Bono_Farmacia , U.UsuarioID , m.Compra_Bono_Fecha , m.Bono_Farmacia_Numero  , M.Plan_Med_Codigo ,'farmacia', m.Bono_Farmacia_Fecha_Impresion
 FROM gd_esquema.Maestra m
 INNER JOIN SHARPS.Usuarios U ON U.Username =  CAST(m.Paciente_DNI AS Nvarchar(255))
@@ -840,7 +835,7 @@ WHERE m.Turno_Fecha is NULL AND m.Bono_Farmacia_Numero is not null
 
 
 
-INSERT INTO  #compras (Precio_Consulta, Precio_Farmacia , usuario, Fecha_Compra, numero_Bono, plan_Medico, tipo_Bono, Fecha_Impresion)
+INSERT INTO  SHARPS.#compras (Precio_Consulta, Precio_Farmacia , usuario, Fecha_Compra, numero_Bono, plan_Medico, tipo_Bono, Fecha_Impresion)
 SELECT  m.Plan_Med_Precio_Bono_Consulta , m.Plan_Med_Precio_Bono_Farmacia , U.UsuarioID , m.Compra_Bono_Fecha , m.Bono_Consulta_Numero  , M.Plan_Med_Codigo ,'consultas', m.Bono_Consulta_Fecha_Impresion
 FROM gd_esquema.Maestra m
 INNER JOIN SHARPS.Usuarios U ON U.Username =  CAST(m.Paciente_DNI AS Nvarchar(255))
@@ -852,7 +847,7 @@ GO
 
 INSERT INTO [SHARPS].Compras (Precio_BonoConsulta , Precio_BonoFarmacia , Afiliado , fecha_Compra)
 SELECT  C.Precio_Consulta , C.Precio_Farmacia, C.usuario, C.Fecha_Compra
-FROM #compras C
+FROM SHARPS.#compras C
 
 
 
@@ -861,7 +856,7 @@ GO
 
 INSERT INTO SHARPS.Bonos_Farmacia(Numero , Fecha_Impresion , PlanMedico , Compra)
 select  C.numero_Bono , C.Fecha_Impresion , C.plan_Medico , C.CodID
-from #compras C
+from  SHARPS.#compras C
 INNER JOIN SHARPS.Compras CO ON CO.CompraID = C.CodID
 where C.tipo_Bono = 'farmacia'
 
@@ -870,7 +865,7 @@ GO
 
 INSERT INTO SHARPS.Bonos_Consulta(Numero , Fecha_Impresion , PlanMedico , Compra)
 select  C.numero_Bono , C.Fecha_Impresion , C.plan_Medico , C.CodID
-from #compras C
+from  SHARPS.#compras C
 INNER JOIN SHARPS.Compras CO ON CO.CompraID = C.CodID
 where C.tipo_Bono = 'consultas'
 
@@ -881,7 +876,7 @@ where C.tipo_Bono = 'consultas'
 
 
 
-
+DROP TABLE SHARPS.#compras
 
 
 
@@ -896,12 +891,17 @@ INNER JOIN [SHARPS].Usuarios x on x.Username =CAST(m.Medico_DNI AS Nvarchar(MAX)
 WHERE m.Turno_Fecha is not null
 order by 1
 
-
+GO
 --Ingresando Turnos
+
+	
 PRINT 'Ingresando los Turnos...'
 GO
+DECLARE @idEstadoAtendido INT
+SELECT @idEstadoAtendido = et.EstadoID  FROM SHARPS.Estados_Turno et WHERE et.Descripcion = 'Atendido'
+
 INSERT INTO [SHARPS].Turnos (Numero , Afiliado , Agenda, Estado)
-SELECT distinct m.Turno_Numero , U.UsuarioID , a.AgendaID ,1
+SELECT distinct m.Turno_Numero , U.UsuarioID , a.AgendaID ,@idEstadoAtendido
 FROM gd_esquema.Maestra m
 INNER JOIN [SHARPS].Agendas a ON a.Horario = m.Turno_Fecha
 INNER JOIN [SHARPS].Usuarios x ON x.UsuarioID = a.Profesional
@@ -912,7 +912,7 @@ ORDER by 1
 --Rellenando Consultas
 PRINT 'Rellenando Consultas...'
 INSERT INTO [SHARPS].Consultas(Turno,Bono_Consulta,Sintomas,Enfermedad,Numero_Consulta)
-SELECT  distinct m.Turno_Numero , m.Bono_Consulta_Numero,m.Consulta_Sintomas,m.Consulta_Enfermedades,0
+SELECT  distinct m.Turno_Numero , m.Bono_Consulta_Numero,m.Consulta_Sintomas,m.Consulta_Enfermedades,1
 FROM gd_esquema.Maestra m
 INNER JOIN [SHARPS].Turnos t ON t.Numero = m.Turno_Numero
 INNER JOIN [SHARPS].Bonos_Consulta b ON m.Bono_Consulta_Numero = b.Numero 
@@ -952,8 +952,8 @@ GO
 --Ingresando Recetas
 PRINT 'Ingresando las Recetas...'
 GO
-INSERT INTO [SHARPS].Recetas (Bono_Farmacia, Consulta)
-SELECT  m.Bono_Farmacia_Numero , m.Bono_Consulta_Numero
+INSERT INTO [SHARPS].Recetas (Bono_Farmacia)
+SELECT  m.Bono_Farmacia_Numero
 FROM gd_esquema.Maestra m
 
 WHERE ( m.Bono_Farmacia_Numero is not null AND m.Bono_Consulta_Numero is not null )
@@ -1473,7 +1473,7 @@ CREATE PROCEDURE [SHARPS].[UpdateDetallePersona]
 @DNI numeric (18,0),
 @TipoDNI varchar(255),
 @Sexo char(10),
-@FechaNacimiento date,
+@FechaNacimiento DATETIME,
 @Direccion varchar(255),
 @ID_Usuario numeric (18,0)
 
@@ -1498,7 +1498,7 @@ CREATE PROCEDURE [SHARPS].[InsertDetallePersona]
 @DNI numeric (18,0),
 @TipoDNI varchar(255),
 @Sexo char(10),
-@FechaNacimiento date,
+@FechaNacimiento DATETIME,
 @Direccion varchar(255),
 @ID_Usuario numeric (18,0)
 
@@ -1661,7 +1661,7 @@ GO
 
 CREATE  PROCEDURE [SHARPS].[CancelarDiaProfesional]
 @Profesional int,
-@Fecha date
+@Fecha DATETIME
 
 AS
 BEGIN
@@ -1693,26 +1693,29 @@ CREATE PROCEDURE [SHARPS].[GetBonos] --Agregar que no fueron usados!!!! ////////
 AS
 BEGIN
 DECLARE @GRUPO INT
-SELECT @GRUPO = GrupoFamiliar FROM Afiliados WHERE UsuarioID =@userId
+DECLARE @Plan INT
+SELECT @GRUPO = GrupoFamiliar, @Plan = Plan_Medico FROM [SHARPS].Afiliados WHERE UsuarioID = @userId
 
-SELECT BC.Fecha_Impresion AS Fecha , BC.Numero AS Numero , X.Precio_BonoConsulta AS Precio ,'Consulta' AS TipoBono
+SELECT BC.Fecha_Impresion AS Fecha , BC.Numero AS Numero , X.Precio_BonoConsulta AS Precio ,'Consulta' AS TipoBono,X.CompraID CompraID
 FROM [SHARPS].Bonos_Consulta BC
-INNER JOIN Compras X ON X.CompraID = BC.Compra
-INNER JOIN Afiliados A ON A.GrupoFamiliar = @GRUPO 
----INNER JOIN Consultas C ON C.Bono_Consulta <> BC.Numero
-WHERE X.Afiliado = @userId OR X.Afiliado = A.UsuarioID
- 
+INNER JOIN [SHARPS].Compras X ON X.CompraID = BC.Compra
+INNER JOIN [SHARPS].Afiliados A ON A.UsuarioID = X.Afiliado
+LEFT JOIN [SHARPS].Consultas CON ON CON.Bono_Consulta = BC.Numero
+WHERE A.GrupoFamiliar = @GRUPO
+AND A.Plan_Medico = @Plan
+AND CON.Numero_Consulta IS NULL
 
 UNION
 
-SELECT BF.Fecha_Impresion AS Fecha, BF.Numero AS Numero ,X.Precio_BonoFarmacia AS Precio , 'Farmacia' AS TipoBono
+SELECT BF.Fecha_Impresion AS Fecha, BF.Numero AS Numero ,X.Precio_BonoFarmacia AS Precio , 'Farmacia' AS TipoBono,X.CompraID CompraID
 FROM [SHARPS].Bonos_Farmacia BF
-INNER JOIN Compras X ON X.CompraID = BF.Compra
-INNER JOIN Afiliados A ON A.GrupoFamiliar = @GRUPO 
-INNER JOIN Recetas R ON R.Bono_Farmacia <> BF.Numero
-WHERE X.Afiliado = @userId OR X.Afiliado = A.UsuarioID
-AND DATEADD(day, 60, BF.Fecha_Impresion) >= @fecha
-order by 4
+INNER JOIN [SHARPS].Compras X ON X.CompraID = BF.Compra
+INNER JOIN [SHARPS].Afiliados A ON A.UsuarioID = X.Afiliado
+LEFT JOIN Recetas R ON R.Bono_Farmacia = BF.Numero
+WHERE A.GrupoFamiliar = @GRUPO
+AND A.Plan_Medico = @Plan
+AND DATEADD(DAY, 60, BF.Fecha_Impresion) >= @fecha
+AND R.RecetaID IS NULL
 
 END
 GO
@@ -1722,16 +1725,14 @@ GO
 CREATE PROCEDURE [SHARPS].[ComprarBonoConsulta]
 @Precio INT,
 @AfiliadoCompro INT,
-@Fecha DATE
+@Fecha DATE,
+@COMPRA INT
 AS 
 BEGIN
 DECLARE @NUMEROBONO INT
 DECLARE @PLAN INT
-DECLARE @COMPRA INT
 SELECT @PLAN = A.Plan_Medico FROM Afiliados A WHERE A.UsuarioID = @AfiliadoCompro 
 SELECT @NUMEROBONO = MAX(Numero) + 1  FROM [SHARPS].Bonos_Consulta 
-INSERT INTO Compras (Precio_BonoConsulta , Afiliado , fecha_Compra) VALUES (@Precio , @AfiliadoCompro , @Fecha)
-SELECT @COMPRA = CompraID FROM Compras WHERE Afiliado = @AfiliadoCompro AND fecha_Compra = @Fecha  ---VER SI ES EL ULTIMO O HAY UNA FUNCION QUE LO HAGA
 INSERT INTO [SHARPS].Bonos_Consulta (Numero,Fecha_Impresion,PlanMedico, Compra)
 VALUES (@NUMEROBONO  , @Fecha , @PLAN,@COMPRA)
 RETURN @NUMEROBONO 
@@ -1759,16 +1760,14 @@ GO */
 CREATE PROCEDURE [SHARPS].[ComprarBonoReceta] -------//////////MODIFICADO
 @Precio INT,
 @AfiliadoCompro INT,
-@Fecha DATE
+@Fecha DATETIME,
+@COMPRA INT
 AS 
 BEGIN
 DECLARE @NUMEROBONO INT
 DECLARE @PLAN INT
-DECLARE @COMPRA INT
 SELECT @PLAN = A.Plan_Medico FROM Afiliados A WHERE A.UsuarioID = @AfiliadoCompro 
 SELECT @NUMEROBONO = MAX(Numero) + 1 FROM [SHARPS].Bonos_Farmacia
-INSERT INTO Compras (Precio_BonoFarmacia , Afiliado , fecha_Compra) VALUES (@Precio , @AfiliadoCompro , @Fecha)
-SELECT @COMPRA = CompraID FROM Compras WHERE Afiliado = @AfiliadoCompro AND fecha_Compra = @Fecha  ---VER SI ES EL ULTIMO O HAY UNA FUNCION QUE LO HAGA
 INSERT INTO [SHARPS].Bonos_Farmacia (Numero,Fecha_Impresion,PlanMedico, Compra)
 VALUES (@NUMEROBONO  , @Fecha , @PLAN, @COMPRA)
 RETURN @NUMEROBONO 
@@ -1782,13 +1781,16 @@ CREATE PROCEDURE [SHARPS].[GetAllAfiliadoTurnos]
 AS
 BEGIN
 
+
 SELECT a.horario as Fecha ,T.Numero as Numero ,A.Profesional AS UserProfesional ,P.Matricula AS Matricula
 FROM Turnos T
 INNER JOIN Agendas A ON A.AgendaID = T.Agenda
 INNER JOIN Profesionales P ON P.UsuarioID = A.Profesional
 INNER JOIN Estados_Turno et ON t.estado = et.EstadoID
 WHERE T.Afiliado = @userId 
-AND CONVERT(CHAR(10), A.Horario ,112) >= @fecha 
+	AND YEAR(A.Horario) >= YEAR(@fecha) 
+	AND MONTH(a.Horario) >= MONTH(@fecha) 
+	AND DAY(a.Horario) >= DAY(@fecha) 
 AND et.Descripcion = 'Activo'
 ORDER BY a.AgendaID
 END
@@ -1818,54 +1820,61 @@ AS
 BEGIN
 	SELECT t.Estado, a.Horario  Fecha, t.Afiliado
 	FROM [SHARPS].[Agendas] A
-	INNER JOIN [SHARPS].[Turnos] T ON t.Agenda = A.AgendaID 
+	INNER JOIN [SHARPS].[Turnos] T ON t.Agenda = A.AgendaID
+	INNER JOIN [sharps].Estados_Turno et ON et.EstadoID = t.Estado
 	WHERE A.Profesional = @profesionalID
+	
 	AND YEAR(A.Horario) = YEAR(@fecha) 
 	AND MONTH(a.Horario) = MONTH(@fecha) 
 	AND DAY(a.Horario) = DAY(@fecha) 
-	AND A.Activo = 0 AND T.Estado < 2
+	AND A.Activo = 0
+	AND et.Descripcion = 'Activo'
 END
 GO
 
 CREATE PROCEDURE [SHARPS].[InsertTurno]
-@Fecha DATE,
+@Fecha DATETIME,
 @Profesional_ID INT,
 @Afiliado_ID INT
 
 AS
 BEGIN
-
-DECLARE @IDAGENDA INT
-DECLARE @NUMERO INT
-SELECT @NUMERO = MAX(Numero) + 1 FROM [SHARPS].Turnos
-SELECT @IDAGENDA = AgendaID FROM [SHARPS].Agendas A WHERE A.Profesional = @Profesional_ID
-INSERT INTO [SHARPS].Turnos (Numero , Afiliado , Estado , FechaHoraLlegada , Agenda )
-VALUES (@NUMERO , @Afiliado_ID, 3 , NULL,@IDAGENDA)
-UPDATE Agendas SET Activo = 0 WHERE Horario = @Fecha AND Profesional = @Profesional_ID
+	DECLARE @idEstadoActivo INT
+	DECLARE @IDAGENDA INT
+	DECLARE @NUMERO INT
+	SELECT @idEstadoActivo = et.EstadoID  FROM SHARPS.Estados_Turno et WHERE et.Descripcion = 'Activo'
+	
+	SELECT @NUMERO = MAX(Numero) + 1 FROM [SHARPS].Turnos
+	
+	SELECT @IDAGENDA = AgendaID FROM [SHARPS].Agendas A WHERE A.Profesional = @Profesional_ID AND a.Horario = @Fecha
+	
+	INSERT INTO [SHARPS].Turnos (Numero , Afiliado , Estado , FechaHoraLlegada , Agenda )
+	VALUES (@NUMERO , @Afiliado_ID, @idEstadoActivo , NULL,@IDAGENDA)
+	UPDATE [SHARPS].Agendas SET Activo = 0 WHERE AgendaID = @IDAGENDA
 
 END
 GO 
 
 
 CREATE PROCEDURE [SHARPS].[RegistrarLlegada]
-@Profesional_ID INT,
-@HoraLlegada DATE, 
-@Afiliado_ID INT,
-@NCONSULTA INT
+@TURNO INT,
+@NCONSULTA INT,
+@HORA DATETIME
 AS
 BEGIN
-DECLARE @TURNO INT 
+DECLARE @IDAFILIADO INT
 
-UPDATE SHARPS.Turnos SET Estado = 1 , FechaHoraLlegada = @HoraLlegada
-FROM SHARPS.Turnos T 
-INNER JOIN Agendas A ON A.Profesional = @Profesional_ID AND A.Activo = 1
-WHERE T.Afiliado = @Afiliado_ID AND T.Agenda = A.AgendaID 
+DECLARE @idEstadoLlego INT
+SELECT @idEstadoLlego = et.EstadoID  FROM SHARPS.Estados_Turno et WHERE et.Descripcion = 'Atendido'
 
-SELECT @TURNO = T.Numero FROM SHARPS.Turnos T 
-INNER JOIN Agendas A ON A.Profesional = @Profesional_ID AND A.Activo = 1
-WHERE T.Afiliado = @Afiliado_ID AND T.Agenda = A.AgendaID 
-SELECT @NCONSULTA = MAX(A.cantConsultas) + 1 FROM [SHARPS].Afiliados A WHERE A.UsuarioID = @Afiliado_ID
-UPDATE Afiliados SET CantConsultas = @NCONSULTA  WHERE UsuarioID = @Afiliado_ID
+
+UPDATE SHARPS.Turnos SET Estado = @idEstadoLlego , FechaHoraLlegada = @HORA
+WHERE Numero = @TURNO
+
+SELECT @IDAFILIADO = T.Afiliado FROM SHARPS.Turnos T WHERE T.Numero = @TURNO
+
+SELECT @NCONSULTA = MAX(A.cantConsultas) + 1 FROM [SHARPS].Afiliados A WHERE A.UsuarioID = @IDAFILIADO
+UPDATE Afiliados SET CantConsultas = @NCONSULTA  WHERE UsuarioID = @IDAFILIADO
 INSERT INTO Consultas (Turno,Numero_Consulta) VALUES (@TURNO,@NCONSULTA)
 END
 GO
@@ -1996,13 +2005,9 @@ WHERE A.Profesional = @ID
 
 END
 GO
-USE [GD2C2013]
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE PROCEDURE [SHARPS].[InsertAgendaProfesional]
-	@Fecha datetime,
+	@Fecha DATETIME,
 	@Profesional int
 AS
 BEGIN
@@ -2013,6 +2018,31 @@ BEGIN
 		UPDATE SHARPS.Agendas SET Activo = 1 WHERE Profesional = @Profesional AND Horario = @Fecha
 END
 GO
+
+
+CREATE PROCEDURE [SHARPS].[GetAfiliadoTurnosConsulta]
+@userId INT
+,@fecha DATETIME
+AS
+BEGIN
+
+
+SELECT a.horario as Fecha ,T.Numero as Numero ,A.Profesional AS UserProfesional ,P.Matricula AS Matricula,C.Numero_Consulta NROCONSULTA
+FROM [SHARPS].Turnos T
+INNER JOIN [SHARPS].Agendas A ON A.AgendaID = T.Agenda
+INNER JOIN [SHARPS].Profesionales P ON P.UsuarioID = A.Profesional
+INNER JOIN [SHARPS].Estados_Turno et ON t.estado = et.EstadoID
+INNER JOIN [SHARPS].Consultas C ON C.Turno = T.Numero
+WHERE T.Afiliado = @userId 
+	AND YEAR(A.Horario) = YEAR(@fecha) 
+	AND MONTH(a.Horario) = MONTH(@fecha) 
+	AND DAY(a.Horario) = DAY(@fecha) 
+AND et.Descripcion = 'Atendido'
+AND C.Sintomas IS NULL
+ORDER BY a.AgendaID
+END
+GO
+
 CREATE PROCEDURE [SHARPS].[GetAfiliadosFromGrupoFamiliar]
 @GrupoFamiliar INT
 AS
@@ -2021,6 +2051,19 @@ BEGIN
 END
 GO
 
-
+CREATE PROCEDURE [SHARPS].[InsertarCompra]
+	@AfiliadoID INT,
+	@Fecha DATETIME,
+	@precioCons INT,
+	@precioFar INT
+AS
+BEGIN
+	SET NOCOUNT ON;
+	INSERT INTO SHARPS.Compras
+	(Afiliado,Precio_BonoConsulta,Precio_BonoFarmacia,fecha_Compra) 
+	VALUES (@AfiliadoID,@precioCons,@precioFar,@Fecha)
+	SELECT @@Identity AS CompraID
+END
+GO
 
 PRINT 'Procedimientos Cargados con Exito'

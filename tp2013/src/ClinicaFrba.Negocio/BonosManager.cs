@@ -15,10 +15,11 @@ namespace ClinicaFrba.Negocio
         public List<Bono> GetAll(Afiliado afiliado)
         {
             var ret = new List<Bono>();
+            DateTime fechaActual = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].GetBonos", SqlDataAccessArgs
                 .CreateWith("@userId", afiliado.UserID)
-                .And("@Fecha", Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]))
+                .And("@Fecha", fechaActual)
                 .Arguments);
             //Devuelve los bonos que no fueron usados
             //Los que son farmacia, debe devolver los que no estan vencidos
@@ -35,35 +36,48 @@ namespace ClinicaFrba.Negocio
                         TipodeBono = (TipoBono)Enum.Parse(typeof(TipoBono), tipoBono),
                         AfiliadoCompro = afiliado,
                         Precio = int.Parse(row["Precio"].ToString()),
+                        Compra = int.Parse(row["CompraID"].ToString()),
                     });
                 }
             }
             return ret;
         }
-
-        public int Comprar(Bono bono)
+        public int Nueva_Compra(Afiliado afiliado)
         {
-            int result = 0;
+            DateTime fechaActual = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
+
+            int numeroCompra = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+            "[SHARPS].InsertarCompra", SqlDataAccessArgs
+            .CreateWith("@afiliadoID", afiliado.UserID)
+            .And("@fecha", fechaActual)
+            .And("@precioCons", afiliado.PlanMedico.PrecioConsulta)
+            .And("@precioFar", afiliado.PlanMedico.PrecioFarmacia)
+            .Arguments);
+            //Inserta una compra
+            return numeroCompra;
+        }
+        public void Comprar(Bono bono)
+        {
+            
             if(bono.TipodeBono == TipoBono.Consulta){
-                result = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                     "[SHARPS].ComprarBonoConsulta", SqlDataAccessArgs
                    .CreateWith("@Precio", bono.Precio)
                    .And("@Fecha", bono.Fecha)
                    .And("@AfiliadoCompro", bono.AfiliadoCompro.UserID)
+                   .And("@Compra", bono.Compra)
                .Arguments);
                 //Guarda un bono, pasa la fecha de impresion, y el precio abonado (sale del plan, se guarda porque el plan puede variar sus precios)
-                return result;
             }
             else{
-                result = SqlDataAccess.ExecuteScalarQuery<int>(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                     "[SHARPS].ComprarBonoReceta", SqlDataAccessArgs
                    .CreateWith("@Precio", bono.Precio)
-                   .And("@Fecha", bono.Precio)
+                   .And("@Fecha", bono.Fecha)
                    .And("@AfiliadoCompro", bono.AfiliadoCompro.UserID)
+                   .And("@Compra", bono.Compra)
                 .Arguments);
-                return result;
             }
-        
         }
     }
 }

@@ -54,10 +54,21 @@ namespace ClinicaFrba.AbmBono
                 _soloConsulta = false;
             }
         }
+        private void RefrescarDatagrid() {
 
+            var bonos = _bonosManager.GetAll(_afiliado);
+            if (_soloConsulta)
+                bonos = new List<Bono>(bonos.Where(x => x.TipodeBono == TipoBono.Consulta).ToList());
+            else if (_soloReceta)
+                bonos = new List<Bono>(bonos.Where(x => x.TipodeBono == TipoBono.Farmacia).ToList());
+            dgvBonos.DataSource = bonos;
+            dgvBonos.AutoGenerateColumns = false;
+        }
         private void BonosForm_Load(object sender, EventArgs e)
         {
             btnBuscarAfiliado.Visible = true;
+            buttonsPanel.Visible = false;
+            dgvBonos.Visible = false;
             if (Session.User.Perfil.Nombre == "Afiliado" || _afiliado != null)
             {
                 if (_afiliado == null)
@@ -65,15 +76,11 @@ namespace ClinicaFrba.AbmBono
                     _afiliado = Session.Afiliado;
                     txtAfiliado.Text = _afiliado.ToString();
                     btnBuscarAfiliado.Visible = false;
+                    
                 }
-                var bonos = _bonosManager.GetAll(_afiliado);
-                if (_soloConsulta)
-                    bonos = new List<Bono>(bonos.Where(x => x.TipodeBono == TipoBono.Consulta).ToList());
-                else if (_soloReceta)
-                    bonos = new List<Bono>(bonos.Where(x => x.TipodeBono == TipoBono.Farmacia).ToList());
-                dgvBonos.DataSource = bonos;
-                dgvBonos.AutoGenerateColumns = false;
+                RefrescarDatagrid();
                 dgvBonos.DoubleClick += new EventHandler(dgvBonos_CellContentDoubleClick);
+                dgvBonos.Visible = true;
             }
 
         }
@@ -101,12 +108,23 @@ namespace ClinicaFrba.AbmBono
             else if(_soloReceta)
                 bonos = new List<Bono>(bonos.Where(x => x.TipodeBono == TipoBono.Farmacia).ToList());
             dgvBonos.DataSource = bonos;
-
+            dgvBonos.Visible = true;
+            buttonsPanel.Visible = true;
         }
 
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (_afiliado == null)
+                    throw new Exception("Error de afiliado!");
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+                return;
+            }
             var addBonoForm = new ComprarBonoForm();
             addBonoForm._afiliado = _afiliado;
             addBonoForm.OnBonosUpdated += new EventHandler<BonoUpdatedEventArgs>(pedirBonoOnBonoUpdated);
@@ -117,12 +135,7 @@ namespace ClinicaFrba.AbmBono
         {
             try
             {
-                var dataSource = dgvBonos.DataSource as BindingList<Bono>;
-                foreach(var bono in e.Bonos){
-                    dataSource.Add(bono);     
-                }
-
-                dgvBonos.Refresh();
+                RefrescarDatagrid();
             }
             catch (System.Exception excep)
             {

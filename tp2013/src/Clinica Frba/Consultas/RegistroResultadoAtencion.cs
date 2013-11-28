@@ -69,11 +69,11 @@ namespace ClinicaFrba.Consultas
         void _afiliadosForm_OnAfiliadoSelected(object sender, AfiliadoSelectedEventArgs e)
         {
             _afiliado = e.Afiliado;
-            txtAfiliado.Text = _afiliado.DetallesPersona.Apellido + ", " + _afiliado.DetallesPersona.Nombre;
+            txtAfiliado.Text = _afiliado.ToString();
             _afiliadosForm.Hide();
             
             TurnosManager tmanager = new TurnosManager();
-            List<Turno> turnosDeHoy = tmanager.GetAll(_afiliado, true, _profesional);
+            List<Turno> turnosDeHoy = tmanager.GetTurnosConConsulta(_afiliado, true, _profesional);
             try
             {
                 if (turnosDeHoy.Count < 1)
@@ -88,6 +88,10 @@ namespace ClinicaFrba.Consultas
                         _turno = turnosDeHoy.ElementAt(0);
                         btnBuscarTurno.Visible = false;
                         txtTurno.Text = _turno.ToString();
+                        panelAcciones.Visible = true;
+                    }
+                    else {
+                        btnBuscarTurno.Visible = true;
                     }
                 }
             }
@@ -104,6 +108,7 @@ namespace ClinicaFrba.Consultas
             _turnosForm.ModoBusqueda(_afiliado);
 
             _turnosForm.SoloTurnosdeHoy();
+            _turnosForm.SoloConConsulta();
             _turnosForm.OnTurnoselected += new EventHandler<TurnoSelectedEventArgs>(_turnosForm_OnTurnoSelected);
             ViewsManager.LoadModal(_turnosForm);
         }
@@ -112,12 +117,13 @@ namespace ClinicaFrba.Consultas
         {
             _turno = e.Turno;
             txtTurno.Text = _turno.Fecha.ToString();
-            _turnosForm.Hide();
+            btnBuscarTurno.Hide();
             panelAcciones.Visible = true;
         }
         private Consulta rellenarConsulta() { 
             Consulta consulta = new Consulta();
             consulta.Turno = _turno;
+            
             try
             {
                 if (string.IsNullOrEmpty(txtSintomas.Text.Trim()))
@@ -169,6 +175,7 @@ namespace ClinicaFrba.Consultas
         void _recetaForm_OnRecetaUpdated(object sender, RecetaUpdatedEventArgs e)
         {
             _contadorRecetas++;
+            MessageBox.Show(string.Format("Receta {0} Guardada",_contadorRecetas));
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)

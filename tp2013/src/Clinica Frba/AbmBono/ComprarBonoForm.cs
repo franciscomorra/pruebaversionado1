@@ -112,43 +112,48 @@ namespace ClinicaFrba.AbmBono
         {
             try
             {
+                int numeroCompra;
+                if (cbxCantConsulta.SelectedIndex > 0 || cbxCantFarmacia.SelectedIndex > 0)
+                {
+                    numeroCompra = _bonoManager.Nueva_Compra(_afiliado);
+                }
+                else {
+                    return;
+                }
+                
                 int i = 0;
-                List<Bono> bonos = new List<Bono>();
+                int j = 0;
                 if (cbxCantConsulta.SelectedIndex > 0)
                 {
                     for (i = 0; i < cbxCantConsulta.SelectedIndex; i++)
                     {
                         Bono bono = new Bono();
+                        bono.Compra = numeroCompra;
                         bono.Fecha = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
                         bono.AfiliadoCompro = _afiliado;
                         bono.Precio = _afiliado.PlanMedico.PrecioConsulta;
                         bono.TipodeBono = TipoBono.Consulta;
-                        int numeroBono = _bonoManager.Comprar(bono);
-                        bonos.Add(bono);
+                        _bonoManager.Comprar(bono);
                     }
                 }
                 if (cbxCantFarmacia.SelectedIndex > 0)
                 {
-                    for (i = 0; i < cbxCantFarmacia.SelectedIndex; i++)
+                    for (j = 0; j < cbxCantFarmacia.SelectedIndex; j++)
                     {
                         Bono bono = new Bono();
                         bono.Fecha = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
+                        bono.Compra = numeroCompra;
                         bono.AfiliadoCompro = _afiliado;
                         bono.Precio = _afiliado.PlanMedico.PrecioFarmacia;
                         bono.TipodeBono = TipoBono.Farmacia;
-                        int numeroBono = _bonoManager.Comprar(bono);
-                        bonos.Add(bono);
+                        _bonoManager.Comprar(bono);
                     }
                 }
-                string mensaje = "Se han asignado los siguientes bonos: \n";
-                foreach(Bono bono in bonos)
-                {
-                    mensaje = mensaje +" " +bono.Numero.ToString()+ " \n";
-                }
-                MessageBox.Show(mensaje);
+                
+                MessageBox.Show(string.Format("Se han comprado {0} bonos consulta y {1} bonos farmacia",i,j));
                 
                 if (OnBonosUpdated != null)
-                    OnBonosUpdated(this, new BonoUpdatedEventArgs() { Bonos = bonos});
+                    OnBonosUpdated(this, new BonoUpdatedEventArgs());
                 
                 
                 this.Close();

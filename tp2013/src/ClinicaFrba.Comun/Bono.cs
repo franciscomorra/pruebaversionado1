@@ -12,6 +12,7 @@ namespace ClinicaFrba.Comun
         public Afiliado AfiliadoCompro { get; set; }
         public DateTime Fecha { get; set; }
         public TipoBono TipodeBono { get; set; }
+        public int Compra { get; set; }
     }
     public enum TipoBono
     {

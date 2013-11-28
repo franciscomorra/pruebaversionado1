@@ -50,7 +50,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cbxCant1 = new System.Windows.Forms.ComboBox();
             this.cbxMed1 = new System.Windows.Forms.ComboBox();
-            this.panelAcciones = new System.Windows.Forms.Panel();
             this.panelMed5 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -76,7 +75,6 @@
             this.panelTurno.SuspendLayout();
             this.panelBono.SuspendLayout();
             this.panelMed1.SuspendLayout();
-            this.panelAcciones.SuspendLayout();
             this.panelMed5.SuspendLayout();
             this.panelMed2.SuspendLayout();
             this.panelMed3.SuspendLayout();
@@ -85,9 +83,9 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(3, 338);
+            this.btnGuardar.Location = new System.Drawing.Point(7, 389);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(399, 23);
+            this.btnGuardar.Size = new System.Drawing.Size(432, 23);
             this.btnGuardar.TabIndex = 2;
             this.btnGuardar.Text = "Agregar Medicamentos A Receta";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -100,7 +98,7 @@
             this.panelProfesional.Controls.Add(this.txtProfesional);
             this.panelProfesional.Location = new System.Drawing.Point(7, 2);
             this.panelProfesional.Name = "panelProfesional";
-            this.panelProfesional.Size = new System.Drawing.Size(435, 43);
+            this.panelProfesional.Size = new System.Drawing.Size(432, 43);
             this.panelProfesional.TabIndex = 15;
             // 
             // btnBuscarProfesional
@@ -286,23 +284,13 @@
             this.cbxMed1.Size = new System.Drawing.Size(88, 21);
             this.cbxMed1.TabIndex = 0;
             // 
-            // panelAcciones
-            // 
-            this.panelAcciones.Controls.Add(this.panelMed5);
-            this.panelAcciones.Controls.Add(this.panelMed2);
-            this.panelAcciones.Controls.Add(this.btnGuardar);
-            this.panelAcciones.Location = new System.Drawing.Point(7, 51);
-            this.panelAcciones.Name = "panelAcciones";
-            this.panelAcciones.Size = new System.Drawing.Size(435, 376);
-            this.panelAcciones.TabIndex = 24;
-            // 
             // panelMed5
             // 
             this.panelMed5.Controls.Add(this.label9);
             this.panelMed5.Controls.Add(this.label10);
             this.panelMed5.Controls.Add(this.cbxCant5);
             this.panelMed5.Controls.Add(this.cbxMed5);
-            this.panelMed5.Location = new System.Drawing.Point(0, 300);
+            this.panelMed5.Location = new System.Drawing.Point(7, 351);
             this.panelMed5.Name = "panelMed5";
             this.panelMed5.Size = new System.Drawing.Size(432, 32);
             this.panelMed5.TabIndex = 23;
@@ -347,7 +335,7 @@
             this.panelMed2.Controls.Add(this.label4);
             this.panelMed2.Controls.Add(this.cbxCant2);
             this.panelMed2.Controls.Add(this.cbxMed2);
-            this.panelMed2.Location = new System.Drawing.Point(0, 186);
+            this.panelMed2.Location = new System.Drawing.Point(7, 237);
             this.panelMed2.Name = "panelMed2";
             this.panelMed2.Size = new System.Drawing.Size(432, 32);
             this.panelMed2.TabIndex = 23;
@@ -480,15 +468,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(445, 430);
+            this.ClientSize = new System.Drawing.Size(446, 416);
+            this.Controls.Add(this.btnGuardar);
+            this.Controls.Add(this.panelMed5);
             this.Controls.Add(this.panelMed4);
+            this.Controls.Add(this.panelMed2);
             this.Controls.Add(this.panelMed3);
             this.Controls.Add(this.panelMed1);
             this.Controls.Add(this.panelBono);
             this.Controls.Add(this.panelTurno);
             this.Controls.Add(this.panelAfiliado);
             this.Controls.Add(this.panelProfesional);
-            this.Controls.Add(this.panelAcciones);
             this.Name = "GenerarRecetaForm";
             this.Text = "Generar Receta";
             this.Load += new System.EventHandler(this.GenerarReceta_Load);
@@ -502,7 +492,6 @@
             this.panelBono.PerformLayout();
             this.panelMed1.ResumeLayout(false);
             this.panelMed1.PerformLayout();
-            this.panelAcciones.ResumeLayout(false);
             this.panelMed5.ResumeLayout(false);
             this.panelMed5.PerformLayout();
             this.panelMed2.ResumeLayout(false);
@@ -539,7 +528,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbxCant1;
         private System.Windows.Forms.ComboBox cbxMed1;
-        private System.Windows.Forms.Panel panelAcciones;
         private System.Windows.Forms.Panel panelMed5;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;

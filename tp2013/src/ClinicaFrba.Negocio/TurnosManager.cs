@@ -42,6 +42,38 @@ namespace ClinicaFrba.Negocio
             }
             return ret;
         }
+        public List<Turno> GetTurnosConConsulta(Afiliado afiliado, bool soloTurnosHoy, Profesional profesional)
+        {
+            var ret = new List<Turno>();
+            DataTable resultado;
+            DateTime fechaActual = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
+            resultado = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                    "[SHARPS].GetAfiliadoTurnosConsulta", SqlDataAccessArgs
+                    .CreateWith("@userId", afiliado.UserID)
+                    .And("@fecha", fechaActual)
+                    .Arguments);
+            //Todos los turnos del afiliado, en la fecha de hoy, que tienen consulta asociada
+
+            if (resultado != null)
+            {
+                ProfesionalManager profMan = new ProfesionalManager();
+                foreach (DataRow row in resultado.Rows)
+                {
+                    Turno turno = new Turno();
+                    turno.Fecha = Convert.ToDateTime(row["Fecha"]);
+                    turno.Numero = int.Parse(row["Numero"].ToString());
+                    turno.NroConsulta = int.Parse(row["NROCONSULTA"].ToString());
+                    turno.Profesional = profMan.getInfo(int.Parse(row["UserProfesional"].ToString()));
+                    turno.Afiliado = afiliado;
+                    if (!soloTurnosHoy || (soloTurnosHoy && turno.Fecha.Date == fechaActual.Date))
+                        if (profesional == null || (profesional.UserID == turno.Profesional.UserID))
+                            ret.Add(turno);
+                }
+            }
+            return ret;
+        }
+
+
 
         public List<Turno> GetDiasHorariosLibres(Profesional profesional, DateTime fecha)
         {
@@ -100,12 +132,15 @@ namespace ClinicaFrba.Negocio
         }
         public void RegistrarLlegada(Turno turno,Bono bono)
         {
+            DateTime fechaActual = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
+            
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].RegistrarLlegada", SqlDataAccessArgs
                 .CreateWith(
                     "@HoraLlegada", Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]))
                     .And("@Turno", turno.Numero)
                     .And("@Bono_Consulta", bono.Numero)
+
                     .Arguments);
             //Ingresa la hora de llegada (guarda toda la fecha por si los horarios de la clinica cambian algun dia)
         }

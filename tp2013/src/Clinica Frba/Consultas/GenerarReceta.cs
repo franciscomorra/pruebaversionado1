@@ -49,7 +49,7 @@ namespace ClinicaFrba.Consultas
             else
             {
                 btnBuscarProfesional.Show();
-                panelAcciones.Hide();
+                
             }
             if (_profesional != null)
             {
@@ -68,14 +68,22 @@ namespace ClinicaFrba.Consultas
             }
             List<int> cantidadMedicamentos = new List<int>();
             int i = 0;
+            cbxCant1.Items.Clear();
+            cbxCant2.Items.Clear();
+            cbxCant3.Items.Clear();
+            cbxCant4.Items.Clear();
+            cbxCant5.Items.Clear();
             for (i = 0; i < 4; i++)
+            {
                 cantidadMedicamentos.Add(i);
+                cbxCant1.Items.Add(i);
+                cbxCant2.Items.Add(i);
+                cbxCant3.Items.Add(i);
+                cbxCant4.Items.Add(i);
+                cbxCant5.Items.Add(i);
+            }
 
-            cbxCant1.DataSource = cantidadMedicamentos;
-            cbxCant2.DataSource = cantidadMedicamentos;
-            cbxCant3.DataSource = cantidadMedicamentos;
-            cbxCant4.DataSource = cantidadMedicamentos;
-            cbxCant5.DataSource = cantidadMedicamentos;
+
             List<Medicamento> medicamentos = new List<Medicamento>();
             Medicamento medVacio = new Medicamento();
             medVacio.Nombre = "--";
@@ -116,8 +124,6 @@ namespace ClinicaFrba.Consultas
             _profesional = e.Profesional;
             txtProfesional.Text = _profesional.ToString();
             _profesionalesForm.Hide();
-            panelAcciones.Location = new Point(0, 0);
-            panelAcciones.Show();
         }
 
 
@@ -176,59 +182,66 @@ namespace ClinicaFrba.Consultas
             _bonoFarmacia = e.Bono;
             txtBono.Text = _bonoFarmacia.Numero.ToString();
             _bonosForm.Hide();
-            panelMed1.Show();
+            btnGuardar.Visible = true;
 
         }
 
         private List<Medicamento> getMedicamentos() { 
             List<Medicamento> listado = new List<Medicamento>();
             int i=0;
-            try
-            {
-                if (cbxMed1.SelectedIndex > 0)
-                    for (i = 0; i <= (int)cbxCant1.SelectedItem; i++)
-                        listado.Add((Medicamento)cbxMed1.SelectedItem);
 
-                if (cbxMed2.SelectedIndex > 0)
-                    if (listado.Contains((Medicamento)cbxMed2.SelectedItem) && cbxCant2.SelectedIndex > 0)
-                        throw new Exception("No puede agregar mas medicamentos de ese tipo");
+
+            if (cbxMed1.SelectedIndex > 0)
+            {
+                for (i = 0; i <= (int)cbxCant1.SelectedItem; i++)
+                    listado.Add((Medicamento)cbxMed1.SelectedItem);
+            }
+            if ((int)cbxCant2.SelectedIndex > 0)
+            {
+                if (listado.Contains((Medicamento)cbxMed2.SelectedItem))
+                    throw new Exception("No puede agregar mas medicamentos de ese tipo");
                 for (i = 0; i <= (int)cbxCant2.SelectedItem; i++)
                     listado.Add((Medicamento)cbxMed2.SelectedItem);
-
-                if (cbxMed3.SelectedIndex > 0)
-                    if (listado.Contains((Medicamento)cbxMed3.SelectedItem) && cbxCant3.SelectedIndex > 0)
-                        throw new Exception("No puede agregar mas medicamentos de ese tipo");
+            }
+            if ((int)cbxCant3.SelectedIndex > 0)
+            {
+                if (listado.Contains((Medicamento)cbxMed3.SelectedItem))
+                    throw new Exception("No puede agregar mas medicamentos de ese tipo");
                 for (i = 0; i <= (int)cbxCant3.SelectedItem; i++)
                     listado.Add((Medicamento)cbxMed3.SelectedItem);
-
-                if (cbxMed4.SelectedIndex > 0)
-                    if (listado.Contains((Medicamento)cbxMed4.SelectedItem) && cbxCant4.SelectedIndex > 0)
-                        throw new Exception("No puede agregar mas medicamentos de ese tipo");
+            }
+            if ((int)cbxCant4.SelectedIndex > 0)
+            {
+                if (listado.Contains((Medicamento)cbxMed4.SelectedItem) )
+                    throw new Exception("No puede agregar mas medicamentos de ese tipo");
                 for (i = 0; i <= (int)cbxCant4.SelectedItem; i++)
                     listado.Add((Medicamento)cbxMed4.SelectedItem);
-
-                if (cbxMed5.SelectedIndex > 0)
-                    if (listado.Contains((Medicamento)cbxMed5.SelectedItem) && cbxCant5.SelectedIndex > 0)
-                        throw new Exception("No puede agregar mas medicamentos de ese tipo");
+            }
+            if ((int)cbxCant5.SelectedIndex > 0)
+            {
+                if (listado.Contains((Medicamento)cbxMed5.SelectedItem))
+                    throw new Exception("No puede agregar mas medicamentos de ese tipo");
                 for (i = 0; i <= (int)cbxCant5.SelectedItem; i++)
                     listado.Add((Medicamento)cbxMed5.SelectedItem);
-                return listado;
             }
-            catch (System.Exception excep)
-            {
-                MessageBox.Show(excep.Message);
-                return null;
-            }
+            return listado;
+
 
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
+                List<Medicamento> listado = getMedicamentos();
+                if(_bonoFarmacia == null)
+                    throw new Exception("Debe seleccionar un bono farmacia!");
+                if (listado.Count == 0)
+                    throw new Exception("Debe seleccionar al menos un medicamento!");
+
                 _receta = new Receta() { 
                     BonoFarmacia = _bonoFarmacia,
                     Fecha = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]),
-                    Medicamentos = getMedicamentos()
+                    Medicamentos = listado
                 };
                 _recetaManager.Save(_receta);
                 if (OnRecetaUpdated != null)
@@ -238,8 +251,8 @@ namespace ClinicaFrba.Consultas
             catch (System.Exception excep)
             {
                 MessageBox.Show(excep.Message);
+                return;
             }
         }
-
     }
 }
