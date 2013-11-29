@@ -13,23 +13,18 @@ namespace ClinicaFrba.Login
 {
     public partial class AfiliadoUserControl : UserControl
     {
-        private Afiliado _afiliado = new Afiliado();
-        public Afiliado _conyuge = new Afiliado();
-        public Afiliado _padre = new Afiliado();
+        private Afiliado _afiliado;
         public int _nroAfiliado;
+        public int _tipoAfiliado;
         public bool esNuevoUsuario = false;
 
         public Afiliado devolverCampos()
         {
-                int cantHijos;  
+            int cantHijos;  
             try
             {
-
                 if (!int.TryParse(txtHijos.Text, out cantHijos))
                     throw new Exception("La cantidad de hijos debe ser numérica!");
-                if (string.IsNullOrEmpty(txtMotivo.Text.Trim()))
-                    throw new Exception("El Motivo es obligatorio!");
-
             }
             catch (System.Exception excep)
             {
@@ -39,7 +34,6 @@ namespace ClinicaFrba.Login
             _afiliado.EstadoCivil = (EstadoCivil)Enum.Parse(typeof(EstadoCivil), cbxEstadoCivil.SelectedItem.ToString());
             _afiliado.PlanMedico = (PlanMedico)cbxPlanMedico.SelectedItem;
             _afiliado.CantHijos = cantHijos;
-            _afiliado.MotivoCambio = txtMotivo.Text.Trim();
             return _afiliado;
         }
 
@@ -49,20 +43,20 @@ namespace ClinicaFrba.Login
             cbxPlanMedico.SelectedItem = afiliado.PlanMedico;
             cbxEstadoCivil.SelectedItem = afiliado.EstadoCivil;
             txtHijos.Text = afiliado.CantHijos.ToString();
-            if (_conyuge.UserID!=0) { //Cargando marido/esposa del afiliado principal
-                txtConyuge.Text = _conyuge.ToString();
+            if (_afiliado.tipoAfiliado==2) { //Cargando marido/esposa del afiliado principal
+
                 panelFamiliar.Visible = false;
                 txtHijos.Text = _afiliado.CantHijos.ToString();
                 txtHijos.Enabled = false;
                 cbxEstadoCivil.SelectedItem = _afiliado.EstadoCivil;
                 cbxEstadoCivil.Enabled = false;
-                _afiliado.grupoFamiliar = _conyuge.grupoFamiliar;
                 _afiliado.tipoAfiliado = 2;
+                _tipoAfiliado = 2;
+                cbxEstadoCivil.Enabled = false;
             }
-            else if (_padre.UserID != 0)//Carga de hijos
+            else if (_afiliado.tipoAfiliado>2)//Carga de hijos
             {
-                txtPadre.Text = _padre.ToString();
-                panelPadre.Visible = false;
+                panelFamiliar.Visible = false;
                 txtHijos.Text = "0";
                 txtHijos.Enabled = false;
                 cbxEstadoCivil.SelectedItem = EstadoCivil.Soltero;
@@ -70,13 +64,9 @@ namespace ClinicaFrba.Login
                 _afiliado.NroAfiliado = _nroAfiliado;
             }
             else {//Es padre
-                panelPadre.Visible = false;
-                panelConyuge.Visible = false;
-            }
-            if (esNuevoUsuario)
-            {
-                txtMotivo.Text = "Alta";
-                txtMotivo.Enabled = false;
+                panelFamiliar.Visible = true;
+                cbxEstadoCivil.Enabled = true;
+                txtHijos.Visible = true;
             }
         }
 

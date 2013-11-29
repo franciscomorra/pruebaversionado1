@@ -9,5 +9,6 @@ namespace ClinicaFrba.Login
     public class UserSavedEventArgs : EventArgs
     {
         public User User { get; set; }
+        public long grupoFamiliar { get; set; }
     }
 }

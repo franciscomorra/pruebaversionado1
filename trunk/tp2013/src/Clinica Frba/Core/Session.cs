@@ -17,7 +17,6 @@ namespace ClinicaFrba.Core
         //Los siguientes son para la seleccion entre formularios
         public static Afiliado Afiliado { get;  set; } //El que se esta logueando
         public static Profesional Profesional { get;  set; } //El que se esta logueando
-        public static String Errores { get; set; } //El que se esta logueando
         public static void StartSession(User user)
         {
             User = user; //Recibe la info del usuario

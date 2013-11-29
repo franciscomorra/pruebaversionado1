@@ -154,8 +154,6 @@ namespace ClinicaFrba.AbmBono
                 
                 if (OnBonosUpdated != null)
                     OnBonosUpdated(this, new BonoUpdatedEventArgs());
-                
-                
                 this.Close();
             }
             catch (System.Exception excep)

@@ -1,31 +1,25 @@
 1. ABM de Rol
-		SIN NOVEDAD!!!
+		SIN NOVEDAD
 2. Login y Seguridad
-		SIN NOVEDAD!!!!!!
+		SIN NOVEDAD
 4. ABM de Afiliados
 		SIN NOVEDAD LISTADO 
 		Hacer parte de agregar/modificar, tiene que ver mucho con profesionales
 5. ABM de Profesional
-		SIN NOVEDAD LISTADO (filtrar por especialidad)
-		Hacer parte de agregar/modificar, tiene que ver mucho con afiliados
+		SIN NOVEDAD
 8. Registrar Agenda Profesional.
-		Falta guardar en db, ver como garcha!
+		SIN NOVEDAD
 9. Compra de Bonos.
-		Falta guardar bonos
-		Falta validar cliente activo
-		abm bonos->Error cuando muestra
+		SIN NOVEDAD
 10. Pedido de turno
-		Ver errores
-		abm turnos->Error cuando muestra
+		SIN NOVEDAD
 11. Registro de llegada para atención médica
-		Validar 15 minutos y mismo dia
-		SQL de registrar llegada
+		SIN NOVEDAD
 12. Registro de resultado para atención médica
-		Ver errores
-		SQL
+		SIN NOVEDAD
 13. Cancelar atención médica		
-		SQL (errores)
+		SIN NOVEDAD
 14. Receta médica
-		
+		PROBAR
 15. Listado Estadístico
 		FALTA PROCEDIMIENTOS

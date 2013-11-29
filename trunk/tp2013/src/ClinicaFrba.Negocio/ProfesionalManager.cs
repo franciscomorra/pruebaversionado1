@@ -37,11 +37,6 @@ namespace ClinicaFrba.Negocio
         }
         public BindingList<Profesional> GetAll()
         {
-            
-            if (SessionData.Contains("Profesionales"))
-            {
-                return SessionData.Get<BindingList<Profesional>>("Profesionales");
-            }
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].GetProfesionales");
             //Todos los profesionales activos
@@ -62,18 +57,14 @@ namespace ClinicaFrba.Negocio
 
                 }
             }
-            SessionData.Set("Profesionales", profesionales);
             return profesionales;
         }
         public void GuardarProfesional(Profesional profesional)
         {
-            var usersManager = new UsersManager();
             if (profesional.UserID == 0)//Profesional nuevo
             {
                 try
                 {
-                    profesional.UserID = usersManager.insertarUsuario(profesional as User);
-                    _detallesManager.AgregarDetalles(profesional.DetallesPersona, profesional.UserID);
                     SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                     "[SHARPS].InsertProfesional", SqlDataAccessArgs
                         .CreateWith("@Matricula", profesional.Matricula)
@@ -89,7 +80,6 @@ namespace ClinicaFrba.Negocio
             }
             else //Editando un profesional
             {
-                _detallesManager.ModificarDetalles(profesional.DetallesPersona, profesional.UserID);
                 SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                     "[SHARPS].UpdateProfesional", SqlDataAccessArgs
                     .CreateWith("@Matricula", profesional.Matricula)

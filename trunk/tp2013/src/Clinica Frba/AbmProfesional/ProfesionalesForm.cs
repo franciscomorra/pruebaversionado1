@@ -116,9 +116,10 @@ namespace ClinicaFrba.AbmProfesional
             var profesional = row.DataBoundItem as Profesional;
             var regForm = new RegistroForm();
             regForm.esNuevoUsuario = false;
+            
             regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
             regForm.rellenarProfesional(profesional);
-            
+            regForm.perfilSeleccionado = "Profesional";
             ViewsManager.LoadModal(regForm);
         }
 
@@ -138,16 +139,15 @@ namespace ClinicaFrba.AbmProfesional
             var regForm = new RegistroForm();
             regForm.esNuevoUsuario = true;
             regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
-            regForm.perfil = new Perfil() { Nombre = "Profesional" };
+            //regForm.perfil = new Perfil() { Nombre = "Profesional" };
+            regForm.perfilSeleccionado = "Profesional";
             ViewsManager.LoadModal(regForm);
-
         }
         
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             txtApellido.Text = string.Empty;
             txtMatricula.Text = string.Empty;
-            
             cbxEspecialidad.SelectedIndex = 0;
             profesionalesGrid.DataSource = _ProfesionalManager.GetAll();
             profesionalesGrid.Refresh();
@@ -169,7 +169,6 @@ namespace ClinicaFrba.AbmProfesional
             if (cbxEspecialidad.SelectedIndex!=0)
             {
                 Especialidad especialidadSeleccionada = (Especialidad)cbxEspecialidad.SelectedItem;
-
                 profesionales = new BindingList<Profesional>(profesionales.Where(x => x.Especialidades.Contains(especialidadSeleccionada)).ToList());
             }
             if (!string.IsNullOrEmpty(txtMatricula.Text))
