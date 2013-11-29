@@ -29,7 +29,7 @@ namespace ClinicaFrba.Negocio
             .Arguments);
         }
 
-        internal void ModificarDetalles(DetallesPersona detallePersona, int userID)
+        public void ModificarDetalles(DetallesPersona detallePersona, int userID)
         {
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].UpdateDetallePersona", SqlDataAccessArgs

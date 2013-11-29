@@ -1515,22 +1515,23 @@ GO
 
 
 CREATE PROCEDURE [SHARPS].[InsertAfiliado]
-@PlanMedico numeric(18,0),
-@ID numeric (18,0),
-@EstadoCivil nchar(10),
-@CantHijos int
-
+	@PlanMedico numeric(18,0),
+	@ID numeric (18,0),
+	@EstadoCivil nchar(10),
+	@CantHijos int,
+	@RolAfiliado int
 AS 
 BEGIN  
-DECLARE @NroAfiliado int
-DECLARE @codCivil int
-SELECT @codCivil = Codigo from [SHARPS].Estados_Civiles where Descripcion = @EstadoCivil
-SELECT @NroAfiliado = MAX(GrupoFamiliar) + 101 FROM [SHARPS].Afiliados
-INSERT INTO [SHARPS].Afiliados (GrupoFamiliar , Plan_Medico , cantHijos , Estado_Civil , UsuarioID,Faltan_Datos)
-VALUES (@NroAfiliado , @PlanMedico , @CantHijos ,@codCivil  , @ID,0) 
-RETURN @NroAfiliado
+	DECLARE @NroAfiliado int
+	DECLARE @codCivil int
+	SELECT @codCivil = Codigo from [SHARPS].Estados_Civiles where Descripcion = @EstadoCivil
+	SELECT @NroAfiliado = MAX(GrupoFamiliar) + 1 FROM [SHARPS].Afiliados
+	INSERT INTO [SHARPS].Afiliados (GrupoFamiliar , Plan_Medico , cantHijos , Estado_Civil , UsuarioID,Faltan_Datos)
+	VALUES (@NroAfiliado , @PlanMedico , @CantHijos ,@codCivil  , @ID,0) 
+	INSERT INTO SHARPS.Usuarios_Roles (Rol,Usuario) VALUES (@RolAfiliado, @ID)
+	RETURN @NroAfiliado
 END
-GO 
+GO
 
 
 CREATE PROCEDURE [SHARPS].[UpdateAfiliado]
@@ -1564,28 +1565,24 @@ END
 
 GO
 CREATE PROCEDURE [SHARPS].[InsertMiembroGrupoFamiliar]
-@PlanMedico int,
-@EstadoCivil int,
-@CantHijos int,
-@RolAfiliado nvarchar(MAX),
-@GrupoFamiliar int,
-@TipoAfiliado int,
-@UserID int   
-AS
-BEGIN 
+	@PlanMedico numeric(18,0),
+	@ID numeric (18,0),
+	@EstadoCivil nchar(10),
+	@CantHijos int,
+	@GrupoFamiliar int,
+	@RolAfiliado int,
+	
+	@TipoAfiliado int
+	
+AS 
+BEGIN  
 
+	DECLARE @codCivil int
+	SELECT @codCivil = Codigo from [SHARPS].Estados_Civiles where Descripcion = @EstadoCivil
 
-INSERT INTO [SHARPS].Afiliados (GrupoFamiliar , UsuarioID , TipoAfiliado , CantHijos , Activo , Plan_Medico ,Faltan_Datos)
-VALUES (@GrupoFamiliar , @UserID , NULL , @CantHijos ,1 , @PlanMedico,0)
-
-DELETE SHARPS.Usuarios_Roles WHERE Usuario = @UserID AND Rol = @RolAfiliado
-INSERT INTO [SHARPS].Usuarios_Roles (Usuario, Rol) 
-VALUES (@UserID , @RolAfiliado)
-
-UPDATE [SHARPS].Roles SET  Descripcion = 'Afiliado' , Activo = 1, Perfil = 1
-WHERE RolID = @RolAfiliado
-
-
+	INSERT INTO [SHARPS].Afiliados (GrupoFamiliar , Plan_Medico , cantHijos , Estado_Civil , UsuarioID,Faltan_Datos,TipoAfiliado)
+	VALUES (@GrupoFamiliar , @PlanMedico , @CantHijos ,@codCivil  , @ID,0,@TipoAfiliado) 
+	INSERT INTO SHARPS.Usuarios_Roles (Rol,Usuario) VALUES (@RolAfiliado, @ID)
 
 END
 GO
