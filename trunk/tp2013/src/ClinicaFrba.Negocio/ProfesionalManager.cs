@@ -61,22 +61,16 @@ namespace ClinicaFrba.Negocio
         }
         public void GuardarProfesional(Profesional profesional)
         {
-            if (profesional.UserID == 0)//Profesional nuevo
+
+            Profesional _profesionalExistente = getInfo(profesional.UserID);
+            if (profesional.UserID == 0 || _profesionalExistente == null)//Profesional nuevo || Afiliado con perfil profesional
             {
-                try
-                {
-                    SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                    "[SHARPS].InsertProfesional", SqlDataAccessArgs
-                        .CreateWith("@Matricula", profesional.Matricula)
-                        .And("@ID", profesional.UserID)
-                        .And("@Rol", profesional.RoleID)
-                        .Arguments);
-                }
-                catch
-                {
-                    profesional.UserID = 0;
-                    throw;
-                }
+                SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "[SHARPS].InsertProfesional", SqlDataAccessArgs
+                    .CreateWith("@Matricula", profesional.Matricula)
+                    .And("@ID", profesional.UserID)
+                    .And("@Rol", profesional.RoleID)
+                    .Arguments);
             }
             else //Editando un profesional
             {

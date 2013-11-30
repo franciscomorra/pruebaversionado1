@@ -50,18 +50,19 @@ namespace ClinicaFrba
         private UsersManager _userManager = new UsersManager();
         private DetallePersonaManager _detallesManager = new DetallePersonaManager();
 
-        private ProfesionalManager manager = new ProfesionalManager();
+        private ProfesionalManager _profesionalManager = new ProfesionalManager();
         private Profesional _profesional = new Profesional();
         private AfiliadoManager _afiliadoManager = new AfiliadoManager();
         private Afiliado _afiliado = new Afiliado();
         private PerfilManager _perfilesManager = new PerfilManager();
+        RolesManager _rolesManager = new RolesManager();
         public bool puedeElegirPerfil = true;
         public Perfil perfil;
         public string perfilSeleccionado;
         User user;
-        public int _nroAfiliado;
+        private long _grupoFamiliar;
         public bool esNuevoUsuario = true;
-
+        private int _tipoAfiliado;
         public RegistroForm()
         {
             try
@@ -99,12 +100,14 @@ namespace ClinicaFrba
         public void rellenarAfiliado(Afiliado afiliado)//Modificacion de afiliado existente
         {
             _afiliado = afiliado;
+            _grupoFamiliar = afiliado.grupoFamiliar;
+            _tipoAfiliado = afiliado.tipoAfiliado;
             rellenarCamposUsuario(afiliado.DetallesPersona);
             user = afiliado as User;
             //cbxPerfiles.SelectedItem = _perfilesManager.getInfo("Afiliado");
             afiliadoUserControl.esNuevoUsuario = esNuevoUsuario;
             afiliadoUserControl.rellenarCampos(_afiliado);
-            afiliadoUserControl._nroAfiliado = _nroAfiliado;
+            afiliadoUserControl._grupoFamiliar = _grupoFamiliar;
             afiliadoUserControl._tipoAfiliado = _afiliado.tipoAfiliado;
             
             userPanel.Controls.Add(afiliadoUserControl);
@@ -115,7 +118,7 @@ namespace ClinicaFrba
             rellenarCamposUsuario(profesional.DetallesPersona);
             user = _profesional as User;
             //cbxPerfiles.SelectedItem = _perfilesManager.getInfo("Profesional");
-            profesionalUserControl.SetUser(_profesional);
+            profesionalUserControl.RellenarProfesional(_profesional);
             userPanel.Controls.Add(profesionalUserControl);
         }
         private void rellenarCamposUsuario(DetallesPersona detalles){
@@ -136,23 +139,23 @@ namespace ClinicaFrba
             try{
                 userPanel.Controls.Clear();
                 perfil = cbxPerfiles.SelectedItem as Perfil;
-                RolesManager rman = new RolesManager();
-                var roles = rman.GetRolesByPerfil(perfil);
+                var roles = _rolesManager.GetRolesByPerfil(perfil);
                 cbxRoles.Items.Clear();
                 foreach (Rol rol in roles)
                     cbxRoles.Items.Add(rol);
-                
                 cbxRoles.DisplayMember = "Nombre";
                 cbxRoles.SelectedIndex = 0;
                 if (perfil.Nombre == "Afiliado")
                 {
+                    _afiliado = _afiliadoManager.actualizarInformacion(user.UserID);
                     afiliadoUserControl.esNuevoUsuario = esNuevoUsuario;
                     afiliadoUserControl.rellenarCampos(_afiliado);
                     userPanel.Controls.Add(afiliadoUserControl);
                 }
                 else if (perfil.Nombre == "Profesional")
                 {
-                    profesionalUserControl.SetUser(_profesional);
+                    _profesional = _profesionalManager.getInfo(user.UserID);
+                    profesionalUserControl.RellenarProfesional(_profesional);
                     userPanel.Controls.Add(profesionalUserControl);
                 }
                 else
@@ -170,54 +173,29 @@ namespace ClinicaFrba
         {
             try
             {
-                
                 if(esNuevoUsuario)
                     user = new User();
-                long telefono;
-                long dni;
-                if (!long.TryParse(txtTelefono.Text.Trim().Replace("-", ""), out telefono))
-                    throw new Exception(" El teléfono debe ser numérico!");
-                if (!long.TryParse(txtDNI.Text, out dni))
-                    throw new Exception(" El DNI debe ser numérico!");
-                if (string.IsNullOrEmpty(txtNombre.Text.Trim()))
-                    throw new Exception(" El Nombre es obligatorio!");
-                if (string.IsNullOrEmpty(txtApellido.Text.Trim()))
-                    throw new Exception(" El Apellido es obligatorio!");
-                if (string.IsNullOrEmpty(txtMail.Text.Trim()))
-                    throw new Exception(" El Email es obligatorio!");
-                user.DetallesPersona.Apellido = txtApellido.Text.Trim();
-                user.DetallesPersona.Nombre = txtNombre.Text.Trim();
-                user.DetallesPersona.DNI = dni;
-                user.DetallesPersona.FechaNacimiento = dtFechaNacimiento.Value;
-                user.DetallesPersona.Direccion = txtDireccion.Text.Trim();
-                user.DetallesPersona.Telefono = telefono;
-                user.DetallesPersona.Email = txtMail.Text.Trim();
-                user.DetallesPersona.TipoDNI = (TipoDoc)cbxTipoDNI.SelectedItem;
-                user.DetallesPersona.Sexo = (TipoSexo)cbxSexo.SelectedItem;
+                user = ValidarDetallesPersona(user);
                 Rol rolSeleccionado = (Rol)cbxRoles.SelectedItem;
-                
-                int userID = 0;
                 if (esNuevoUsuario)
                 {
                     user.UserName = user.DetallesPersona.DNI.ToString() ;
-                    userID = _userManager.insertarUsuario(user);
-                    _detallesManager.AgregarDetalles(user.DetallesPersona, userID);
+                    user.UserID= _userManager.insertarUsuario(user);
+                    _detallesManager.AgregarDetalles(user.DetallesPersona, user.UserID);
                 }
                 else {
                     _detallesManager.ModificarDetalles(user.DetallesPersona, user.UserID);
                 }
-
                 if (perfil.Nombre == "Afiliado")
                 {
-                    
                     _afiliado = ((AfiliadoUserControl)afiliadoUserControl).devolverCampos();
                     _afiliado.UserID = user.UserID;
+                    _afiliado.grupoFamiliar = _grupoFamiliar;
+                    
                     _afiliado.DetallesPersona = user.DetallesPersona;
+                    _afiliado.tipoAfiliado = _tipoAfiliado;
                     _afiliado.RoleID = rolSeleccionado.ID;
-                    if (esNuevoUsuario)
-                        _afiliado = _afiliadoManager.CrearAfiliado(_afiliado);
-                    else
-                        _afiliado = _afiliadoManager.GuardarAfiliado(_afiliado);
+                    _afiliado = _afiliadoManager.GuardarAfiliado(_afiliado);
                     user = _afiliado as User;
                     OnUserSaved(this, new UserSavedEventArgs() { User = user,grupoFamiliar = _afiliado.grupoFamiliar });
                 }
@@ -225,8 +203,9 @@ namespace ClinicaFrba
                 {
                     _profesional = ((ProfesionalUserControl)profesionalUserControl).GetProfesional();
                     _profesional.DetallesPersona = user.DetallesPersona;
+                    _profesional.UserID = user.UserID;
                     _profesional.RoleID = rolSeleccionado.ID;
-                    manager.GuardarProfesional(_profesional);
+                    _profesionalManager.GuardarProfesional(_profesional);
                     user = _profesional as User;
                     OnUserSaved(this, new UserSavedEventArgs() { User = user });
                 }
@@ -243,6 +222,36 @@ namespace ClinicaFrba
                 return;
             }
         }
+
+        private User ValidarDetallesPersona(User user)
+        {
+            long telefono;
+            long dni;
+            if (!long.TryParse(txtTelefono.Text.Trim().Replace("-", ""), out telefono))
+                throw new Exception(" El teléfono debe ser numérico!");
+            if (!long.TryParse(txtDNI.Text, out dni))
+                throw new Exception(" El DNI debe ser numérico!");
+            if (string.IsNullOrEmpty(txtNombre.Text.Trim()))
+                throw new Exception(" El Nombre es obligatorio!");
+            if (string.IsNullOrEmpty(txtApellido.Text.Trim()))
+                throw new Exception(" El Apellido es obligatorio!");
+            if (string.IsNullOrEmpty(txtMail.Text.Trim()))
+                throw new Exception(" El Email es obligatorio!");
+            if (dni==0)
+                throw new Exception("El DNI no es valido!");
+
+            user.DetallesPersona.Apellido = txtApellido.Text.Trim();
+            user.DetallesPersona.Nombre = txtNombre.Text.Trim();
+            user.DetallesPersona.DNI = dni;
+            user.DetallesPersona.FechaNacimiento = dtFechaNacimiento.Value;
+            user.DetallesPersona.Direccion = txtDireccion.Text.Trim();
+            user.DetallesPersona.Telefono = telefono;
+            user.DetallesPersona.Email = txtMail.Text.Trim();
+            user.DetallesPersona.TipoDNI = (TipoDoc)cbxTipoDNI.SelectedItem;
+            user.DetallesPersona.Sexo = (TipoSexo)cbxSexo.SelectedItem;
+            return user;
+        }
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();

@@ -124,8 +124,11 @@ namespace ClinicaFrba.Negocio
             }
             return afiliados;
         }
-        public Afiliado CrearAfiliado(Afiliado afiliado) {
-            try
+        public Afiliado GuardarAfiliado(Afiliado afiliado)
+        {
+            Afiliado _afiliadoExistente = actualizarInformacion(afiliado.UserID);
+
+            if (_afiliadoExistente.DetallesPersona.DNI == 0)
             {
                 if (afiliado.grupoFamiliar == 0)//Primero del grupo familiar
                 {
@@ -160,35 +163,21 @@ namespace ClinicaFrba.Negocio
                 }
                 return afiliado;
             }
-            catch
-            {
-                afiliado.UserID = 0;
-                throw;
-            }
-            
-        }
-
-        public Afiliado GuardarAfiliado(Afiliado afiliado)
-        {
-            try 
+            else
             {
                 SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
-                        "[SHARPS].UpdateAfiliado", SqlDataAccessArgs
-                        .CreateWith("@PlanMedico", afiliado.PlanMedico.ID)
-                        .And("@ID", afiliado.UserID)
-                        .And("@EstadoCivil", afiliado.EstadoCivil.ToString())
-                        .And("@RolAfiliado", afiliado.RoleID)
-                        .And("@CantHijos", afiliado.CantHijos)
-                        .And("@Motivo", afiliado.MotivoCambio)
-                        .And("@Fecha", Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]))
-                    .Arguments);
+            "[SHARPS].UpdateAfiliado", SqlDataAccessArgs
+            .CreateWith("@PlanMedico", afiliado.PlanMedico.ID)
+            .And("@ID", afiliado.UserID)
+            .And("@EstadoCivil", afiliado.EstadoCivil.ToString())
+            .And("@RolAfiliado", afiliado.RoleID)
+            .And("@CantHijos", afiliado.CantHijos)
+            .And("@Motivo", afiliado.MotivoCambio)
+            .And("@Fecha", Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]))
+        .Arguments);
                 afiliado.NroAfiliado = ((afiliado.grupoFamiliar * 100) + afiliado.tipoAfiliado);
                 //Guarda la informacion del usuario
                 return afiliado;
-            }
-            catch
-            {
-                throw;
             }
         }
         public void Delete(Afiliado afiliado)
@@ -208,6 +197,7 @@ namespace ClinicaFrba.Negocio
             conyuge.PlanMedico = afiliado.PlanMedico;
             conyuge.tipoAfiliado = 2;
             conyuge.DetallesPersona = afiliado.DetallesPersona;
+            conyuge.DetallesPersona.DNI = 0;
             conyuge.DetallesPersona.Nombre = "";
             return conyuge;
         }
@@ -220,10 +210,25 @@ namespace ClinicaFrba.Negocio
             hijo.Perfil = afiliado.Perfil;
             hijo.grupoFamiliar = afiliado.grupoFamiliar;
             hijo.DetallesPersona = afiliado.DetallesPersona;
+            hijo.DetallesPersona.DNI = 0;
             hijo.DetallesPersona.Nombre = "";
+            hijo.tipoAfiliado = CalcularTipoAfiliado(hijo);
             return hijo;
-        }
 
+        }
+        private int CalcularTipoAfiliado(Afiliado hijo){
+            int tipoAfiliado = 3;
+            BindingList<Afiliado> familia = GetAllFromGrupoFamiliar(hijo.grupoFamiliar);
+            BindingList<Afiliado> hijosEnSistema = new BindingList<Afiliado>(familia.Where(x => (x.grupoFamiliar == hijo.grupoFamiliar && x.tipoAfiliado > 2)).ToList());
+
+            if (hijosEnSistema.Count > 0)
+            {
+                Afiliado ultimo = (Afiliado)(hijosEnSistema.OrderBy(x => x.tipoAfiliado).ToList().Last());
+                tipoAfiliado = ultimo.tipoAfiliado + 1;
+            }
+                
+            return tipoAfiliado;
+        }
         public bool correspondeConyuge(Afiliado afiliado)
         {
             return (afiliado.EstadoCivil == EstadoCivil.Casado || afiliado.EstadoCivil == EstadoCivil.Concubinato);

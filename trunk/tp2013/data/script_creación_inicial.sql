@@ -1693,7 +1693,7 @@ DECLARE @GRUPO INT
 DECLARE @Plan INT
 SELECT @GRUPO = GrupoFamiliar, @Plan = Plan_Medico FROM [SHARPS].Afiliados WHERE UsuarioID = @userId
 
-SELECT BC.Fecha_Impresion AS Fecha , BC.Numero AS Numero , X.Precio_BonoConsulta AS Precio ,'Consulta' AS TipoBono,X.CompraID CompraID
+SELECT BC.Fecha_Impresion AS Fecha , BC.Numero AS Numero , X.Precio_BonoConsulta AS Precio ,'Consulta' AS TipoBono,X.CompraID CompraID,x.Afiliado as comprador
 FROM [SHARPS].Bonos_Consulta BC
 INNER JOIN [SHARPS].Compras X ON X.CompraID = BC.Compra
 INNER JOIN [SHARPS].Afiliados A ON A.UsuarioID = X.Afiliado
@@ -1704,7 +1704,7 @@ AND CON.Numero_Consulta IS NULL
 
 UNION
 
-SELECT BF.Fecha_Impresion AS Fecha, BF.Numero AS Numero ,X.Precio_BonoFarmacia AS Precio , 'Farmacia' AS TipoBono,X.CompraID CompraID
+SELECT BF.Fecha_Impresion AS Fecha, BF.Numero AS Numero ,X.Precio_BonoFarmacia AS Precio , 'Farmacia' AS TipoBono,X.CompraID CompraID,x.Afiliado as comprador
 FROM [SHARPS].Bonos_Farmacia BF
 INNER JOIN [SHARPS].Compras X ON X.CompraID = BF.Compra
 INNER JOIN [SHARPS].Afiliados A ON A.UsuarioID = X.Afiliado
@@ -1713,6 +1713,8 @@ WHERE A.GrupoFamiliar = @GRUPO
 AND A.Plan_Medico = @Plan
 AND DATEADD(DAY, 60, BF.Fecha_Impresion) >= @fecha
 AND R.RecetaID IS NULL
+
+
 
 END
 GO
