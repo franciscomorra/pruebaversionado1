@@ -80,8 +80,8 @@ namespace ClinicaFrba.AbmAfiliado
                 try
                 {
                     _afiliadoManager.Delete(afiliado);
-                    var dataSource = dgvAfiliados.DataSource as BindingList<Afiliado>;
-                    dataSource.Remove(afiliado);
+                    var dataSource = _afiliadoManager.buscarTodos();
+                    dgvAfiliados.DataSource = dataSource;
                     dgvAfiliados.Refresh();
                     MessageBox.Show(string.Format("Afiliado {0} {1} eliminado", afiliado.DetallesPersona.Nombre.Trim(), afiliado.DetallesPersona.Apellido.Trim()));
                     
@@ -97,8 +97,6 @@ namespace ClinicaFrba.AbmAfiliado
             var regForm = new RegistroForm(); //Registro para usuarios
             regForm.esNuevoUsuario = true;
             regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
-           // Perfil _perfil = new Perfil() { Nombre = "Afiliado" };
-            //regForm.perfil = _perfil;
             regForm.perfilSeleccionado = "Afiliado";
             ViewsManager.LoadModal(regForm);
 
@@ -118,11 +116,9 @@ namespace ClinicaFrba.AbmAfiliado
 
         void regForm_OnUserSaved(object sender, UserSavedEventArgs e)
         {
-            BindingList<Afiliado> dataSource = dgvAfiliados.DataSource as BindingList<Afiliado>;
             var afiliado = e.User as Afiliado;
             afiliado.grupoFamiliar = e.grupoFamiliar;
-            if (dataSource.Contains(afiliado)) dataSource.Remove(afiliado);
-            dataSource.Add(afiliado);
+            var dataSource = _afiliadoManager.buscarTodos();
             dgvAfiliados.DataSource = dataSource;
             dgvAfiliados.Refresh();
             MessageBox.Show("Se han guardado los datos del Afiliado " + e.User.ToString());
@@ -163,9 +159,9 @@ namespace ClinicaFrba.AbmAfiliado
                             ViewsManager.LoadModal(regForm);
                         }
                     }
-                    BindingList<Afiliado> hijos = new BindingList<Afiliado>(familia.Where(x => (x.grupoFamiliar == afiliado.grupoFamiliar && x.tipoAfiliado > 2)).ToList());
-                    int cantidadHijosFaltantes = afiliado.CantHijos - hijos.Count;
-                    for (int i = hijos.Count; i < cantidadHijosFaltantes + hijos.Count; i++)//Verificar el for
+                    BindingList<Afiliado> hijosEnSistema = new BindingList<Afiliado>(familia.Where(x => (x.grupoFamiliar == afiliado.grupoFamiliar && x.tipoAfiliado > 2)).ToList());
+                    int cantidadHijosFaltantes = afiliado.CantHijos - hijosEnSistema.Count;//Los que ingreso en el campo menos los que estan ya cargados
+                    for (int i = hijosEnSistema.Count; i < cantidadHijosFaltantes + hijosEnSistema.Count; i++)//Verificar el for
                     {
                         
                         if (MessageBox.Show(string.Format(("Se registro que tiene {1} hijos, pero en el sistema hay {0} hijos cargados, desea cargarlos?"), i, afiliado.CantHijos), "Agregar Hijos", MessageBoxButtons.OKCancel) == DialogResult.OK)
@@ -173,7 +169,6 @@ namespace ClinicaFrba.AbmAfiliado
                             var regForm = new RegistroForm();
                             regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnHijoSaved);
                             Afiliado hijo = _afiliadoManager.RellenarDatosHijo(afiliado);
-                            hijo.tipoAfiliado = hijos.Count + 2;
                             regForm.perfilSeleccionado = "Afiliado";
                             regForm.rellenarAfiliado(hijo);
                             regForm.esNuevoUsuario = true;
@@ -181,6 +176,9 @@ namespace ClinicaFrba.AbmAfiliado
                         }
                     }
                 }
+                var dataSource = _afiliadoManager.buscarTodos();
+                dgvAfiliados.DataSource = dataSource;
+                dgvAfiliados.Refresh();
             }
         }
 
@@ -193,7 +191,7 @@ namespace ClinicaFrba.AbmAfiliado
             txtEmail.Text = string.Empty;
             txtAfiliadoNro.Text = string.Empty;
             var dataSource = _afiliadoManager.buscarTodos();
-            dgvAfiliados.DataSource = new BindingList<Afiliado>(dataSource.OrderBy(x => x.DetallesPersona.Apellido + x.DetallesPersona.Nombre).ToList());
+            dgvAfiliados.DataSource = dataSource;
             dgvAfiliados.Refresh();
         }
 

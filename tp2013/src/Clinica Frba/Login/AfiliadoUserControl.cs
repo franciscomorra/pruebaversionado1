@@ -14,7 +14,7 @@ namespace ClinicaFrba.Login
     public partial class AfiliadoUserControl : UserControl
     {
         private Afiliado _afiliado;
-        public int _nroAfiliado;
+        public long _grupoFamiliar;
         public int _tipoAfiliado;
         public bool esNuevoUsuario = false;
 
@@ -61,7 +61,7 @@ namespace ClinicaFrba.Login
                 txtHijos.Enabled = false;
                 cbxEstadoCivil.SelectedItem = EstadoCivil.Soltero;
                 cbxEstadoCivil.Enabled = false;
-                _afiliado.NroAfiliado = _nroAfiliado;
+                _afiliado.grupoFamiliar = _grupoFamiliar;
             }
             else {//Es padre
                 panelFamiliar.Visible = true;

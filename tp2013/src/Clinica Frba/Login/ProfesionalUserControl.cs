@@ -34,7 +34,7 @@ namespace ClinicaFrba.Login
             }
         }
 
-        public void SetUser(Profesional profesional)
+        public void RellenarProfesional(Profesional profesional)
         {
             _profesional = profesional;
             var especialidadesManager = new EspecialidadesManager();

@@ -14,6 +14,7 @@ namespace ClinicaFrba.Negocio
     {
         public List<Bono> GetAll(Afiliado afiliado)
         {
+            AfiliadoManager afManager = new AfiliadoManager();
             var ret = new List<Bono>();
             DateTime fechaActual = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]);
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
@@ -34,7 +35,7 @@ namespace ClinicaFrba.Negocio
                         Fecha = Convert.ToDateTime(row["Fecha"]),
                         Numero = int.Parse(row["Numero"].ToString()),
                         TipodeBono = (TipoBono)Enum.Parse(typeof(TipoBono), tipoBono),
-                        AfiliadoCompro = afiliado,
+                        AfiliadoCompro = afManager.actualizarInformacion(int.Parse(row["comprador"].ToString())),
                         Precio = int.Parse(row["Precio"].ToString()),
                         Compra = int.Parse(row["CompraID"].ToString()),
                     });
