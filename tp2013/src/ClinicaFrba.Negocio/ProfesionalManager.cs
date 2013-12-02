@@ -62,8 +62,9 @@ namespace ClinicaFrba.Negocio
         public void GuardarProfesional(Profesional profesional)
         {
 
-            Profesional _profesionalExistente = getInfo(profesional.UserID);
-            if (profesional.UserID == 0 || _profesionalExistente == null)//Profesional nuevo || Afiliado con perfil profesional
+            Profesional _profesionalExistente = new Profesional();
+            _profesionalExistente = getInfo(profesional.UserID);
+            if (profesional.UserID == 0 || _profesionalExistente.Especialidades.Count == 0)//Profesional nuevo || Afiliado con perfil profesional
             {
                 SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].InsertProfesional", SqlDataAccessArgs

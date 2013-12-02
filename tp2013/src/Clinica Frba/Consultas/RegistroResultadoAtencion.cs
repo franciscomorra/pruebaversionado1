@@ -73,7 +73,7 @@ namespace ClinicaFrba.Consultas
             _afiliadosForm.Hide();
             
             TurnosManager tmanager = new TurnosManager();
-            List<Turno> turnosDeHoy = tmanager.GetTurnosConConsulta(_afiliado, true, _profesional);
+            List<Turno> turnosDeHoy = tmanager.BuscarConConsulta(_afiliado, true, _profesional);
             try
             {
                 if (turnosDeHoy.Count < 1)

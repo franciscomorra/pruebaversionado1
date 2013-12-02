@@ -46,8 +46,6 @@ namespace ClinicaFrba.Login
             {
                 user = svc.Login(userName, pass);
                 roles = rolManager.GetUserRoles(user.UserID);
-
-
                 if (roles.Count > 1)
                 {
                     comboRoles.DataSource = roles;
@@ -73,7 +71,6 @@ namespace ClinicaFrba.Login
                 return;
             }
         }
-
         private void iniciar_sesion() {
             try
             {
@@ -90,11 +87,12 @@ namespace ClinicaFrba.Login
                     if (afiliado.FaltanDatos)
                     {
                         MessageBox.Show("Por favor, verifique sus datos a continuacion");
-                        var registroForm = new RegistroForm();
-                        afiliado.MotivoCambio = "Update Nuevo Sistema";
-                        registroForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
-                        registroForm.rellenarAfiliado(afiliado);
-                        ViewsManager.LoadModal(registroForm);
+                        var regForm = new RegistroForm();
+                        regForm.esNuevoUsuario = false;
+                        regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
+                        regForm.perfilSeleccionado = "Afiliado";
+                        regForm.rellenarAfiliado(afiliado);
+                        ViewsManager.LoadModal(regForm);
                     }
                 }
                 else if (user.Perfil.Nombre == "Profesional")
@@ -105,17 +103,18 @@ namespace ClinicaFrba.Login
                     if (profesional.FaltanDatos)
                     {
                         MessageBox.Show("Por favor, verifique sus datos a continuacion");
-                        var registroForm = new RegistroForm();
-                        registroForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
-                        registroForm.rellenarProfesional(profesional);
-                        ViewsManager.LoadModal(registroForm);
+                        var regForm = new RegistroForm();
+                        regForm.esNuevoUsuario = false;
+                        regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
+                        regForm.rellenarProfesional(profesional);
+                        regForm.perfilSeleccionado = "Profesional";
+                        ViewsManager.LoadModal(regForm);
                     }
                 }
             }
             catch (System.Exception excep)
             {
                 MessageBox.Show(excep.Message);
-
             }
         }
         private void btnRol_Click(object sender, EventArgs e)

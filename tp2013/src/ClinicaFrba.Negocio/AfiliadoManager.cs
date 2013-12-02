@@ -140,7 +140,6 @@ namespace ClinicaFrba.Negocio
                         .And("@EstadoCivil", afiliado.EstadoCivil.ToString())
                         .And("@CantHijos", afiliado.CantHijos)
                         .And("@RolAfiliado", afiliado.RoleID)
-                        .And("@TipoAfiliado", afiliado.tipoAfiliado)
                         .Arguments);
                     afiliado.NroAfiliado = ((afiliado.grupoFamiliar * 100) + afiliado.tipoAfiliado);
                     afiliado = actualizarInformacion(afiliado.UserID);

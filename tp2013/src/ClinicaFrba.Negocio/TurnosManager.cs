@@ -12,7 +12,7 @@ namespace ClinicaFrba.Negocio
 {
     public class TurnosManager
     {
-        public List<Turno> GetAll(Afiliado afiliado,bool soloTurnosHoy, Profesional profesional)
+        public List<Turno> BuscarTodos(Afiliado afiliado,bool soloTurnosHoy, Profesional profesional)
         {
             var ret = new List<Turno>();
             DataTable resultado;
@@ -42,7 +42,7 @@ namespace ClinicaFrba.Negocio
             }
             return ret;
         }
-        public List<Turno> GetTurnosConConsulta(Afiliado afiliado, bool soloTurnosHoy, Profesional profesional)
+        public List<Turno> BuscarConConsulta(Afiliado afiliado, bool soloTurnosHoy, Profesional profesional)
         {
             var ret = new List<Turno>();
             DataTable resultado;
@@ -75,7 +75,7 @@ namespace ClinicaFrba.Negocio
 
 
 
-        public List<Turno> GetDiasHorariosLibres(Profesional profesional, DateTime fecha)
+        public List<Turno> BuscarHorariosLibres(Profesional profesional, DateTime fecha)
         {
             List<Turno> ret = new List<Turno>();
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
@@ -97,7 +97,7 @@ namespace ClinicaFrba.Negocio
         }
 
 
-        public List<Turno> GetTurnosEnFechaProfesional(Profesional profesional, DateTime fecha)
+        public List<Turno> BuscarTurnosProfesional(Profesional profesional, DateTime fecha)
         {
             List<Turno> ret = new List<Turno>();
             var result = SqlDataAccess.ExecuteDataTableQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
@@ -120,7 +120,7 @@ namespace ClinicaFrba.Negocio
             return ret;
 
         }
-        public void SaveTurno(Turno turno) {
+        public void GuardarTurno(Turno turno) {
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].InsertTurno", SqlDataAccessArgs
                 .CreateWith(

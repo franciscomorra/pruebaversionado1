@@ -51,7 +51,7 @@ namespace ClinicaFrba
             this.label10 = new System.Windows.Forms.Label();
             this.lblPerfil = new System.Windows.Forms.Label();
             this.cbxPerfiles = new System.Windows.Forms.ComboBox();
-            this.label13 = new System.Windows.Forms.Label();
+            this.lblRol = new System.Windows.Forms.Label();
             this.cbxRoles = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
@@ -246,14 +246,14 @@ namespace ClinicaFrba
             this.cbxPerfiles.TabIndex = 50;
             this.cbxPerfiles.SelectedIndexChanged += new System.EventHandler(this.cbxPerfiles_SelectedIndexChanged);
             // 
-            // label13
+            // lblRol
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(90, 270);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(23, 13);
-            this.label13.TabIndex = 31;
-            this.label13.Text = "Rol";
+            this.lblRol.AutoSize = true;
+            this.lblRol.Location = new System.Drawing.Point(90, 270);
+            this.lblRol.Name = "lblRol";
+            this.lblRol.Size = new System.Drawing.Size(23, 13);
+            this.lblRol.TabIndex = 31;
+            this.lblRol.Text = "Rol";
             // 
             // cbxRoles
             // 
@@ -270,7 +270,7 @@ namespace ClinicaFrba
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(444, 617);
-            this.Controls.Add(this.label13);
+            this.Controls.Add(this.lblRol);
             this.Controls.Add(this.lblPerfil);
             this.Controls.Add(this.cbxRoles);
             this.Controls.Add(this.cbxPerfiles);
@@ -326,7 +326,7 @@ namespace ClinicaFrba
         private Label label10;
         private Label lblPerfil;
         private ComboBox cbxPerfiles;
-        private Label label13;
+        private Label lblRol;
         private ComboBox cbxRoles;
     }
 }

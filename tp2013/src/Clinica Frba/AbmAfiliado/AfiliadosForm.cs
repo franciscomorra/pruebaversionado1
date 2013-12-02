@@ -84,11 +84,11 @@ namespace ClinicaFrba.AbmAfiliado
                     dgvAfiliados.DataSource = dataSource;
                     dgvAfiliados.Refresh();
                     MessageBox.Show(string.Format("Afiliado {0} {1} eliminado", afiliado.DetallesPersona.Nombre.Trim(), afiliado.DetallesPersona.Apellido.Trim()));
-                    
                 }
                 catch (System.Exception excep)
                 {
                     MessageBox.Show(excep.Message);
+                    return;
                 }
             }
         }
@@ -99,7 +99,6 @@ namespace ClinicaFrba.AbmAfiliado
             regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
             regForm.perfilSeleccionado = "Afiliado";
             ViewsManager.LoadModal(regForm);
-
         }
         private void btnModificar_Click(object sender, EventArgs e) //Modificando afiliado existente
         {
@@ -116,12 +115,12 @@ namespace ClinicaFrba.AbmAfiliado
 
         void regForm_OnUserSaved(object sender, UserSavedEventArgs e)
         {
-            var afiliado = e.User as Afiliado;
-            afiliado.grupoFamiliar = e.grupoFamiliar;
+
             var dataSource = _afiliadoManager.buscarTodos();
             dgvAfiliados.DataSource = dataSource;
             dgvAfiliados.Refresh();
             MessageBox.Show("Se han guardado los datos del Afiliado " + e.User.ToString());
+            Afiliado afiliado = _afiliadoManager.actualizarInformacion(e.User.UserID);
             verificar_Familiares(afiliado);
         }
         void regForm_OnConyugeSaved(object sender, UserSavedEventArgs e)
@@ -129,7 +128,6 @@ namespace ClinicaFrba.AbmAfiliado
             var afiliado = e.User as Afiliado;
             MessageBox.Show("Se han guardado los datos del Afiliado " + e.User.ToString());
             //verificar_Familiares(afiliado);
-        
         }
         void regForm_OnHijoSaved(object sender, UserSavedEventArgs e)
         {
@@ -140,7 +138,7 @@ namespace ClinicaFrba.AbmAfiliado
             if (afiliado.tipoAfiliado == 1 || afiliado.tipoAfiliado == 2)//Afiliado Principal
             {
                 var familia = _afiliadoManager.GetAllFromGrupoFamiliar(afiliado.grupoFamiliar);
-                int miembrosSegunRegistro = 1; //El afiliado
+                int miembrosSegunRegistro = 1; //El afiliado principal
                 miembrosSegunRegistro = miembrosSegunRegistro + afiliado.CantHijos; //Sumo cantidad de hijos
                 if (_afiliadoManager.correspondeConyuge(afiliado))//Sumo Conyuge
                     miembrosSegunRegistro++;
@@ -163,7 +161,6 @@ namespace ClinicaFrba.AbmAfiliado
                     int cantidadHijosFaltantes = afiliado.CantHijos - hijosEnSistema.Count;//Los que ingreso en el campo menos los que estan ya cargados
                     for (int i = hijosEnSistema.Count; i < cantidadHijosFaltantes + hijosEnSistema.Count; i++)//Verificar el for
                     {
-                        
                         if (MessageBox.Show(string.Format(("Se registro que tiene {1} hijos, pero en el sistema hay {0} hijos cargados, desea cargarlos?"), i, afiliado.CantHijos), "Agregar Hijos", MessageBoxButtons.OKCancel) == DialogResult.OK)
                         {
                             var regForm = new RegistroForm();

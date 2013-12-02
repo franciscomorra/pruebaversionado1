@@ -17,13 +17,10 @@ namespace ClinicaFrba.AbmProfesional
     [PermissionRequired(Functionalities.AdministrarProfesionales)]
     public partial class ProfesionalesForm : Form
     {
-        private ProfesionalManager _ProfesionalManager = new ProfesionalManager();
-        private EspecialidadesManager _EspecialidadesManager = new EspecialidadesManager();
-        
+        private ProfesionalManager _profesionalManager = new ProfesionalManager();
+        private EspecialidadesManager _especialidadesManager = new EspecialidadesManager();
         private bool _isSearchMode = false;
         public event EventHandler<ProfesionalSelectedEventArgs> OnProfesionalSelected;
-        
-
         public ProfesionalesForm()
         {
             InitializeComponent();
@@ -43,16 +40,12 @@ namespace ClinicaFrba.AbmProfesional
                 Especialidad especialidadVacio = new Especialidad();
                 especialidadVacio.Nombre = "--";
                 especialidades.Add(especialidadVacio);
-                especialidades.AddRange(_EspecialidadesManager.GetAll());
-                
+                especialidades.AddRange(_especialidadesManager.GetAll());
                 cbxEspecialidad.DataSource = especialidades;
                 cbxEspecialidad.DisplayMember = "Nombre";
-                var dataSource = _ProfesionalManager.GetAll();
+                var dataSource = _profesionalManager.GetAll();
                 if (_isSearchMode)
-                {
                     dataSource.Remove(Session.Profesional);
-                }
-
                 profesionalesGrid.AutoGenerateColumns = false;
                 profesionalesGrid.DataSourceChanged += new EventHandler(profesionalesGrid_DataSourceChanged);
                 dataSource.Remove(Session.Profesional);
@@ -95,7 +88,7 @@ namespace ClinicaFrba.AbmProfesional
             {
                 try
                 {
-                    _ProfesionalManager.Delete(profesional);
+                    _profesionalManager.Delete(profesional);
                     var dataSource = profesionalesGrid.DataSource as BindingList<Profesional>;
                     dataSource.Remove(profesional);
                     profesionalesGrid.Refresh();
@@ -107,8 +100,6 @@ namespace ClinicaFrba.AbmProfesional
                 }
             }
         }
-
-
         private void btnModificar_Click(object sender, EventArgs e)
         {
             if (profesionalesGrid.SelectedRows == null || profesionalesGrid.SelectedRows.Count == 0) return;
@@ -116,7 +107,6 @@ namespace ClinicaFrba.AbmProfesional
             var profesional = row.DataBoundItem as Profesional;
             var regForm = new RegistroForm();
             regForm.esNuevoUsuario = false;
-            
             regForm.OnUserSaved += new EventHandler<UserSavedEventArgs>(regForm_OnUserSaved);
             regForm.rellenarProfesional(profesional);
             regForm.perfilSeleccionado = "Profesional";
@@ -125,11 +115,8 @@ namespace ClinicaFrba.AbmProfesional
 
         void regForm_OnUserSaved(object sender, UserSavedEventArgs e)
         {
-            var dataSource = profesionalesGrid.DataSource as BindingList<Profesional>;
-            var profesional = e.User as Profesional;
-            if (dataSource.Contains(profesional)) dataSource.Remove(profesional);
-            dataSource.Add(profesional);
-            profesionalesGrid.DataSource = new BindingList<Profesional>(dataSource.OrderBy(x => x.DetallesPersona.Apellido + x.DetallesPersona.Nombre).ToList());
+            var dataSource = _profesionalManager.GetAll();
+            profesionalesGrid.DataSource = dataSource;
             profesionalesGrid.Refresh();
             MessageBox.Show("Se han guardado los datos del profesional " + e.User.ToString());
         }
@@ -149,13 +136,13 @@ namespace ClinicaFrba.AbmProfesional
             txtApellido.Text = string.Empty;
             txtMatricula.Text = string.Empty;
             cbxEspecialidad.SelectedIndex = 0;
-            profesionalesGrid.DataSource = _ProfesionalManager.GetAll();
+            profesionalesGrid.DataSource = _profesionalManager.GetAll();
             profesionalesGrid.Refresh();
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            var profesionales = _ProfesionalManager.GetAll();
+            var profesionales = _profesionalManager.GetAll();
             if (!string.IsNullOrEmpty(txtApellido.Text))
             {
                 profesionales = new BindingList<Profesional>(profesionales.Where(x => x.DetallesPersona.Apellido.ToLowerInvariant().Contains(txtApellido.Text.ToLowerInvariant())).ToList());
@@ -164,8 +151,6 @@ namespace ClinicaFrba.AbmProfesional
             {
                 profesionales = new BindingList<Profesional>(profesionales.Where(x => x.DetallesPersona.Nombre.ToLowerInvariant().Contains(txtNombre.Text.ToLowerInvariant())).ToList());
             }
-
-
             if (cbxEspecialidad.SelectedIndex!=0)
             {
                 Especialidad especialidadSeleccionada = (Especialidad)cbxEspecialidad.SelectedItem;

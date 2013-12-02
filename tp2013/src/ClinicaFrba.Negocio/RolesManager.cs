@@ -12,7 +12,7 @@ namespace ClinicaFrba.Negocio
 {
     public class RolesManager
     {
-        public BindingList<Rol> GetRolesByPerfil(Perfil perfil)
+        public BindingList<Rol> BuscarTodosPorPerfil(Perfil perfil)
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(
                 ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
@@ -36,7 +36,7 @@ namespace ClinicaFrba.Negocio
         }
         
         
-        public BindingList<Rol> GetRoles() //Para el abm roles en particular
+        public BindingList<Rol> BuscarTodos() //Para el abm roles en particular
         {
             var result = SqlDataAccess.ExecuteDataTableQuery(
                 ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
@@ -64,7 +64,7 @@ namespace ClinicaFrba.Negocio
 
             return roles;
         }
-        public void DeleteRole(Rol rol)
+        public void BorrarRol(Rol rol)
         {
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].DeleteRole", SqlDataAccessArgs

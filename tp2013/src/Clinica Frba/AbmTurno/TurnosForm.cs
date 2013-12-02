@@ -39,7 +39,8 @@ namespace ClinicaFrba.AbmTurno
             buttonsPanel.Visible = false;
             btnBuscarAfiliado.Visible = false;
             txtAfiliado.Text = _afiliado.ToString();
-            panelAcciones.Visible = true;
+            dgvTurnos.Visible = true;
+            buttonsPanel.Visible = true;
             _isSearchMode = true;
         }
         public void SoloTurnosdeHoy()
@@ -53,9 +54,9 @@ namespace ClinicaFrba.AbmTurno
         {
             List<Turno> dataSource;
             if (!_soloConConsulta)
-                 dataSource = _turnosManager.GetAll(_afiliado,_soloTurnosdeHoy,null);
+                 dataSource = _turnosManager.BuscarTodos(_afiliado,_soloTurnosdeHoy,null);
             else
-                dataSource = _turnosManager.GetTurnosConConsulta(_afiliado, _soloTurnosdeHoy, null);
+                dataSource = _turnosManager.BuscarConConsulta(_afiliado, _soloTurnosdeHoy, null);
             dgvTurnos.AutoGenerateColumns = false; 
             dgvTurnos.DataSource = dataSource;
             dgvTurnos.DoubleClick += new EventHandler(dgvTurnos_CellContentDoubleClick);
@@ -70,7 +71,8 @@ namespace ClinicaFrba.AbmTurno
                 _afiliado = Session.Afiliado;
                 btnBuscarAfiliado.Visible = false;
                 txtAfiliado.Text = _afiliado.ToString();
-                panelAcciones.Visible = true;
+                buttonsPanel.Visible = true;
+                dgvTurnos.Visible = true;
                 RefreshDataGrid();
             }
             else if (_isSearchMode)
@@ -101,7 +103,9 @@ namespace ClinicaFrba.AbmTurno
             txtAfiliado.Text = _afiliado.ToString();
             _afiliadosForm.Hide();
             RefreshDataGrid();
-            panelAcciones.Visible = true;
+
+            buttonsPanel.Visible = true;
+            dgvTurnos.Visible = true;
         }
 
 

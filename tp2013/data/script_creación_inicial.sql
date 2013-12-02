@@ -1517,7 +1517,7 @@ GO
 CREATE PROCEDURE [SHARPS].[InsertAfiliado]
 	@PlanMedico numeric(18,0),
 	@ID numeric (18,0),
-	@EstadoCivil nchar(10),
+	@EstadoCivil nvarchar(max),
 	@CantHijos int,
 	@RolAfiliado int
 AS 
@@ -1526,12 +1526,13 @@ BEGIN
 	DECLARE @codCivil int
 	SELECT @codCivil = Codigo from [SHARPS].Estados_Civiles where Descripcion = @EstadoCivil
 	SELECT @NroAfiliado = MAX(GrupoFamiliar) + 1 FROM [SHARPS].Afiliados
-	INSERT INTO [SHARPS].Afiliados (GrupoFamiliar , Plan_Medico , cantHijos , Estado_Civil , UsuarioID,Faltan_Datos)
-	VALUES (@NroAfiliado , @PlanMedico , @CantHijos ,@codCivil  , @ID,0) 
+	INSERT INTO [SHARPS].Afiliados (GrupoFamiliar , Plan_Medico , cantHijos , Estado_Civil , UsuarioID,Faltan_Datos,TipoAfiliado)
+	VALUES (@NroAfiliado , @PlanMedico , @CantHijos ,@codCivil  , @ID,0,1) 
 	INSERT INTO SHARPS.Usuarios_Roles (Rol,Usuario) VALUES (@RolAfiliado, @ID)
 	RETURN @NroAfiliado
 END
 GO
+
 
 
 CREATE PROCEDURE [SHARPS].[UpdateAfiliado]

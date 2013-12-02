@@ -32,12 +32,21 @@ namespace ClinicaFrba.ReportesForm
 
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
-            if (dtpDesde.Value > dtpHasta.Value)
+            try
             {
-                MessageBox.Show("La fecha desde debe ser menor o igual que la fecha hasta");
+
+                if (dtpDesde.Value > dtpHasta.Value)
+                {
+                    MessageBox.Show("La fecha desde debe ser menor o igual que la fecha hasta");
+                }
+                dataGridView.DataSource = _reporteManager.GetReporte(cbxReportType.SelectedItem as TipoReporte, dtpDesde.Value, dtpHasta.Value);
+                dataGridView.Refresh();
             }
-            dataGridView.DataSource = _reporteManager.GetReporte(cbxReportType.SelectedItem as TipoReporte, dtpDesde.Value, dtpHasta.Value);
-            dataGridView.Refresh();
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+                return;
+            }
         }
     }
 }
