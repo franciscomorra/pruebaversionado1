@@ -62,7 +62,7 @@ namespace ClinicaFrba.AbmTurno
             _turno = (Turno)cbxHorarios.SelectedItem;
             _turno.Afiliado = _afiliado;
             
-            _turnosManager.SaveTurno(_turno);
+            _turnosManager.GuardarTurno(_turno);
             if (OnTurnoUpdated != null)
                 OnTurnoUpdated(this, new TurnoUpdatedEventArgs() { Turno = _turno });
             this.Close();
@@ -93,7 +93,7 @@ namespace ClinicaFrba.AbmTurno
             cbxHorarios.DataSource = null;
             if (_profesional != null)
             {
-                List<Turno> turnos = _turnosManager.GetDiasHorariosLibres(_profesional, dtTurno.Value);
+                List<Turno> turnos = _turnosManager.BuscarHorariosLibres(_profesional, dtTurno.Value);
                 cbxHorarios.DataSource = turnos;
                 if (turnos.Count > 0)
                     panelHorario.Visible = true;

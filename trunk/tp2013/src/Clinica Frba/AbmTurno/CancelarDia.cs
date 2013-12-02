@@ -53,7 +53,7 @@ namespace ClinicaFrba.AbmTurno
             else
                 try
                 {
-                    List<Turno> turnosDeLaFecha = _turnoManager.GetTurnosEnFechaProfesional(_profesional, fecha);
+                    List<Turno> turnosDeLaFecha = _turnoManager.BuscarTurnosProfesional(_profesional, fecha);
 
                     if (MessageBox.Show(string.Format("Usted tiene {0} turnos en la fecha\n Seguro que desea cancelar el dia?", turnosDeLaFecha.Count)
                      , "Cancelar Dia", MessageBoxButtons.OKCancel) == DialogResult.OK)

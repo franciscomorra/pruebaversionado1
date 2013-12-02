@@ -26,7 +26,7 @@ namespace ClinicaFrba.AbmRol
         private void RolesForm_Load(object sender, EventArgs e)
         {
             var bindingSource = new BindingSource();
-            var rolesTable = rolesManager.GetRoles();
+            var rolesTable = rolesManager.BuscarTodos();
             rolesDataGridView.DataSourceChanged += new EventHandler(rolesDataGridView_DataSourceChanged);
             rolesDataGridView.AutoGenerateColumns = false;
             rolesDataGridView.DataSource = rolesTable;
@@ -84,7 +84,7 @@ namespace ClinicaFrba.AbmRol
             {
                 try
                 {
-                    rolesManager.DeleteRole(rol);
+                    rolesManager.BorrarRol(rol);
                     var dataSource = rolesDataGridView.DataSource as BindingList<Rol>;
                     dataSource.Remove(rol);
                     rolesDataGridView.Refresh();

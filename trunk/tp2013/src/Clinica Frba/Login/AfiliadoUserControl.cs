@@ -37,7 +37,7 @@ namespace ClinicaFrba.Login
             return _afiliado;
         }
 
-        public void rellenarCampos(Afiliado afiliado)
+        public void rellenarAfiliado(Afiliado afiliado)
         {
             _afiliado = afiliado;
             cbxPlanMedico.SelectedItem = afiliado.PlanMedico;
@@ -59,13 +59,17 @@ namespace ClinicaFrba.Login
                 panelFamiliar.Visible = false;
                 txtHijos.Text = "0";
                 txtHijos.Enabled = false;
+                txtHijos.Visible = false;
                 cbxEstadoCivil.SelectedItem = EstadoCivil.Soltero;
                 cbxEstadoCivil.Enabled = false;
+                cbxEstadoCivil.Visible = false;
                 _afiliado.grupoFamiliar = _grupoFamiliar;
             }
             else {//Es padre
                 panelFamiliar.Visible = true;
                 cbxEstadoCivil.Enabled = true;
+                cbxEstadoCivil.Visible = true;
+                txtHijos.Enabled = true;
                 txtHijos.Visible = true;
             }
         }

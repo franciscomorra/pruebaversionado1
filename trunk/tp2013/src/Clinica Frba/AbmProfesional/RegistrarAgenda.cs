@@ -70,13 +70,13 @@ namespace ClinicaFrba.AbmProfesional
                     _agenda.SabadoIN = Convert.ToDateTime(cbxSabIN.SelectedItem);
                     _agenda.SabadoOUT = Convert.ToDateTime(cbxSabOUT.SelectedItem);
                 }
-                
                 MessageBox.Show("Se guardara la agenda del profesional, un momento porfavor");
                 
+                progressBar1.Visible = true;
                 _agenda.profesional = _profesional;
                 GuardarAgenda(_agenda);
-                //mgr.GuardarAgenda(_agenda);
                 MessageBox.Show("Se ha guardado la agenda");
+                progressBar1.Visible = false;
             }
             catch (System.Exception excep)
             {
@@ -171,8 +171,6 @@ namespace ClinicaFrba.AbmProfesional
             TimeSpan diferencia = contador;
             try
             {
-
-
                 if (cbxLunesIN.SelectedIndex > 0)
                 {
                     if (cbxLunesOUT.SelectedIndex < 1)
@@ -274,15 +272,18 @@ namespace ClinicaFrba.AbmProfesional
         private void GuardarAgenda(Agenda agenda)
         {
             TimeSpan diferenciaDias = agenda.FechaHasta - agenda.FechaDesde;
+            progressBar1.Maximum = diferenciaDias.Days;
+            progressBar1.Step = 1;
+            progressBar1.Value = 0;
+
             for (int i = 0; i < diferenciaDias.Days; i++)
             {
                 DateTime actual = agenda.FechaDesde.Date;
                 actual = actual.AddDays(i);
-
-                List<Turno> turnosDeLaFecha = _turnoManager.GetTurnosEnFechaProfesional(_profesional, actual);
+                progressBar1.Value = i;
+                List<Turno> turnosDeLaFecha = _turnoManager.BuscarTurnosProfesional(_profesional, actual);
                 DateTime horain = new DateTime();
                 DateTime horaout = new DateTime();
-
                 switch (actual.DayOfWeek)
                 {
                     case DayOfWeek.Monday:

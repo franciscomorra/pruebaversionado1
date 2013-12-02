@@ -12,7 +12,7 @@ namespace ClinicaFrba.Negocio
 {
     public class UsersManager
     {
-        public int insertarUsuario(User user)
+        public int InsertarUsuario(User user)
         {
             var service = new LoginService();
             var encryptedPass = service.ComputeHash("w23e", new SHA256Managed()); 

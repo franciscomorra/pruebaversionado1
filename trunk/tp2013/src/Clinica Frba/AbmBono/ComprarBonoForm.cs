@@ -17,10 +17,8 @@ namespace ClinicaFrba.AbmBono
     [NonNavigable]
     public partial class ComprarBonoForm : Form
     {
-
         private AfiliadosForm _afiliadosForm;
-
-        private AfiliadoManager _afiliadoMan = new AfiliadoManager();
+        private AfiliadoManager _afiliadoManager = new AfiliadoManager();
         public Afiliado _afiliado;
         private BonosManager _bonoManager = new BonosManager();
 
@@ -53,7 +51,7 @@ namespace ClinicaFrba.AbmBono
         { 
             try
             {
-                _afiliado = _afiliadoMan.actualizarInformacion(_afiliado.UserID);
+                _afiliado = _afiliadoManager.actualizarInformacion(_afiliado.UserID);
             }
             catch (System.Exception excep)
             {
@@ -85,7 +83,6 @@ namespace ClinicaFrba.AbmBono
                 }
                 else
                 {
-                    AfiliadoManager manager = new AfiliadoManager();
                     if(_afiliado == null)
                         _afiliado = Session.Afiliado;
                     txtAfiliado.Text = _afiliado.ToString();
@@ -114,13 +111,9 @@ namespace ClinicaFrba.AbmBono
             {
                 int numeroCompra;
                 if (cbxCantConsulta.SelectedIndex > 0 || cbxCantFarmacia.SelectedIndex > 0)
-                {
                     numeroCompra = _bonoManager.Nueva_Compra(_afiliado);
-                }
-                else {
+                else
                     return;
-                }
-                
                 int i = 0;
                 int j = 0;
                 if (cbxCantConsulta.SelectedIndex > 0)
@@ -149,9 +142,7 @@ namespace ClinicaFrba.AbmBono
                         _bonoManager.Comprar(bono);
                     }
                 }
-                
                 MessageBox.Show(string.Format("Se han comprado {0} bonos consulta y {1} bonos farmacia",i,j));
-                
                 if (OnBonosUpdated != null)
                     OnBonosUpdated(this, new BonoUpdatedEventArgs());
                 this.Close();
@@ -160,10 +151,7 @@ namespace ClinicaFrba.AbmBono
             {
                 MessageBox.Show(excep.Message);
             }
-
         }
-
-
     }
 }
 

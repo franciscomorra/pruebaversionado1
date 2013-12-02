@@ -58,6 +58,7 @@
             this.cbxSabIN = new System.Windows.Forms.ComboBox();
             this.cbxSabOUT = new System.Windows.Forms.ComboBox();
             this.panelAcciones = new System.Windows.Forms.Panel();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.panelProfesional.SuspendLayout();
             this.panelAcciones.SuspendLayout();
             this.SuspendLayout();
@@ -313,6 +314,7 @@
             // 
             // panelAcciones
             // 
+            this.panelAcciones.Controls.Add(this.progressBar1);
             this.panelAcciones.Controls.Add(this.cbxSabOUT);
             this.panelAcciones.Controls.Add(this.dtDesde);
             this.panelAcciones.Controls.Add(this.cbxSabIN);
@@ -342,6 +344,13 @@
             this.panelAcciones.Name = "panelAcciones";
             this.panelAcciones.Size = new System.Drawing.Size(632, 195);
             this.panelAcciones.TabIndex = 17;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(62, 162);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(466, 23);
+            this.progressBar1.TabIndex = 19;
             // 
             // RegistrarAgenda
             // 
@@ -393,6 +402,7 @@
         private System.Windows.Forms.ComboBox cbxSabIN;
         private System.Windows.Forms.ComboBox cbxSabOUT;
         private System.Windows.Forms.Panel panelAcciones;
+        private System.Windows.Forms.ProgressBar progressBar1;
 
     }
 }

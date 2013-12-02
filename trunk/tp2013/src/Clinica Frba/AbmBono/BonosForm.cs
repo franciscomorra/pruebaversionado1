@@ -10,14 +10,12 @@ using ClinicaFrba.Core;
 using ClinicaFrba.Login;
 using ClinicaFrba.Comun;
 using ClinicaFrba.Negocio;
-
 using ClinicaFrba.AbmAfiliado;
 using System.Configuration;
 
 
 namespace ClinicaFrba.AbmBono
 {
-    
     [PermissionRequired(Functionalities.ComprarBonos)]
     public partial class BonosForm : Form
     {
@@ -27,7 +25,6 @@ namespace ClinicaFrba.AbmBono
         private BonosManager _bonosManager = new BonosManager();
         private Afiliado _afiliado;
         private AfiliadosForm _afiliadosForm;
-
         bool _soloReceta = false;
         bool _soloConsulta = false;
 
@@ -76,11 +73,11 @@ namespace ClinicaFrba.AbmBono
                     _afiliado = Session.Afiliado;
                     txtAfiliado.Text = _afiliado.ToString();
                     btnBuscarAfiliado.Visible = false;
-                    
                 }
                 RefrescarDatagrid();
                 dgvBonos.DoubleClick += new EventHandler(dgvBonos_CellContentDoubleClick);
                 dgvBonos.Visible = true;
+                buttonsPanel.Visible = true;
             }
 
         }
@@ -102,12 +99,7 @@ namespace ClinicaFrba.AbmBono
             _afiliado = e.Afiliado;
             txtAfiliado.Text = _afiliado.ToString();
             _afiliadosForm.Hide();
-            var bonos = _bonosManager.GetAll(_afiliado);
-            if (_soloConsulta)
-                bonos = new List<Bono>(bonos.Where(x => x.TipodeBono == TipoBono.Consulta).ToList());
-            else if(_soloReceta)
-                bonos = new List<Bono>(bonos.Where(x => x.TipodeBono == TipoBono.Farmacia).ToList());
-            dgvBonos.DataSource = bonos;
+            RefrescarDatagrid();
             dgvBonos.Visible = true;
             buttonsPanel.Visible = true;
         }
@@ -151,15 +143,11 @@ namespace ClinicaFrba.AbmBono
                 var row = dgvBonos.SelectedRows[0];
                 var bono = row.DataBoundItem as Bono;
                 if (OnBonoselected != null)
-                {
-                    OnBonoselected(this, new BonoSelectedEventArgs()
-                    {
-                        Bono = bono
-                    });
-                }
+                    OnBonoselected(this, new BonoSelectedEventArgs(){Bono = bono});
                 this.Close();
             }
         }
+
 
     }
 }

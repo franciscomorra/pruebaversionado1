@@ -62,7 +62,7 @@
             this.buttonsPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.buttonsPanel.Location = new System.Drawing.Point(0, 0);
             this.buttonsPanel.Name = "buttonsPanel";
-            this.buttonsPanel.Size = new System.Drawing.Size(588, 39);
+            this.buttonsPanel.Size = new System.Drawing.Size(590, 39);
             this.buttonsPanel.TabIndex = 3;
             // 
             // btnEliminar
@@ -103,7 +103,7 @@
             this.searchPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.searchPanel.Location = new System.Drawing.Point(0, 39);
             this.searchPanel.Name = "searchPanel";
-            this.searchPanel.Size = new System.Drawing.Size(588, 117);
+            this.searchPanel.Size = new System.Drawing.Size(590, 117);
             this.searchPanel.TabIndex = 5;
             // 
             // groupBox
@@ -120,7 +120,7 @@
             this.groupBox.Controls.Add(this.txtNombre);
             this.groupBox.Location = new System.Drawing.Point(12, 6);
             this.groupBox.Name = "groupBox";
-            this.groupBox.Size = new System.Drawing.Size(564, 76);
+            this.groupBox.Size = new System.Drawing.Size(566, 76);
             this.groupBox.TabIndex = 2;
             this.groupBox.TabStop = false;
             this.groupBox.Text = "Filtro";
@@ -147,7 +147,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(323, 48);
+            this.label2.Location = new System.Drawing.Point(325, 48);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 5;
@@ -157,7 +157,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(259, 22);
+            this.label1.Location = new System.Drawing.Point(261, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(96, 13);
             this.label1.TabIndex = 4;
@@ -166,7 +166,7 @@
             // txtEmail
             // 
             this.txtEmail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEmail.Location = new System.Drawing.Point(361, 45);
+            this.txtEmail.Location = new System.Drawing.Point(363, 45);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(197, 20);
             this.txtEmail.TabIndex = 3;
@@ -174,7 +174,7 @@
             // txtAfiliadoNro
             // 
             this.txtAfiliadoNro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAfiliadoNro.Location = new System.Drawing.Point(361, 19);
+            this.txtAfiliadoNro.Location = new System.Drawing.Point(363, 19);
             this.txtAfiliadoNro.Name = "txtAfiliadoNro";
             this.txtAfiliadoNro.Size = new System.Drawing.Size(197, 20);
             this.txtAfiliadoNro.TabIndex = 2;
@@ -206,7 +206,7 @@
             // btnBuscar
             // 
             this.btnBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBuscar.Location = new System.Drawing.Point(501, 88);
+            this.btnBuscar.Location = new System.Drawing.Point(503, 88);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 0;
@@ -229,7 +229,7 @@
             this.dgvAfiliados.MultiSelect = false;
             this.dgvAfiliados.Name = "dgvAfiliados";
             this.dgvAfiliados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAfiliados.Size = new System.Drawing.Size(588, 314);
+            this.dgvAfiliados.Size = new System.Drawing.Size(590, 314);
             this.dgvAfiliados.TabIndex = 7;
             // 
             // Matricula
@@ -250,7 +250,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(588, 470);
+            this.ClientSize = new System.Drawing.Size(590, 470);
             this.Controls.Add(this.dgvAfiliados);
             this.Controls.Add(this.searchPanel);
             this.Controls.Add(this.buttonsPanel);
