@@ -34,7 +34,12 @@ namespace ClinicaFrba.Negocio
                     turno.Fecha = Convert.ToDateTime(row["Fecha"]);
                     turno.Numero = int.Parse(row["Numero"].ToString());
                     turno.Profesional = profMan.getInfo(int.Parse(row["UserProfesional"].ToString()));
-                     turno.Afiliado = afiliado;
+                    turno.Afiliado = afiliado;
+                    turno.Especialidad = new Especialidad()
+                    {
+                        ID = int.Parse(row["Especialidad_Cod"].ToString()),
+                        Nombre = row["Especialidad_Desc"].ToString()
+                    };
                     if(!soloTurnosHoy || (soloTurnosHoy && turno.Fecha.Date == fechaActual.Date))
                         if(profesional == null || (profesional.UserID == turno.Profesional.UserID))
                             ret.Add(turno);
@@ -65,6 +70,11 @@ namespace ClinicaFrba.Negocio
                     turno.NroConsulta = int.Parse(row["NROCONSULTA"].ToString());
                     turno.Profesional = profMan.getInfo(int.Parse(row["UserProfesional"].ToString()));
                     turno.Afiliado = afiliado;
+                    turno.Especialidad = new Especialidad()
+                    {
+                        ID = int.Parse(row["Especialidad_Cod"].ToString()),
+                        Nombre = row["Especialidad_Desc"].ToString()
+                    };
                     if (!soloTurnosHoy || (soloTurnosHoy && turno.Fecha.Date == fechaActual.Date))
                         if (profesional == null || (profesional.UserID == turno.Profesional.UserID))
                             ret.Add(turno);
@@ -127,6 +137,7 @@ namespace ClinicaFrba.Negocio
                     "@Fecha", turno.Fecha)
                     .And("@Profesional_ID", turno.Profesional.UserID)
                     .And("@Afiliado_ID", turno.Afiliado.UserID)
+                    .And("@Especialidad", turno.Especialidad.ID)
             .Arguments);
             //Turno nuevo
         }

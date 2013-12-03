@@ -25,10 +25,9 @@ namespace ClinicaFrba.AbmTurno
         private BonosForm _bonosForm;
         private Bono _bono;
         private TurnosManager _turnosManager = new TurnosManager();
-        private bool _registrado = false;
         public RegistrarLlegada()
         {
-            _registrado = false;
+            //_registrado = false;
             InitializeComponent();
 
         }
@@ -46,19 +45,17 @@ namespace ClinicaFrba.AbmTurno
         {
             _afiliado = e.Afiliado;
             txtAfiliado.Text = _afiliado.ToString();
-            _afiliadosForm.Hide();
+            _afiliadosForm.Close();
             panelTurno.Show();
         }
 
         private void btnBuscarTurno_Click(object sender, EventArgs e)
         {
-            if (_turnosForm == null)
-            {
-                _turnosForm = new TurnosForm();
-                _turnosForm.ModoBusqueda(_afiliado);
-                _turnosForm.SoloTurnosdeHoy();
-                _turnosForm.OnTurnoselected += new EventHandler<TurnoSelectedEventArgs>(_turnosForm_OnTurnoSelected);
-            }
+
+            _turnosForm = new TurnosForm();
+            _turnosForm.ModoBusqueda(_afiliado);
+            _turnosForm.SoloTurnosdeHoy();
+            _turnosForm.OnTurnoselected += new EventHandler<TurnoSelectedEventArgs>(_turnosForm_OnTurnoSelected);
             ViewsManager.LoadModal(_turnosForm);
         }
 
@@ -66,18 +63,16 @@ namespace ClinicaFrba.AbmTurno
         {
             _turno = e.Turno;
             txtTurno.Text = _turno.Fecha.ToString();
-            _turnosForm.Hide();
+            _turnosForm.Close();
             panelBono.Show();
         }
 
         private void btnBuscarBonoC_Click(object sender, EventArgs e)
         {
-            if (_bonosForm == null)
-            {
-                _bonosForm = new BonosForm();
-                _bonosForm.ModoBusqueda(_afiliado,TipoBono.Consulta);
-                _bonosForm.OnBonoselected += new EventHandler<BonoSelectedEventArgs>(_bonosForm_OnBonoSelected);
-            }
+
+            _bonosForm = new BonosForm();
+            _bonosForm.ModoBusqueda(_afiliado,TipoBono.Consulta);
+            _bonosForm.OnBonoselected += new EventHandler<BonoSelectedEventArgs>(_bonosForm_OnBonoSelected);
             ViewsManager.LoadModal(_bonosForm);
         }
 
@@ -85,7 +80,7 @@ namespace ClinicaFrba.AbmTurno
         {
             _bono = e.Bono;
             txtBono.Text = _bono.Numero.ToString();
-            _bonosForm.Hide();
+            _bonosForm.Close();
             btnRegistrar.Show();
         }
 
@@ -94,17 +89,24 @@ namespace ClinicaFrba.AbmTurno
         {
             try
             {
-                if (_turno.Fecha > Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddMinutes(15))
-                {
+                DateTime fechallegada = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddMinutes(15);
+                if (_turno.Fecha.CompareTo(fechallegada)<0)
                     throw new Exception("El usuario debia registrarse 15 minutos antes!");
-                }
-                if (_registrado == false)
-                {
-                    _turnosManager.RegistrarLlegada(_turno, _bono);
-                    _registrado = true;
-                    MessageBox.Show("Registrado Correctamente!");
-                    this.Refresh();
-                }
+
+                _turnosManager.RegistrarLlegada(_turno, _bono);
+                //_registrado = true;
+                MessageBox.Show("Registrado Correctamente!");
+                _afiliado  = null;
+                _afiliadosForm = null;
+                _turno = null;
+                _turnosForm  = null;
+                _bonosForm = null;
+                _bono = null;
+                panelTurno.Hide();
+                panelBono.Hide();
+                btnRegistrar.Hide();
+
+
             }
             catch (System.Exception excep)
             {

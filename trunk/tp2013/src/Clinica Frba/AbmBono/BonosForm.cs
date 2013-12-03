@@ -85,12 +85,11 @@ namespace ClinicaFrba.AbmBono
 
         private void btnBuscarAfiliado_Click(object sender, EventArgs e)
         {
-            if (_afiliadosForm == null)
-            {
+     
                 _afiliadosForm = new AfiliadosForm();
                 _afiliadosForm.ModoBusqueda();
                 _afiliadosForm.OnAfiliadoSelected += new EventHandler<AfiliadoSelectedEventArgs>(_afiliadosForm_OnAfiliadoSelected);
-            }
+            
             ViewsManager.LoadModal(_afiliadosForm);
         }
 

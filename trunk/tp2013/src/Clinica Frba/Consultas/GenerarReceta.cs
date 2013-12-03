@@ -111,12 +111,10 @@ namespace ClinicaFrba.Consultas
 
         private void btnBuscarProfesional_Click(object sender, EventArgs e)
         {
-            if (_profesionalesForm == null)
-            {
-                _profesionalesForm = new ProfesionalesForm();
-                _profesionalesForm.ModoBusqueda();
-                _profesionalesForm.OnProfesionalSelected += new EventHandler<ProfesionalSelectedEventArgs>(profesionalesForm_OnProfesionalSelected);
-            }
+
+            _profesionalesForm = new ProfesionalesForm();
+            _profesionalesForm.ModoBusqueda();
+            _profesionalesForm.OnProfesionalSelected += new EventHandler<ProfesionalSelectedEventArgs>(profesionalesForm_OnProfesionalSelected);
             ViewsManager.LoadModal(_profesionalesForm);
         }
         void profesionalesForm_OnProfesionalSelected(object sender, ProfesionalSelectedEventArgs e)
@@ -130,11 +128,10 @@ namespace ClinicaFrba.Consultas
 
         private void btnBuscarAfiliado_Click(object sender, EventArgs e)
         {
-            if (_afiliadosForm == null)
-            {
-                _afiliadosForm = new AfiliadosForm();
-                _afiliadosForm.ModoBusqueda();
-                _afiliadosForm.OnAfiliadoSelected += new EventHandler<AfiliadoSelectedEventArgs>(_afiliadosForm_OnAfiliadoSelected);            }
+
+            _afiliadosForm = new AfiliadosForm();
+            _afiliadosForm.ModoBusqueda();
+            _afiliadosForm.OnAfiliadoSelected += new EventHandler<AfiliadoSelectedEventArgs>(_afiliadosForm_OnAfiliadoSelected);
             ViewsManager.LoadModal(_afiliadosForm);
         }
 
@@ -148,13 +145,12 @@ namespace ClinicaFrba.Consultas
 
         private void btnBuscarTurno_Click(object sender, EventArgs e)
         {
-            if (_turnosForm == null)
-            {
-                _turnosForm = new TurnosForm();
-                _turnosForm.ModoBusqueda(_afiliado);
-                _turnosForm.SoloTurnosdeHoy();
-                _turnosForm.OnTurnoselected += new EventHandler<TurnoSelectedEventArgs>(_turnosForm_OnTurnoSelected);
-            }
+
+            _turnosForm = new TurnosForm();
+            _turnosForm.ModoBusqueda(_afiliado);
+            _turnosForm.SoloTurnosdeHoy();
+            _turnosForm.OnTurnoselected += new EventHandler<TurnoSelectedEventArgs>(_turnosForm_OnTurnoSelected);
+    
             ViewsManager.LoadModal(_turnosForm);
         }
 
@@ -168,12 +164,11 @@ namespace ClinicaFrba.Consultas
 
         private void btnBuscarBonoF_Click(object sender, EventArgs e)
         {
-            if (_bonosForm == null)
-            {
+
                 _bonosForm = new BonosForm();
                 _bonosForm.ModoBusqueda(_afiliado, TipoBono.Farmacia);
                 _bonosForm.OnBonoselected += new EventHandler<BonoSelectedEventArgs>(_bonosForm_OnBonoSelected);
-            }
+            
             ViewsManager.LoadModal(_bonosForm);
         }
 

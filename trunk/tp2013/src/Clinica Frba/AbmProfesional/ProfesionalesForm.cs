@@ -21,6 +21,7 @@ namespace ClinicaFrba.AbmProfesional
         private EspecialidadesManager _especialidadesManager = new EspecialidadesManager();
         private bool _isSearchMode = false;
         public event EventHandler<ProfesionalSelectedEventArgs> OnProfesionalSelected;
+        public Especialidad _especialidad;
         public ProfesionalesForm()
         {
             InitializeComponent();
@@ -31,6 +32,7 @@ namespace ClinicaFrba.AbmProfesional
             buttonsPanel.Visible = false;
             _isSearchMode = true;
         }
+        
 
         private void ProfesionalesForm_Load(object sender, EventArgs e)
         {
@@ -49,6 +51,9 @@ namespace ClinicaFrba.AbmProfesional
                 profesionalesGrid.AutoGenerateColumns = false;
                 profesionalesGrid.DataSourceChanged += new EventHandler(profesionalesGrid_DataSourceChanged);
                 dataSource.Remove(Session.Profesional);
+
+                if (_especialidad != null)
+                    dataSource = new BindingList<Profesional>(dataSource.Where(x => x.Especialidades.Contains(_especialidad)).ToList());
                 profesionalesGrid.DataSource = dataSource;
                 profesionalesGrid.DoubleClick += new EventHandler(profesionalesGrid_DoubleClick);
             }

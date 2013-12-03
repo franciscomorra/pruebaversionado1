@@ -37,12 +37,11 @@ namespace ClinicaFrba.Consultas
 
         private void btnBuscarProfesional_Click(object sender, EventArgs e)
         {
-            if (_profesionalesForm == null)
-            {
+
                 _profesionalesForm = new ProfesionalesForm();
                 _profesionalesForm.ModoBusqueda();
                 _profesionalesForm.OnProfesionalSelected += new EventHandler<ProfesionalSelectedEventArgs>(profesionalesForm_OnProfesionalSelected);
-            }
+            
             ViewsManager.LoadModal(_profesionalesForm);
         }
         void profesionalesForm_OnProfesionalSelected(object sender, ProfesionalSelectedEventArgs e)
@@ -57,12 +56,11 @@ namespace ClinicaFrba.Consultas
 
         private void btnBuscarAfiliado_Click(object sender, EventArgs e)
         {
-            if (_afiliadosForm == null)
-            {
+  
                 _afiliadosForm = new AfiliadosForm();
                 _afiliadosForm.ModoBusqueda();
                 _afiliadosForm.OnAfiliadoSelected += new EventHandler<AfiliadoSelectedEventArgs>(_afiliadosForm_OnAfiliadoSelected);
-            }
+            
             ViewsManager.LoadModal(_afiliadosForm);
         }
 
@@ -123,27 +121,18 @@ namespace ClinicaFrba.Consultas
         private Consulta rellenarConsulta() { 
             Consulta consulta = new Consulta();
             consulta.Turno = _turno;
-            
-            try
-            {
-                if (string.IsNullOrEmpty(txtSintomas.Text.Trim()))
-                    throw new Exception("Los sintomas son obligatorios");
-                if (string.IsNullOrEmpty(txtDiagnostico.Text.Trim()))
-                    throw new Exception("El diagnostico es obligatorio!");
-                consulta.Enfermedad = txtDiagnostico.Text;
-                consulta.Sintomas = txtSintomas.Text;
-                return consulta;
-            }
-            catch (System.Exception excep)
-            {
-                MessageBox.Show(excep.Message);
-                return null;
-            }
+            if (string.IsNullOrEmpty(txtSintomas.Text.Trim()))
+                throw new Exception("Los sintomas son obligatorios");
+            if (string.IsNullOrEmpty(txtDiagnostico.Text.Trim()))
+                throw new Exception("El diagnostico es obligatorio!");
+            consulta.Enfermedad = txtDiagnostico.Text;
+            consulta.Sintomas = txtSintomas.Text;
+            return consulta;
+
         }
 
         private void btnGenerarReceta_Click(object sender, EventArgs e)
         {
-
             try
             {
                 if (_contadorRecetas <= 5)
@@ -180,28 +169,53 @@ namespace ClinicaFrba.Consultas
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (!_consultaAlmacenada)
+            try
             {
-                _consulta = rellenarConsulta();
-                _consultasManager.Save(_consulta);
-                MessageBox.Show("Consulta Almacenada Correctamente!");
+                if (!_consultaAlmacenada)
+                {
+                    _consulta = rellenarConsulta();
+                    _consultasManager.Save(_consulta);
+                    MessageBox.Show("Consulta Almacenada Correctamente!");
+                    ValoresPorDefecto();
+                }
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+                return;
             }
         }
-
-        private void RegistroResultadoAtencion_Load(object sender, EventArgs e)
-        {
+        private void ValoresPorDefecto() { 
+             _profesional=null;
+             _profesionalesForm=null;
+            _afiliado=null;
+            _afiliadosForm=null;
+            _turno=null;
+            _turnosForm=null;
+            _recetaForm=null;    
+            _contadorRecetas = 0;
+            _consulta=null;
+            _consultaAlmacenada = false;
             panelAcciones.Visible = false;
             panelAfiliado.Visible = false;
             panelTurno.Visible = false;
-            if (Session.User.Perfil.Nombre == "Profesional") {
+            if (Session.User.Perfil.Nombre == "Profesional")
+            {
                 _profesional = new Profesional();
                 _profesional = Session.Profesional;
                 txtProfesional.Text = _profesional.ToString();
                 btnBuscarProfesional.Visible = false;
                 panelAfiliado.Visible = true;
-            }else{
+            }
+            else
+            {
                 btnBuscarProfesional.Visible = true;
             }
+        }
+
+        private void RegistroResultadoAtencion_Load(object sender, EventArgs e)
+        {
+            ValoresPorDefecto();
         }
 
     }

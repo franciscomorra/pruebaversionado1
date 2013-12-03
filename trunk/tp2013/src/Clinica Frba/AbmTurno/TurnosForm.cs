@@ -40,7 +40,6 @@ namespace ClinicaFrba.AbmTurno
             btnBuscarAfiliado.Visible = false;
             txtAfiliado.Text = _afiliado.ToString();
             dgvTurnos.Visible = true;
-            buttonsPanel.Visible = true;
             _isSearchMode = true;
         }
         public void SoloTurnosdeHoy()
@@ -88,12 +87,11 @@ namespace ClinicaFrba.AbmTurno
 
         private void btnBuscarAfiliado_Click(object sender, EventArgs e)
         {
-            if (_afiliadosForm == null)
-            {
+
                 _afiliadosForm = new AfiliadosForm();
                 _afiliadosForm.ModoBusqueda();
                 _afiliadosForm.OnAfiliadoSelected += new EventHandler<AfiliadoSelectedEventArgs>(_afiliadosForm_OnAfiliadoSelected);
-            }
+            
             ViewsManager.LoadModal(_afiliadosForm);
         }
 
@@ -103,9 +101,8 @@ namespace ClinicaFrba.AbmTurno
             txtAfiliado.Text = _afiliado.ToString();
             _afiliadosForm.Hide();
             RefreshDataGrid();
-
-            buttonsPanel.Visible = true;
             dgvTurnos.Visible = true;
+            buttonsPanel.Visible = true;
         }
 
 
@@ -161,5 +158,9 @@ namespace ClinicaFrba.AbmTurno
                 this.Close();
             }
         }
+
+
+
+
     }
 }

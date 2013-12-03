@@ -13,6 +13,7 @@ namespace ClinicaFrba.Comun
         public DateTime Fecha { get; set; }
         public int AgendaID { get; set; }
         public int NroConsulta { get; set; }
+        public Especialidad Especialidad { get; set; }
         public override string ToString()
         {
             return Fecha+" ("+Numero+")";
