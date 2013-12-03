@@ -87,12 +87,11 @@ namespace ClinicaFrba.AbmProfesional
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            if (_profesionalesForm == null)
-            {
+           
                 _profesionalesForm = new ProfesionalesForm();
                 _profesionalesForm.ModoBusqueda();
                 _profesionalesForm.OnProfesionalSelected += new EventHandler<ProfesionalSelectedEventArgs>(profesionalesForm_OnProfesionalSelected);
-            }
+            
             ViewsManager.LoadModal(_profesionalesForm);
         }
 

@@ -24,6 +24,7 @@ namespace ClinicaFrba.AbmTurno
         private Profesional _profesional;
         private ProfesionalesForm _profesionalesForm;
         private TurnosManager _turnosManager = new TurnosManager();
+        private EspecialidadesManager _especialidadManager = new EspecialidadesManager();
         private Turno _turno = new Turno();
         public event EventHandler<TurnoUpdatedEventArgs> OnTurnoUpdated;
         
@@ -34,12 +35,11 @@ namespace ClinicaFrba.AbmTurno
 
         private void btnBuscarProfesional_Click(object sender, EventArgs e)
         {
-            if (_profesionalesForm == null)
-            {
+      
                 _profesionalesForm = new ProfesionalesForm();
                 _profesionalesForm.ModoBusqueda();
                 _profesionalesForm.OnProfesionalSelected += new EventHandler<ProfesionalSelectedEventArgs>(profesionalesForm_OnProfesionalSelected);
-            }
+            
             ViewsManager.LoadModal(_profesionalesForm);
         }
         void profesionalesForm_OnProfesionalSelected(object sender, ProfesionalSelectedEventArgs e)
@@ -48,8 +48,12 @@ namespace ClinicaFrba.AbmTurno
             txtProfesional.Text = _profesional.ToString();
             _profesionalesForm.Hide();
 
-            panelFecha.Visible = true;
-            panelHorario.Visible = false;
+            List<Especialidad> especialidadesDeProfesional = _especialidadManager.GetAllForUser(_profesional.UserID);
+            cbxEspecialidad.DataSource = especialidadesDeProfesional;
+            cbxEspecialidad.SelectedIndex = 0;
+
+            lblEsp.Visible = true;
+            cbxEspecialidad.Visible = true;
 
         }
         private void dtTurno_ValueChanged(object sender, EventArgs e)
@@ -61,11 +65,20 @@ namespace ClinicaFrba.AbmTurno
         {
             _turno = (Turno)cbxHorarios.SelectedItem;
             _turno.Afiliado = _afiliado;
-            
-            _turnosManager.GuardarTurno(_turno);
-            if (OnTurnoUpdated != null)
-                OnTurnoUpdated(this, new TurnoUpdatedEventArgs() { Turno = _turno });
-            this.Close();
+            if(_turno.Especialidad==null)
+                _turno.Especialidad = (Especialidad)cbxEspecialidad.SelectedItem;
+            try
+            {
+                _turnosManager.GuardarTurno(_turno);
+                if (OnTurnoUpdated != null)
+                    OnTurnoUpdated(this, new TurnoUpdatedEventArgs() { Turno = _turno });
+                this.Close();
+            }
+            catch (System.Exception excep)
+            {
+                MessageBox.Show(excep.Message);
+                return;
+            }
         }
 
         private void PedirTurnoForm_Load(object sender, EventArgs e)
@@ -100,6 +113,14 @@ namespace ClinicaFrba.AbmTurno
                 else
                     MessageBox.Show("No hay horarios disponibles en la fecha!");
             }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            panelFecha.Visible = true;
+            panelHorario.Visible = false;
+            if(cbxEspecialidad.SelectedIndex>=0)
+                _turno.Especialidad = (Especialidad)cbxEspecialidad.SelectedItem;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace ClinicaFrba.Comun
     {
         public int ID { get; set; }
         public string Nombre { get; set; }
-        public List<TiposEspecialidad> TiposEspecialidad { get; set; }
+        public TiposEspecialidad TipoEspecialidad { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -20,6 +20,11 @@ namespace ClinicaFrba.Comun
         public override int GetHashCode()
         {
             return ID.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return this.Nombre;
         }
     }
 

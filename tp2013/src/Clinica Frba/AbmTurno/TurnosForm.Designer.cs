@@ -28,53 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonsPanel = new System.Windows.Forms.Panel();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnAgregar = new System.Windows.Forms.Button();
             this.panelAfiliado = new System.Windows.Forms.Panel();
             this.btnBuscarAfiliado = new System.Windows.Forms.Button();
             this.lblAfiliado = new System.Windows.Forms.Label();
             this.txtAfiliado = new System.Windows.Forms.TextBox();
+            this.buttonsPanel = new System.Windows.Forms.Panel();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnAgregar = new System.Windows.Forms.Button();
             this.dgvTurnos = new System.Windows.Forms.DataGridView();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Especialidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Profesional = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonsPanel.SuspendLayout();
             this.panelAfiliado.SuspendLayout();
+            this.buttonsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTurnos)).BeginInit();
             this.SuspendLayout();
-            // 
-            // buttonsPanel
-            // 
-            this.buttonsPanel.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.buttonsPanel.Controls.Add(this.btnCancelar);
-            this.buttonsPanel.Controls.Add(this.btnAgregar);
-            this.buttonsPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonsPanel.Location = new System.Drawing.Point(0, 43);
-            this.buttonsPanel.Name = "buttonsPanel";
-            this.buttonsPanel.Size = new System.Drawing.Size(843, 39);
-            this.buttonsPanel.TabIndex = 2;
-            this.buttonsPanel.Visible = false;
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Location = new System.Drawing.Point(93, 10);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(106, 23);
-            this.btnCancelar.TabIndex = 2;
-            this.btnCancelar.Text = "Cancelar Turno";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Location = new System.Drawing.Point(12, 10);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregar.TabIndex = 0;
-            this.btnAgregar.Text = "Nuevo";
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // panelAfiliado
             // 
@@ -85,7 +54,7 @@
             this.panelAfiliado.Location = new System.Drawing.Point(0, 0);
             this.panelAfiliado.Name = "panelAfiliado";
             this.panelAfiliado.Size = new System.Drawing.Size(843, 43);
-            this.panelAfiliado.TabIndex = 1;
+            this.panelAfiliado.TabIndex = 9;
             // 
             // btnBuscarAfiliado
             // 
@@ -114,6 +83,38 @@
             this.txtAfiliado.Size = new System.Drawing.Size(250, 20);
             this.txtAfiliado.TabIndex = 33;
             // 
+            // buttonsPanel
+            // 
+            this.buttonsPanel.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.buttonsPanel.Controls.Add(this.btnCancelar);
+            this.buttonsPanel.Controls.Add(this.btnAgregar);
+            this.buttonsPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonsPanel.Location = new System.Drawing.Point(0, 43);
+            this.buttonsPanel.Name = "buttonsPanel";
+            this.buttonsPanel.Size = new System.Drawing.Size(843, 39);
+            this.buttonsPanel.TabIndex = 10;
+            this.buttonsPanel.Visible = false;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(93, 10);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(106, 23);
+            this.btnCancelar.TabIndex = 2;
+            this.btnCancelar.Text = "Cancelar Turno";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Location = new System.Drawing.Point(12, 10);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregar.TabIndex = 0;
+            this.btnAgregar.Text = "Nuevo";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
             // dgvTurnos
             // 
             this.dgvTurnos.AllowUserToAddRows = false;
@@ -123,6 +124,7 @@
             this.dgvTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTurnos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Fecha,
+            this.Especialidad,
             this.Profesional,
             this.Numero});
             this.dgvTurnos.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -132,7 +134,7 @@
             this.dgvTurnos.ReadOnly = true;
             this.dgvTurnos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTurnos.Size = new System.Drawing.Size(843, 379);
-            this.dgvTurnos.TabIndex = 4;
+            this.dgvTurnos.TabIndex = 11;
             this.dgvTurnos.Visible = false;
             // 
             // Fecha
@@ -141,6 +143,13 @@
             this.Fecha.HeaderText = "Fecha";
             this.Fecha.Name = "Fecha";
             this.Fecha.ReadOnly = true;
+            // 
+            // Especialidad
+            // 
+            this.Especialidad.DataPropertyName = "Especialidad";
+            this.Especialidad.HeaderText = "Especialidad";
+            this.Especialidad.Name = "Especialidad";
+            this.Especialidad.ReadOnly = true;
             // 
             // Profesional
             // 
@@ -167,9 +176,9 @@
             this.Name = "TurnosForm";
             this.Text = "Administrar Turnos";
             this.Load += new System.EventHandler(this.TurnosForm_Load);
-            this.buttonsPanel.ResumeLayout(false);
             this.panelAfiliado.ResumeLayout(false);
             this.panelAfiliado.PerformLayout();
+            this.buttonsPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTurnos)).EndInit();
             this.ResumeLayout(false);
 
@@ -177,16 +186,18 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel buttonsPanel;
-        private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Panel panelAfiliado;
         private System.Windows.Forms.Button btnBuscarAfiliado;
         private System.Windows.Forms.Label lblAfiliado;
         private System.Windows.Forms.TextBox txtAfiliado;
+        private System.Windows.Forms.Panel buttonsPanel;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.DataGridView dgvTurnos;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Especialidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Profesional;
         private System.Windows.Forms.DataGridViewTextBoxColumn Numero;
+
     }
 }
