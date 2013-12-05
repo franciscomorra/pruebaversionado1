@@ -23,5 +23,25 @@ namespace ClinicaFrba.Negocio
             .Arguments);
             //Guarda la consulta de un turno (Obs. Un turno fue atendido si solo si tiene una consulta asociada a el)
         }
+        public Consulta getInfo(Turno turno)
+        {
+            Consulta consulta = new Consulta();
+            var row = SqlDataAccess.ExecuteDataRowQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "[SHARPS].GetConsultaInfo", SqlDataAccessArgs
+                .CreateWith("@turno", turno.Numero)
+                .Arguments);
+
+            //Dado un nombre de perfil, dame el ID
+            if (row != null)
+            {
+                consulta.Enfermedad = row["Enfermedad"].ToString();
+                consulta.Sintomas = row["Sintomas"].ToString();
+                consulta.Turno = turno;
+                consulta.NumeroConsulta = int.Parse(row["Numero_Consulta"].ToString());
+            }
+            return consulta;
+        }
+
+
     }
 }

@@ -11,6 +11,5 @@ namespace ClinicaFrba.Comun
         public string Sintomas { get; set; }
         public string Enfermedad { get; set; }
         public int NumeroConsulta { get; set; }
-
     }
 }

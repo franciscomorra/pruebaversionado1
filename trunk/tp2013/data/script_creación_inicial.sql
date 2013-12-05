@@ -2059,6 +2059,37 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE [SHARPS].[GetConsultaInfo]
+@turno INT
+AS
+BEGIN
+	SELECT
+		Enfermedad ,Sintomas,Numero_Consulta
+	FROM  [SHARPS].Consultas C
+	WHERE C.Turno = @turno
+END
+GO
+
+CREATE PROCEDURE  [SHARPS].[CancelarTurnoAgenda]
+@turno INT
+AS
+BEGIN
+	DECLARE @idEstadoCanceladoProfesional INT
+	DECLARE @IDAGENDA INT
+	SELECT @idEstadoCanceladoProfesional = et.EstadoID  FROM Estados_Turno et WHERE et.Descripcion = 'CanceladoProfesional'
+	SELECT @IDAGENDA = T.Agenda FROM TURNOS T WHERE T.Numero = @turno
+	UPDATE SHARPS.Turnos SET Estado = @idEstadoCanceladoProfesional WHERE Numero = @turno
+	UPDATE SHARPS.Agendas SET Activo = 1 WHERE AgendaID = @IDAGENDA AND Activo = 0
+END
+GO
+CREATE PROCEDURE [SHARPS].[DeleteAgenda]
+	@agendaID int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	DELETE FROM SHARPS.Agendas WHERE AgendaID = @agendaID
+END
+GO
 CREATE PROCEDURE [SHARPS].[InsertarCompra]
 	@AfiliadoID INT,
 	@Fecha DATETIME,

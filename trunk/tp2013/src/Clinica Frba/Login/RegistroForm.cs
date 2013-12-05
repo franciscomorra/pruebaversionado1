@@ -72,15 +72,12 @@ namespace ClinicaFrba
                 bool puedeModificarProfesionales = Session.User.Permissions.Contains(Functionalities.AdministrarProfesionales);
                 if ((puedeModificarAfiliados && !puedeModificarProfesionales) || (puedeModificarProfesionales && !puedeModificarAfiliados))
                     puedeElegirPerfil = false;
-
                 Perfiles = _perfilesManager.GetAllPerfilesForRegistration();
                 Perfiles.ForEach(x => cbxPerfiles.Items.Add(x));
-                
                 cbxPerfiles.DisplayMember = "Nombre";
-                
                 cbxSexo.DataSource = Enum.GetValues(typeof(TipoSexo)).Cast<TipoSexo>().ToList();
                 cbxTipoDNI.DataSource = Enum.GetValues(typeof(TipoDoc)).Cast<TipoDoc>().ToList();
-                
+
             }
             
             catch (System.Exception excep)
@@ -115,12 +112,10 @@ namespace ClinicaFrba
             _profesional = profesional;
             user = _profesional as User;
             rellenarCamposUsuario(user);
-            
             profesionalUserControl.RellenarProfesional(_profesional);
             userPanel.Controls.Add(profesionalUserControl);
         }
         private void rellenarCamposUsuario(User usuario){
-
             if (Session.User.UserID == usuario.UserID) {
                 lblPerfil.Visible = false;
                 lblRol.Visible = false;
@@ -170,7 +165,6 @@ namespace ClinicaFrba
                 }
                 else
                    throw new Exception("Error de Perfiles");
-
             }
             catch (System.Exception excep)
             {
@@ -247,7 +241,6 @@ namespace ClinicaFrba
                 throw new Exception(" El Email es obligatorio!");
             if (dni==0 || dni>99999999)
                 throw new Exception("El DNI no es valido!");
-
             user.DetallesPersona.Apellido = txtApellido.Text.Trim();
             user.DetallesPersona.Nombre = txtNombre.Text.Trim();
             user.DetallesPersona.DNI = dni;
@@ -259,7 +252,6 @@ namespace ClinicaFrba
             user.DetallesPersona.Sexo = (TipoSexo)cbxSexo.SelectedItem;
             return user;
         }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();

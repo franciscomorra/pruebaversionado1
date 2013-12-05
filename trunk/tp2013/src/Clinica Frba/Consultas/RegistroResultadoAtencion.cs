@@ -34,14 +34,15 @@ namespace ClinicaFrba.Consultas
         {
             InitializeComponent();
         }
-
+        private void RegistroResultadoAtencion_Load(object sender, EventArgs e)
+        {
+            ValoresPorDefecto();
+        }
         private void btnBuscarProfesional_Click(object sender, EventArgs e)
         {
-
-                _profesionalesForm = new ProfesionalesForm();
-                _profesionalesForm.ModoBusqueda();
-                _profesionalesForm.OnProfesionalSelected += new EventHandler<ProfesionalSelectedEventArgs>(profesionalesForm_OnProfesionalSelected);
-            
+            _profesionalesForm = new ProfesionalesForm();
+            _profesionalesForm.ModoBusqueda();
+            _profesionalesForm.OnProfesionalSelected += new EventHandler<ProfesionalSelectedEventArgs>(profesionalesForm_OnProfesionalSelected);
             ViewsManager.LoadModal(_profesionalesForm);
         }
         void profesionalesForm_OnProfesionalSelected(object sender, ProfesionalSelectedEventArgs e)
@@ -51,25 +52,18 @@ namespace ClinicaFrba.Consultas
             _profesionalesForm.Hide();
             panelAfiliado.Visible = true;
         }
-
-
-
         private void btnBuscarAfiliado_Click(object sender, EventArgs e)
         {
-  
-                _afiliadosForm = new AfiliadosForm();
-                _afiliadosForm.ModoBusqueda();
-                _afiliadosForm.OnAfiliadoSelected += new EventHandler<AfiliadoSelectedEventArgs>(_afiliadosForm_OnAfiliadoSelected);
-            
+            _afiliadosForm = new AfiliadosForm();
+            _afiliadosForm.ModoBusqueda();
+            _afiliadosForm.OnAfiliadoSelected += new EventHandler<AfiliadoSelectedEventArgs>(_afiliadosForm_OnAfiliadoSelected);
             ViewsManager.LoadModal(_afiliadosForm);
         }
-
         void _afiliadosForm_OnAfiliadoSelected(object sender, AfiliadoSelectedEventArgs e)
         {
             _afiliado = e.Afiliado;
             txtAfiliado.Text = _afiliado.ToString();
             _afiliadosForm.Hide();
-            
             TurnosManager tmanager = new TurnosManager();
             List<Turno> turnosDeHoy = tmanager.BuscarConConsulta(_afiliado, true, _profesional);
             try
@@ -104,7 +98,6 @@ namespace ClinicaFrba.Consultas
         {
             _turnosForm = new TurnosForm();
             _turnosForm.ModoBusqueda(_afiliado);
-
             _turnosForm.SoloTurnosdeHoy();
             _turnosForm.SoloConConsulta();
             _turnosForm.OnTurnoselected += new EventHandler<TurnoSelectedEventArgs>(_turnosForm_OnTurnoSelected);
@@ -117,6 +110,13 @@ namespace ClinicaFrba.Consultas
             txtTurno.Text = _turno.Fecha.ToString();
             btnBuscarTurno.Hide();
             panelAcciones.Visible = true;
+            _consulta = _consultasManager.getInfo(_turno);
+            if (_consulta != null)
+            {
+                txtSintomas.Text = _consulta.Sintomas;
+                txtDiagnostico.Text = _consulta.Enfermedad;
+            }
+
         }
         private Consulta rellenarConsulta() { 
             Consulta consulta = new Consulta();
@@ -128,14 +128,13 @@ namespace ClinicaFrba.Consultas
             consulta.Enfermedad = txtDiagnostico.Text;
             consulta.Sintomas = txtSintomas.Text;
             return consulta;
-
         }
 
         private void btnGenerarReceta_Click(object sender, EventArgs e)
         {
             try
             {
-                if (_contadorRecetas <= 5)
+                if (_contadorRecetas < 5)
                 {
                     if (!_consultaAlmacenada)
                     {
@@ -186,8 +185,8 @@ namespace ClinicaFrba.Consultas
             }
         }
         private void ValoresPorDefecto() { 
-             _profesional=null;
-             _profesionalesForm=null;
+            _profesional=null;
+            _profesionalesForm=null;
             _afiliado=null;
             _afiliadosForm=null;
             _turno=null;
@@ -212,11 +211,5 @@ namespace ClinicaFrba.Consultas
                 btnBuscarProfesional.Visible = true;
             }
         }
-
-        private void RegistroResultadoAtencion_Load(object sender, EventArgs e)
-        {
-            ValoresPorDefecto();
-        }
-
     }
 }

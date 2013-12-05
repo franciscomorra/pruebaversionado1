@@ -77,7 +77,8 @@ namespace ClinicaFrba.AbmBono
                 RefrescarDatagrid();
                 dgvBonos.DoubleClick += new EventHandler(dgvBonos_CellContentDoubleClick);
                 dgvBonos.Visible = true;
-                buttonsPanel.Visible = true;
+                if(!_isSearchMode)
+                    buttonsPanel.Visible = true;
             }
 
         }
@@ -85,11 +86,9 @@ namespace ClinicaFrba.AbmBono
 
         private void btnBuscarAfiliado_Click(object sender, EventArgs e)
         {
-     
-                _afiliadosForm = new AfiliadosForm();
-                _afiliadosForm.ModoBusqueda();
-                _afiliadosForm.OnAfiliadoSelected += new EventHandler<AfiliadoSelectedEventArgs>(_afiliadosForm_OnAfiliadoSelected);
-            
+            _afiliadosForm = new AfiliadosForm();
+            _afiliadosForm.ModoBusqueda();
+            _afiliadosForm.OnAfiliadoSelected += new EventHandler<AfiliadoSelectedEventArgs>(_afiliadosForm_OnAfiliadoSelected);
             ViewsManager.LoadModal(_afiliadosForm);
         }
 
