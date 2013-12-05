@@ -83,8 +83,6 @@ namespace ClinicaFrba.AbmTurno
                 btnBuscarAfiliado.Visible = true;
             }
         }
-
-
         private void btnBuscarAfiliado_Click(object sender, EventArgs e)
         {
 
@@ -113,7 +111,6 @@ namespace ClinicaFrba.AbmTurno
             addTurnoForm.OnTurnoUpdated += new EventHandler<TurnoUpdatedEventArgs>(pedirTurnoOnTurnoUpdated);
             ViewsManager.LoadModal(addTurnoForm);
         }
-
         void pedirTurnoOnTurnoUpdated(object sender, TurnoUpdatedEventArgs e)
         {
             try
@@ -138,9 +135,6 @@ namespace ClinicaFrba.AbmTurno
             MessageBox.Show(string.Format("Turno {0} cancelado correctamente", turno.ToString()));
             RefreshDataGrid();
         }
-
-
-
         private void dgvTurnos_CellContentDoubleClick(object sender, EventArgs e)
         {
             if (_isSearchMode)
@@ -158,9 +152,5 @@ namespace ClinicaFrba.AbmTurno
                 this.Close();
             }
         }
-
-
-
-
     }
 }

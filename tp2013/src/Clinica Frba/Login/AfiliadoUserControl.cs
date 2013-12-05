@@ -77,7 +77,6 @@ namespace ClinicaFrba.Login
         public AfiliadoUserControl()
         {
             InitializeComponent();
-            //_afiliado = new Afiliado();
             var manager = new PlanesMedicosManager();
             var planesMedicos = manager.GetAll();
             cbxPlanMedico.DisplayMember = "Name";
@@ -87,7 +86,6 @@ namespace ClinicaFrba.Login
             items.ForEach(x => cbxEstadoCivil.Items.Add(x));
             cbxEstadoCivil.DisplayMember = "Name";
             cbxPlanMedico.SelectedIndex = 0;
-
         }
 
     }

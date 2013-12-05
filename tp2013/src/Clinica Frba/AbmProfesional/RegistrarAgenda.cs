@@ -168,82 +168,67 @@ namespace ClinicaFrba.AbmProfesional
         {
             TimeSpan contador = new TimeSpan();
             TimeSpan diferencia = contador;
-            try
+            if (cbxLunesIN.SelectedIndex > 0)
             {
-                if (cbxLunesIN.SelectedIndex > 0)
-                {
-                    if (cbxLunesOUT.SelectedIndex < 1)
-                        throw new Exception("Complete la hora de salida de los lunes!");
-                    if (cbxLunesOUT.SelectedIndex < cbxLunesIN.SelectedIndex)
-                        throw new Exception("Error de hora en los lunes!");
-                    diferencia = Convert.ToDateTime(cbxLunesOUT.SelectedItem) - Convert.ToDateTime(cbxLunesIN.SelectedItem);
-                    if (diferencia.TotalDays > 0)
-                        contador = contador + diferencia;
-                }
-
-                if (cbxMartesIN.SelectedIndex > 0)
-                {
-                    if (cbxMartesOUT.SelectedIndex < 1)
-                        throw new Exception("Complete la hora de salida de los Martes!");
-                    if (cbxMartesOUT.SelectedIndex < cbxMartesIN.SelectedIndex)
-                        throw new Exception("Error de hora en los Martes!");
-                    diferencia = Convert.ToDateTime(cbxMartesOUT.SelectedItem) - Convert.ToDateTime(cbxMartesIN.SelectedItem);
-                    if (diferencia.TotalDays > 0)
-                        contador = contador + diferencia;
-                }
-
-
-                if (cbxMiercIN.SelectedIndex > 0)
-                {
-                    if (cbxMiercOUT.SelectedIndex < 1)
-                        throw new Exception("Complete la hora de salida de los Miercoles!");
-                    if (cbxMiercOUT.SelectedIndex < cbxMiercIN.SelectedIndex)
-                        throw new Exception("Error de hora en los Miercoles!");
-                    diferencia = Convert.ToDateTime(cbxMiercOUT.SelectedItem) - Convert.ToDateTime(cbxMiercIN.SelectedItem);
-                    if (diferencia.TotalDays > 0)
-                        contador = contador + diferencia;
-                }
-
-                if (cbxJueIN.SelectedIndex > 0)
-                {
-                    if (cbxJueOUT.SelectedIndex < 1)
-                        throw new Exception("Complete la hora de salida de los Jueves!");
-                    if (cbxJueOUT.SelectedIndex < cbxJueIN.SelectedIndex)
-                        throw new Exception("Error de hora en los Jueves!");
-                    diferencia = Convert.ToDateTime(cbxJueOUT.SelectedItem) - Convert.ToDateTime(cbxJueIN.SelectedItem);
-                    if (diferencia.TotalDays > 0)
-                        contador = contador + diferencia;
-                }
-
-
-                if (cbxViesIN.SelectedIndex > 0)
-                {
-                    if (cbxVieOUT.SelectedIndex < 1)
-                        throw new Exception("Complete la hora de salida de los Viernes!!");
-                    if (cbxVieOUT.SelectedIndex < cbxViesIN.SelectedIndex)
-                        throw new Exception("Error de hora en los Viernes!");
-                    diferencia = Convert.ToDateTime(cbxVieOUT.SelectedItem) - Convert.ToDateTime(cbxViesIN.SelectedItem);
-                    if (diferencia.TotalDays > 0)
-                        contador = contador + diferencia;
-                }
-
-                if (cbxSabIN.SelectedIndex > 0)
-                {
-                    if (cbxSabOUT.SelectedIndex < 1)
-                        throw new Exception("Complete la hora de salida de los Sabados!");
-                    if (cbxSabOUT.SelectedIndex < cbxSabIN.SelectedIndex)
-                        throw new Exception("Error de hora en los Sabados!");
-                    diferencia = Convert.ToDateTime(cbxSabOUT.SelectedItem) - Convert.ToDateTime(cbxSabIN.SelectedItem);
-                    if (diferencia.TotalDays > 0)
-                        contador = contador + diferencia;
-                }
-                return contador;
+                if (cbxLunesOUT.SelectedIndex < 1)
+                    throw new Exception("Complete la hora de salida de los lunes!");
+                if (cbxLunesOUT.SelectedIndex < cbxLunesIN.SelectedIndex)
+                    throw new Exception("Error de hora en los lunes!");
+                diferencia = Convert.ToDateTime(cbxLunesOUT.SelectedItem) - Convert.ToDateTime(cbxLunesIN.SelectedItem);
+                if (diferencia.TotalDays > 0)
+                    contador = contador + diferencia;
             }
-            catch (System.Exception excep)
+            if (cbxMartesIN.SelectedIndex > 0)
             {
-                MessageBox.Show(excep.Message);
-                return contador;
+                if (cbxMartesOUT.SelectedIndex < 1)
+                    throw new Exception("Complete la hora de salida de los Martes!");
+                if (cbxMartesOUT.SelectedIndex < cbxMartesIN.SelectedIndex)
+                    throw new Exception("Error de hora en los Martes!");
+                diferencia = Convert.ToDateTime(cbxMartesOUT.SelectedItem) - Convert.ToDateTime(cbxMartesIN.SelectedItem);
+                if (diferencia.TotalDays > 0)
+                    contador = contador + diferencia;
             }
+            if (cbxMiercIN.SelectedIndex > 0)
+            {
+                if (cbxMiercOUT.SelectedIndex < 1)
+                    throw new Exception("Complete la hora de salida de los Miercoles!");
+                if (cbxMiercOUT.SelectedIndex < cbxMiercIN.SelectedIndex)
+                    throw new Exception("Error de hora en los Miercoles!");
+                diferencia = Convert.ToDateTime(cbxMiercOUT.SelectedItem) - Convert.ToDateTime(cbxMiercIN.SelectedItem);
+                if (diferencia.TotalDays > 0)
+                    contador = contador + diferencia;
+            }
+            if (cbxJueIN.SelectedIndex > 0)
+            {
+                if (cbxJueOUT.SelectedIndex < 1)
+                    throw new Exception("Complete la hora de salida de los Jueves!");
+                if (cbxJueOUT.SelectedIndex < cbxJueIN.SelectedIndex)
+                    throw new Exception("Error de hora en los Jueves!");
+                diferencia = Convert.ToDateTime(cbxJueOUT.SelectedItem) - Convert.ToDateTime(cbxJueIN.SelectedItem);
+                if (diferencia.TotalDays > 0)
+                    contador = contador + diferencia;
+            }
+            if (cbxViesIN.SelectedIndex > 0)
+            {
+                if (cbxVieOUT.SelectedIndex < 1)
+                    throw new Exception("Complete la hora de salida de los Viernes!!");
+                if (cbxVieOUT.SelectedIndex < cbxViesIN.SelectedIndex)
+                    throw new Exception("Error de hora en los Viernes!");
+                diferencia = Convert.ToDateTime(cbxVieOUT.SelectedItem) - Convert.ToDateTime(cbxViesIN.SelectedItem);
+                if (diferencia.TotalDays > 0)
+                    contador = contador + diferencia;
+            }
+            if (cbxSabIN.SelectedIndex > 0)
+            {
+                if (cbxSabOUT.SelectedIndex < 1)
+                    throw new Exception("Complete la hora de salida de los Sabados!");
+                if (cbxSabOUT.SelectedIndex < cbxSabIN.SelectedIndex)
+                    throw new Exception("Error de hora en los Sabados!");
+                diferencia = Convert.ToDateTime(cbxSabOUT.SelectedItem) - Convert.ToDateTime(cbxSabIN.SelectedItem);
+                if (diferencia.TotalDays > 0)
+                    contador = contador + diferencia;
+            }
+            return contador;
         }
         private void RegistrarAgenda_Load(object sender, EventArgs e)
         {
@@ -318,14 +303,14 @@ namespace ClinicaFrba.AbmProfesional
                     if (turnosfueraDeRango.Count > 0)
                     {
                         if (MessageBox.Show(string.Format("Se registro que en la fecha {0}, {1} turnos quedan fuera de rango, desea cancelarlos?", actual.Date.ToString(), turnosfueraDeRango.Count.ToString()), "Cancelar Turnos", MessageBoxButtons.OKCancel) == DialogResult.OK)
-
-                            _turnoManager.CancelarDiaProfesional(_profesional.UserID, actual);
+                            foreach(Turno turnoACancelar in turnosfueraDeRango)
+                                _turnoManager.CancelarTurnoAgenda(turnoACancelar);//Cancela el turno, no elimina
                         else
                             return;
                     }
+                    _agendaManager.LimpiarDia(_profesional, actual);//Elimina los que no tienen turno asociado
                     while (actual.TimeOfDay < horaout.TimeOfDay)
                     {
-                        _agendaManager.BorrarRegistrosFueraDeRango(_profesional, actual, horain, horaout);
                         _agendaManager.GuardarAgenda(agenda, actual);
                         actual = actual.AddMinutes(30);
                     }

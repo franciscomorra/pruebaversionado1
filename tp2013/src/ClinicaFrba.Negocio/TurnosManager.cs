@@ -157,13 +157,21 @@ namespace ClinicaFrba.Negocio
         }
         public void CancelarTurno(Turno turno)
         {
-            
             SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
                 "[SHARPS].CancelarTurnoAfiliado", SqlDataAccessArgs
                 .CreateWith(
                     "@turno", turno.Numero)
                     .Arguments);
             //Cancela un turno por parte del afiliado, motivo es cancelado por afiliado
+        }
+        public void CancelarTurnoAgenda(Turno turno)
+        {
+            SqlDataAccess.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["StringConexion"].ToString(),
+                "[SHARPS].CancelarTurnoAgenda", SqlDataAccessArgs
+                .CreateWith(
+                    "@turno", turno.Numero)
+                    .Arguments);
+            //Cancela un turno cuando se pisa una agenda, motivo es cancelado por profesional
         }
 
         public void CancelarDiaProfesional(int usuarioID, DateTime fecha)
@@ -176,5 +184,6 @@ namespace ClinicaFrba.Negocio
                 .And("@Fecha", fecha)
                 .Arguments);
         }
+
     }
 }

@@ -27,9 +27,7 @@ namespace ClinicaFrba.AbmTurno
         private TurnosManager _turnosManager = new TurnosManager();
         public RegistrarLlegada()
         {
-            //_registrado = false;
             InitializeComponent();
-
         }
 
         private void btnBuscarAfiliado_Click(object sender, EventArgs e)
@@ -51,7 +49,6 @@ namespace ClinicaFrba.AbmTurno
 
         private void btnBuscarTurno_Click(object sender, EventArgs e)
         {
-
             _turnosForm = new TurnosForm();
             _turnosForm.ModoBusqueda(_afiliado);
             _turnosForm.SoloTurnosdeHoy();
@@ -92,9 +89,7 @@ namespace ClinicaFrba.AbmTurno
                 DateTime fechallegada = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]).AddMinutes(15);
                 if (_turno.Fecha.CompareTo(fechallegada)<0)
                     throw new Exception("El usuario debia registrarse 15 minutos antes!");
-
                 _turnosManager.RegistrarLlegada(_turno, _bono);
-                //_registrado = true;
                 MessageBox.Show("Registrado Correctamente!");
                 _afiliado  = null;
                 _afiliadosForm = null;
@@ -105,8 +100,6 @@ namespace ClinicaFrba.AbmTurno
                 panelTurno.Hide();
                 panelBono.Hide();
                 btnRegistrar.Hide();
-
-
             }
             catch (System.Exception excep)
             {

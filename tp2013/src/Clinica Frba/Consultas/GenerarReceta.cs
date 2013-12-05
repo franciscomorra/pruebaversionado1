@@ -49,7 +49,6 @@ namespace ClinicaFrba.Consultas
             else
             {
                 btnBuscarProfesional.Show();
-                
             }
             if (_profesional != null)
             {
@@ -82,8 +81,6 @@ namespace ClinicaFrba.Consultas
                 cbxCant4.Items.Add(i);
                 cbxCant5.Items.Add(i);
             }
-
-
             List<Medicamento> medicamentos = new List<Medicamento>();
             Medicamento medVacio = new Medicamento();
             medVacio.Nombre = "--";
@@ -123,9 +120,6 @@ namespace ClinicaFrba.Consultas
             txtProfesional.Text = _profesional.ToString();
             _profesionalesForm.Hide();
         }
-
-
-
         private void btnBuscarAfiliado_Click(object sender, EventArgs e)
         {
 
@@ -232,7 +226,6 @@ namespace ClinicaFrba.Consultas
                     throw new Exception("Debe seleccionar un bono farmacia!");
                 if (listado.Count == 0)
                     throw new Exception("Debe seleccionar al menos un medicamento!");
-
                 _receta = new Receta() { 
                     BonoFarmacia = _bonoFarmacia,
                     Fecha = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]),
