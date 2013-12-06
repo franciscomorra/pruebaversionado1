@@ -1698,7 +1698,7 @@ AS
 BEGIN
 
 
-SELECT a.horario as Fecha ,T.Numero as Numero,t.Especialidad, e.Descripcion, A.Profesional AS UserProfesional ,P.Matricula AS Matricula
+SELECT a.horario as Fecha ,T.Numero as Numero,t.Especialidad, e.Descripcion, A.Profesional AS UserProfesional ,P.Matricula AS Matricula, e.Codigo Especialidad_Cod, e.Descripcion Especialidad_Desc
 FROM Turnos T
 INNER JOIN Agendas A ON A.AgendaID = T.Agenda
 INNER JOIN Profesionales P ON P.UsuarioID = A.Profesional
