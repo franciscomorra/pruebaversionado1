@@ -32,6 +32,7 @@ namespace ClinicaFrba.Consultas
         private RecetasManager _recetaManager = new RecetasManager();
         private Receta _receta;
         private MedicamentosManager _medicamentosManager = new MedicamentosManager();
+        
 
         public GenerarRecetaForm()
         {
@@ -228,8 +229,10 @@ namespace ClinicaFrba.Consultas
                     throw new Exception("Debe seleccionar al menos un medicamento!");
                 _receta = new Receta() { 
                     BonoFarmacia = _bonoFarmacia,
+                    Turno = _turno,
                     Fecha = Convert.ToDateTime(ConfigurationManager.AppSettings["FechaSistema"]),
                     Medicamentos = listado
+                    
                 };
                 _recetaManager.Save(_receta);
                 if (OnRecetaUpdated != null)

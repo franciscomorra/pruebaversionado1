@@ -30,6 +30,7 @@ namespace ClinicaFrba.Negocio
                     //Crea nuevas filas en recetas_medicamentos
                         "@BonoFarmacia", receta.BonoFarmacia.Numero)
                         .And("@Medicamento", medicamento.Codigo)
+                        .And("@Turno", receta.Turno.Numero)
                 .Arguments);
             
             }
