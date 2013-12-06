@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Data</name>
+    </assembly>
+    <members>
+        <member name="T:Data.SqlDataAccess">
+            <summary>
+            Represents a provider data access class only for SQL database type.
+            <seealso cref="T:Data.SqlDataAccessArgs"/>
+            </summary>
+        </member>
+    </members>
+</doc>
