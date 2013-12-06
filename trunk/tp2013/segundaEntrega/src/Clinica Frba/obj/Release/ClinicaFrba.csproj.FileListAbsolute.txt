@@ -42,3 +42,6 @@ C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica 
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\bin\Release\ClinicaFrba.application
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.exe.manifest
 C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\src\Clinica Frba\obj\Release\ClinicaFrba.application
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\segundaEntrega\src\Clinica Frba\bin\Release\ClinicaFrba.exe.config
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\segundaEntrega\src\Clinica Frba\obj\Release\ClinicaFrba.exe
+C:\Documents and Settings\UsuarioAdmin\Escritorio\versionado\tp2013\segundaEntrega\src\Clinica Frba\obj\Release\ClinicaFrba.pdb

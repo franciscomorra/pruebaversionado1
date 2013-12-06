@@ -2039,12 +2039,12 @@ GO
 
  /*Top 5 de la cantidad total de bonos farmacia vencidos por afiliado*/
 
-CREATE PROCEDURE [SHARPS].Get_TOPVencidos
+CREATE PROCEDURE [SHARPS].[Get_TOPVencidos]
 	@fecha_inicio AS NVARCHAR(50),
 	@fecha_fin AS NVARCHAR(50)
 AS
 BEGIN
-	SELECT TOP 5 D.Nombre NOMBRE, D.Apellido APELLIDO, A.GrupoFamiliar,A.TipoAfiliado
+	SELECT TOP 5 D.Nombre NOMBRE, D.Apellido APELLIDO, A.GrupoFamiliar,A.TipoAfiliado, COUNT (DISTINCT BF.Numero) Cantidad
 	FROM SHARPS.Detalles_Persona D
 	JOIN SHARPS.Afiliados A ON A.UsuarioID = D.UsuarioID
 	JOIN SHARPS.Compras C ON C.Afiliado = A.UsuarioID
@@ -2052,7 +2052,8 @@ BEGIN
 	LEFT JOIN SHARPS.Recetas R ON R.Bono_Farmacia = BF.Numero
 	WHERE R.RecetaID IS NULL
 	AND DATEADD(DAY, 60, BF.Fecha_Impresion) >= @fecha_fin
-	AND BF.Fecha_Impresion BETWEEN @fecha_inicio AND @fecha_fin
+	GROUP BY D.Nombre, D.Apellido, A.GrupoFamiliar,A.TipoAfiliado
+	ORDER BY Cantidad DESC
 END
 GO
 
