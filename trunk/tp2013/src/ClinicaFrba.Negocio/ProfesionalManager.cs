@@ -16,6 +16,7 @@ namespace ClinicaFrba.Negocio
         private UsersManager _usersManager = new UsersManager();
         private EspecialidadesManager _especialidadesManager = new EspecialidadesManager();
         private DetallePersonaManager _detallesManager = new DetallePersonaManager();
+
         public Profesional getInfo(int userID)
         {
             Profesional profesional = new Profesional();
