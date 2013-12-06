@@ -237,6 +237,7 @@ GO
 CREATE TABLE [SHARPS].Recetas ( 
 	Bono_Farmacia numeric(18,0),
 	RecetaID [int] identity(1,1),
+	Turno numeric(18,0)
 CONSTRAINT [PK_Recetas] PRIMARY KEY CLUSTERED 
 (
 	[Bono_Farmacia] ASC
@@ -350,15 +351,6 @@ GO
 ALTER TABLE [SHARPS].[Afiliados] CHECK CONSTRAINT [CK_Afiliados_CantHijos]
 GO
 
-/*ALTER TABLE [SHARPS].[Bonos_Consulta]  WITH CHECK ADD  CONSTRAINT [CK_Bonos_Consulta_Precio_Pagado] CHECK  (([Precio_Pagado]>=(0)))
-GO
-ALTER TABLE [SHARPS].[Bonos_Consulta] CHECK CONSTRAINT [CK_Bonos_Consulta_Precio_Pagado]
-GO
-
-ALTER TABLE [SHARPS].[Bonos_Farmacia]  WITH CHECK ADD  CONSTRAINT [CK_Bonos_Farmacia_Precio_Pagado] CHECK  (([Precio_Pagado]>=(0)))
-GO
-ALTER TABLE [SHARPS].[Bonos_Farmacia] CHECK CONSTRAINT [CK_Bonos_Farmacia_Precio_Pagado]
-GO*/
 
 ALTER TABLE [SHARPS].[Agendas] ADD  CONSTRAINT [DF_Agendas_Activo]  DEFAULT ((1)) FOR [Activo]
 GO
@@ -375,15 +367,6 @@ GO
 ALTER TABLE [SHARPS].[Planes_Medicos] ADD  CONSTRAINT [DF_PlanesMedicos_Activo]  DEFAULT ((1)) FOR [Activo]
 GO
 
-/*ALTER TABLE [SHARPS].[Planes_Medicos]  WITH CHECK ADD  CONSTRAINT [CK_Planes_Medicos_Precio_Bono_Consulta] CHECK  (([Precio_Bono_Consulta]>=(0)))
-GO
-ALTER TABLE [SHARPS].[Planes_Medicos] CHECK CONSTRAINT [CK_Planes_Medicos_Precio_Bono_Consulta]
-GO
-
-ALTER TABLE [SHARPS].[Planes_Medicos]  WITH CHECK ADD  CONSTRAINT [CK_Planes_Medicos_Precio_Bono_Farmacia] CHECK  (([Precio_Bono_Farmacia]>=(0)))
-GO
-ALTER TABLE [SHARPS].[Planes_Medicos] CHECK CONSTRAINT [CK_Planes_Medicos_Precio_Bono_Farmacia]*/
-GO
 
 ALTER TABLE [SHARPS].[Roles] ADD  CONSTRAINT [DF_Roles_Activo]  DEFAULT ((1)) FOR [Activo]
 GO
@@ -440,6 +423,13 @@ ALTER TABLE [SHARPS].[Consultas]  WITH CHECK ADD  CONSTRAINT [FK_Consultas_Bonos
 REFERENCES [SHARPS].[Bonos_Consulta] ([Numero])
 GO
 ALTER TABLE [SHARPS].[Consultas] CHECK CONSTRAINT [FK_Consultas_Bonos_Consulta]
+GO
+
+
+ALTER TABLE [SHARPS].[Recetas]  WITH CHECK ADD  CONSTRAINT [FK_Recetas_Turnos] FOREIGN KEY([Turno])
+REFERENCES [SHARPS].[Turnos] (Numero)
+GO
+ALTER TABLE [SHARPS].[Recetas] CHECK CONSTRAINT [FK_Recetas_Turnos]
 GO
 
 
@@ -584,7 +574,7 @@ GO
 
 
 
--------MIGRACIONES------------------------------------------------------
+--MIGRACIONES
 PRINT 'Migrando los datos'
 
 PRINT 'Creando Funcionalidades'
@@ -696,7 +686,7 @@ INSERT INTO [SHARPS].Estados_Civiles (Descripcion) VALUES ('Concubinato');
 INSERT INTO [SHARPS].Estados_Civiles (Descripcion) VALUES ('Divorciado')
 
 PRINT 'Ingresando Estados de un Turno...'
-INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('Activo'); ---todavia no es el dia del turno
+INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('Activo'); --todavia no es el dia del turno
 INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('CanceladoAfiliado');
 INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('CanceladoProfesional');
 INSERT INTO [SHARPS].Estados_Turno (Descripcion) VALUES ('Atendido');
@@ -752,70 +742,6 @@ FROM gd_esquema.Maestra m
 INNER JOIN [SHARPS].Usuarios u ON u.Username= CAST(m.Medico_DNI AS Nvarchar(255))
 
 
-
-/*INSERT INTO [SHARPS].Bonos_Consulta(Numero,Fecha_Impresion,Compra,PlanMedico)
-SELECT distinct m.Bono_Consulta_Numero , m.Bono_Consulta_Fecha_Impresion, [SHARPS].UltimoCompra(), m.Plan_Med_Codigo
-  FROM gd_esquema.Maestra m
-  INNER JOIN [SHARPS].Usuarios a on CAST(m.Paciente_DNI AS Nvarchar(255))= a.Username
-  WHERE m.Turno_Fecha is NULL AND m.Bono_Consulta_Numero is not null  
-GO
-
-INSERT INTO  SHARPS.Compras (Precio_BonoConsulta , Precio_BonoFarmacia , Afiliado , fecha_Compra)
-SELECT DISTINCT  M.Plan_Med_Precio_Bono_Consulta, M.Plan_Med_Precio_Bono_Farmacia , U.UsuarioID , M.Compra_Bono_Fecha
-FROM gd_esquema.Maestra M
-INNER JOIN SHARPS.Usuarios U ON U.Username =  CAST(M.Paciente_DNI AS Nvarchar(255))
-INNER JOIN SHARPS.Bonos_Consulta  BC ON BC.Numero = M.Bono_Consulta_Numero 
-WHERE m.Turno_Fecha is NULL AND m.Bono_Consulta_Numero is not null
-GO
-
-PRINT 'Ingresando los Bonos Farmacia'
-INSERT INTO [SHARPS].Bonos_Farmacia(Numero,Fecha_Impresion,Compra ,PlanMedico)
-SELECT distinct m.Bono_Farmacia_Numero , m.Bono_Farmacia_Fecha_Impresion,[SHARPS].UltimoCompra() ,m.Plan_Med_Codigo
-  FROM gd_esquema.Maestra m
-  INNER JOIN [SHARPS].Usuarios a on CAST(m.Paciente_DNI AS Nvarchar(255))= a.Username
-  WHERE m.Turno_Fecha is NULL AND m.Bono_Farmacia_Numero is not null   
-GO
-
-INSERT INTO  SHARPS.Compras (Precio_BonoConsulta , Precio_BonoFarmacia , Afiliado , fecha_Compra)
-SELECT DISTINCT  M.Plan_Med_Precio_Bono_Consulta, M.Plan_Med_Precio_Bono_Farmacia , U.UsuarioID , M.Compra_Bono_Fecha
-FROM gd_esquema.Maestra M
-INNER JOIN SHARPS.Usuarios U ON U.Username =  CAST(M.Paciente_DNI AS Nvarchar(255))
-INNER JOIN SHARPS.Bonos_Farmacia BF ON BF.Numero = M.Bono_Farmacia_Numero  
-WHERE m.Turno_Fecha is NULL AND m.Bono_Farmacia_Numero is not null
-GO
-*/
-
-
--- PARA BONOS DE FARMACIA
-/*INSERT INTO [SHARPS].Compras (Precio_BonoConsulta , Precio_BonoFarmacia , Afiliado , fecha_Compra)
-SELECT DISTINCT m.Plan_Med_Precio_Bono_Consulta , m.Plan_Med_Precio_Bono_Farmacia , U.UsuarioID , m.Compra_Bono_Fecha
-FROM gd_esquema.Maestra m
-INNER JOIN SHARPS.Usuarios U ON U.Username =  CAST(m.Paciente_DNI AS Nvarchar(255))
-WHERE m.Turno_Fecha is NULL AND m.Bono_Farmacia_Numero is not null AND m.Paciente_Dni IS NOT NULL
-order by m.Compra_Bono_Fecha , U.UsuarioID
-
-INSERT INTO [SHARPS].Bonos_Farmacia (Numero, Fecha_Impresion, Compra ,PlanMedico)
-SELECT DISTINCT m.Bono_Farmacia_Numero , m.Bono_Farmacia_Fecha_Impresion , C.CompraID , m.Plan_Med_Codigo
-FROM gd_esquema.Maestra m
-INNER JOIN SHARPS.Usuarios U ON U.Username =  CAST(m.Paciente_DNI AS Nvarchar(255))
-INNER JOIN SHARPS.Compras C ON U.UsuarioID = C.Afiliado 
-WHERE  m.Bono_Farmacia_Numero is not null
-
---PARA BONOS DE CONSULTA
-
-INSERT INTO [SHARPS].Compras (Precio_BonoConsulta , Precio_BonoFarmacia , Afiliado , fecha_Compra)
-SELECT DISTINCT m.Plan_Med_Precio_Bono_Consulta , m.Plan_Med_Precio_Bono_Farmacia , U.UsuarioID , m.Compra_Bono_Fecha
-FROM gd_esquema.Maestra m
-INNER JOIN SHARPS.Usuarios U ON U.Username =  CAST(m.Paciente_DNI AS Nvarchar(255))
-WHERE m.Turno_Fecha is NULL AND m.Bono_Consulta_Numero IS NOT NULL AND m.Paciente_Dni IS NOT NULL
-order by m.Compra_Bono_Fecha , U.UsuarioID
-
-INSERT INTO [SHARPS].Bonos_Consulta(Numero, Fecha_Impresion, Compra ,PlanMedico)
-SELECT  DISTINCT m.Bono_Consulta_Numero , m.Bono_Consulta_Fecha_Impresion , C.CompraID , m.Plan_Med_Codigo
-FROM gd_esquema.Maestra m
-INNER JOIN SHARPS.Usuarios U ON U.Username =  CAST(m.Paciente_DNI AS Nvarchar(255))
-INNER JOIN SHARPS.Compras C ON U.UsuarioID = C.Afiliado 
-WHERE  m.Bono_Consulta_Numero is not null*/
 
 CREATE TABLE SHARPS.#compras(
 CodID int identity (1,1) ,
@@ -955,8 +881,8 @@ GO
 --Ingresando Recetas
 PRINT 'Ingresando las Recetas...'
 GO
-INSERT INTO [SHARPS].Recetas (Bono_Farmacia)
-SELECT  m.Bono_Farmacia_Numero
+INSERT INTO [SHARPS].Recetas (Bono_Farmacia, Turno)
+SELECT  m.Bono_Farmacia_Numero, m.Turno_Numero
 FROM gd_esquema.Maestra m
 
 WHERE ( m.Bono_Farmacia_Numero is not null AND m.Bono_Consulta_Numero is not null )
@@ -984,12 +910,12 @@ GO
 
 
 
------MIGRANDO ROLES
+--MIGRANDO ROLES
 
 
 PRINT 'Ingresando Relacion Usuarios-Roles...'
 PRINT 'Profesionales...'
-INSERT INTO [SHARPS].Usuarios_Roles(Usuario , Rol) --- Lo hago 2 veces ya que uno puede ser para paciente y otro Medico pero ambos tienen el mismo Usuario(DNI)  y se le aignan 2 roles
+INSERT INTO [SHARPS].Usuarios_Roles(Usuario , Rol)
 SELECT distinct CAST(m.UsuarioID AS Nvarchar(255))  , 2    
 FROM [SHARPS].Profesionales m 
 
@@ -1008,10 +934,6 @@ AND U.Username = 'Admin'
 
 PRINT 'Migracion finalizada'
 GO
-
-
-
--------------------
 
 PRINT 'Cargando Procedimientos'
 
@@ -1742,25 +1664,7 @@ RETURN @NUMEROBONO
 END
 GO
 
-
-/*
 CREATE PROCEDURE [SHARPS].[ComprarBonoReceta] 
-@Precio INT,
-@AfiliadoCompro INT,
-@Fecha DATE
-AS 
-BEGIN
-DECLARE @NUMEROBONO INT
-DECLARE @PLAN INT
-SELECT @PLAN = A.Plan_Medico FROM Afiliados A WHERE A.UsuarioID = @AfiliadoCompro 
-SELECT @NUMEROBONO = MAX(Numero) + 1 FROM [SHARPS].Bonos_Farmacia
-INSERT INTO [SHARPS].Bonos_Farmacia(Numero,Fecha_Impresion,Afiliado_Compro,Precio_Pagado)
-VALUES (@NUMEROBONO  , @Fecha , @AfiliadoCompro,@Precio)
-RETURN @NUMEROBONO
-END
-GO */
-
-CREATE PROCEDURE [SHARPS].[ComprarBonoReceta] -------//////////MODIFICADO
 @Precio INT,
 @AfiliadoCompro INT,
 @Fecha DATETIME,
@@ -1917,11 +1821,12 @@ GO
 
 
 CREATE PROCEDURE [SHARPS].[InsertReceta]
-@BonoFarmacia INT
+@BonoFarmacia INT,
+@Turno INT
 AS
 BEGIN
 
-INSERT INTO Recetas (Bono_Farmacia) VALUES (@BonoFarmacia)
+INSERT INTO Recetas (Bono_Farmacia,Turno) VALUES (@BonoFarmacia,@Turno)
 
 END
 GO 
@@ -2102,6 +2007,83 @@ BEGIN
 	(Afiliado,Precio_BonoConsulta,Precio_BonoFarmacia,fecha_Compra) 
 	VALUES (@AfiliadoID,@precioCons,@precioFar,@Fecha)
 	SELECT @@Identity AS CompraID
+END
+GO
+
+CREATE PROCEDURE [SHARPS].Get_TOPCancelaciones
+
+	@fecha_inicio AS NVARCHAR(50),
+	@fecha_fin AS NVARCHAR(50)
+AS
+BEGIN
+	SELECT TOP 5 E.Descripcion AS Especialidad, COUNT(DISTINCT T.Numero) AS Cantidad
+	FROM SHARPS.Especialidades E
+	JOIN SHARPS.Turnos T ON T.Especialidad = E.Codigo
+	JOIN SHARPS.Agendas AG ON AG.AgendaID = T.Agenda
+	JOIN SHARPS.Estados_Turno et ON et.EstadoID = t.Estado
+	WHERE (et.Descripcion = 'CanceladoAfiliado' OR et.Descripcion = 'CanceladoProfesional')
+	AND AG.Horario BETWEEN @fecha_inicio AND @fecha_fin
+	GROUP BY E.Descripcion
+	ORDER BY Cantidad DESC
+END
+GO
+
+ /*Top 5 de la cantidad total de bonos farmacia vencidos por afiliado*/
+
+CREATE PROCEDURE [SHARPS].Get_TOPVencidos
+	@fecha_inicio AS NVARCHAR(50),
+	@fecha_fin AS NVARCHAR(50)
+AS
+BEGIN
+	SELECT TOP 5 D.Nombre NOMBRE, D.Apellido APELLIDO, A.GrupoFamiliar,A.TipoAfiliado
+	FROM SHARPS.Detalles_Persona D
+	JOIN SHARPS.Afiliados A ON A.UsuarioID = D.UsuarioID
+	JOIN SHARPS.Compras C ON C.Afiliado = A.UsuarioID
+	JOIN SHARPS.Bonos_Farmacia BF ON BF.Compra = C.CompraID
+	LEFT JOIN SHARPS.Recetas R ON R.Bono_Farmacia = BF.Numero
+	WHERE R.RecetaID IS NULL
+	AND DATEADD(DAY, 60, BF.Fecha_Impresion) >= @fecha_fin
+	AND BF.Fecha_Impresion BETWEEN @fecha_inicio AND @fecha_fin
+END
+GO
+
+/*Top 5 de las especialidades de médicos con más bonos de farmacia recetados*/
+
+CREATE PROCEDURE [SHARPS].[Get_TOPRecetados] 
+
+	@fecha_inicio AS NVARCHAR(50),
+	@fecha_fin AS NVARCHAR(50)
+AS
+BEGIN
+	SELECT TOP 5 E.Descripcion AS Especialidad, COUNT(DISTINCT R.RecetaID) AS Cantidad
+	FROM SHARPS.Especialidades E 
+	JOIN SHARPS.Turnos T ON T.Especialidad = E.Codigo
+	JOIN SHARPS.Recetas R ON R.Turno = T.Numero
+	JOIN SHARPS.Agendas AG ON AG.AgendaID = T.Agenda
+	WHERE AG.Horario BETWEEN @fecha_inicio AND @fecha_fin
+	GROUP BY E.Descripcion
+	ORDER BY Cantidad DESC
+END
+
+/*Top 10 de los afiliados que utilizaron bonos que ellos mismo no compraron*/
+
+CREATE PROCEDURE [SHARPS].Get_TOPVividores
+
+	@fecha_inicio AS NVARCHAR(50),
+	@fecha_fin AS NVARCHAR(50)
+AS
+BEGIN
+	SELECT TOP 10 D.Nombre,D.Apellido,A2.GrupoFamiliar,A2.TipoAfiliado
+	FROM SHARPS.Afiliados A
+	JOIN SHARPS.Compras COM ON COM.Afiliado = A.UsuarioID
+	JOIN SHARPS.Bonos_Consulta BC ON BC.Compra = COM.CompraID
+	JOIN SHARPS.Consultas CON ON CON.Bono_Consulta = BC.Numero
+	JOIN SHARPS.Turnos T ON CON.Turno = T.Numero
+	JOIN SHARPS.Agendas AG ON AG.AgendaID = T.Agenda
+	JOIN SHARPS.Afiliados A2 ON A2.UsuarioID = T.Afiliado
+	JOIN SHARPS.Detalles_Persona D ON D.UsuarioID = A2.UsuarioID
+	WHERE A2.UsuarioID <> A.UsuarioID
+	AND AG.Horario BETWEEN @fecha_inicio AND @fecha_fin
 END
 GO
 
