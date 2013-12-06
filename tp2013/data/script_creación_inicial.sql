@@ -1,5 +1,4 @@
 USE [GD2C2013]
-
 GO
 IF  EXISTS (SELECT * FROM sys.schemas WHERE name = 'SHARPS')
 DROP SCHEMA [SHARPS]
@@ -302,7 +301,7 @@ GO
 
 CREATE TABLE [SHARPS].Usuarios ( 
 	UsuarioID [int] identity(1,1)  NOT NULL,
-	Username nvarchar(255) UNIQUE,
+	Username nvarchar(255),
 	Password nvarchar(255) NOT NULL,
 	Intentos [int],
 	Activo bit,
@@ -522,6 +521,11 @@ REFERENCES [SHARPS].[Usuarios] ([UsuarioID])
 GO
 ALTER TABLE [SHARPS].[Profesionales] CHECK CONSTRAINT [FK_Profesionales_Usuarios]
 GO
+
+
+ALTER TABLE [SHARPS].[Usuarios] ADD CONSTRAINT [IX_USUARIO] UNIQUE (Username)
+GO
+
 
 ALTER TABLE [SHARPS].[Usuarios_Roles]  WITH CHECK ADD  CONSTRAINT [FK_Usuarios_Roles_Usuarios] FOREIGN KEY([Usuario])
 REFERENCES [SHARPS].[Usuarios] ([UsuarioID])
@@ -2064,7 +2068,7 @@ BEGIN
 	GROUP BY E.Descripcion
 	ORDER BY Cantidad DESC
 END
-
+GO
 /*Top 10 de los afiliados que utilizaron bonos que ellos mismo no compraron*/
 
 CREATE PROCEDURE [SHARPS].Get_TOPVividores
