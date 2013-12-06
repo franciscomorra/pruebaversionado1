@@ -2082,7 +2082,7 @@ CREATE PROCEDURE [SHARPS].Get_TOPVividores
 	@fecha_fin AS NVARCHAR(50)
 AS
 BEGIN
-	SELECT TOP 10 D.Nombre,D.Apellido,A2.GrupoFamiliar,A2.TipoAfiliado
+	SELECT TOP 10 D.Nombre,D.Apellido,A2.GrupoFamiliar,A2.TipoAfiliado, COUNT (DISTINCT BC.Numero) Cantidad
 	FROM SHARPS.Afiliados A
 	JOIN SHARPS.Compras COM ON COM.Afiliado = A.UsuarioID
 	JOIN SHARPS.Bonos_Consulta BC ON BC.Compra = COM.CompraID
@@ -2093,6 +2093,8 @@ BEGIN
 	JOIN SHARPS.Detalles_Persona D ON D.UsuarioID = A2.UsuarioID
 	WHERE A2.UsuarioID <> A.UsuarioID
 	AND AG.Horario BETWEEN @fecha_inicio AND @fecha_fin
+	GROUP BY D.Nombre,D.Apellido,A2.GrupoFamiliar,A2.TipoAfiliado
+	ORDER BY Cantidad DESC
 END
 GO
 
