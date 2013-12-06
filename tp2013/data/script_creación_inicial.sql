@@ -1486,7 +1486,9 @@ VALUES (@Motivo , @fecha ,@ID )
 
 SELECT @rolActual = r.RolID FROM Roles r 
 INNER JOIN [SHARPS].Perfiles P ON r.Perfil = p.PerfilID
+INNER JOIN SHARPS.Usuarios_Roles UR ON UR.Rol = R.RolID
 WHERE p.Descripcion = 'Afiliado'
+AND UR.Usuario = @ID 
 
 DELETE FROM SHARPS.Usuarios_Roles WHERE Rol = @rolActual AND Usuario = @ID
 INSERT INTO SHARPS.Usuarios_Roles (Usuario , Rol) VALUES (@ID , @RolAfiliado)
@@ -1554,12 +1556,15 @@ BEGIN
 
 	SELECT @rolActual = r.RolID FROM Roles r 
 	INNER JOIN [SHARPS].Perfiles P ON r.Perfil = p.PerfilID
+	INNER JOIN SHARPS.Usuarios_Roles UR ON UR.Rol = R.RolID
 	WHERE p.Descripcion = 'Profesional'
+	AND UR.Usuario = @ID
 
 	DELETE FROM SHARPS.Usuarios_Roles WHERE Rol = @rolActual AND Usuario = @ID
 	INSERT INTO SHARPS.Usuarios_Roles (Usuario , Rol) VALUES (@ID , @RolProfesional)
 
 END
+
 GO
 
 
